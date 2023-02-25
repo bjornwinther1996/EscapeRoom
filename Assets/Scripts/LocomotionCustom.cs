@@ -15,7 +15,7 @@ public class LocomotionCustom : MonoBehaviour
     bool isLocomotionEnabled;
 
     bool runOnce;
-
+    
     void Start()
     {
         
