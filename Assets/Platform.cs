@@ -21,8 +21,9 @@ public class Platform : MonoBehaviour
 
     }
 
-    private void OnTriggerStay(Collider other) // can use courutine instead? - to wait x-time to execute.
+    private void OnTriggerStay(Collider other) // can use courutine instead? - to wait x-time to execute. // Rigidbody on Avatar
     {
+        /*
         if (other.CompareTag("player")) //change this to "returnIF" but not the other code below)
         {
             timer += Time.deltaTime; // test if this works xD
@@ -42,14 +43,15 @@ public class Platform : MonoBehaviour
                 }
                 
             }
-        }
+        }*/
 
-        //the following is the same as the above:
-        /*
+        //the following is the same as the above: - check if it works
         if (!other.CompareTag("player")) { return; }
         timer += Time.deltaTime;
-        if (timer <= timerThreshold) { return; }
-        */
+        if (timer <= timerThreshold) { return; }//break instead?
+        checkPlatform();
+
+
     }
 
     public void SetSolid(bool isSolid)
@@ -73,6 +75,22 @@ public class Platform : MonoBehaviour
         //Sound
         //light up perimiter of platform
         //material change?
+    }
+
+    public void checkPlatform()
+    {
+        if (isSolid)
+        {
+            Success();
+        }
+        else
+        {
+            GlassCracking();
+            if (timer >= timerThreshold + 0.5)
+            {
+                platformFall();
+            }
+        }
     }
 
 }
