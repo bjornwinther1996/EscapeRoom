@@ -54,7 +54,7 @@ public class Platform : MonoBehaviour
         }*/
 
         //the following is the same as the above: - check if it works
-        if (!other.CompareTag("player")) { return; }
+        if (!other.CompareTag("Player")) { return; }
         timer += Time.deltaTime;
         if (timer <= timerThreshold) { return; }//break instead?
         checkPlatform();
@@ -64,7 +64,7 @@ public class Platform : MonoBehaviour
 
     public void SetSolid(bool isSolid)
     {
-        this.isSolid = isSolid;
+        isSolid = this.isSolid;
     }
 
     public void GlassCracking()
