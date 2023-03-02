@@ -64,7 +64,7 @@ public class Platform : MonoBehaviour
 
     public void SetSolid(bool isSolid)
     {
-        isSolid = this.isSolid;
+        this.isSolid = isSolid;
     }
 
     public void GlassCracking()
