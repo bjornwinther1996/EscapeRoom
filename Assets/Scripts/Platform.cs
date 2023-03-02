@@ -8,11 +8,19 @@ public class Platform : MonoBehaviour
     private float timer;
     public float timerThreshold = 1;
     Collider collider;
+    int randomChance; //Temporary - functionality should be in grid class
 
     // Start is called before the first frame update
     void Start()
     {
         collider = GetComponent<Collider>();
+
+        // Below is temporary - set from grid/path class in future.
+        randomChance = Random.Range(0,4);
+        if (randomChance == 2)
+        {
+            isSolid = true;
+        }
     }
 
     // Update is called once per frame
@@ -68,6 +76,7 @@ public class Platform : MonoBehaviour
     public void platformFall()
     {
         //make platform fall (translate pos), and possibly delete?
+        gameObject.SetActive(false);
     }
 
     public void Success()
