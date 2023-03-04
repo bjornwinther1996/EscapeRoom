@@ -18,13 +18,15 @@ public class PlatformManager : MonoBehaviour
     private bool[,] pathSequence3;
     private int [] oneDimArrayEx = {0,1,2,3};
 
+    public int PlatformSequence;
+
     //need to get relatime component possibly? - and put realtime components on prefab.
 
     // Start is called before the first frame update
     void Start()
     {
         InstantiatePlatforms();
-        setSequence();
+        SetSequence(platformArray);
 
     }
 
@@ -47,7 +49,7 @@ public class PlatformManager : MonoBehaviour
         }
     }
 
-    public void setSequence() // the players start from the top and go down:
+    public void SetSequence(GameObject[,] arrayOfPlatforms) // the players start from the top and go down:
     {
         pathSequence1 = new bool[ColoumnLength, RowLength] { {false, false, false, false, true , false, false},
                                                              {false, false, false, false, true , false, false},
@@ -71,5 +73,38 @@ public class PlatformManager : MonoBehaviour
 
         };
 
+        int randomChance = Random.Range(0, 3);
+        bool[,] pathSequence;
+
+        switch (randomChance)
+        {
+            case 0:
+                pathSequence = pathSequence1;
+                PlatformSequence = 0;
+                break;
+            case 1:
+                pathSequence = pathSequence2;
+                PlatformSequence = 1;
+                break;
+            case 2:
+                pathSequence = pathSequence3;
+                PlatformSequence = 2;
+                break;
+            default:
+                pathSequence = pathSequence1;
+                PlatformSequence = 0;
+                break;
+        }
+
+        for (int i = 0; i < ColoumnLength; i++)
+        {
+            for (int j = 0; j < RowLength; j++)
+            {
+                if (pathSequence[i,j] == true)
+                {
+                    arrayOfPlatforms[i, j].gameObject.GetComponent<Platform>().SetSolid(true);
+                }
+            }
+        }
     }
 }

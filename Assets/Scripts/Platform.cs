@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Platform : MonoBehaviour
 {
-    private bool isSolid;
+    public bool isSolid;
     private float timer;
     public float TimerThreshold = 1;
     Collider collider;
-    int randomChance; //Temporary - functionality should be in grid class
+    //int randomChance; //Temporary - functionality should be in grid class
 
     //platform needs to have realtime components on them!
 
@@ -18,11 +18,13 @@ public class Platform : MonoBehaviour
         collider = GetComponent<Collider>();
 
         // Below is temporary - set from grid/path class in future.
+        /*
         randomChance = Random.Range(0,4);
         if (randomChance == 2)
         {
             isSolid = true;
         }
+        */
     }
 
     // Update is called once per frame
