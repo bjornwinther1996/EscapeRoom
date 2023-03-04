@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlatformManager : MonoBehaviour
 {
 
-    public GameObject PlatformPrefab;
+    public GameObject PlatformPrefab; // put realtimecomponents on platform. - Does this change the instantiate method?
 
     public const int ColoumnLength = 5;
     public const int RowLength = 7;
@@ -21,12 +21,14 @@ public class PlatformManager : MonoBehaviour
     public int PlatformSequence;
 
     //need to get relatime component possibly? - and put realtime components on prefab.
+    //need to sync either the pathSequence, or the random int (randomChance) that determines the path sequence.
+    //InstantiatePlatforms() and SetSequence() needs to be called from only one headset via gameManager? (first headset that connects - Master) - will solve above problem as well
 
     // Start is called before the first frame update
     void Start()
     {
-        InstantiatePlatforms();
-        SetSequence(platformArray);
+        InstantiatePlatforms(); //call from gameManger where only Master-client calls it
+        SetSequence(platformArray); //call from gameManger where only Master-client calls it
 
     }
 
