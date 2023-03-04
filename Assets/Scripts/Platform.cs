@@ -6,9 +6,11 @@ public class Platform : MonoBehaviour
 {
     private bool isSolid;
     private float timer;
-    public float timerThreshold = 1;
+    public float TimerThreshold = 1;
     Collider collider;
     int randomChance; //Temporary - functionality should be in grid class
+
+    //platform needs to have realtime components on them!
 
     // Start is called before the first frame update
     void Start()
@@ -56,7 +58,7 @@ public class Platform : MonoBehaviour
         //the following is the same as the above: - check if it works
         if (!other.CompareTag("Player")) { return; }
         timer += Time.deltaTime;
-        if (timer <= timerThreshold) { return; }//break instead?
+        if (timer <= TimerThreshold) { return; }//break instead?
         checkPlatform();
 
 
@@ -73,7 +75,7 @@ public class Platform : MonoBehaviour
         //animation or material change.
     }
 
-    public void platformFall()
+    public void PlatformFall()
     {
         //make platform fall (translate pos), and possibly delete?
         gameObject.SetActive(false);
@@ -95,9 +97,9 @@ public class Platform : MonoBehaviour
         else
         {
             GlassCracking();
-            if (timer >= timerThreshold + 0.5)
+            if (timer >= TimerThreshold + 0.5)
             {
-                platformFall();
+                PlatformFall();
             }
         }
     }
