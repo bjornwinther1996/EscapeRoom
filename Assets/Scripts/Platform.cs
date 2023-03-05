@@ -8,6 +8,8 @@ public class Platform : MonoBehaviour
     private float timer;
     public float TimerThreshold = 1;
     Collider collider;
+    public AudioClip[] VanishSounds;
+    private AudioSource audioSource;
     //int randomChance; //Temporary - functionality should be in grid class
 
     //platform needs to have realtime components on them! - and this script needs to get the realtime component to delete realtime etc.
@@ -16,6 +18,8 @@ public class Platform : MonoBehaviour
     void Start()
     {
         collider = GetComponent<Collider>();
+        audioSource = GetComponentInParent<AudioSource>();
+        
 
     }
 
@@ -72,6 +76,23 @@ public class Platform : MonoBehaviour
     public void PlatformFall()
     {
         //make platform fall (translate pos), and possibly delete?
+        int randomAudio = Random.Range(0, 3);
+        switch (randomAudio)
+        {
+            case 0:
+                audioSource.PlayOneShot(VanishSounds[0]);
+                break;
+            case 1:
+                audioSource.PlayOneShot(VanishSounds[1]);
+                break;
+            case 2:
+                audioSource.PlayOneShot(VanishSounds[2]);
+                break;
+
+            default:
+                audioSource.PlayOneShot(VanishSounds[1]);
+                break;
+        }
         gameObject.SetActive(false); // probably has to be changed to delete and furthermore realtime.delete
     }
 
@@ -91,7 +112,7 @@ public class Platform : MonoBehaviour
         else
         {
             GlassCracking();
-            if (timer >= TimerThreshold + 0.5)
+            if (timer >= TimerThreshold + 1)
             {
                 PlatformFall();
             }
