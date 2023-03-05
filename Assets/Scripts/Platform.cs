@@ -10,21 +10,13 @@ public class Platform : MonoBehaviour
     Collider collider;
     //int randomChance; //Temporary - functionality should be in grid class
 
-    //platform needs to have realtime components on them!
+    //platform needs to have realtime components on them! - and this script needs to get the realtime component to delete realtime etc.
 
     // Start is called before the first frame update
     void Start()
     {
         collider = GetComponent<Collider>();
 
-        // Below is temporary - set from grid/path class in future.
-        /*
-        randomChance = Random.Range(0,4);
-        if (randomChance == 2)
-        {
-            isSolid = true;
-        }
-        */
     }
 
     // Update is called once per frame
@@ -80,7 +72,7 @@ public class Platform : MonoBehaviour
     public void PlatformFall()
     {
         //make platform fall (translate pos), and possibly delete?
-        gameObject.SetActive(false);
+        gameObject.SetActive(false); // probably has to be changed to delete and furthermore realtime.delete
     }
 
     public void Success()
