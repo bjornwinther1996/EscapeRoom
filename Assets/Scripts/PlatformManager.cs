@@ -9,8 +9,8 @@ public class PlatformManager : MonoBehaviour
 
     public const int ColoumnLength = 5;
     public const int RowLength = 7;
-    public float ColoumnMultiplier = 0.66f;
-    public float RowMultiplier = 0.66f;
+    public float ColoumnMultiplier = 0.73f; // Inspector values overwrite! Set in Inspector of PlatformGrid!!!
+    public float RowMultiplier = 0.73f; // Inspector values overwrite! Set in Inspector!!!
 
     private GameObject[,] platformArray;
 
