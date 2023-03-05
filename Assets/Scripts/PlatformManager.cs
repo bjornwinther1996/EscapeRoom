@@ -13,10 +13,35 @@ public class PlatformManager : MonoBehaviour
     public float RowMultiplier = 0.66f;
 
     private GameObject[,] platformArray;
-    private bool[,] pathSequence1;
-    private bool[,] pathSequence2;
-    private bool[,] pathSequence3;
-    private int [] oneDimArrayEx = {0,1,2,3};
+
+    // hardcorded path sequences. has to be manually adjusted according to ColoumnLength and RowLength
+    private bool[,] pathSequence1 = new bool[ColoumnLength, RowLength] {        {false, false, false, false, true , false, false},
+                                                                                {false, false, false, false, true , false, false},
+                                                                                {false, false, false, false, true , false, false},
+                                                                                {false, false, false, false, true , false, false},
+                                                                                {false, false, false, false, true , false, false},
+
+    };
+    private bool[,] pathSequence2 = new bool[ColoumnLength, RowLength] {        {false, true , false, false, false, false, false},
+                                                                                {false, false, true , false, false, false, false},
+                                                                                {false, false, false, true , false, false, false},
+                                                                                {false, false, false, false, true , false, false},
+                                                                                {false, false, false, false, false, true , false},
+
+    };
+    private bool[,] pathSequence3 = new bool[ColoumnLength, RowLength] {        {true , false, false, false, false, false, false},
+                                                                                {true , false, false, false, false, false, false},
+                                                                                {false, true , false, false, false, false, false},
+                                                                                {false, true , false, false, false, false, false},
+                                                                                {false, false, true , false, false, false, false},
+
+    };
+    private bool[,] pathSequence4 = new bool[ColoumnLength, RowLength] {        {false, false, false, false, false, false, true },
+                                                                                {false, false, false, false, false, false, true },
+                                                                                {false, false, false, false, false, false, true },
+                                                                                {false, false, false, false, false, false, true },
+                                                                                {false, false, false, false, false, false, true }
+    };
 
     public int PlatformSequence;
 
@@ -28,7 +53,7 @@ public class PlatformManager : MonoBehaviour
     void Start()
     {
         InstantiatePlatforms(); //call from gameManger where only Master-client calls it
-        SetSequence(platformArray); //call from gameManger where only Master-client calls it
+        SetRandomSequence(platformArray); //call from gameManger where only Master-client calls it
 
     }
 
@@ -51,31 +76,10 @@ public class PlatformManager : MonoBehaviour
         }
     }
 
-    public void SetSequence(GameObject[,] arrayOfPlatforms) // the players start from the top and go down:
+    public void SetRandomSequence(GameObject[,] arrayOfPlatforms) // the players start from the top and go down:
     {
-        pathSequence1 = new bool[ColoumnLength, RowLength] { {false, false, false, false, true , false, false},
-                                                             {false, false, false, false, true , false, false},
-                                                             {false, false, false, false, true , false, false},
-                                                             {false, false, false, false, true , false, false},
-                                                             {false, false, false, false, true , false, false},
 
-        };
-        pathSequence2 = new bool[ColoumnLength, RowLength] { {false, true , false, false, false, false, false},
-                                                             {false, false, true , false, false, false, false},
-                                                             {false, false, false, true , false, false, false},
-                                                             {false, false, false, false, true , false, false},
-                                                             {false, false, false, false, false, true , false},
-
-        };
-        pathSequence3 = new bool[ColoumnLength, RowLength] { {true , false, false, false, false, false, false},
-                                                             {true , false, false, false, false, false, false},
-                                                             {false, true , false, false, false, false, false},
-                                                             {false, true , false, false, false, false, false},
-                                                             {false, false, true , false, false, false, false},
-
-        };
-
-        int randomChance = Random.Range(0, 3);
+        int randomChance = Random.Range(0, 4);
         bool[,] pathSequence;
 
         switch (randomChance)
@@ -92,6 +96,10 @@ public class PlatformManager : MonoBehaviour
                 pathSequence = pathSequence3;
                 PlatformSequence = 2;
                 break;
+            case 3:
+                pathSequence = pathSequence4;
+                PlatformSequence = 3;
+                break;
             default:
                 pathSequence = pathSequence1;
                 PlatformSequence = 0;
@@ -105,6 +113,10 @@ public class PlatformManager : MonoBehaviour
                 if (pathSequence[i,j] == true)
                 {
                     arrayOfPlatforms[i, j].gameObject.GetComponent<Platform>().SetSolid(true);
+                }
+                else
+                {
+                    arrayOfPlatforms[i, j].gameObject.GetComponent<Platform>().SetSolid(false);
                 }
             }
         }
