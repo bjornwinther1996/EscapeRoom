@@ -53,6 +53,7 @@ public class PlatformManager : MonoBehaviour
     void Start()
     {
         InstantiatePlatforms(); //call from gameManger where only Master-client calls it
+
         SetRandomSequence(platformArray); //call from gameManger where only Master-client calls it
 
     }
@@ -86,23 +87,23 @@ public class PlatformManager : MonoBehaviour
         {
             case 0:
                 pathSequence = pathSequence1;
-                PlatformSequence = 0;
+                PlatformSequence = 1;
                 break;
             case 1:
                 pathSequence = pathSequence2;
-                PlatformSequence = 1;
+                PlatformSequence = 2;
                 break;
             case 2:
                 pathSequence = pathSequence3;
-                PlatformSequence = 2;
+                PlatformSequence = 3;
                 break;
             case 3:
                 pathSequence = pathSequence4;
-                PlatformSequence = 3;
+                PlatformSequence = 4;
                 break;
             default:
                 pathSequence = pathSequence1;
-                PlatformSequence = 0;
+                PlatformSequence = 1;
                 break;
         }
 
