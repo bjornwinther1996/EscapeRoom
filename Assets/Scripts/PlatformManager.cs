@@ -113,11 +113,11 @@ public class PlatformManager : MonoBehaviour
             {
                 if (pathSequence[i,j] == true)
                 {
-                    arrayOfPlatforms[i, j].gameObject.GetComponent<Platform>().SetSolid(true);
+                    arrayOfPlatforms[i, j].gameObject.GetComponentInChildren<Platform>().SetSolid(true);
                 }
                 else
                 {
-                    arrayOfPlatforms[i, j].gameObject.GetComponent<Platform>().SetSolid(false);
+                    arrayOfPlatforms[i, j].gameObject.GetComponentInChildren<Platform>().SetSolid(false);
                 }
             }
         }
