@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Platform : MonoBehaviour
 {
-    public bool isSolid;
+    public bool IsSolid;
     private float timer;
     public float TimerThreshold = 1;
     Collider collider;
@@ -64,7 +64,7 @@ public class Platform : MonoBehaviour
 
     public void SetSolid(bool isSolid)
     {
-        this.isSolid = isSolid;
+        this.IsSolid = isSolid;
     }
 
     public void GlassCracking()
@@ -105,7 +105,7 @@ public class Platform : MonoBehaviour
 
     public void checkPlatform()
     {
-        if (isSolid)
+        if (IsSolid)
         {
             Success();
         }
