@@ -45,6 +45,11 @@ public class PlatformManager : MonoBehaviour
 
     public int PlatformSequence;
 
+    private GameObject platformChild;
+
+    private int rowIndex = 1;
+    private int previousRowIndex;
+
     //need to get relatime component possibly? - and put realtime components on prefab.
     //need to sync either the pathSequence, or the random int (randomChance) that determines the path sequence.
     //InstantiatePlatforms() and SetSequence() needs to be called from only one headset via gameManager? (first headset that connects - Master) - will solve above problem as well
@@ -52,6 +57,8 @@ public class PlatformManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        platformChild = PlatformPrefab.transform.GetChild(0).gameObject; // Get first child = The Platform. (Parent = Empty GameObj w AudioSource)
+
         InstantiatePlatforms(); //call from gameManger where only Master-client calls it
 
         SetRandomSequence(platformArray); //call from gameManger where only Master-client calls it
@@ -61,8 +68,16 @@ public class PlatformManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //if(previousRowIndex == rowIndex) { return; } // do this to avoid calling ActivateNextRow all the time.
+
+        ActivateNextRow(rowIndex);
+
+        CheckCorrectPath(rowIndex);
+        previousRowIndex = rowIndex;
     }
+
+
+    // ALL THE METHODS IN START AND UPDATE (IN THIS CLASS) ARE PROBABLY GOING TO BE CALLED FROM GAMEMANAGER AND NOT IN START/UDPATE!
 
     public void InstantiatePlatforms()
     {
@@ -73,8 +88,47 @@ public class PlatformManager : MonoBehaviour
             {
                 platformArray[i, j] = (GameObject)Instantiate(PlatformPrefab, new Vector3(transform.position.x + i*ColoumnMultiplier, 0, transform.position.z+j*RowMultiplier), Quaternion.identity);
                 platformArray[i, j].transform.parent = gameObject.transform; // set this.gamebojct as parent
+                DisablePlatform(platformArray[i, j].transform.GetChild(0).gameObject);
+
             }
         }
+    }
+
+    public void ActivateNextRow(int rowToActivate) // Make petter performance-wise so it doesnt continously activate components.
+    {
+        for (int i = 0; i < rowToActivate; i++)
+        {
+            for (int j = 0; j < RowLength; j++)
+            {
+                EnablePlatform(platformArray[i, j].transform.GetChild(0).gameObject);
+            }
+        }
+    }
+
+    public void CheckCorrectPath(int rowToCheck)
+    { 
+        for (int i = 0; i < rowToCheck; i++)
+        {
+            for (int j = 0; j < RowLength; j++)
+            {
+                if (platformArray[i, j].transform.GetChild(0).gameObject.GetComponent<Platform>().GetPlatformActivated())
+                {
+                    rowIndex++;
+                    platformArray[i, j].transform.GetChild(0).gameObject.GetComponent<Platform>().SetPlatformActivated(false);
+                }
+            }
+        }
+    }
+
+    public void DisablePlatform(GameObject platform)
+    {
+        platform.GetComponent<MeshRenderer>().enabled = false;
+        platform.GetComponent<Collider>().enabled = false;
+    }
+    public void EnablePlatform(GameObject platform)
+    {
+        platform.GetComponent<MeshRenderer>().enabled = true;
+        platform.GetComponent<Collider>().enabled = true;
     }
 
     public void SetRandomSequence(GameObject[,] arrayOfPlatforms) // the players start from the top and go down:

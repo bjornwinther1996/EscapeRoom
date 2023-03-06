@@ -10,6 +10,8 @@ public class Platform : MonoBehaviour
     Collider collider;
     public AudioClip[] VanishSounds;
     private AudioSource audioSource;
+    private bool platformActivated;
+    private bool stopCalling;
     //int randomChance; //Temporary - functionality should be in grid class
 
     //platform needs to have realtime components on them! - and this script needs to get the realtime component to delete realtime etc.
@@ -101,6 +103,9 @@ public class Platform : MonoBehaviour
         //Sound
         //light up perimiter of platform
         //material change?
+        if(stopCalling) { return; }
+        platformActivated = true;
+        stopCalling = true;
     }
 
     public void checkPlatform()
@@ -117,6 +122,16 @@ public class Platform : MonoBehaviour
                 PlatformFall();
             }
         }
+    }
+
+    public bool GetPlatformActivated()
+    {
+        return platformActivated;
+    }
+
+    public void SetPlatformActivated(bool platformActivated)
+    {
+        this.platformActivated = platformActivated;
     }
 
 }

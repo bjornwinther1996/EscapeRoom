@@ -168,6 +168,10 @@ PrefabInstance:
       propertyPath: _viewUUID
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 7183534839951161701, guid: bc1caee2f892a408a9cd02b79a9c0b9a, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7183534839951161703, guid: bc1caee2f892a408a9cd02b79a9c0b9a, type: 3}
       propertyPath: m_RootOrder
       value: 0
