@@ -112,7 +112,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e1c16971a86e4a12adbf21dcd4bcb44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerThreshold: 1
+  IsSolid: 0
+  TimerThreshold: 1
+  VanishSounds:
+  - {fileID: 8300000, guid: f141d73bff1384de383d51862e7bf28c, type: 3}
+  - {fileID: 8300000, guid: 7da58ef67479c44ae896521b0fd33515, type: 3}
+  - {fileID: 8300000, guid: cd416bfdb938f45b8add9f7a65ebda37, type: 3}
 --- !u!114 &6464383885824024241
 MonoBehaviour:
   m_ObjectHideFlags: 0
