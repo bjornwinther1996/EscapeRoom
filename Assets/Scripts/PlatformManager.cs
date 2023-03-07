@@ -15,37 +15,37 @@ public class PlatformManager : MonoBehaviour
     private GameObject[,] platformArray;
 
     // hardcorded path sequences. has to be manually adjusted according to ColoumnLength and RowLength
-    private bool[,] pathSequence1 = new bool[ColoumnLength, RowLength] {        {false, false, false, false, true , false, false},
-                                                                                {false, false, false, false, true , false, false},
-                                                                                {false, false, false, false, true , false, false},
-                                                                                {false, false, false, false, true , false, false},
-                                                                                {false, false, false, false, true , false, false},
+    
+    private int[,] pathSequence1 = new int[ColoumnLength, RowLength] {          {0, 0, 0, 0, 1, 0, 0},
+                                                                                {0, 0, 0, 0, 1, 0, 0},
+                                                                                {0, 0, 0, 0, 1, 0, 0},
+                                                                                {0, 0, 0, 0, 1, 0, 0},
+                                                                                {0, 0, 0, 0, 1, 0, 0},
 
     };
-    private bool[,] pathSequence2 = new bool[ColoumnLength, RowLength] {        {false, true , false, false, false, false, false},
-                                                                                {false, false, true , false, false, false, false},
-                                                                                {false, false, false, true , false, false, false},
-                                                                                {false, false, false, false, true , false, false},
-                                                                                {false, false, false, false, false, true , false},
+    private int[,] pathSequence2 = new int[ColoumnLength, RowLength] {          {0, 1, 0, 0, 0, 0, 0},
+                                                                                {0, 0, 1, 0, 0, 0, 0},
+                                                                                {0, 0, 0, 1, 0, 0, 0},
+                                                                                {0, 0, 0, 0, 1, 0, 0},
+                                                                                {0, 0, 0, 0, 0, 1, 0},
 
     };
-    private bool[,] pathSequence3 = new bool[ColoumnLength, RowLength] {        {true , false, false, false, false, false, false},
-                                                                                {true , false, false, false, false, false, false},
-                                                                                {false, true , false, false, false, false, false},
-                                                                                {false, true , false, false, false, false, false},
-                                                                                {false, false, true , false, false, false, false},
+    private int[,] pathSequence3 = new int[ColoumnLength, RowLength] {          {1, 0, 0, 0, 0, 0, 0},
+                                                                                {1, 0, 0, 0, 0, 0, 0},
+                                                                                {0, 1, 0, 0, 0, 0, 0},
+                                                                                {0, 1, 0, 0, 0, 0, 0},
+                                                                                {0, 0, 1, 0, 0, 0, 0},
 
     };
-    private bool[,] pathSequence4 = new bool[ColoumnLength, RowLength] {        {false, false, false, false, false, false, true },
-                                                                                {false, false, false, false, false, false, true },
-                                                                                {false, false, false, false, false, false, true },
-                                                                                {false, false, false, false, false, false, true },
-                                                                                {false, false, false, false, false, false, true }
+    private int[,] pathSequence4 = new int[ColoumnLength, RowLength] {          {0, 0, 0, 0, 0, 0, 1},
+                                                                                {0, 0, 0, 0, 0, 0, 1},
+                                                                                {0, 0, 0, 0, 0, 0, 1},
+                                                                                {0, 0, 0, 0, 0, 0, 1},
+                                                                                {0, 0, 0, 0, 0, 0, 1},
+
     };
 
     public int PlatformSequence;
-
-    private GameObject platformChild;
 
     private int rowIndex = 1;
     private int previousRowIndex;
@@ -57,7 +57,6 @@ public class PlatformManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        platformChild = PlatformPrefab.transform.GetChild(0).gameObject; // Get first child = The Platform. (Parent = Empty GameObj w AudioSource)
 
         InstantiatePlatforms(); //call from gameManger where only Master-client calls it
 
@@ -68,12 +67,9 @@ public class PlatformManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if(previousRowIndex == rowIndex) { return; } // do this to avoid calling ActivateNextRow all the time.
-
         ActivateNextRow(rowIndex);
 
         CheckCorrectPath(rowIndex);
-        previousRowIndex = rowIndex;
     }
 
 
@@ -96,6 +92,7 @@ public class PlatformManager : MonoBehaviour
 
     public void ActivateNextRow(int rowToActivate) // Make petter performance-wise so it doesnt continously activate components.
     {
+        if(previousRowIndex == rowIndex) { return; }; // maybe obsolete once called from GameManager. // needs to be in GameManager?
         for (int i = 0; i < rowToActivate; i++)
         {
             for (int j = 0; j < RowLength; j++)
@@ -103,6 +100,7 @@ public class PlatformManager : MonoBehaviour
                 EnablePlatform(platformArray[i, j].transform.GetChild(0).gameObject);
             }
         }
+        previousRowIndex = rowIndex;
     }
 
     public void CheckCorrectPath(int rowToCheck)
@@ -135,7 +133,7 @@ public class PlatformManager : MonoBehaviour
     {
 
         int randomChance = Random.Range(0, 4);
-        bool[,] pathSequence;
+        int[,] pathSequence;
 
         switch (randomChance)
         {
@@ -165,7 +163,7 @@ public class PlatformManager : MonoBehaviour
         {
             for (int j = 0; j < RowLength; j++)
             {
-                if (pathSequence[i,j] == true)
+                if (pathSequence[i,j] == 1)
                 {
                     arrayOfPlatforms[i, j].gameObject.GetComponentInChildren<Platform>().SetSolid(true);
                 }
@@ -176,4 +174,37 @@ public class PlatformManager : MonoBehaviour
             }
         }
     }
+
 }
+
+
+
+// Just saving temporarily in case we need it to be bool 2d array:
+/*
+private bool[,] pathSequence1 = new bool[ColoumnLength, RowLength] {        {false, false, false, false, true , false, false},
+                                                                            {false, false, false, false, true , false, false},
+                                                                            {false, false, false, false, true , false, false},
+                                                                            {false, false, false, false, true , false, false},
+                                                                            {false, false, false, false, true , false, false},
+
+};
+private bool[,] pathSequence2 = new bool[ColoumnLength, RowLength] {        {false, true , false, false, false, false, false},
+                                                                            {false, false, true , false, false, false, false},
+                                                                            {false, false, false, true , false, false, false},
+                                                                            {false, false, false, false, true , false, false},
+                                                                            {false, false, false, false, false, true , false},
+
+};
+private bool[,] pathSequence3 = new bool[ColoumnLength, RowLength] {        {true , false, false, false, false, false, false},
+                                                                            {true , false, false, false, false, false, false},
+                                                                            {false, true , false, false, false, false, false},
+                                                                            {false, true , false, false, false, false, false},
+                                                                            {false, false, true , false, false, false, false},
+
+};
+private bool[,] pathSequence4 = new bool[ColoumnLength, RowLength] {        {false, false, false, false, false, false, true },
+                                                                            {false, false, false, false, false, false, true },
+                                                                            {false, false, false, false, false, false, true },
+                                                                            {false, false, false, false, false, false, true },
+                                                                            {false, false, false, false, false, false, true }
+};*/

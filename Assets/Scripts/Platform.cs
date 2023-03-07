@@ -21,14 +21,13 @@ public class Platform : MonoBehaviour
     {
         collider = GetComponent<Collider>();
         audioSource = GetComponentInParent<AudioSource>();
-        
 
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 
     private void OnTriggerStay(Collider other) // can use courutine instead? - to wait x-time to execute. // Rigidbody on Avatar
