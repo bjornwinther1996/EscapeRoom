@@ -14,12 +14,18 @@ public partial class PlatformSyncModel {
     private bool _isSolidPlayer2;
 
     [RealtimeProperty(3, true, true)]
-    private bool _backupBool;
+    private static int _destroyedPlatforms;
 
     [RealtimeProperty(4, true, true)]
-    private float _backupFloat;
+    private static bool _fail;
 
     [RealtimeProperty(5, true, true)]
+    private bool _backupBool;
+
+    [RealtimeProperty(6, true, true)]
+    private float _backupFloat;
+
+    [RealtimeProperty(7, true, true)]
     private int _backupInt;
 
 }
@@ -96,9 +102,9 @@ public partial class PlatformSyncModel : RealtimeModel {
     public enum PropertyID : uint {
         IsSolidPlayer1 = 1,
         IsSolidPlayer2 = 2,
-        BackupBool = 3,
-        BackupFloat = 4,
-        BackupInt = 5,
+        BackupBool = 5,
+        BackupFloat = 6,
+        BackupInt = 7,
     }
     
     #region Properties
@@ -118,9 +124,9 @@ public partial class PlatformSyncModel : RealtimeModel {
     public PlatformSyncModel() : base(null) {
         _isSolidPlayer1Property = new ReliableProperty<bool>(1, _isSolidPlayer1);
         _isSolidPlayer2Property = new ReliableProperty<bool>(2, _isSolidPlayer2);
-        _backupBoolProperty = new ReliableProperty<bool>(3, _backupBool);
-        _backupFloatProperty = new ReliableProperty<float>(4, _backupFloat);
-        _backupIntProperty = new ReliableProperty<int>(5, _backupInt);
+        _backupBoolProperty = new ReliableProperty<bool>(5, _backupBool);
+        _backupFloatProperty = new ReliableProperty<float>(6, _backupFloat);
+        _backupIntProperty = new ReliableProperty<int>(7, _backupInt);
     }
     
     protected override void OnParentReplaced(RealtimeModel previousParent, RealtimeModel currentParent) {
