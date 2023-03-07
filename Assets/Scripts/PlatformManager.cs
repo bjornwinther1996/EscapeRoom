@@ -50,9 +50,9 @@ public class PlatformManager : MonoBehaviour
     private int rowIndex = 1;
     private int previousRowIndex;
 
-    //need to get relatime component possibly? - and put realtime components on prefab.
-    //need to sync either the pathSequence, or the random int (randomChance) that determines the path sequence.
-    //InstantiatePlatforms() and SetSequence() needs to be called from only one headset via gameManager? (first headset that connects - Master) - will solve above problem as well
+    // need to get relatime component possibly? - and put realtime components on prefab (already on!).
+    // need to sync either the pathSequence, or the random int (randomChance) that determines the path sequence.
+    // InstantiatePlatforms() and SetSequence() needs to be called from only one headset via gameManager? (first headset that connects - Master). ALso needs to be RealtimeInstantiate
 
     // Start is called before the first frame update
     void Start()
@@ -82,6 +82,7 @@ public class PlatformManager : MonoBehaviour
         {
             for (int j = 0; j < RowLength; j++)
             {
+                //Below needs to be changed to RealtimeInstantiate - and to usethat, import package Using Normal.Realtime
                 platformArray[i, j] = (GameObject)Instantiate(PlatformPrefab, new Vector3(transform.position.x + i*ColoumnMultiplier, 0, transform.position.z+j*RowMultiplier), Quaternion.identity);
                 platformArray[i, j].transform.parent = gameObject.transform; // set this.gamebojct as parent
                 DisablePlatform(platformArray[i, j].transform.GetChild(0).gameObject);
