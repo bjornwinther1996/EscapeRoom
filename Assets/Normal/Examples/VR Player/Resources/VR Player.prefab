@@ -288,6 +288,8 @@ GameObject:
   - component: {fileID: 114272718057082298}
   - component: {fileID: 5789234995495255754}
   - component: {fileID: 241529509240225551}
+  - component: {fileID: 6487897762903215473}
+  - component: {fileID: 2047142232309446106}
   m_Layer: 0
   m_Name: VR Player
   m_TagString: Player
@@ -337,6 +339,8 @@ MonoBehaviour:
     component: {fileID: 114800176784454794}
   - componentID: 2
     component: {fileID: 114272718057082298}
+  - componentID: 3
+    component: {fileID: 6487897762903215473}
   _childViews:
   - componentID: 1
     component: {fileID: 114098979720017432}
@@ -406,6 +410,43 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 36
   m_CollisionDetection: 0
+--- !u!114 &6487897762903215473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1435502846325602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f94bcf66bc281e45b2538b4fa9b765c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2047142232309446106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1435502846325602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b8e3aab0eb511141aa204348474584c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerSync: {fileID: 0}
+  _isServer: 0
+  _previousIsServer: 0
+  _isReady: 0
+  _previousIsReady: 0
+  _pathSequence: 0
+  _previousPathSequence: 0
+  _backupBool: 0
+  _previousBackupBool: 0
+  _backupFloat: 0
+  _previousBackupFloat: 0
+  _backupInt: 0
+  _previousBackupInt: 0
 --- !u!1 &1573471737031190
 GameObject:
   m_ObjectHideFlags: 0

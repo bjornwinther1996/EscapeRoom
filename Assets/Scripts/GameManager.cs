@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     public GameObject NetworkManager;
     public static bool IsServer = false;
 
+    public GameObject PlatformManagerObject;
+
     void Start()
     {
         
