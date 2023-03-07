@@ -15,7 +15,6 @@ public class DebuggerVR : MonoBehaviour
     public static string DebugMessage2;
     public static string DebugMessage3;
 
-    // Make sure to TOGGLE! Not only visible when holding down A but toggle on/off. 
     bool toggleReady = true;
 
 
@@ -24,8 +23,8 @@ public class DebuggerVR : MonoBehaviour
     {
         textMesh = GetComponentInChildren<TextMeshPro>();
         DebugMessage1 = "N/A";
-        DebugMessage2 = "N/A";
-        DebugMessage3 = "N/A";
+        DebugMessage2 = "";
+        DebugMessage3 = "";
 
     }
 
