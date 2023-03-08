@@ -16,27 +16,46 @@ public class GameManager : MonoBehaviour
     public static bool IsServer = false;
 
     public GameObject PlatformManagerObject;
+    private PlatformManager PlatformManagerScript;
+
+    private GameManagerData syncedGameVariables;
+
+    private bool platformsInstantiated; // maybe make public static?
+
+
 
     void Start()
     {
-        
+        syncedGameVariables = GetComponent<GameManagerData>();
+        PlatformManagerScript = PlatformManagerObject.GetComponent<PlatformManager>();
     }
-    /*
+    
     void Update()
     {
         CheckAndSetAvatarArray();
         AssignServer();
 
-        if (CheckIfServerExist())
-        {
+        if (!CheckIfServerExist()) { return; }
 
+        AssignPlayerNumbers();
+
+
+        if (!IsServer) { return; } // Only do the following if client is server: 
+        if (!platformsInstantiated)
+        {
+            PlatformManagerScript.RealtimeInstantiatePlatforms();
+            PlatformManagerScript.SetRandomSequence(); // sync the sequence index int? 
+            platformsInstantiated = true;
         }
+        PlatformManagerScript.ActivateNextRow(PlatformManagerScript.rowIndex);
+        PlatformManagerScript.CheckCorrectPath(PlatformManagerScript.rowIndex);
 
     }
 
     public void CheckAndSetAvatarArray()
     {
-        if (Avatars.Count == 2) { return; } // only do the following if it doesn't have 2 avatars in its array of avatars. - CHECK THAT THIS WORKS
+        // Will fuck with computer, as it will count it as avatar as well
+        //if (Avatars.Count == 2) { return; } // only do the following if it doesn't have 2 avatars in its array of avatars. - CHECK THAT THIS WORKS
         if (Manager == null)
         {
             Manager = NetworkManager.GetComponent<RealtimeAvatarManager>();
@@ -57,18 +76,18 @@ public class GameManager : MonoBehaviour
     void AssignServer()
     {
         if (Avatars.Count == 0) { return; }
-        avatars[0].GetComponent<PlayerStat>()._backupVariable1 = true; //isServer
+        Avatars[0].GetComponent<PlayerData>()._isServer = true; //isServer
     }
 
     bool CheckIfServerExist()
     {
         bool isServerExist = true;
 
-        for (int i = 0; i < avatars.Count; i++)
+        for (int i = 0; i < Avatars.Count; i++)
         {
-            RealtimeAvatar player = avatars[i];
+            RealtimeAvatar player = Avatars[i];
 
-            if (!player.gameObject.GetComponent<PlayerStat>()._backupVariable1) //isServer
+            if (!player.gameObject.GetComponent<PlayerData>()._isServer) //isServer
             {
                 isServerExist = false;
             }
@@ -78,22 +97,22 @@ public class GameManager : MonoBehaviour
         return isServerExist;
     }
 
-    void AssignPlayerNumbers()
+    void AssignPlayerNumbers() // make condition so it isn't checked and assigned all the time.
     {
         for (int i = 0; i < Avatars.Count; i++)
         {
             RealtimeAvatar player = Avatars[i];
 
-            if (player.gameObject.GetComponent<PlayerStat>()._backupVariable1) //isServer
+            if (player.gameObject.GetComponent<PlayerData>()._isServer) //isServer
             {
-                player1 = player.gameObject;
-                isServer = true; // correct to set here?
+                Player1 = player.gameObject;
+                IsServer = true; // correct to set here? - I would think so xD
             }
             else
             {
-                player2 = player.gameObject;
+                Player2 = player.gameObject;
             }
 
         }
-    }*/
+    }
 }

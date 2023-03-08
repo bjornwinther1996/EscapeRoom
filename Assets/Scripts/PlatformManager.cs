@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Normal.Realtime;
 
 public class PlatformManager : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class PlatformManager : MonoBehaviour
     public float ColoumnMultiplier = 0.73f; // Inspector values overwrite! Set in Inspector of PlatformGrid!!!
     public float RowMultiplier = 0.73f; // Inspector values overwrite! Set in Inspector!!!
 
-    private GameObject[,] platformArray;
+    public GameObject[,] platformArray;
 
     // hardcorded path sequences. has to be manually adjusted according to ColoumnLength and RowLength
     
@@ -47,7 +48,7 @@ public class PlatformManager : MonoBehaviour
 
     public int PlatformSequence;
 
-    private int rowIndex = 1;
+    public int rowIndex = 1;
     private int previousRowIndex;
 
     // need to get relatime component possibly? - and put realtime components on prefab (already on!).
@@ -58,18 +59,18 @@ public class PlatformManager : MonoBehaviour
     void Start()
     {
 
-        InstantiatePlatforms(); //call from gameManger where only Master-client calls it
+        //InstantiatePlatforms(); //call from gameManger where only Master-client calls it
 
-        SetRandomSequence(platformArray); //call from gameManger where only Master-client calls it
+        //SetRandomSequence(); //call from gameManger where only Master-client calls it
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        ActivateNextRow(rowIndex);
+        //ActivateNextRow(rowIndex);
 
-        CheckCorrectPath(rowIndex);
+        //CheckCorrectPath(rowIndex);
     }
 
 
@@ -84,6 +85,29 @@ public class PlatformManager : MonoBehaviour
             {
                 //Below needs to be changed to RealtimeInstantiate - and to usethat, import package Using Normal.Realtime
                 platformArray[i, j] = (GameObject)Instantiate(PlatformPrefab, new Vector3(transform.position.x + i*ColoumnMultiplier, 0, transform.position.z+j*RowMultiplier), Quaternion.identity);
+                platformArray[i, j].transform.parent = gameObject.transform; // set this.gamebojct as parent
+                //DisablePlatform(platformArray[i, j].transform.GetChild(0).gameObject);
+
+            }
+        }
+    }
+
+    public void RealtimeInstantiatePlatforms()
+    {
+        platformArray = new GameObject[ColoumnLength, RowLength];
+        for (int i = 0; i < ColoumnLength; i++)
+        {
+            for (int j = 0; j < RowLength; j++)
+            {
+                //Below needs to be changed to RealtimeInstantiate - and to usethat, import package Using Normal.Realtime // prefab needs to be in resource folder. is it ok to have in subfolder of Resource? CHECK!
+                platformArray[i,j] = Realtime.Instantiate("PlatformV2", new Vector3(transform.position.x + i * ColoumnMultiplier, 0, transform.position.z + j * RowMultiplier), Quaternion.identity, new Realtime.InstantiateOptions
+                {
+
+                    ownedByClient = true,
+                    preventOwnershipTakeover = false,
+                    destroyWhenOwnerLeaves = false,
+                    destroyWhenLastClientLeaves = true
+                });
                 platformArray[i, j].transform.parent = gameObject.transform; // set this.gamebojct as parent
                 DisablePlatform(platformArray[i, j].transform.GetChild(0).gameObject);
 
@@ -130,7 +154,7 @@ public class PlatformManager : MonoBehaviour
         platform.GetComponent<Collider>().enabled = true;
     }
 
-    public void SetRandomSequence(GameObject[,] arrayOfPlatforms) // the players start from the top and go down:
+    public void SetRandomSequence() // the players start from the top and go down:
     {
 
         int randomChance = Random.Range(0, 4);
@@ -166,11 +190,11 @@ public class PlatformManager : MonoBehaviour
             {
                 if (pathSequence[i,j] == 1)
                 {
-                    arrayOfPlatforms[i, j].gameObject.GetComponentInChildren<Platform>().SetSolid(true);
+                    platformArray[i, j].gameObject.GetComponentInChildren<Platform>().SetSolid(true);
                 }
                 else
                 {
-                    arrayOfPlatforms[i, j].gameObject.GetComponentInChildren<Platform>().SetSolid(false);
+                    platformArray[i, j].gameObject.GetComponentInChildren<Platform>().SetSolid(false);
                 }
             }
         }
