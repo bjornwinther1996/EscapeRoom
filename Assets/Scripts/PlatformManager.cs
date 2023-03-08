@@ -87,8 +87,8 @@ public class PlatformManager : MonoBehaviour
     public void MoveToStartPosition(GameObject platform)
     {
         platform.GetComponent<RealtimeTransform>().RequestOwnership();
-        platform.transform.SetParent(gameObject.transform);
-        //platform.transform.position += new Vector3(2.37f, 0, 0);
+        //platform.transform.SetParent(gameObject.transform);
+        platform.transform.position += new Vector3(0.5f, 0, 0);
     }
 
     public void ActivateNextRow(int rowToActivate) // Make petter performance-wise so it doesnt continously activate components.
