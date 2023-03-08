@@ -76,22 +76,6 @@ public class PlatformManager : MonoBehaviour
 
     // ALL THE METHODS IN START AND UPDATE (IN THIS CLASS) ARE PROBABLY GOING TO BE CALLED FROM GAMEMANAGER AND NOT IN START/UDPATE!
 
-    public void InstantiatePlatforms()
-    {
-        platformArray = new GameObject[ColoumnLength, RowLength];
-        for (int i = 0; i < ColoumnLength; i++)
-        {
-            for (int j = 0; j < RowLength; j++)
-            {
-                //Below needs to be changed to RealtimeInstantiate - and to usethat, import package Using Normal.Realtime
-                platformArray[i, j] = (GameObject)Instantiate(PlatformPrefab, new Vector3(transform.position.x + i*ColoumnMultiplier, 0, transform.position.z+j*RowMultiplier), Quaternion.identity);
-                platformArray[i, j].transform.parent = gameObject.transform; // set this.gamebojct as parent
-                //DisablePlatform(platformArray[i, j].transform.GetChild(0).gameObject);
-
-            }
-        }
-    }
-
     public void RealtimeInstantiatePlatforms()
     {
         platformArray = new GameObject[ColoumnLength, RowLength];
@@ -102,14 +86,13 @@ public class PlatformManager : MonoBehaviour
                 //Below needs to be changed to RealtimeInstantiate - and to usethat, import package Using Normal.Realtime // prefab needs to be in resource folder. is it ok to have in subfolder of Resource? CHECK!
                 platformArray[i,j] = Realtime.Instantiate("PlatformV2", new Vector3(transform.position.x + i * ColoumnMultiplier, 0, transform.position.z + j * RowMultiplier), Quaternion.identity, new Realtime.InstantiateOptions
                 {
-
                     ownedByClient = true,
                     preventOwnershipTakeover = false,
                     destroyWhenOwnerLeaves = false,
                     destroyWhenLastClientLeaves = true
                 });
-                platformArray[i, j].transform.parent = gameObject.transform; // set this.gamebojct as parent
-                DisablePlatform(platformArray[i, j].transform.GetChild(0).gameObject);
+                platformArray[i, j].transform.SetParent(gameObject.transform); // ONLY SETS PARENT FOR SERVER!! THIS LINE ONLY RUNS FOR SERVER.
+                DespawnPlatform(platformArray[i, j].transform.GetChild(0).gameObject); // This doesnt work on realtime objects
 
             }
         }
@@ -122,7 +105,7 @@ public class PlatformManager : MonoBehaviour
         {
             for (int j = 0; j < RowLength; j++)
             {
-                EnablePlatform(platformArray[i, j].transform.GetChild(0).gameObject);
+                SpawnPlatform(platformArray[i, j].transform.GetChild(0).gameObject);
             }
         }
         previousRowIndex = rowIndex;
@@ -143,15 +126,16 @@ public class PlatformManager : MonoBehaviour
         }
     }
 
-    public void DisablePlatform(GameObject platform)
+    public void DespawnPlatform(GameObject platform) // need to request ownership. Realtime.transform.requestOwnership()
     {
-        platform.GetComponent<MeshRenderer>().enabled = false;
-        platform.GetComponent<Collider>().enabled = false;
+        platform.GetComponent<RealtimeTransform>().RequestOwnership();
+        platform.transform.position += new Vector3(100,0,0);
     }
-    public void EnablePlatform(GameObject platform)
+
+    public void SpawnPlatform(GameObject platform)
     {
-        platform.GetComponent<MeshRenderer>().enabled = true;
-        platform.GetComponent<Collider>().enabled = true;
+        platform.GetComponent<RealtimeTransform>().RequestOwnership();
+        platform.transform.position += new Vector3(-100, 0, 0);
     }
 
     public void SetRandomSequence() // the players start from the top and go down:
@@ -233,3 +217,35 @@ private bool[,] pathSequence4 = new bool[ColoumnLength, RowLength] {        {fal
                                                                             {false, false, false, false, false, false, true },
                                                                             {false, false, false, false, false, false, true }
 };*/
+/*
+    public void InstantiatePlatforms()
+    {
+        platformArray = new GameObject[ColoumnLength, RowLength];
+        for (int i = 0; i < ColoumnLength; i++)
+        {
+            for (int j = 0; j < RowLength; j++)
+            {
+                //Below needs to be changed to RealtimeInstantiate - and to usethat, import package Using Normal.Realtime
+                platformArray[i, j] = (GameObject)Instantiate(PlatformPrefab, new Vector3(transform.position.x + i * ColoumnMultiplier, 0, transform.position.z + j * RowMultiplier), Quaternion.identity);
+                platformArray[i, j].transform.parent = gameObject.transform; // set this.gamebojct as parent
+                                                                             //DisablePlatform(platformArray[i, j].transform.GetChild(0).gameObject);
+
+            }
+        }
+    }
+
+    public void DisablePlatform(GameObject platform) // doesnt work Realtime. Isn't synced
+    {
+        platform.GetComponent<MeshRenderer>().enabled = false;
+        platform.GetComponent<Collider>().enabled = false;
+    }
+
+    public void EnablePlatform(GameObject platform) // doesnt work Realtime. Isn't synced
+    {
+        platform.GetComponent<MeshRenderer>().enabled = true;
+        platform.GetComponent<Collider>().enabled = true;
+    }
+
+
+
+*/
