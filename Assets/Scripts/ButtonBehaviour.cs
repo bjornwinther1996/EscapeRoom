@@ -36,12 +36,11 @@ public class ButtonBehaviour : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other == presser)
-        {
-            button.transform.localPosition = new Vector3(0, 0.01f, 0);
-            onRelease.Invoke();
-            isPressed = false;
-        }
+        
+        button.transform.localPosition = new Vector3(0, 0.01f, 0);
+        onRelease.Invoke();
+        isPressed = false;
+        
     }
 
     private void ElevatorGoUp()
