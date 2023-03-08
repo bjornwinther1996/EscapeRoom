@@ -51,34 +51,19 @@ public class PlatformManager : MonoBehaviour
     public int rowIndex = 1;
     private int previousRowIndex;
 
+
+    void Start()
+    {
+        platformArray = new GameObject[ColoumnLength, RowLength];
+    }
+
     // need to get relatime component possibly? - and put realtime components on prefab (already on!).
     // need to sync either the pathSequence, or the random int (randomChance) that determines the path sequence.
     // InstantiatePlatforms() and SetSequence() needs to be called from only one headset via gameManager? (first headset that connects - Master). ALso needs to be RealtimeInstantiate
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-        //InstantiatePlatforms(); //call from gameManger where only Master-client calls it
-
-        //SetRandomSequence(); //call from gameManger where only Master-client calls it
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //ActivateNextRow(rowIndex);
-
-        //CheckCorrectPath(rowIndex);
-    }
-
-
-    // ALL THE METHODS IN START AND UPDATE (IN THIS CLASS) ARE PROBABLY GOING TO BE CALLED FROM GAMEMANAGER AND NOT IN START/UDPATE!
-
     public void RealtimeInstantiatePlatforms()
     {
-        platformArray = new GameObject[ColoumnLength, RowLength];
+        //platformArray = new GameObject[ColoumnLength, RowLength];
         for (int i = 0; i < ColoumnLength; i++)
         {
             for (int j = 0; j < RowLength; j++)
@@ -86,13 +71,25 @@ public class PlatformManager : MonoBehaviour
                 //Below needs to be changed to RealtimeInstantiate - and to usethat, import package Using Normal.Realtime // prefab needs to be in resource folder. is it ok to have in subfolder of Resource? CHECK!
                 platformArray[i,j] = Realtime.Instantiate("PlatformV2", new Vector3(transform.position.x + i * ColoumnMultiplier, 0, transform.position.z + j * RowMultiplier), Quaternion.identity, new Realtime.InstantiateOptions
                 {
-                    ownedByClient = false,
+                    ownedByClient = false, // True? 
                     preventOwnershipTakeover = false,
                     destroyWhenOwnerLeaves = false,
                     destroyWhenLastClientLeaves = true
                 });
-                platformArray[i, j].transform.SetParent(gameObject.transform); // ONLY SETS PARENT FOR SERVER!! THIS LINE ONLY RUNS FOR SERVER.
+                //platformArray[i, j].transform.SetParent(gameObject.transform); // ONLY SETS PARENT FOR SERVER!! THIS LINE ONLY RUNS FOR SERVER.
                 DespawnPlatform(platformArray[i, j].transform.GetChild(0).gameObject); // This doesnt work on realtime objects
+
+            }
+        }
+    }
+
+    public void SetParentForPlatform()
+    {
+        for (int i = 0; i < ColoumnLength; i++)
+        {
+            for (int j = 0; j < RowLength; j++)
+            {
+                platformArray[i, j].transform.SetParent(gameObject.transform); // ONLY SETS PARENT FOR SERVER!! THIS LINE ONLY RUNS FOR SERVER.
 
             }
         }
@@ -217,7 +214,27 @@ private bool[,] pathSequence4 = new bool[ColoumnLength, RowLength] {        {fal
                                                                             {false, false, false, false, false, false, true },
                                                                             {false, false, false, false, false, false, true }
 };*/
+
 /*
+ 
+    // Start is called before the first frame update
+    void Start()
+    {
+
+        //InstantiatePlatforms(); //call from gameManger where only Master-client calls it
+
+        //SetRandomSequence(); //call from gameManger where only Master-client calls it
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        //ActivateNextRow(rowIndex);
+
+        //CheckCorrectPath(rowIndex);
+    }
+
     public void InstantiatePlatforms()
     {
         platformArray = new GameObject[ColoumnLength, RowLength];
