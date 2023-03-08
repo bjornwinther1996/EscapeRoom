@@ -86,7 +86,7 @@ public class PlatformManager : MonoBehaviour
                 //Below needs to be changed to RealtimeInstantiate - and to usethat, import package Using Normal.Realtime // prefab needs to be in resource folder. is it ok to have in subfolder of Resource? CHECK!
                 platformArray[i,j] = Realtime.Instantiate("PlatformV2", new Vector3(transform.position.x + i * ColoumnMultiplier, 0, transform.position.z + j * RowMultiplier), Quaternion.identity, new Realtime.InstantiateOptions
                 {
-                    ownedByClient = true,
+                    ownedByClient = false,
                     preventOwnershipTakeover = false,
                     destroyWhenOwnerLeaves = false,
                     destroyWhenLastClientLeaves = true
