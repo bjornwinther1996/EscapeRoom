@@ -76,23 +76,19 @@ public class PlatformManager : MonoBehaviour
                     destroyWhenOwnerLeaves = false,
                     destroyWhenLastClientLeaves = true
                 });
-                //platformArray[i, j].transform.SetParent(gameObject.transform); // ONLY SETS PARENT FOR SERVER!! THIS LINE ONLY RUNS FOR SERVER.
+                MoveToStartPosition(platformArray[i, j]);
+                //platformArray[i, j].transform.SetParent(gameObject.transform); // ONLY SETS PARENT FOR SERVER!! THIS LINE ONLY RUNS FOR SERVER?!
                 DespawnPlatform(platformArray[i, j].transform.GetChild(0).gameObject); // This doesnt work on realtime objects
 
             }
         }
     }
 
-    public void SetParentForPlatform()
+    public void MoveToStartPosition(GameObject platform)
     {
-        for (int i = 0; i < ColoumnLength; i++)
-        {
-            for (int j = 0; j < RowLength; j++)
-            {
-                platformArray[i, j].transform.SetParent(gameObject.transform); // ONLY SETS PARENT FOR SERVER!! THIS LINE ONLY RUNS FOR SERVER.
-
-            }
-        }
+        platform.GetComponent<RealtimeTransform>().RequestOwnership();
+        platform.transform.SetParent(gameObject.transform);
+        //platform.transform.position += new Vector3(2.37f, 0, 0);
     }
 
     public void ActivateNextRow(int rowToActivate) // Make petter performance-wise so it doesnt continously activate components.

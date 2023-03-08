@@ -40,25 +40,15 @@ public class GameManager : MonoBehaviour
         AssignPlayerNumbers();
 
 
-        if (IsServer) // Only do the following if client is server: 
+        if (!IsServer) { return; } // Only do the following if client is server: 
+        if (!platformsInstantiated)
         {
-            if (!platformsInstantiated)
-            {
-                PlatformManagerScript.RealtimeInstantiatePlatforms();
-                PlatformManagerScript.SetParentForPlatform();
-                PlatformManagerScript.SetRandomSequence(); // sync the sequence index int? 
-                platformsInstantiated = true;
-            }
-            PlatformManagerScript.ActivateNextRow(PlatformManagerScript.rowIndex);
-            PlatformManagerScript.CheckCorrectPath(PlatformManagerScript.rowIndex);
+            PlatformManagerScript.RealtimeInstantiatePlatforms();
+            PlatformManagerScript.SetRandomSequence(); // sync the sequence index int? 
+            platformsInstantiated = true;
         }
-        else // if not server:
-        {
-            if (platformsInstantiated)
-            {
-                PlatformManagerScript.SetParentForPlatform();
-            }
-        }
+        PlatformManagerScript.ActivateNextRow(PlatformManagerScript.rowIndex);
+        PlatformManagerScript.CheckCorrectPath(PlatformManagerScript.rowIndex);
 
     }
 
