@@ -48,8 +48,8 @@ public class PlatformManager : MonoBehaviour
 
     public int PlatformSequence;
 
-    public int rowIndex = 1;
-    private int previousRowIndex;
+    public int RowIndex = 1;
+    public int PreviousRowIndex;
 
 
     void Start()
@@ -68,6 +68,7 @@ public class PlatformManager : MonoBehaviour
         {
             for (int j = 0; j < RowLength; j++)
             {
+                //GameObject platform = platformArray[i, j];
                 //Below needs to be changed to RealtimeInstantiate - and to usethat, import package Using Normal.Realtime // prefab needs to be in resource folder. is it ok to have in subfolder of Resource? CHECK!
                 platformArray[i,j] = Realtime.Instantiate("PlatformV2", new Vector3(transform.position.x + i * ColoumnMultiplier, 0, transform.position.z + j * RowMultiplier), Quaternion.identity, new Realtime.InstantiateOptions
                 {
@@ -76,24 +77,25 @@ public class PlatformManager : MonoBehaviour
                     destroyWhenOwnerLeaves = false,
                     destroyWhenLastClientLeaves = true
                 });
-                MoveToStartPosition(platformArray[i, j]);
-                //platformArray[i, j].transform.SetParent(gameObject.transform); // ONLY SETS PARENT FOR SERVER!! THIS LINE ONLY RUNS FOR SERVER?!
+                //platformArray[i,j].GetComponent<RealtimeTransform>().RequestOwnership();
+                MoveToStartPosition(platformArray[i, j]); // was temporary
+                //platformArray[i,j].transform.SetParent(gameObject.transform); // ONLY SETS PARENT FOR SERVER!! THIS LINE ONLY RUNS FOR SERVER?!
                 DespawnPlatform(platformArray[i, j].transform.GetChild(0).gameObject); // This doesnt work on realtime objects
 
             }
         }
     }
 
-    public void MoveToStartPosition(GameObject platform)
+    public void MoveToStartPosition(GameObject platform) // Temporary. Find a way to setparent for the spawned objects for both clients. Problem = needs to wait to setparent or instantiate obj untill both clients have connected
     {
         platform.GetComponent<RealtimeTransform>().RequestOwnership();
         //platform.transform.SetParent(gameObject.transform);
-        platform.transform.position += new Vector3(0.5f, 0, 0);
+        platform.transform.position += new Vector3(0.2f, 0, 0);
     }
 
     public void ActivateNextRow(int rowToActivate) // Make petter performance-wise so it doesnt continously activate components.
     {
-        if(previousRowIndex == rowIndex) { return; }; // maybe obsolete once called from GameManager. // needs to be in GameManager?
+        if(PreviousRowIndex == RowIndex) { return; }; // maybe obsolete once called from GameManager. // needs to be in GameManager?
         for (int i = 0; i < rowToActivate; i++)
         {
             for (int j = 0; j < RowLength; j++)
@@ -101,10 +103,10 @@ public class PlatformManager : MonoBehaviour
                 SpawnPlatform(platformArray[i, j].transform.GetChild(0).gameObject);
             }
         }
-        previousRowIndex = rowIndex;
+        PreviousRowIndex = RowIndex;
     }
 
-    public void CheckCorrectPath(int rowToCheck)
+    public void CheckCorrectPath(int rowToCheck) // only checking for row in question
     { 
         for (int i = 0; i < rowToCheck; i++)
         {
@@ -112,7 +114,7 @@ public class PlatformManager : MonoBehaviour
             {
                 if (platformArray[i, j].transform.GetChild(0).gameObject.GetComponent<Platform>().GetPlatformActivated())
                 {
-                    rowIndex++;
+                    RowIndex++;
                     platformArray[i, j].transform.GetChild(0).gameObject.GetComponent<Platform>().SetPlatformActivated(false);
                 }
             }
@@ -167,11 +169,12 @@ public class PlatformManager : MonoBehaviour
             {
                 if (pathSequence[i,j] == 1)
                 {
-                    platformArray[i, j].gameObject.GetComponentInChildren<Platform>().SetSolid(true);
+                    platformArray[i, j].gameObject.GetComponentInChildren<PlatformData>()._isSolidPlayer1 = true;
+                    
                 }
-                else
+                else if (pathSequence[i, j] == 2)
                 {
-                    platformArray[i, j].gameObject.GetComponentInChildren<Platform>().SetSolid(false);
+                    platformArray[i, j].gameObject.GetComponentInChildren<PlatformData>()._isSolidPlayer2 = true;
                 }
             }
         }

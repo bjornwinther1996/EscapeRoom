@@ -5,15 +5,15 @@ using Normal.Realtime;
 
 public class GameManager : MonoBehaviour
 {
-    public Dictionary<int, RealtimeAvatar> Avatars;
-    static RealtimeAvatarManager Manager;
-
     [SerializeField]
     public static GameObject Player1;
     public static GameObject Player2;
 
     public GameObject NetworkManager;
+    public Dictionary<int, RealtimeAvatar> Avatars;
+    static RealtimeAvatarManager Manager;
     public static bool IsServer = false;
+    private bool firstConnected;
 
     public GameObject PlatformManagerObject;
     private PlatformManager PlatformManagerScript;
@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
     private GameManagerData syncedGameVariables;
 
     private bool platformsInstantiated; // maybe make public static?
+
+    private bool incrementOnce;
 
 
 
@@ -32,30 +34,57 @@ public class GameManager : MonoBehaviour
     
     void Update()
     {
+        //if (!BoolFirstConnectedDevice()) { return; } // If the device is not the first connected device to the server - return
         CheckAndSetAvatarArray();
         AssignServer();
+        AssignPlayerNumbers(); // also sets IsServer!
+        //Debug.Log("Avatars Computer: " + Avatars.Count);
+        //Debug.Log("BackupInt Avatars: " + syncedGameVariables._backupInt);
 
         if (!CheckIfServerExist()) { return; }
 
-        AssignPlayerNumbers();
-
-
-        if (!IsServer) { return; } // Only do the following if client is server: 
+        if (!IsServer) { return; } // Only do the following if client is server:
+        DebuggerVR.DebugMessage1 = "Avatars: " + Avatars.Count;
+        if (!CheckAllPlayersConnected()) { return; } // check if all players are connected, before realtime spawning objects that need to have local sceneObj as parent.
         if (!platformsInstantiated)
         {
             PlatformManagerScript.RealtimeInstantiatePlatforms();
             PlatformManagerScript.SetRandomSequence(); // sync the sequence index int? 
             platformsInstantiated = true;
         }
-        PlatformManagerScript.ActivateNextRow(PlatformManagerScript.rowIndex);
-        PlatformManagerScript.CheckCorrectPath(PlatformManagerScript.rowIndex);
+        PlatformManagerScript.ActivateNextRow(PlatformManagerScript.RowIndex);
+        PlatformManagerScript.CheckCorrectPath(PlatformManagerScript.RowIndex);
 
     }
 
-    public void CheckAndSetAvatarArray()
+
+    void FirstConnectedDevice()
+    {
+        if (syncedGameVariables._backupBool == false)
+        {
+            firstConnected = true;
+            syncedGameVariables._backupBool = firstConnected;
+        }
+    }
+
+    bool BoolFirstConnectedDevice()
+    {
+        if (syncedGameVariables._backupBool == false)
+        {
+            syncedGameVariables._backupBool = firstConnected;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    void CheckAndSetAvatarArray() // needs to be run only by server, to set avatar count!
     {
         // Will fuck with computer, as it will count it as avatar as well
         //if (Avatars.Count == 2) { return; } // only do the following if it doesn't have 2 avatars in its array of avatars. - CHECK THAT THIS WORKS
+        //if(!firstConnected) { return;  }
         if (Manager == null)
         {
             Manager = NetworkManager.GetComponent<RealtimeAvatarManager>();
@@ -63,10 +92,9 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Avatars = Manager.avatars;
+            Avatars = Manager.avatars; 
 
         }
-
         if (Avatars == null)
         {
             return;
@@ -106,13 +134,49 @@ public class GameManager : MonoBehaviour
             if (player.gameObject.GetComponent<PlayerData>()._isServer) //isServer
             {
                 Player1 = player.gameObject;
-                IsServer = true; // correct to set here? - I would think so xD
+                IsServer = true; // correct to set here? - I would think so xD maybe better to set from playerscript?
+                if (!incrementOnce)
+                {
+                    syncedGameVariables._backupInt++;
+                    incrementOnce = true;
+                }
             }
             else
             {
                 Player2 = player.gameObject;
+                if (!incrementOnce)
+                {
+                    syncedGameVariables._backupInt++;
+                    incrementOnce = true;
+                }
             }
 
         }
     }
+
+    bool CheckAllPlayersConnected()
+    {
+        if(syncedGameVariables._backupInt == 1) // was Avatars.Count 
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+    }
 }
+
+/*
+ * if (Avatars.Count < 2)
+        {
+            return false;
+            //DebuggerVR.DebugMessage2 = "False - Not enough avatars " + Avatars.Count;
+        }
+        else
+        {
+            //DebuggerVR.DebugMessage3 = "True - AllPlayersConnected  " + Avatars.Count;
+            return true;
+        }
+*/

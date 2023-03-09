@@ -12,6 +12,8 @@ public class Platform : MonoBehaviour
     private AudioSource audioSource;
     private bool platformActivated;
     private bool stopCalling;
+
+    private PlatformData syncedPlatformVariables;
     //int randomChance; //Temporary - functionality should be in grid class
 
     //platform needs to have realtime components on them! - and this script needs to get the realtime component to delete realtime etc.
@@ -21,6 +23,7 @@ public class Platform : MonoBehaviour
     {
         collider = GetComponent<Collider>();
         audioSource = GetComponentInParent<AudioSource>();
+        syncedPlatformVariables = GetComponent<PlatformData>();
 
     }
 
@@ -94,7 +97,7 @@ public class Platform : MonoBehaviour
                 audioSource.PlayOneShot(VanishSounds[1]);
                 break;
         }
-        gameObject.SetActive(false); // probably has to be changed to delete and furthermore realtime.delete
+        gameObject.SetActive(false); // probably has to be changed to delete and furthermore realtime.delete?
     }
 
     public void Success()
@@ -102,14 +105,14 @@ public class Platform : MonoBehaviour
         //Sound
         //light up perimiter of platform
         //material change?
-        if(stopCalling) { return; }
+        if(stopCalling) { return; } // so it doesnt activate all the next rows, as you continue to stand on activated/correct platform. Only triggers once, revealing next row
         platformActivated = true;
         stopCalling = true;
     }
 
     public void checkPlatform()
     {
-        if (IsSolid)
+        if (syncedPlatformVariables._isSolidPlayer1 || syncedPlatformVariables._isSolidPlayer2)
         {
             Success();
         }
