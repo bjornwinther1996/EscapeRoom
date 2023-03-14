@@ -49,8 +49,10 @@ public class GameManager : MonoBehaviour
         if (!IsServer) { return; } // Only do the following if client is server:
         DebuggerVR.DebugMessage1 = "Avatars: " + Avatars.Count;
         if (!CheckAllPlayersConnected()) { return; } // check if all players are connected, before realtime spawning objects that need to have local sceneObj as parent.
+        Debug.Log("IS SERVER AND ALL CONNECTED");
         if (!isPlatformsInstantiated)
         {
+            Debug.Log("IS SERVER AND PLATFORMINSTANTIATED");
             PlatformManagerScript.RealtimeInstantiatePlatforms();
             PlatformManagerScript.SetRandomSequence(); // sync the sequence index int? 
             isPlatformsInstantiated = true;
