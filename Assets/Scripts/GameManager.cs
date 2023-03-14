@@ -41,8 +41,8 @@ public class GameManager : MonoBehaviour
         CheckAndSetAvatarArray();
         AssignServer();
         AssignPlayerNumbers(); // also sets IsServer!
-        //Debug.Log("Avatars Computer: " + Avatars.Count);
-        //Debug.Log("BackupInt Avatars: " + syncedGameVariables._backupInt);
+        Debug.Log("Avatars Computer: " + Avatars.Count);
+        Debug.Log("BackupInt Avatars: " + syncedGameVariables._backupInt);
 
         if (!CheckIfServerExist()) { return; }
 
