@@ -162,7 +162,7 @@ public class GameManager : MonoBehaviour
 
     bool CheckAllPlayersConnected()
     {
-        if(syncedGameVariables._backupInt == 2) // was Avatars.Count 
+        if(syncedGameVariables._backupInt > 1) // was Avatars.Count 
         {
             return true;
         }
