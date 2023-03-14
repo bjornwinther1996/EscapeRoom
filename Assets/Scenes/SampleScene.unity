@@ -146,16 +146,16 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 753183}
-  m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: -2.374, y: 1.244, z: -0.737}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 69.20001, y: -84.2, z: -55.60001}
+  m_LocalScale: {x: 100, y: 99.99998, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1358327307}
   - {fileID: 306658669}
   - {fileID: 439668719}
-  m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_Father: {fileID: 7639749042653488892}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 90}
 --- !u!1 &26005394
 GameObject:
@@ -420,7 +420,8 @@ MonoBehaviour:
   ColoumnMultiplier: 0.66
   RowMultiplier: 0.66
   PlatformSequence: 0
-  rowIndex: 1
+  RowIndex: 1
+  PreviousRowIndex: 0
 --- !u!4 &291113917
 Transform:
   m_ObjectHideFlags: 0
@@ -950,14 +951,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6626e442ccabde646be8836b67e81851, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Elevator: {fileID: 0}
+  ElevatorAnims: {fileID: 0}
   button: {fileID: 306658668}
   onPress:
     m_PersistentCalls:
       m_Calls: []
   onRelease:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 439668723}
+        m_TargetAssemblyTypeName: ButtonBehaviour, Assembly-CSharp
+        m_MethodName: ElevatorGoDown
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &576554803
 GameObject:
   m_ObjectHideFlags: 0
@@ -2493,14 +2506,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6626e442ccabde646be8836b67e81851, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Elevator: {fileID: 0}
+  ElevatorAnims: {fileID: 0}
   button: {fileID: 1207956368}
   onPress:
     m_PersistentCalls:
       m_Calls: []
   onRelease:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1468664259}
+        m_TargetAssemblyTypeName: ButtonBehaviour, Assembly-CSharp
+        m_MethodName: ElevatorGoUp
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &1512623816
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2775,16 +2800,16 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1759358939}
-  m_LocalRotation: {x: 0.5, y: -0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: -2.374, y: 1.425, z: -0.737}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.7071068, y: -0.7071068, z: -0, w: 0}
+  m_LocalPosition: {x: 69.20001, y: -66.1, z: -55.60001}
+  m_LocalScale: {x: 100, y: 99.99998, z: 99.99997}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 576554804}
   - {fileID: 1207956369}
   - {fileID: 1468664255}
-  m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_Father: {fileID: 7639749042653488892}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 180, y: 90, z: 90}
 --- !u!1 &1772045141
 GameObject:
@@ -3461,6 +3486,11 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+--- !u!4 &7639749042653488892 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1727425959745746841, guid: c1ca35dfc91060c4cbf9c0b1c7d9be25, type: 3}
+  m_PrefabInstance: {fileID: 8554318285731220441}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8554318285731220441
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3538,3 +3568,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c1ca35dfc91060c4cbf9c0b1c7d9be25, type: 3}
+--- !u!1 &8554318285731220442 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7007345447106631162, guid: c1ca35dfc91060c4cbf9c0b1c7d9be25, type: 3}
+  m_PrefabInstance: {fileID: 8554318285731220441}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &8554318285731220443
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8554318285731220442}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 143.21788, y: 225.98117, z: 189.58131}
+  m_Center: {x: -0.41496158, y: -95.27749, z: -90.000435}
