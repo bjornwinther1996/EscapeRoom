@@ -20,9 +20,11 @@ public class GameManager : MonoBehaviour
 
     private GameManagerData syncedGameVariables;
 
-    private bool platformsInstantiated; // maybe make public static?
+    private bool isPlatformsInstantiated; // maybe make public static?
 
     private bool incrementOnce;
+
+    private bool isActivateNextRow;
 
 
 
@@ -35,6 +37,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         //if (!BoolFirstConnectedDevice()) { return; } // If the device is not the first connected device to the server - return
+        
         CheckAndSetAvatarArray();
         AssignServer();
         AssignPlayerNumbers(); // also sets IsServer!
@@ -46,14 +49,15 @@ public class GameManager : MonoBehaviour
         if (!IsServer) { return; } // Only do the following if client is server:
         DebuggerVR.DebugMessage1 = "Avatars: " + Avatars.Count;
         if (!CheckAllPlayersConnected()) { return; } // check if all players are connected, before realtime spawning objects that need to have local sceneObj as parent.
-        if (!platformsInstantiated)
+        if (!isPlatformsInstantiated)
         {
             PlatformManagerScript.RealtimeInstantiatePlatforms();
             PlatformManagerScript.SetRandomSequence(); // sync the sequence index int? 
-            platformsInstantiated = true;
+            isPlatformsInstantiated = true;
         }
-        PlatformManagerScript.ActivateNextRow(PlatformManagerScript.RowIndex);
+        PlatformManagerScript.ActivateNextRow(PlatformManagerScript.RowIndex); // gettiing PlatformManagerScript.rowIndex fails?? no
         PlatformManagerScript.CheckCorrectPath(PlatformManagerScript.RowIndex);
+
 
     }
 
@@ -156,7 +160,7 @@ public class GameManager : MonoBehaviour
 
     bool CheckAllPlayersConnected()
     {
-        if(syncedGameVariables._backupInt == 1) // was Avatars.Count 
+        if(syncedGameVariables._backupInt == 2) // was Avatars.Count 
         {
             return true;
         }

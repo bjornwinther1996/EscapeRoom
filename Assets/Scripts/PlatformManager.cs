@@ -54,7 +54,7 @@ public class PlatformManager : MonoBehaviour
 
     void Start()
     {
-        platformArray = new GameObject[ColoumnLength, RowLength];
+        //platformArray = new GameObject[ColoumnLength, RowLength];
     }
 
     // need to get relatime component possibly? - and put realtime components on prefab (already on!).
@@ -63,13 +63,12 @@ public class PlatformManager : MonoBehaviour
 
     public void RealtimeInstantiatePlatforms()
     {
-        //platformArray = new GameObject[ColoumnLength, RowLength];
+        platformArray = new GameObject[ColoumnLength, RowLength];
         for (int i = 0; i < ColoumnLength; i++)
         {
             for (int j = 0; j < RowLength; j++)
             {
                 //GameObject platform = platformArray[i, j];
-                //Below needs to be changed to RealtimeInstantiate - and to usethat, import package Using Normal.Realtime // prefab needs to be in resource folder. is it ok to have in subfolder of Resource? CHECK!
                 platformArray[i,j] = Realtime.Instantiate("PlatformV2", new Vector3(transform.position.x + i * ColoumnMultiplier, 0, transform.position.z + j * RowMultiplier), Quaternion.identity, new Realtime.InstantiateOptions
                 {
                     ownedByClient = false, // True? 
@@ -78,9 +77,10 @@ public class PlatformManager : MonoBehaviour
                     destroyWhenLastClientLeaves = true
                 });
                 //platformArray[i,j].GetComponent<RealtimeTransform>().RequestOwnership();
-                MoveToStartPosition(platformArray[i, j]); // was temporary
-                //platformArray[i,j].transform.SetParent(gameObject.transform); // ONLY SETS PARENT FOR SERVER!! THIS LINE ONLY RUNS FOR SERVER?!
-                DespawnPlatform(platformArray[i, j].transform.GetChild(0).gameObject); // This doesnt work on realtime objects
+                //MoveToStartPosition(platformArray[i, j]); // was temporary
+                platformArray[i,j].transform.SetParent(gameObject.transform); // ONLY SETS PARENT FOR SERVER!! THIS LINE ONLY RUNS FOR SERVER?!
+                DespawnPlatform(platformArray[i, j].transform.GetChild(0).gameObject);
+                Debug.Log("All Platforms Instantiated and Despawned");
 
             }
         }
@@ -95,18 +95,21 @@ public class PlatformManager : MonoBehaviour
 
     public void ActivateNextRow(int rowToActivate) // Make petter performance-wise so it doesnt continously activate components.
     {
-        if(PreviousRowIndex == RowIndex) { return; }; // maybe obsolete once called from GameManager. // needs to be in GameManager?
-        for (int i = 0; i < rowToActivate; i++)
+        if(PreviousRowIndex == RowIndex) { return; } // maybe obsolete once called from GameManager. // needs to be in GameManager?
+        
+        for (int targetRow = rowToActivate -1; targetRow < rowToActivate; targetRow++)
         {
             for (int j = 0; j < RowLength; j++)
             {
-                SpawnPlatform(platformArray[i, j].transform.GetChild(0).gameObject);
+                SpawnPlatform(platformArray[targetRow, j].transform.GetChild(0).gameObject);
+                Debug.Log("SpawnPlatform -100x");
             }
         }
+        Debug.Log("PrevRow = Row");
         PreviousRowIndex = RowIndex;
     }
 
-    public void CheckCorrectPath(int rowToCheck) // only checking for row in question
+    public void CheckCorrectPath(int rowToCheck) // Could limit to check only one row - Just as in ActivateNextRow
     { 
         for (int i = 0; i < rowToCheck; i++)
         {
@@ -114,6 +117,7 @@ public class PlatformManager : MonoBehaviour
             {
                 if (platformArray[i, j].transform.GetChild(0).gameObject.GetComponent<Platform>().GetPlatformActivated())
                 {
+                    Debug.Log("RowIndex Increased");
                     RowIndex++;
                     platformArray[i, j].transform.GetChild(0).gameObject.GetComponent<Platform>().SetPlatformActivated(false);
                 }
@@ -179,9 +183,7 @@ public class PlatformManager : MonoBehaviour
             }
         }
     }
-
 }
-
 
 
 // Just saving temporarily in case we need it to be bool 2d array:
