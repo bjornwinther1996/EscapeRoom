@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class ButtonBehaviour : MonoBehaviour
 {
 
-    public GameObject Elevator;
+    public Animator ElevatorAnims;
 
     public GameObject button;
     public UnityEvent onPress;
@@ -18,8 +18,10 @@ public class ButtonBehaviour : MonoBehaviour
 
     void Start()
     {
+        
         sound = GetComponent<AudioSource>();
         isPressed = false;
+        ElevatorAnims = GetComponentInParent<Animator>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -43,12 +45,12 @@ public class ButtonBehaviour : MonoBehaviour
         
     }
 
-    private void ElevatorGoUp()
+    public void ElevatorGoUp()
     {
 
     }
 
-    private void ElevatorGoDown()
+    public void ElevatorGoDown()
     {
 
     }
