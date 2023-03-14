@@ -77,8 +77,8 @@ public class PlatformManager : MonoBehaviour
                     destroyWhenLastClientLeaves = true
                 });
                 //platformArray[i,j].GetComponent<RealtimeTransform>().RequestOwnership();
-                //MoveToStartPosition(platformArray[i, j]); // was temporary
-                platformArray[i,j].transform.SetParent(gameObject.transform); // ONLY SETS PARENT FOR SERVER!! THIS LINE ONLY RUNS FOR SERVER?!
+                MoveToStartPosition(platformArray[i, j]); // was temporary
+                //platformArray[i,j].transform.SetParent(gameObject.transform); // ONLY SETS PARENT FOR SERVER!! THIS LINE ONLY RUNS FOR SERVER?!
                 DespawnPlatform(platformArray[i, j].transform.GetChild(0).gameObject);
                 Debug.Log("All Platforms Instantiated and Despawned");
 
