@@ -41,10 +41,11 @@ public class GameManager : MonoBehaviour
         CheckAndSetAvatarArray();
         AssignServer();
         AssignPlayerNumbers(); // also sets IsServer!
-        Debug.Log("Avatars Computer: " + Avatars.Count);
-        Debug.Log("BackupInt Avatars: " + syncedGameVariables._backupInt);
+        //Debug.Log("Avatars Computer: " + Avatars.Count);
+        //Debug.Log("BackupInt Avatars: " + syncedGameVariables._backupInt);
 
         if (!CheckIfServerExist()) { return; }
+        Debug.Log("Server Exists");
 
         if (!IsServer) { return; } // Only do the following if client is server:
         DebuggerVR.DebugMessage1 = "Avatars: " + Avatars.Count;
