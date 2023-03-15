@@ -61,6 +61,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            if (!BoolFirstConnectedDevice()) { return; }
             Debug.Log("Server assigned");
             AssignServer();
         }
@@ -82,6 +83,7 @@ public class GameManager : MonoBehaviour
     {
         if (syncedGameVariables._backupBool == false)
         {
+            syncedGameVariables._backupBool = true;
             return true;
         }
         else
@@ -114,7 +116,6 @@ public class GameManager : MonoBehaviour
     void AssignServer()
     {
         if (Avatars.Count == 0) { return; }
-        if (!BoolFirstConnectedDevice()) { return; }
         Avatars[0].GetComponent<PlayerData>()._isServer = true; //isServer
     }
 
