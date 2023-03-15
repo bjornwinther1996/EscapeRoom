@@ -132,7 +132,7 @@ public class GameManager : MonoBehaviour
             if (player.gameObject.GetComponent<PlayerData>()._isServer) //isServer
             {
                 isServerExist = true;
-                Debug.Log("CheckIfServerExist: IF statement triggered! isServerExist = false");
+                Debug.Log("CheckIfServerExist: IF statement triggered!");
             }
 
         }
