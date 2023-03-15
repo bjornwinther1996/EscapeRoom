@@ -26,4 +26,13 @@ public class Player : MonoBehaviour
             GameManager.IsServer = false;
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        
+        Debug.Log("ELEVATOR HIT");
+        this.transform.position = other.transform.position;
+        
+        
+    }
 }

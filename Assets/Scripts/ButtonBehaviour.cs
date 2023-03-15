@@ -47,12 +47,12 @@ public class ButtonBehaviour : MonoBehaviour
 
     public void ElevatorGoUp()
     {
-
+        ElevatorAnims.SetBool("GoUp", true);
     }
 
     public void ElevatorGoDown()
     {
-
+        ElevatorAnims.SetBool("GoDown", true);
     }
 
 }
