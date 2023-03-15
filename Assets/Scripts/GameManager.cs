@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            if (!BoolFirstConnectedDevice()) { return; }
+            //if (!BoolFirstConnectedDevice()) { return; }
             Debug.Log("Server assigned");
             AssignServer();
         }
