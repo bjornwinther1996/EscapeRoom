@@ -121,19 +121,20 @@ public class GameManager : MonoBehaviour
 
     bool CheckIfServerExist()
     {
-        bool isServer = false;
+        bool isServerExist = true;
+
         for (int i = 0; i < Avatars.Count; i++)
         {
             RealtimeAvatar player = Avatars[i];
 
-            if (player.gameObject.GetComponent<PlayerData>()._isServer) //isServer
+            if (!player.gameObject.GetComponent<PlayerData>()._isServer) //isServer
             {
-                isServer = true;
-            }            
+                isServerExist = false;
+            }
 
         }
-        return isServer;
-        
+
+        return isServerExist;
     }
 
     void AssignPlayerNumbers() // make condition so it isn't checked and assigned all the time.
