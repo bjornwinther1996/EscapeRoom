@@ -38,20 +38,20 @@ public class GameManager : MonoBehaviour
         CheckAndSetAvatarArray();
         //AssignServer();
         AssignPlayerNumbers(); // also sets IsServer!
-        Debug.Log("Avatars Computer: " + Avatars.Count);
-        Debug.Log("BackupInt Avatars: " + syncedGameVariables._backupInt);
+        //Debug.Log("Avatars Computer: " + Avatars.Count);
+        //Debug.Log("BackupInt Avatars: " + syncedGameVariables._backupInt);
         if (CheckIfServerExist())
         {
             //if (!CheckIfServerExist()) { return; }
-            Debug.Log("Server Exists");
+            //Debug.Log("Server Exists");
 
             if (!IsServer) { return; } // Only do the following if client is server:
-            DebuggerVR.DebugMessage1 = "Avatars: " + Avatars.Count;
+            //DebuggerVR.DebugMessage1 = "Avatars: " + Avatars.Count;
             //if (!CheckAllPlayersConnected()) { return; } // check if all players are connected, before realtime spawning objects that need to have local sceneObj as parent.
-            Debug.Log("IS SERVER AND ALL CONNECTED");
+            //Debug.Log("IS SERVER AND ALL CONNECTED");
             if (!isPlatformsInstantiated)
             {
-                Debug.Log("IS SERVER AND PLATFORMINSTANTIATED");
+                //Debug.Log("IS SERVER AND PLATFORMINSTANTIATED");
                 PlatformManagerScript.RealtimeInstantiatePlatforms();
                 PlatformManagerScript.SetRandomSequence(); // sync the sequence index int? 
                 isPlatformsInstantiated = true;
@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour
         else
         {
             //if (!BoolFirstConnectedDevice()) { return; }
-            Debug.Log("Server assigned");
+            //Debug.Log("Server assigned");
             AssignServer();
         }
 
@@ -120,22 +120,22 @@ public class GameManager : MonoBehaviour
 
     bool CheckIfServerExist()
     {
-        Debug.Log("CheckIfServerExist Method Triggered");
+        //Debug.Log("CheckIfServerExist Method Triggered");
         bool isServerExist = false;
 
         for (int i = 0; i < Avatars.Count; i++)
         {
-            Debug.Log("CheckIfServerExist: Avatars.count:" + Avatars.Count);
+            //Debug.Log("CheckIfServerExist: Avatars.count:" + Avatars.Count);
             RealtimeAvatar player = Avatars[i];
 
             if (player.gameObject.GetComponent<PlayerData>()._isServer) //isServer
             {
                 isServerExist = true;
-                Debug.Log("CheckIfServerExist: IF statement triggered!");
+                //Debug.Log("CheckIfServerExist: IF statement triggered!");
             }
 
         }
-        Debug.Log("CheckIfServerExist: isServerExist: " + isServerExist);
+        //Debug.Log("CheckIfServerExist: isServerExist: " + isServerExist);
 
         return isServerExist;
     }
