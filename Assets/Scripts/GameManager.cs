@@ -39,27 +39,34 @@ public class GameManager : MonoBehaviour
         //if (!BoolFirstConnectedDevice()) { return; } // If the device is not the first connected device to the server - return
         
         CheckAndSetAvatarArray();
-        AssignServer();
+        //AssignServer();
         AssignPlayerNumbers(); // also sets IsServer!
         Debug.Log("Avatars Computer: " + Avatars.Count);
         Debug.Log("BackupInt Avatars: " + syncedGameVariables._backupInt);
-
-        if (!CheckIfServerExist()) { return; }
-        Debug.Log("Server Exists");
-
-        if (!IsServer) { return; } // Only do the following if client is server:
-        DebuggerVR.DebugMessage1 = "Avatars: " + Avatars.Count;
-        //if (!CheckAllPlayersConnected()) { return; } // check if all players are connected, before realtime spawning objects that need to have local sceneObj as parent.
-        Debug.Log("IS SERVER AND ALL CONNECTED");
-        if (!isPlatformsInstantiated)
+        if (CheckIfServerExist())
         {
-            Debug.Log("IS SERVER AND PLATFORMINSTANTIATED");
-            PlatformManagerScript.RealtimeInstantiatePlatforms();
-            PlatformManagerScript.SetRandomSequence(); // sync the sequence index int? 
-            isPlatformsInstantiated = true;
+            //if (!CheckIfServerExist()) { return; }
+            Debug.Log("Server Exists");
+
+            if (!IsServer) { return; } // Only do the following if client is server:
+            DebuggerVR.DebugMessage1 = "Avatars: " + Avatars.Count;
+            //if (!CheckAllPlayersConnected()) { return; } // check if all players are connected, before realtime spawning objects that need to have local sceneObj as parent.
+            Debug.Log("IS SERVER AND ALL CONNECTED");
+            if (!isPlatformsInstantiated)
+            {
+                Debug.Log("IS SERVER AND PLATFORMINSTANTIATED");
+                PlatformManagerScript.RealtimeInstantiatePlatforms();
+                PlatformManagerScript.SetRandomSequence(); // sync the sequence index int? 
+                isPlatformsInstantiated = true;
+            }
+            PlatformManagerScript.ActivateNextRow(PlatformManagerScript.RowIndex); // gettiing PlatformManagerScript.rowIndex fails?? no
+            PlatformManagerScript.CheckCorrectPath(PlatformManagerScript.RowIndex);
         }
-        PlatformManagerScript.ActivateNextRow(PlatformManagerScript.RowIndex); // gettiing PlatformManagerScript.rowIndex fails?? no
-        PlatformManagerScript.CheckCorrectPath(PlatformManagerScript.RowIndex);
+        else
+        {
+            Debug.Log("Server assigned");
+            AssignServer();
+        }
 
 
     }
