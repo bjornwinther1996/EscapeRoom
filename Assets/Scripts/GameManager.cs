@@ -24,9 +24,6 @@ public class GameManager : MonoBehaviour
 
     private bool incrementOnce;
 
-    private bool isActivateNextRow;
-
-
 
     void Start()
     {
@@ -85,7 +82,6 @@ public class GameManager : MonoBehaviour
     {
         if (syncedGameVariables._backupBool == false)
         {
-            syncedGameVariables._backupBool = firstConnected;
             return true;
         }
         else
@@ -118,6 +114,7 @@ public class GameManager : MonoBehaviour
     void AssignServer()
     {
         if (Avatars.Count == 0) { return; }
+        if (!BoolFirstConnectedDevice()) { return; }
         Avatars[0].GetComponent<PlayerData>()._isServer = true; //isServer
     }
 
