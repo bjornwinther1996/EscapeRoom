@@ -290,6 +290,7 @@ GameObject:
   - component: {fileID: 241529509240225551}
   - component: {fileID: 6487897762903215473}
   - component: {fileID: 2047142232309446106}
+  - component: {fileID: 7203698329441718173}
   m_Layer: 0
   m_Name: VR Player
   m_TagString: Player
@@ -447,6 +448,18 @@ MonoBehaviour:
   _previousBackupFloat: 0
   _backupInt: 0
   _previousBackupInt: 0
+--- !u!114 &7203698329441718173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1435502846325602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d67bfd6c596eb4536b4852d1f6b895ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1573471737031190
 GameObject:
   m_ObjectHideFlags: 0

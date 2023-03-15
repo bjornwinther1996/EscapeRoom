@@ -66,7 +66,6 @@ public class GameManager : MonoBehaviour
             AssignServer();
         }
 
-
     }
 
 
@@ -150,7 +149,7 @@ public class GameManager : MonoBehaviour
             if (player.gameObject.GetComponent<PlayerData>()._isServer) //isServer
             {
                 Player1 = player.gameObject;
-                IsServer = true; // correct to set here? - I would think so xD maybe better to set from playerscript?
+                //IsServer = true; // correct to set here? - I would think so xD maybe better to set from playerscript?
                 if (!incrementOnce)
                 {
                     syncedGameVariables._backupInt++;
