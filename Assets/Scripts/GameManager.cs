@@ -121,18 +121,22 @@ public class GameManager : MonoBehaviour
 
     bool CheckIfServerExist()
     {
+        Debug.Log("CheckIfServerExist Method Triggered");
         bool isServerExist = true;
 
         for (int i = 0; i < Avatars.Count; i++)
         {
+            Debug.Log("CheckIfServerExist: Avatars.count:" + Avatars.Count);
             RealtimeAvatar player = Avatars[i];
 
             if (!player.gameObject.GetComponent<PlayerData>()._isServer) //isServer
             {
                 isServerExist = false;
+                Debug.Log("CheckIfServerExist: IF statement triggered! isServerExist = false");
             }
 
         }
+        Debug.Log("CheckIfServerExist: isServerExist: " + isServerExist);
 
         return isServerExist;
     }
