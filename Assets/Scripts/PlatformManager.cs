@@ -113,6 +113,7 @@ public class PlatformManager : MonoBehaviour
 
     public void CheckCorrectPath(int rowToCheck) // Could limit to check only one row - Just as in ActivateNextRow
     {
+        Debug.Log("CheckCorrectPath called");
         for (int i = 0; i < rowToCheck; i++)
         {
             for (int j = 0; j < RowLength; j++)
@@ -121,7 +122,7 @@ public class PlatformManager : MonoBehaviour
                 {
                     numOfPlatformsActivatedInRow++;
                     platformArray[i, j].transform.GetChild(0).gameObject.GetComponent<Platform>().SetPlatformActivated(false);
-                    if (numOfPlatformsActivatedInRow <= 2) // if 2 or more
+                    if (numOfPlatformsActivatedInRow >= 2) // if 2 or more
                     {
                         RowIndex++;
                         numOfPlatformsActivatedInRow = 0;
