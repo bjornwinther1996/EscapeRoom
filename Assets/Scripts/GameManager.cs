@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
                 PlatformManagerScript.RealtimeInstantiatePlatforms();
                 PlatformManagerScript.SetRandomSequence(); // sync the sequence index int? 
                 isPlatformsInstantiated = true;
+                syncedGameVariables._backupBool = true;
             }
             PlatformManagerScript.ActivateNextRow(PlatformManagerScript.RowIndex); // gettiing PlatformManagerScript.rowIndex fails?? no
             PlatformManagerScript.CheckCorrectPath(PlatformManagerScript.RowIndex);
@@ -149,7 +150,10 @@ public class GameManager : MonoBehaviour
 
     }
 
-    void FirstConnectedDevice() // not used
+}
+
+/*
+     void FirstConnectedDevice() // not used
     {
         if (syncedGameVariables._backupBool == false)
         {
@@ -170,7 +174,7 @@ public class GameManager : MonoBehaviour
             return false;
         }
     }
-}
+ */
 
 
 

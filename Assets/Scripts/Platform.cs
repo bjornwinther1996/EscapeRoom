@@ -18,6 +18,7 @@ public class Platform : MonoBehaviour
     public GameObject GameManagerReference;
 
     private PlatformData syncedPlatformVariables;
+    private bool isMaterialSet;
     //int randomChance; //Temporary - functionality should be in grid class
 
     //platform needs to have realtime components on them! - and this script needs to get the realtime component to delete realtime etc.
@@ -29,18 +30,22 @@ public class Platform : MonoBehaviour
         audioSource = GetComponentInParent<AudioSource>();
         syncedPlatformVariables = GetComponent<PlatformData>();
         meshRenderer = GetComponent<MeshRenderer>();
-        GameManagerReference = GameObject.FindGameObjectWithTag("GameManager");
+        //GameManagerReference = GameObject.FindGameObjectWithTag("GameManager");
+        GameManagerReference = GameObject.Find("GameManager");
+        Debug.Log("GameManagerReference: " + GameManagerReference);
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        //if (!IsPlatformsInstantiated) { return; }
+        if (!GameManagerReference.GetComponent<GameManagerData>()._backupBool) { return; }
         SetMaterial();
     }
 
     public void SetMaterial()
     {
+        if (isMaterialSet) { return; }
         if (GameManager.Player1 && syncedPlatformVariables._isSolidPlayer1)
         {
             meshRenderer.material = Player1Material;
@@ -49,6 +54,7 @@ public class Platform : MonoBehaviour
         {
             meshRenderer.material = Player2Material;
         }
+        isMaterialSet = true;
     }
 
     private void OnTriggerStay(Collider other) // can use courutine instead? - to wait x-time to execute. // Rigidbody on Avatar

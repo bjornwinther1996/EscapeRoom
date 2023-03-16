@@ -460,6 +460,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d67bfd6c596eb4536b4852d1f6b895ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  VRRig: {fileID: 0}
+  LeftHand: {fileID: 1573471737031190}
+  RightHand: {fileID: 1681626021449142}
+  GameManagerReference: {fileID: 0}
+  MaterialPlayer1: {fileID: 2100000, guid: 102bd7dd5028145e6901ad6c219d5cc8, type: 2}
+  MaterialPlayer2: {fileID: 2100000, guid: 6930e17525e114f3bbe041665e3e8894, type: 2}
 --- !u!1 &1573471737031190
 GameObject:
   m_ObjectHideFlags: 0
