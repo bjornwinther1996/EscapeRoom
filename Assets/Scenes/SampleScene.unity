@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.35743085, g: 0.6972783, b: 0.72365904, a: 1}
+  m_IndirectSpecularColor: {r: 0.3575201, g: 0.6973908, b: 0.72364134, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -951,6 +951,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6626e442ccabde646be8836b67e81851, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waitTime: 10
   ElevatorAnims: {fileID: 0}
   button: {fileID: 306658668}
   onPress:
@@ -2579,6 +2580,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6626e442ccabde646be8836b67e81851, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waitTime: 10
   ElevatorAnims: {fileID: 0}
   button: {fileID: 1207956368}
   onPress:
@@ -3700,6 +3702,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: elevator_v2
       objectReference: {fileID: 0}
+    - target: {fileID: 2067957546217286947, guid: c1ca35dfc91060c4cbf9c0b1c7d9be25, type: 3}
+      propertyPath: m_TagString
+      value: Elevator
+      objectReference: {fileID: 0}
     - target: {fileID: 2855742304251784447, guid: c1ca35dfc91060c4cbf9c0b1c7d9be25, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -3719,6 +3725,10 @@ PrefabInstance:
     - target: {fileID: 6737748149490171505, guid: c1ca35dfc91060c4cbf9c0b1c7d9be25, type: 3}
       propertyPath: m_LocalPosition.x
       value: -43.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7007345447106631162, guid: c1ca35dfc91060c4cbf9c0b1c7d9be25, type: 3}
+      propertyPath: m_TagString
+      value: Elevator
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c1ca35dfc91060c4cbf9c0b1c7d9be25, type: 3}
