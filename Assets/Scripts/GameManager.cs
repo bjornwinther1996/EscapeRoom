@@ -95,7 +95,7 @@ public class GameManager : MonoBehaviour
             //Debug.Log("CheckIfServerExist: Avatars.count:" + Avatars.Count);
             RealtimeAvatar player = Avatars[i];
 
-            if (player.gameObject.GetComponent<PlayerData>()._isServer) //isServer
+            if (player.gameObject.GetComponent<PlayerData>()._isServer) // If one of the avatars in the list _isServer = true, return true
             {
                 isServerExist = true;
                 //Debug.Log("CheckIfServerExist: IF statement triggered!");
@@ -138,7 +138,7 @@ public class GameManager : MonoBehaviour
 
     bool CheckAllPlayersConnected()
     {
-        if(syncedGameVariables._backupInt == 2) // was Avatars.Count 
+        if(syncedGameVariables._backupInt == 1) // was Avatars.Count 
         {
             return true;
         }

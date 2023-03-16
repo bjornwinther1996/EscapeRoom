@@ -12,6 +12,10 @@ public class Platform : MonoBehaviour
     private AudioSource audioSource;
     private bool platformActivated;
     private bool stopCalling;
+    private MeshRenderer meshRenderer;
+    public Material Player1Material;
+    public Material Player2Material;
+    public GameObject GameManagerReference;
 
     private PlatformData syncedPlatformVariables;
     //int randomChance; //Temporary - functionality should be in grid class
@@ -24,13 +28,27 @@ public class Platform : MonoBehaviour
         collider = GetComponent<Collider>();
         audioSource = GetComponentInParent<AudioSource>();
         syncedPlatformVariables = GetComponent<PlatformData>();
-
+        meshRenderer = GetComponent<MeshRenderer>();
+        GameManagerReference = GameObject.FindGameObjectWithTag("GameManager");
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        //if (!IsPlatformsInstantiated) { return; }
+        SetMaterial();
+    }
+
+    public void SetMaterial()
+    {
+        if (GameManager.Player1 && syncedPlatformVariables._isSolidPlayer1)
+        {
+            meshRenderer.material = Player1Material;
+        }
+        else if(GameManager.Player2 && syncedPlatformVariables._isSolidPlayer2)
+        {
+            meshRenderer.material = Player2Material;
+        }
     }
 
     private void OnTriggerStay(Collider other) // can use courutine instead? - to wait x-time to execute. // Rigidbody on Avatar
@@ -38,7 +56,9 @@ public class Platform : MonoBehaviour
         if (!other.CompareTag("Player")) { return; }
         timer += Time.deltaTime;
         if (timer <= TimerThreshold) { return; }//break instead?
-        CheckPlatform();
+        //CheckPlatformBothPlayers();
+        CheckPlatformOnePlayer(GameManager.Player1, syncedPlatformVariables._isSolidPlayer1);
+        CheckPlatformOnePlayer(GameManager.Player2, syncedPlatformVariables._isSolidPlayer2);
 
     }
 
@@ -93,9 +113,26 @@ public class Platform : MonoBehaviour
         stopCalling = true;
     }
 
-    public void CheckPlatform()
+    public void CheckPlatformBothPlayers()
     {
         if (syncedPlatformVariables._isSolidPlayer1 || syncedPlatformVariables._isSolidPlayer2)
+        {
+            Success();
+        }
+        else
+        {
+            GlassCracking();
+            if (timer >= TimerThreshold + 1)
+            {
+                PlatformFall();
+            }
+        }
+    }
+
+    public void CheckPlatformOnePlayer(GameObject player, bool isSolidPlayer)
+    {
+        if (!player) { return;  }
+        if (isSolidPlayer)
         {
             Success();
         }

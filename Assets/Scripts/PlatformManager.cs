@@ -17,32 +17,32 @@ public class PlatformManager : MonoBehaviour
 
     // hardcorded path sequences. has to be manually adjusted according to ColoumnLength and RowLength
     
-    private int[,] pathSequence1 = new int[ColoumnLength, RowLength] {          {0, 0, 0, 0, 1, 0, 0},
-                                                                                {0, 0, 0, 0, 1, 0, 0},
-                                                                                {0, 0, 0, 0, 1, 0, 0},
-                                                                                {0, 0, 0, 0, 1, 0, 0},
-                                                                                {0, 0, 0, 0, 1, 0, 0},
+    private int[,] pathSequence1 = new int[ColoumnLength, RowLength] {          {0, 1, 0, 0, 2, 0, 0},
+                                                                                {0, 1, 0, 0, 2, 0, 0},
+                                                                                {0, 1, 0, 0, 2, 0, 0},
+                                                                                {0, 1, 0, 0, 2, 0, 0},
+                                                                                {0, 1, 0, 0, 2, 0, 0},
 
     };
-    private int[,] pathSequence2 = new int[ColoumnLength, RowLength] {          {0, 1, 0, 0, 0, 0, 0},
-                                                                                {0, 0, 1, 0, 0, 0, 0},
-                                                                                {0, 0, 0, 1, 0, 0, 0},
-                                                                                {0, 0, 0, 0, 1, 0, 0},
-                                                                                {0, 0, 0, 0, 0, 1, 0},
+    private int[,] pathSequence2 = new int[ColoumnLength, RowLength] {          {0, 1, 0, 0, 2, 0, 0},
+                                                                                {0, 0, 1, 2, 0, 0, 0},
+                                                                                {0, 0, 2, 1, 0, 0, 0},
+                                                                                {0, 2, 0, 0, 1, 0, 0},
+                                                                                {2, 0, 0, 0, 0, 1, 0},
 
     };
-    private int[,] pathSequence3 = new int[ColoumnLength, RowLength] {          {1, 0, 0, 0, 0, 0, 0},
-                                                                                {1, 0, 0, 0, 0, 0, 0},
-                                                                                {0, 1, 0, 0, 0, 0, 0},
-                                                                                {0, 1, 0, 0, 0, 0, 0},
-                                                                                {0, 0, 1, 0, 0, 0, 0},
+    private int[,] pathSequence3 = new int[ColoumnLength, RowLength] {          {1, 0, 0, 0, 2, 0, 0},
+                                                                                {1, 0, 0, 0, 2, 0, 0},
+                                                                                {0, 1, 0, 0, 0, 2, 0},
+                                                                                {0, 1, 0, 0, 0, 0, 2},
+                                                                                {0, 0, 1, 0, 0, 0, 2},
 
     };
-    private int[,] pathSequence4 = new int[ColoumnLength, RowLength] {          {0, 0, 0, 0, 0, 0, 1},
-                                                                                {0, 0, 0, 0, 0, 0, 1},
-                                                                                {0, 0, 0, 0, 0, 0, 1},
-                                                                                {0, 0, 0, 0, 0, 0, 1},
-                                                                                {0, 0, 0, 0, 0, 0, 1},
+    private int[,] pathSequence4 = new int[ColoumnLength, RowLength] {          {0, 1, 0, 0, 0, 0, 2},
+                                                                                {0, 1, 0, 0, 0, 0, 2},
+                                                                                {0, 1, 0, 0, 0, 0, 2},
+                                                                                {0, 1, 0, 0, 0, 0, 2},
+                                                                                {0, 1, 0, 0, 0, 0, 2},
 
     };
 
@@ -110,16 +110,20 @@ public class PlatformManager : MonoBehaviour
     }
 
     public void CheckCorrectPath(int rowToCheck) // Could limit to check only one row - Just as in ActivateNextRow
-    { 
+    {
+        int numOfPlatformsActivatedInRow = 0;
         for (int i = 0; i < rowToCheck; i++)
         {
             for (int j = 0; j < RowLength; j++)
             {
                 if (platformArray[i, j].transform.GetChild(0).gameObject.GetComponent<Platform>().GetPlatformActivated())
                 {
-                    Debug.Log("RowIndex Increased");
-                    RowIndex++;
+                    numOfPlatformsActivatedInRow++;
                     platformArray[i, j].transform.GetChild(0).gameObject.GetComponent<Platform>().SetPlatformActivated(false);
+                    if (numOfPlatformsActivatedInRow <= 2) // if 2 or more
+                    {
+                        RowIndex++;
+                    }
                 }
             }
         }
