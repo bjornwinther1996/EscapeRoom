@@ -36,22 +36,13 @@ public class GameManager : MonoBehaviour
         //if (!BoolFirstConnectedDevice()) { return; } // If the device is not the first connected device to the server - return
         
         CheckAndSetAvatarArray();
-        //AssignServer();
         AssignPlayerNumbers(); // also sets IsServer!
-        //Debug.Log("Avatars Computer: " + Avatars.Count);
-        //Debug.Log("BackupInt Avatars: " + syncedGameVariables._backupInt);
         if (CheckIfServerExist())
         {
-            //if (!CheckIfServerExist()) { return; }
-            //Debug.Log("Server Exists");
-
             if (!IsServer) { return; } // Only do the following if client is server:
-            //DebuggerVR.DebugMessage1 = "Avatars: " + Avatars.Count;
             if (!CheckAllPlayersConnected()) { return; } // check if all players are connected, before realtime spawning objects that need to have local sceneObj as parent.
-            //Debug.Log("IS SERVER AND ALL CONNECTED");
             if (!isPlatformsInstantiated)
             {
-                //Debug.Log("IS SERVER AND PLATFORMINSTANTIATED");
                 PlatformManagerScript.RealtimeInstantiatePlatforms();
                 PlatformManagerScript.SetRandomSequence(); // sync the sequence index int? 
                 isPlatformsInstantiated = true;
@@ -62,33 +53,9 @@ public class GameManager : MonoBehaviour
         else
         {
             //if (!BoolFirstConnectedDevice()) { return; }
-            //Debug.Log("Server assigned");
             AssignServer();
         }
 
-    }
-
-
-    void FirstConnectedDevice()
-    {
-        if (syncedGameVariables._backupBool == false)
-        {
-            firstConnected = true;
-            syncedGameVariables._backupBool = firstConnected;
-        }
-    }
-
-    bool BoolFirstConnectedDevice()
-    {
-        if (syncedGameVariables._backupBool == false)
-        {
-            syncedGameVariables._backupBool = true;
-            return true;
-        }
-        else
-        {
-            return false;
-        }
     }
 
     void CheckAndSetAvatarArray() // needs to be run only by server, to set avatar count!
@@ -181,7 +148,31 @@ public class GameManager : MonoBehaviour
         }
 
     }
+
+    void FirstConnectedDevice() // not used
+    {
+        if (syncedGameVariables._backupBool == false)
+        {
+            firstConnected = true;
+            syncedGameVariables._backupBool = firstConnected;
+        }
+    }
+
+    bool BoolFirstConnectedDevice() // not used
+    {
+        if (syncedGameVariables._backupBool == false)
+        {
+            syncedGameVariables._backupBool = true;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }
+
+
 
 /*
  * if (Avatars.Count < 2)
