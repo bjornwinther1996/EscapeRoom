@@ -62,8 +62,8 @@ public class Platform : MonoBehaviour
         if (!other.CompareTag("Player")) { return; }
         timer += Time.deltaTime;
         if (timer <= TimerThreshold) { return; }//break instead?
-        //CheckPlatformOld();
-        CheckPlatformForPlayers();
+        CheckPlatformOld();
+        //CheckPlatformForPlayers(); // doesnt work yet
 
     }
 
