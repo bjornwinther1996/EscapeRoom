@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Throwable
   - Elevator
+  - GameManager
   layers:
   - Default
   - TransparentFX
