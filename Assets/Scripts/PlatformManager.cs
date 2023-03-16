@@ -51,7 +51,7 @@ public class PlatformManager : MonoBehaviour
     public int RowIndex = 1;
     public int PreviousRowIndex;
 
-    private int numOfPlatformsActivatedInRow;
+    //private int numOfPlatformsActivatedInRow;
 
 
     void Start()
@@ -114,6 +114,7 @@ public class PlatformManager : MonoBehaviour
     public void CheckCorrectPath(int rowToCheck) // Could limit to check only one row - Just as in ActivateNextRow
     {
         Debug.Log("CheckCorrectPath called");
+        int numOfPlatformsActivatedInRow = 0;
         for (int i = 0; i < rowToCheck; i++)
         {
             for (int j = 0; j < RowLength; j++)
