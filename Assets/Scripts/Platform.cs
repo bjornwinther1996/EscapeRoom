@@ -16,6 +16,7 @@ public class Platform : MonoBehaviour
     public Material Player1Material;
     public Material Player2Material;
     public GameObject GameManagerReference;
+    private float materialTimer;
 
     private PlatformData syncedPlatformVariables;
     private bool isMaterialSet;
@@ -40,13 +41,15 @@ public class Platform : MonoBehaviour
     void Update()
     {
         if (!GameManagerReference.GetComponent<GameManagerData>()._backupBool) { return; }
-        SetMaterial();
+        SetMaterial(); // CHANGE SO IT IS CALLED WHEN YOU STAND ON THE INITIAL READY/START BUTTON AS A PLAYER
     }
 
-    public void SetMaterial() // only called locally on each client
+    public void SetMaterial() // only called locally on each client // In future, SetMaterial, will be called once you stand on something!!!!!!!!
     {
         if (isMaterialSet) { return; }
-        if (GameManager.IsServer && syncedPlatformVariables._isSolidPlayer2)
+        materialTimer += Time.deltaTime; // store time
+        if (materialTimer < 3) { return; } // check if time is passed to counter bug where material is set before platforms are RealtimeInstantiated
+            if (GameManager.IsServer && syncedPlatformVariables._isSolidPlayer2)
         {
             meshRenderer.material = Player2Material;
         }
