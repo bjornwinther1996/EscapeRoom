@@ -145,7 +145,7 @@ public class Platform : MonoBehaviour
         {
             Success();
         }
-        else
+        else if(!syncedPlatformVariables._isSolidPlayer1 || !syncedPlatformVariables._isSolidPlayer2)
         {
             GlassCracking();
             if (timer >= TimerThreshold + 1)
