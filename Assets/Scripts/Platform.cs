@@ -74,7 +74,7 @@ public class Platform : MonoBehaviour
     {
         if (!other.CompareTag("Throwable")) { return; }
         timer += Time.deltaTime;
-        CheckPlatformThrowable(0.1f);
+        CheckPlatformThrowable(0f);
     }
 
     public void SetSolid(bool isSolid)
