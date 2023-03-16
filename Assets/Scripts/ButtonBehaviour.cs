@@ -6,6 +6,8 @@ using UnityEngine.Events;
 public class ButtonBehaviour : MonoBehaviour
 {
 
+    public float waitTime = 10f;
+    
     public Animator ElevatorAnims;
 
     public GameObject button;
@@ -22,6 +24,7 @@ public class ButtonBehaviour : MonoBehaviour
         sound = GetComponent<AudioSource>();
         isPressed = false;
         ElevatorAnims = GetComponentInParent<Animator>();
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -48,11 +51,20 @@ public class ButtonBehaviour : MonoBehaviour
     public void ElevatorGoUp()
     {
         ElevatorAnims.SetBool("GoUp", true);
+        //StartCoroutine(WaitAndReset());
+        //ElevatorAnims.SetBool("GoUp", false);
     }
 
     public void ElevatorGoDown()
     {
         ElevatorAnims.SetBool("GoDown", true);
+        //StartCoroutine(WaitAndReset());
+        //ElevatorAnims.SetBool("GoDown", false);
+    }
+
+    private IEnumerator WaitAndReset()
+    {
+        yield return new WaitForSeconds(waitTime);
     }
 
 }
