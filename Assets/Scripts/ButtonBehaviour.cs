@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class ButtonBehaviour : MonoBehaviour
 {
 
-    public float waitTime = 10f;
+    public float waitTime = 2f;
     
     public Animator ElevatorAnims;
 
@@ -51,20 +51,28 @@ public class ButtonBehaviour : MonoBehaviour
     public void ElevatorGoUp()
     {
         ElevatorAnims.SetBool("GoUp", true);
-        //StartCoroutine(WaitAndReset());
-        //ElevatorAnims.SetBool("GoUp", false);
+        if (true)
+        {
+            DebuggerVR.DebugMessage1 = "Starting coroutine UP";
+            StartCoroutine(WaitAndReset());
+        }
+        ElevatorAnims.SetBool("GoDown", false);
     }
 
     public void ElevatorGoDown()
     {
         ElevatorAnims.SetBool("GoDown", true);
-        //StartCoroutine(WaitAndReset());
-        //ElevatorAnims.SetBool("GoDown", false);
+        if (true)
+        {
+            DebuggerVR.DebugMessage1 = "Starting coroutine DOWN";
+            StartCoroutine(WaitAndReset());
+        }
+        ElevatorAnims.SetBool("GoUp", false);
     }
 
     private IEnumerator WaitAndReset()
     {
-        yield return new WaitForSeconds(waitTime);
+        yield return new WaitForSeconds(2.0f);
     }
 
 }
