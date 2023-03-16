@@ -35,35 +35,18 @@ public class Platform : MonoBehaviour
 
     private void OnTriggerStay(Collider other) // can use courutine instead? - to wait x-time to execute. // Rigidbody on Avatar
     {
-        /*
-        if (other.CompareTag("player")) //change this to "returnIF" but not the other code below)
-        {
-            timer += Time.deltaTime; // test if this works xD
-            if (timer >= timerThreshold)
-            {
-                if (isSolid)
-                {
-                    Success();
-                }
-                else
-                {
-                    GlassCracking();
-                    if (timer >= timerThreshold+0.5)
-                    {
-                        platformFall();
-                    }
-                }
-                
-            }
-        }*/
-
-        //the following is the same as the above: - check if it works
         if (!other.CompareTag("Player")) { return; }
         timer += Time.deltaTime;
         if (timer <= TimerThreshold) { return; }//break instead?
-        checkPlatform();
+        CheckPlatform();
 
+    }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!other.CompareTag("Throwable")) { return; }
+        timer += Time.deltaTime;
+        CheckPlatformThrowable(0.1f);
     }
 
     public void SetSolid(bool isSolid)
@@ -110,7 +93,7 @@ public class Platform : MonoBehaviour
         stopCalling = true;
     }
 
-    public void checkPlatform()
+    public void CheckPlatform()
     {
         if (syncedPlatformVariables._isSolidPlayer1 || syncedPlatformVariables._isSolidPlayer2)
         {
@@ -120,6 +103,22 @@ public class Platform : MonoBehaviour
         {
             GlassCracking();
             if (timer >= TimerThreshold + 1)
+            {
+                PlatformFall();
+            }
+        }
+    }
+
+    public void CheckPlatformThrowable(float timeThreshold)
+    {
+        if (syncedPlatformVariables._isSolidPlayer1 || syncedPlatformVariables._isSolidPlayer2)
+        {
+            Success();
+        }
+        else
+        {
+            GlassCracking();
+            if (timer >= timeThreshold)
             {
                 PlatformFall();
             }
