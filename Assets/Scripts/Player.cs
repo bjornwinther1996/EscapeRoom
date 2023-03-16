@@ -45,13 +45,15 @@ public class Player : MonoBehaviour
     {
         if (!GameManagerReference.GetComponent<GameManagerData>()._backupBool) { return; }
         if (isHandsColorSet) { return; }
-        if (GameManager.Player1)
+        if (GameManager.IsServer)
         {
             LeftHand.GetComponent<MeshRenderer>().material = MaterialPlayer1;
+            RightHand.GetComponent<MeshRenderer>().material = MaterialPlayer1;
         }
-        else if(GameManager.Player2)
+        else if(!GameManager.IsServer)
         {
             LeftHand.GetComponent<MeshRenderer>().material = MaterialPlayer2;
+            RightHand.GetComponent<MeshRenderer>().material = MaterialPlayer2;
         }
         isHandsColorSet = true;
     }

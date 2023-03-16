@@ -43,16 +43,16 @@ public class Platform : MonoBehaviour
         SetMaterial();
     }
 
-    public void SetMaterial()
+    public void SetMaterial() // only called locally on each client
     {
         if (isMaterialSet) { return; }
-        if (GameManager.Player1 && syncedPlatformVariables._isSolidPlayer1)
-        {
-            meshRenderer.material = Player1Material;
-        }
-        else if(GameManager.Player2 && syncedPlatformVariables._isSolidPlayer2)
+        if (GameManager.IsServer && syncedPlatformVariables._isSolidPlayer2)
         {
             meshRenderer.material = Player2Material;
+        }
+        else if(!GameManager.IsServer && syncedPlatformVariables._isSolidPlayer1)
+        {
+            meshRenderer.material = Player1Material;
         }
         isMaterialSet = true;
     }
@@ -62,9 +62,8 @@ public class Platform : MonoBehaviour
         if (!other.CompareTag("Player")) { return; }
         timer += Time.deltaTime;
         if (timer <= TimerThreshold) { return; }//break instead?
-        //CheckPlatformBothPlayers();
-        CheckPlatformOnePlayer(GameManager.Player1, syncedPlatformVariables._isSolidPlayer1);
-        CheckPlatformOnePlayer(GameManager.Player2, syncedPlatformVariables._isSolidPlayer2);
+        //CheckPlatformOld();
+        CheckPlatformForPlayers();
 
     }
 
@@ -119,7 +118,7 @@ public class Platform : MonoBehaviour
         stopCalling = true;
     }
 
-    public void CheckPlatformBothPlayers()
+    public void CheckPlatformOld() // old - not used anymore.
     {
         if (syncedPlatformVariables._isSolidPlayer1 || syncedPlatformVariables._isSolidPlayer2)
         {
@@ -135,10 +134,14 @@ public class Platform : MonoBehaviour
         }
     }
 
-    public void CheckPlatformOnePlayer(GameObject player, bool isSolidPlayer)
+    public void CheckPlatformForPlayers()
     {
-        if (!player) { return;  }
-        if (isSolidPlayer)
+
+        if (GameManager.IsServer && syncedPlatformVariables._isSolidPlayer1)
+        {
+            Success();
+        }
+        else if (!GameManager.IsServer && syncedPlatformVariables._isSolidPlayer2)
         {
             Success();
         }
