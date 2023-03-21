@@ -23,6 +23,10 @@ public class GameManager : MonoBehaviour
     private bool isPlatformsInstantiated; // maybe make public static?
 
     private bool incrementOnce;
+    private bool runOnce;
+
+    public static bool AmbientAudio;
+    public bool AmbientAudioEnabled;
 
 
     void Start()
@@ -33,6 +37,21 @@ public class GameManager : MonoBehaviour
     
     void Update()
     {
+
+        if (!runOnce)
+        {
+            if (AmbientAudioEnabled == true)
+            {
+                AmbientAudio = true;
+                runOnce = true;
+            }
+            else if (AmbientAudioEnabled == false)
+            {
+                AmbientAudio = false;
+                runOnce = true;
+            }
+        }
+
         //if (!BoolFirstConnectedDevice()) { return; } // If the device is not the first connected device to the server - return
         
         CheckAndSetAvatarArray();

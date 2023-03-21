@@ -7,6 +7,8 @@ public class GameManagerData : MonoBehaviour
 {
     public GameManagerSync _gameManagerSync;
 
+    
+
     [SerializeField]
     public float _gameTime = default;
     public float _previousGameTime = default;
