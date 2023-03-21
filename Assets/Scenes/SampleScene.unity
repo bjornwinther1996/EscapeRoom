@@ -3325,7 +3325,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NetworkManager: {fileID: 120883205}
   PlatformManagerObject: {fileID: 291113915}
-  AmbientAudioEnabled: 0
+  AmbientAudioEnabled: 1
 --- !u!114 &1231007734
 MonoBehaviour:
   m_ObjectHideFlags: 0
