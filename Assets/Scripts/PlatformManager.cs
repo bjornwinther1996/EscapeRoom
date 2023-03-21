@@ -92,7 +92,7 @@ public class PlatformManager : MonoBehaviour
     {
         platform.GetComponent<RealtimeTransform>().RequestOwnership();
         //platform.transform.SetParent(gameObject.transform);
-        platform.transform.position += new Vector3(0.2f, 0, 0);
+        platform.transform.position += new Vector3(-0.025f, 0, 0);
     }
 
     public void ActivateNextRow(int rowToActivate) // Make petter performance-wise so it doesnt continously activate components.
