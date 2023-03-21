@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.35743085, g: 0.6972783, b: 0.72365904, a: 1}
+  m_IndirectSpecularColor: {r: 0.3575201, g: 0.6973908, b: 0.72364134, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -417,6 +417,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7633953770711298854, guid: 89c7c01d5555c40c9975548891611185, type: 3}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7633953770711298854, guid: 89c7c01d5555c40c9975548891611185, type: 3}
       propertyPath: InitialModule.maxNumParticles
       value: 150
       objectReference: {fileID: 0}
@@ -659,7 +663,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 322651724}
-  audioClip: {fileID: 0}
+  audioClip: {fileID: 8300000, guid: ae2dd33fb0345744da999a4e6d89eb23, type: 3}
   runOnce: 1
   wasDone: 0
   timer: 0
@@ -2774,7 +2778,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 1009039428}
-  audioClip: {fileID: 0}
+  audioClip: {fileID: 8300000, guid: 7a74d556db95a0e4d981892fc69081af, type: 3}
   runOnce: 1
   wasDone: 0
   timer: 0
