@@ -48,12 +48,12 @@ public class Player : MonoBehaviour
 
     private void SetSkybox() // MAKE LOGIC SO IT ONLY CALLS ONCE.
     {
-        if (transform.position.y > -50)
+        if (transform.position.y > -50 && RenderSettings.skybox != HeavenSkyMaterial)
         {
             RenderSettings.skybox = HeavenSkyMaterial;
             
         }
-        else if(transform.position.y < -50)
+        else if(transform.position.y < -50 && RenderSettings.skybox != HellSkyMaterial)
         {
             RenderSettings.skybox = HellSkyMaterial;
         }
