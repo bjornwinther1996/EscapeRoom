@@ -63,7 +63,7 @@ public class Player : MonoBehaviour
 
         if (other.gameObject.tag == "Elevator")
         {
-            Debug.Log("ELLIE HIT");
+            //Debug.Log("ELLIE HIT");
             if (!other.gameObject == null)
             {
                 other.GetComponent<RealtimeTransform>().RequestOwnership();
@@ -77,7 +77,7 @@ public class Player : MonoBehaviour
         if (other.gameObject.tag == "Elevator")
         {
             Vector3 newPos = new Vector3(VRRig.transform.position.x, other.transform.position.y - avatarYOffset, VRRig.transform.position.z);
-            Debug.Log("STILL IN ELLIE");
+            //Debug.Log("STILL IN ELLIE");
 
             VRRig.transform.position = newPos;
         }
