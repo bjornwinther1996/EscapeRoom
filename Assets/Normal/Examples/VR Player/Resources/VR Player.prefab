@@ -466,6 +466,8 @@ MonoBehaviour:
   GameManagerReference: {fileID: 0}
   MaterialPlayer1: {fileID: 2100000, guid: 102bd7dd5028145e6901ad6c219d5cc8, type: 2}
   MaterialPlayer2: {fileID: 2100000, guid: 6930e17525e114f3bbe041665e3e8894, type: 2}
+  HeavenSkyMaterial: {fileID: 2100000, guid: d04fa9ef91692c6429efccdf42970c46, type: 2}
+  HellSkyMaterial: {fileID: 2100000, guid: a093f82ba07e44104b3d07206de518ef, type: 2}
 --- !u!1 &1573471737031190
 GameObject:
   m_ObjectHideFlags: 0

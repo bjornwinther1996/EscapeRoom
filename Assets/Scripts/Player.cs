@@ -17,6 +17,9 @@ public class Player : MonoBehaviour
 
     private float avatarYOffset = 2f;
 
+    public Material HeavenSkyMaterial;
+    public Material HellSkyMaterial;
+
     void Start()
     {
         syncedPlayerData = GetComponent<PlayerData>();
@@ -39,6 +42,22 @@ public class Player : MonoBehaviour
         }
 
         SetHandsColor();
+        SetSkybox(); // MAKE IT SO IT ONLY CALLS ONCE!
+
+    }
+
+    private void SetSkybox() // MAKE LOGIC SO IT ONLY CALLS ONCE.
+    {
+        if (transform.position.y > -50)
+        {
+            RenderSettings.skybox = HeavenSkyMaterial;
+            
+        }
+        else if(transform.position.y < -50)
+        {
+            RenderSettings.skybox = HellSkyMaterial;
+        }
+        //DynamicGI.UpdateEnvironment();
     }
 
     private void SetHandsColor() // needs color sync?
