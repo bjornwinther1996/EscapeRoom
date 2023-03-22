@@ -30,7 +30,7 @@ public class ButtonBehaviour : MonoBehaviour
 
     }
 
-    private void Update()
+    void FixedUpdate()
     {
         //ElevatorAnims.SetBool("GoUp", elevatorData._goUp);
         //ElevatorAnims.SetBool("GoDown", true);
