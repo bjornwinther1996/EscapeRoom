@@ -6,6 +6,8 @@ using UnityEngine.Events;
 public class ButtonBehaviour : MonoBehaviour
 {
 
+    private ElevatorData elevatorData; 
+    
     public float waitTime = 2f;
     
     public Animator ElevatorAnims;
@@ -24,7 +26,14 @@ public class ButtonBehaviour : MonoBehaviour
         sound = GetComponent<AudioSource>();
         isPressed = false;
         ElevatorAnims = GetComponentInParent<Animator>();
+        elevatorData = GetComponent<ElevatorData>();
 
+    }
+
+    private void Update()
+    {
+        ElevatorAnims.SetBool("GoUp", elevatorData._goUp);
+        ElevatorAnims.SetBool("GoDown", elevatorData._goDown);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -50,24 +59,30 @@ public class ButtonBehaviour : MonoBehaviour
 
     public void ElevatorGoUp()
     {
-        ElevatorAnims.SetBool("GoUp", true);
+        elevatorData._goUp = true;
+        //ElevatorAnims.SetBool("GoUp", elevatorData._goUp);
+        
         if (true)
         {
             DebuggerVR.DebugMessage1 = "Starting coroutine UP";
             StartCoroutine(WaitAndReset());
         }
-        ElevatorAnims.SetBool("GoDown", false);
+
+        elevatorData._goDown = false;
+        //ElevatorAnims.SetBool("GoDown", elevatorData._goDown);
     }
 
     public void ElevatorGoDown()
     {
-        ElevatorAnims.SetBool("GoDown", true);
+        elevatorData._goDown = true;
+        //ElevatorAnims.SetBool("GoDown", elevatorData._goDown);
         if (true)
         {
             DebuggerVR.DebugMessage1 = "Starting coroutine DOWN";
             StartCoroutine(WaitAndReset());
         }
-        ElevatorAnims.SetBool("GoUp", false);
+        //ElevatorAnims.SetBool("GoUp", false);
+        elevatorData._goUp = false;
     }
 
     private IEnumerator WaitAndReset()
