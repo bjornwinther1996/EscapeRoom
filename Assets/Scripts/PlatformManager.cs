@@ -188,6 +188,11 @@ public class PlatformManager : MonoBehaviour
                 {
                     platformArray[i, j].gameObject.GetComponentInChildren<PlatformData>()._isSolidPlayer2 = true;
                 }
+                else if(pathSequence[i, j] == 2) // so that i can call this method (SetrandomSequence) - to reset platforms according to new sequence.
+                {
+                    platformArray[i, j].gameObject.GetComponentInChildren<PlatformData>()._isSolidPlayer2 = false;
+                    platformArray[i, j].gameObject.GetComponentInChildren<PlatformData>()._isSolidPlayer2 = false;
+                }
             }
         }
     }
@@ -204,8 +209,9 @@ public class PlatformManager : MonoBehaviour
         FloorHeaven.SetActive(false);
     }
 
-    public void ShowAllSurfaces()
+    public IEnumerator EnableAllSurfaces(float time)
     {
+        yield return new WaitForSeconds(time);
         for (int i = 0; i < ColoumnLength; i++)
         {
             for (int j = 0; j < RowLength; j++)
@@ -215,6 +221,7 @@ public class PlatformManager : MonoBehaviour
         }
         FloorHeaven.SetActive(true);
     }
+
 }
 
 
