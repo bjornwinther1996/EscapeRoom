@@ -43,7 +43,6 @@ public class AudioBehavior : MonoBehaviour
             }
         }
 
-        Debug.Log("Is playing " + audioSource.isPlaying);
 
     }
 }

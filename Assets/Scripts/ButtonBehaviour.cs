@@ -32,8 +32,8 @@ public class ButtonBehaviour : MonoBehaviour
 
     private void Update()
     {
-        ElevatorAnims.SetBool("GoUp", elevatorData._goUp);
-        ElevatorAnims.SetBool("GoDown", elevatorData._goDown);
+        //ElevatorAnims.SetBool("GoUp", elevatorData._goUp);
+        //ElevatorAnims.SetBool("GoDown", elevatorData._goDown);
     }
 
     private void OnTriggerEnter(Collider other)
