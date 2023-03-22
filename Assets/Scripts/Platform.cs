@@ -106,7 +106,6 @@ public class Platform : MonoBehaviour
             case 2:
                 audioSource.PlayOneShot(VanishSounds[2]);
                 break;
-
             default:
                 audioSource.PlayOneShot(VanishSounds[1]);
                 break;
@@ -188,7 +187,7 @@ public class Platform : MonoBehaviour
         this.platformActivated = platformActivated;
     }
 
-    public void DisablePlatform()
+    public void DisablePlatform() // DOES THIS FUCK THE SOUND??
     {
         //gameObject.SetActive(false); // probably has to be changed to delete and furthermore realtime.delete?
         gameObject.GetComponent<RealtimeTransform>().RequestOwnership();

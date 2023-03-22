@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
             PlatformManagerScript.ActivateNextRow(PlatformManagerScript.RowIndex); // gettiing PlatformManagerScript.rowIndex fails?? no
             PlatformManagerScript.CheckCorrectPath(PlatformManagerScript.RowIndex);
 
-            if (Platform.NumberOfPlatformsDestroyed > 1) // if 2:
+            if (Platform.NumberOfPlatformsDestroyed > 0) // if 1:
             {
                 PlatformManagerScript.DestroyAllSurfaces();
                 PlatformManagerScript.StartCoroutine(PlatformManagerScript.EnableAllSurfaces(7)); // enable all surfaces again after 5 sec
