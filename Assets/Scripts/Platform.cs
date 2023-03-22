@@ -110,7 +110,7 @@ public class Platform : MonoBehaviour
                 audioSource.PlayOneShot(VanishSounds[1]);
                 break;
         }
-        gameObject.SetActive(false); // probably has to be changed to delete and furthermore realtime.delete?
+        DisablePlatform();
     }
 
     public void Success()
@@ -185,6 +185,16 @@ public class Platform : MonoBehaviour
     public void SetPlatformActivated(bool platformActivated)
     {
         this.platformActivated = platformActivated;
+    }
+
+    public void DisablePlatform()
+    {
+        gameObject.SetActive(false); // probably has to be changed to delete and furthermore realtime.delete?
+    }
+
+    public void EnablePlatform()
+    {
+        gameObject.SetActive(true); // probably has to be changed to delete and furthermore realtime.delete?
     }
 
 }

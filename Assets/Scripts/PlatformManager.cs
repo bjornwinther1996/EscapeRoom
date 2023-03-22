@@ -191,6 +191,30 @@ public class PlatformManager : MonoBehaviour
             }
         }
     }
+
+    public void DestroyAllSurfaces()
+    {
+        for (int i = 0; i < ColoumnLength; i++)
+        {
+            for (int j = 0; j < RowLength; j++)
+            {
+                platformArray[i, j].transform.GetChild(0).gameObject.GetComponent<Platform>().DisablePlatform();
+            }
+        }
+        FloorHeaven.SetActive(false);
+    }
+
+    public void ShowAllSurfaces()
+    {
+        for (int i = 0; i < ColoumnLength; i++)
+        {
+            for (int j = 0; j < RowLength; j++)
+            {
+                platformArray[i, j].transform.GetChild(0).gameObject.GetComponent<Platform>().EnablePlatform();
+            }
+        }
+        FloorHeaven.SetActive(true);
+    }
 }
 
 
