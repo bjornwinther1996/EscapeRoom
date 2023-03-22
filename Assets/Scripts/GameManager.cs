@@ -69,6 +69,11 @@ public class GameManager : MonoBehaviour
             }
             PlatformManagerScript.ActivateNextRow(PlatformManagerScript.RowIndex); // gettiing PlatformManagerScript.rowIndex fails?? no
             PlatformManagerScript.CheckCorrectPath(PlatformManagerScript.RowIndex);
+
+            if (Platform.NumberOfPlatformsDestroyed > 1)
+            {
+                //PlatformManagerScript.
+            }
         }
         else
         {

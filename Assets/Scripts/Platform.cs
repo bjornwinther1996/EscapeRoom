@@ -20,6 +20,8 @@ public class Platform : MonoBehaviour
 
     private PlatformData syncedPlatformVariables;
     private bool isMaterialSet;
+
+    public static int NumberOfPlatformsDestroyed;
     //int randomChance; //Temporary - functionality should be in grid class
 
     //platform needs to have realtime components on them! - and this script needs to get the realtime component to delete realtime etc.
@@ -133,6 +135,7 @@ public class Platform : MonoBehaviour
             if (timer >= TimerThreshold + 1)
             {
                 PlatformFall();
+                NumberOfPlatformsDestroyed++;
             }
         }
     }

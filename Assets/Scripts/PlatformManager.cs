@@ -53,6 +53,8 @@ public class PlatformManager : MonoBehaviour
 
     private int numOfPlatformsActivatedInRow;
 
+    public GameObject FloorHeaven;
+
 
     void Start()
     {
