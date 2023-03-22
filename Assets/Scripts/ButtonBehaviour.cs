@@ -38,13 +38,13 @@ public class ButtonBehaviour : MonoBehaviour
         if (elevatorData._goUp)
         {
             ElevatorAnims.SetBool("GoUp", true);
-            WaitAndReset();
+            //WaitAndReset();
             ElevatorAnims.SetBool("GoDown", false);
         }
         else if (elevatorData._goDown)
         {
             ElevatorAnims.SetBool("GoDown", true);
-            WaitAndReset();
+            //WaitAndReset();
             ElevatorAnims.SetBool("GoUp", false);
         }
 
@@ -101,7 +101,7 @@ public class ButtonBehaviour : MonoBehaviour
 
     private IEnumerator WaitAndReset()
     {
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(2f);
     }
 
 }
