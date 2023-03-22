@@ -206,7 +206,8 @@ public class PlatformManager : MonoBehaviour
                 platformArray[i, j].transform.GetChild(0).gameObject.GetComponent<Platform>().DisablePlatform();
             }
         }
-        FloorHeaven.SetActive(false);
+        FloorHeaven.GetComponent<RealtimeTransform>().RequestOwnership();
+        FloorHeaven.transform.position += new Vector3(100, 0, 0);
     }
 
     public IEnumerator EnableAllSurfaces(float time)
@@ -219,9 +220,9 @@ public class PlatformManager : MonoBehaviour
                 platformArray[i, j].transform.GetChild(0).gameObject.GetComponent<Platform>().EnablePlatform();
             }
         }
-        FloorHeaven.SetActive(true);
+        FloorHeaven.GetComponent<RealtimeTransform>().RequestOwnership();
+        FloorHeaven.transform.position += new Vector3(-100, 0, 0);
     }
-
 }
 
 

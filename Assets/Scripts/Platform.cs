@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Normal.Realtime;
 
 public class Platform : MonoBehaviour
 {
@@ -189,12 +190,16 @@ public class Platform : MonoBehaviour
 
     public void DisablePlatform()
     {
-        gameObject.SetActive(false); // probably has to be changed to delete and furthermore realtime.delete?
+        //gameObject.SetActive(false); // probably has to be changed to delete and furthermore realtime.delete?
+        gameObject.GetComponent<RealtimeTransform>().RequestOwnership();
+        gameObject.transform.position += new Vector3(100, 0, 0);
     }
 
     public void EnablePlatform()
     {
-        gameObject.SetActive(true); // probably has to be changed to delete and furthermore realtime.delete?
+        //gameObject.SetActive(true); // probably has to be changed to delete and furthermore realtime.delete?
+        gameObject.GetComponent<RealtimeTransform>().RequestOwnership();
+        gameObject.transform.position += new Vector3(-100, 0, 0);
     }
 
 }

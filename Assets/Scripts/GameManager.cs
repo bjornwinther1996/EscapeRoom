@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviour
             if (Platform.NumberOfPlatformsDestroyed > 1) // if 2:
             {
                 PlatformManagerScript.DestroyAllSurfaces();
-                PlatformManagerScript.StartCoroutine(PlatformManagerScript.EnableAllSurfaces(5)); // enable all surfaces again after 5 sec
+                PlatformManagerScript.StartCoroutine(PlatformManagerScript.EnableAllSurfaces(7)); // enable all surfaces again after 5 sec
                 //Make another coroutine? to reset the sequence. Care that you might have to adjust setRandomSequence method. Add Else: isSolidplayer1+2 = false
                 Platform.NumberOfPlatformsDestroyed = 0; // Reset so it doesnt run continously.
             }
