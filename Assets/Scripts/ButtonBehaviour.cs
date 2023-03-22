@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class ButtonBehaviour : MonoBehaviour
 {
 
-    private ElevatorData elevatorData; 
+    public ElevatorData elevatorData; 
     
     public float waitTime = 2f;
     
@@ -26,14 +26,28 @@ public class ButtonBehaviour : MonoBehaviour
         sound = GetComponent<AudioSource>();
         isPressed = false;
         ElevatorAnims = GetComponentInParent<Animator>();
-        elevatorData = GetComponent<ElevatorData>();
+        elevatorData = GetComponentInParent<ElevatorData>();
 
     }
 
     private void Update()
     {
         //ElevatorAnims.SetBool("GoUp", elevatorData._goUp);
-        //ElevatorAnims.SetBool("GoDown", elevatorData._goDown);
+        //ElevatorAnims.SetBool("GoDown", true);
+
+        if (elevatorData._goUp)
+        {
+            ElevatorAnims.SetBool("GoUp", true);
+            WaitAndReset();
+            ElevatorAnims.SetBool("GoDown", false);
+        }
+        else if (elevatorData._goDown)
+        {
+            ElevatorAnims.SetBool("GoDown", true);
+            WaitAndReset();
+            ElevatorAnims.SetBool("GoUp", false);
+        }
+
     }
 
     private void OnTriggerEnter(Collider other)
