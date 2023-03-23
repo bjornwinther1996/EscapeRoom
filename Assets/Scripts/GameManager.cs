@@ -90,6 +90,7 @@ public class GameManager : MonoBehaviour
             AssignServer();
         }
 
+        Debug.Log("Server:" + IsServer);
         //Do the following for only for the client (NOT THE SERVER):
         if (syncedGameVariables._backupFloat > 0 && !IsServer)
         {
