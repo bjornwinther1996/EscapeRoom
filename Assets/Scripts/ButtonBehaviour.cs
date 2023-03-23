@@ -96,13 +96,6 @@ public class ButtonBehaviour : MonoBehaviour
     {
         elevatorData._goUp = true;
         //ElevatorAnims.SetBool("GoUp", elevatorData._goUp);
-        
-        if (true)
-        {
-            StartCoroutine(WaitAndReset());
-        }
-
-        elevatorData._goDown = false;
         //ElevatorAnims.SetBool("GoDown", elevatorData._goDown);
     }
 
@@ -110,12 +103,7 @@ public class ButtonBehaviour : MonoBehaviour
     {
         elevatorData._goDown = true;
         //ElevatorAnims.SetBool("GoDown", elevatorData._goDown);
-        if (true)
-        {
-            StartCoroutine(WaitAndReset());
-        }
         //ElevatorAnims.SetBool("GoUp", false);
-        elevatorData._goUp = false;
     }
 
     private IEnumerator WaitAndReset()
