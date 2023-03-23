@@ -24,14 +24,14 @@ public class PlatformManager : MonoBehaviour
                                                                                 {0, 1, 0, 0, 2, 0, 0},
 
     };
-    private int[,] pathSequence2 = new int[ColoumnLength, RowLength] {          {0, 1, 0, 0, 2, 0, 0},
+    private int[,] pathSequence2 = new int[ColoumnLength, RowLength] {          {0, 1, 0, 0, 0, 2, 0},
                                                                                 {0, 0, 1, 2, 0, 0, 0},
                                                                                 {0, 0, 2, 1, 0, 0, 0},
                                                                                 {0, 2, 0, 0, 1, 0, 0},
                                                                                 {2, 0, 0, 0, 0, 1, 0},
 
     };
-    private int[,] pathSequence3 = new int[ColoumnLength, RowLength] {          {1, 0, 0, 0, 2, 0, 0},
+    private int[,] pathSequence3 = new int[ColoumnLength, RowLength] {          {1, 0, 0, 2, 0, 0, 0},
                                                                                 {1, 0, 0, 0, 2, 0, 0},
                                                                                 {0, 1, 0, 0, 0, 2, 0},
                                                                                 {0, 1, 0, 0, 0, 0, 2},
@@ -188,7 +188,7 @@ public class PlatformManager : MonoBehaviour
                 {
                     platformArray[i, j].gameObject.GetComponentInChildren<PlatformData>()._isSolidPlayer2 = true;
                 }
-                else if(pathSequence[i, j] == 2) // so that i can call this method (SetrandomSequence) - to reset platforms according to new sequence.
+                else // so that i can call this method (SetrandomSequence) - to reset platforms according to new sequence.
                 {
                     platformArray[i, j].gameObject.GetComponentInChildren<PlatformData>()._isSolidPlayer2 = false;
                     platformArray[i, j].gameObject.GetComponentInChildren<PlatformData>()._isSolidPlayer2 = false;
@@ -222,6 +222,86 @@ public class PlatformManager : MonoBehaviour
         }
         FloorHeaven.GetComponent<RealtimeTransform>().RequestOwnership();
         FloorHeaven.transform.position += new Vector3(-100, 0, 0);
+    }
+
+    public IEnumerator SetRandomSequenceAfterXTime(float time) // the players start from the top and go down:
+    {
+        yield return new WaitForSeconds(time);
+        int randomChance = Random.Range(0, 4);
+        int[,] pathSequence;
+
+        switch (randomChance)
+        {
+            case 0:
+                pathSequence = pathSequence1;
+                PlatformSequence = 1;
+                break;
+            case 1:
+                pathSequence = pathSequence2;
+                PlatformSequence = 2;
+                break;
+            case 2:
+                pathSequence = pathSequence3;
+                PlatformSequence = 3;
+                break;
+            case 3:
+                pathSequence = pathSequence4;
+                PlatformSequence = 4;
+                break;
+            default:
+                pathSequence = pathSequence1;
+                PlatformSequence = 1;
+                break;
+        }
+
+        for (int i = 0; i < ColoumnLength; i++)
+        {
+            for (int j = 0; j < RowLength; j++)
+            {
+                if (pathSequence[i, j] == 1)
+                {
+                    platformArray[i, j].gameObject.GetComponentInChildren<PlatformData>()._isSolidPlayer1 = true;
+
+                }
+                else if (pathSequence[i, j] == 2)
+                {
+                    platformArray[i, j].gameObject.GetComponentInChildren<PlatformData>()._isSolidPlayer2 = true;
+                }
+                else // so that i can call this method (SetrandomSequence) - to reset platforms according to new sequence.
+                {
+                    platformArray[i, j].gameObject.GetComponentInChildren<PlatformData>()._isSolidPlayer2 = false;
+                    platformArray[i, j].gameObject.GetComponentInChildren<PlatformData>()._isSolidPlayer2 = false;
+                }
+            }
+        }
+    }
+
+    public IEnumerator ResetPositionOfDisabledPlatforms(float time)
+    {
+        yield return new WaitForSeconds(time);
+        for (int i = 0; i < ColoumnLength; i++)
+        {
+            for (int j = 0; j < RowLength; j++)
+            {
+                if (platformArray[i, j].transform.GetChild(0).gameObject.GetComponent<Platform>().GetPlatformDisabled())
+                {
+                    SpawnPlatform(platformArray[i, j].transform.GetChild(0).gameObject);
+                    platformArray[i, j].transform.GetChild(0).gameObject.GetComponent<Platform>().SetPlatformDisabled(false);
+                }
+            }
+        }
+    }
+
+    public IEnumerator ResetMaterial(float time)
+    {
+        yield return new WaitForSeconds(time);
+        for (int i = 0; i < ColoumnLength; i++)
+        {
+            for (int j = 0; j < RowLength; j++)
+            {
+                platformArray[i, j].transform.GetChild(0).gameObject.GetComponent<Platform>().ResetMaterial();
+            }
+        }
     }
 }
 

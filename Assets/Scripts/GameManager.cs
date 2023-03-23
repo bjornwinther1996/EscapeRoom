@@ -68,15 +68,18 @@ public class GameManager : MonoBehaviour
                 PlatformManagerScript.RealtimeInstantiatePlatforms();
                 PlatformManagerScript.SetRandomSequence(); // sync the sequence index int? 
                 isPlatformsInstantiated = true;
-                syncedGameVariables._backupBool = true;
+                syncedGameVariables._backupBool = true; // Platforms Instantiated = true
             }
             PlatformManagerScript.ActivateNextRow(PlatformManagerScript.RowIndex); // gettiing PlatformManagerScript.rowIndex fails?? no
             PlatformManagerScript.CheckCorrectPath(PlatformManagerScript.RowIndex);
 
             if (Platform.NumberOfPlatformsDestroyed > 0) // if 1:
             {
+                syncedGameVariables._backupFloat = Platform.NumberOfPlatformsDestroyed; // To reset material
                 PlatformManagerScript.DestroyAllSurfaces();
                 PlatformManagerScript.StartCoroutine(PlatformManagerScript.EnableAllSurfaces(7)); // enable all surfaces again after 5 sec
+                PlatformManagerScript.StartCoroutine(PlatformManagerScript.SetRandomSequenceAfterXTime(10));
+                PlatformManagerScript.StartCoroutine(PlatformManagerScript.ResetPositionOfDisabledPlatforms(10));
                 //Make another coroutine? to reset the sequence. Care that you might have to adjust setRandomSequence method. Add Else: isSolidplayer1+2 = false
                 Platform.NumberOfPlatformsDestroyed = 0; // Reset so it doesnt run continously.
             }
@@ -85,6 +88,13 @@ public class GameManager : MonoBehaviour
         {
             //if (!BoolFirstConnectedDevice()) { return; }
             AssignServer();
+        }
+
+        //Do the following for both clients:
+        if (syncedGameVariables._backupFloat > 0)
+        {
+            PlatformManagerScript.StartCoroutine(PlatformManagerScript.ResetMaterial(12)); // needs to be run for client as well.
+            syncedGameVariables._backupFloat = 0; // care that one of the clients sets this to 0, so that the other client doesnt reset material. // maybe wait
         }
 
     }
@@ -169,7 +179,7 @@ public class GameManager : MonoBehaviour
 
     bool CheckAllPlayersConnected()
     {
-        if(syncedGameVariables._backupInt == 2) // was Avatars.Count 
+        if(syncedGameVariables._backupInt == 1) // was Avatars.Count 
         {
             return true;
         }

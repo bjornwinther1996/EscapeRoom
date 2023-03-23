@@ -14,10 +14,12 @@ public class Platform : MonoBehaviour
     private bool platformActivated;
     private bool stopCalling;
     private MeshRenderer meshRenderer;
+    private Material defaultMaterial;
     public Material Player1Material;
     public Material Player2Material;
     public GameObject GameManagerReference;
     private float materialTimer;
+    private bool platformDisabled;
 
     private PlatformData syncedPlatformVariables;
     private bool isMaterialSet;
@@ -37,13 +39,14 @@ public class Platform : MonoBehaviour
         //GameManagerReference = GameObject.FindGameObjectWithTag("GameManager");
         GameManagerReference = GameObject.Find("GameManager");
         Debug.Log("GameManagerReference: " + GameManagerReference);
+        defaultMaterial = meshRenderer.material;
         
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!GameManagerReference.GetComponent<GameManagerData>()._backupBool) { return; }
+        if (!GameManagerReference.GetComponent<GameManagerData>()._backupBool) { return; } // if platforms are instantiated (Realtime) Into the scene
         SetMaterial(); // CHANGE SO IT IS CALLED WHEN YOU STAND ON THE INITIAL READY/START BUTTON AS A PLAYER
     }
 
@@ -60,7 +63,29 @@ public class Platform : MonoBehaviour
         {
             meshRenderer.material = Player1Material;
         }
+        else
+        {
+            meshRenderer.material = defaultMaterial;
+        }
         isMaterialSet = true;
+    }
+
+    public void ResetMaterial() // only called locally on each client // In future, SetMaterial, will be called once you stand on something!!!!!!!!
+    {
+        materialTimer += Time.deltaTime; // store time
+        if (materialTimer < 3) { return; } // check if time is passed to counter bug where material is set before platforms are RealtimeInstantiated
+        if (GameManager.IsServer && syncedPlatformVariables._isSolidPlayer2)
+        {
+            meshRenderer.material = Player2Material;
+        }
+        else if (!GameManager.IsServer && syncedPlatformVariables._isSolidPlayer1)
+        {
+            meshRenderer.material = Player1Material;
+        }
+        else
+        {
+            meshRenderer.material = defaultMaterial;
+        }
     }
 
     private void OnTriggerStay(Collider other) // can use courutine instead? - to wait x-time to execute. // Rigidbody on Avatar
@@ -110,6 +135,7 @@ public class Platform : MonoBehaviour
                 audioSource.PlayOneShot(VanishSounds[1]);
                 break;
         }
+        platformDisabled = true;
         DisablePlatform();
     }
 
@@ -192,6 +218,16 @@ public class Platform : MonoBehaviour
         //gameObject.SetActive(false); // probably has to be changed to delete and furthermore realtime.delete?
         gameObject.GetComponent<RealtimeTransform>().RequestOwnership();
         gameObject.transform.position += new Vector3(100, 0, 0);
+    }
+
+    public bool GetPlatformDisabled()
+    {
+        return platformDisabled;
+    }
+
+    public void SetPlatformDisabled(bool platformDisabled)
+    {
+        this.platformDisabled = platformDisabled;
     }
 
     public void EnablePlatform()
