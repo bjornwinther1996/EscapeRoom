@@ -51,7 +51,7 @@ public class Platform : MonoBehaviour
 
         if (GameManagerReference.GetComponent<GameManagerData>()._backupFloat > 0 && !GameManager.IsServer) // this is only done for client, as it is done for server in GameManger
         {
-            ResetMaterialTimer(12);
+            StartCoroutine(ResetMaterialTimer(12));
             Debug.Log("Client if statement");
             Debug.Log("Client backupFlot " + GameManagerReference.GetComponent<GameManagerData>()._backupFloat);
             GameManagerReference.GetComponent<GameManagerData>()._backupFloat = 0; // care that one of the clients sets this to 0, so that the other client doesnt reset material. // maybe wait // Not an issue now that only client does it
