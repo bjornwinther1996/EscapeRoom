@@ -24,7 +24,7 @@ public class PlatformManager : MonoBehaviour
                                                                                 {0, 1, 0, 0, 2, 0, 0},
 
     };
-    private int[,] pathSequence2 = new int[ColoumnLength, RowLength] {          {0, 1, 0, 0, 0, 2, 0},
+    private int[,] pathSequence2 = new int[ColoumnLength, RowLength] {          {0, 0, 1, 0, 0, 2, 0},
                                                                                 {0, 0, 1, 2, 0, 0, 0},
                                                                                 {0, 0, 2, 1, 0, 0, 0},
                                                                                 {0, 2, 0, 0, 1, 0, 0},
@@ -38,8 +38,8 @@ public class PlatformManager : MonoBehaviour
                                                                                 {0, 0, 1, 0, 0, 0, 2},
 
     };
-    private int[,] pathSequence4 = new int[ColoumnLength, RowLength] {          {0, 1, 0, 0, 0, 0, 2},
-                                                                                {0, 1, 0, 0, 0, 0, 2},
+    private int[,] pathSequence4 = new int[ColoumnLength, RowLength] {          {0, 0, 0, 1, 0, 0, 2},
+                                                                                {0, 0, 1, 0, 0, 0, 2},
                                                                                 {0, 1, 0, 0, 0, 0, 2},
                                                                                 {0, 1, 0, 0, 0, 0, 2},
                                                                                 {0, 1, 0, 0, 0, 0, 2},
