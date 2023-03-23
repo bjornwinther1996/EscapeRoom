@@ -221,7 +221,7 @@ public class PlatformManager : MonoBehaviour
             }
         }
         FloorHeaven.GetComponent<RealtimeTransform>().RequestOwnership();
-        FloorHeaven.transform.position += new Vector3(-100, 0, 0);
+        //FloorHeaven.transform.position += new Vector3(-100, 0, 0);
     }
 
     public IEnumerator SetRandomSequenceAfterXTime(float time) // the players start from the top and go down:
