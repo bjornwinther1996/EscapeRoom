@@ -295,6 +295,7 @@ public class PlatformManager : MonoBehaviour
     public IEnumerator ResetMaterial(float time)
     {
         yield return new WaitForSeconds(time);
+        Debug.Log("Reset Material in PlatformManager Called");
         for (int i = 0; i < ColoumnLength; i++)
         {
             for (int j = 0; j < RowLength; j++)

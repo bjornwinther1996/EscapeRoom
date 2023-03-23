@@ -94,6 +94,8 @@ public class GameManager : MonoBehaviour
         if (syncedGameVariables._backupFloat > 0 && !IsServer)
         {
             PlatformManagerScript.StartCoroutine(PlatformManagerScript.ResetMaterial(12));
+            Debug.Log("Client if statement");
+            Debug.Log("Client backupFlot " + syncedGameVariables._backupFloat);
             syncedGameVariables._backupFloat = 0; // care that one of the clients sets this to 0, so that the other client doesnt reset material. // maybe wait // Not an issue now that only client does it
         }
 
