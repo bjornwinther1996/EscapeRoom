@@ -97,16 +97,20 @@ public class Platform : MonoBehaviour
     public IEnumerator ResetMaterialTimer(float time) // only called locally on each client // In future, SetMaterial, will be called once you stand on something!!!!!!!!
     {
         yield return new WaitForSeconds(time);
+        Debug.Log("RESET TIMER METHOD TRIGGERED");
         if (GameManager.IsServer && syncedPlatformVariables._isSolidPlayer2)
         {
+            Debug.Log("RESET TIMER METHOD - IS SERVER");
             meshRenderer.material = Player2Material;
         }
         else if (!GameManager.IsServer && syncedPlatformVariables._isSolidPlayer1)
         {
+            Debug.Log("RESET TIMER METHOD - IS NOT SERVER");
             meshRenderer.material = Player1Material;
         }
         else
         {
+            Debug.Log("RESET TIMER METHOD - ELSE STATEMENT");
             meshRenderer.material = defaultMaterial;
         }
     }
