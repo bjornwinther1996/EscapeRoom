@@ -190,7 +190,7 @@ public class PlatformManager : MonoBehaviour
                 }
                 else // so that i can call this method (SetrandomSequence) - to reset platforms according to new sequence.
                 {
-                    platformArray[i, j].gameObject.GetComponentInChildren<PlatformData>()._isSolidPlayer2 = false;
+                    platformArray[i, j].gameObject.GetComponentInChildren<PlatformData>()._isSolidPlayer1 = false;
                     platformArray[i, j].gameObject.GetComponentInChildren<PlatformData>()._isSolidPlayer2 = false;
                 }
             }
@@ -269,7 +269,7 @@ public class PlatformManager : MonoBehaviour
                 }
                 else // so that i can call this method (SetrandomSequence) - to reset platforms according to new sequence.
                 {
-                    platformArray[i, j].gameObject.GetComponentInChildren<PlatformData>()._isSolidPlayer2 = false;
+                    platformArray[i, j].gameObject.GetComponentInChildren<PlatformData>()._isSolidPlayer1 = false;
                     platformArray[i, j].gameObject.GetComponentInChildren<PlatformData>()._isSolidPlayer2 = false;
                 }
             }
