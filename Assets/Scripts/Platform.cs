@@ -48,6 +48,14 @@ public class Platform : MonoBehaviour
     {
         if (!GameManagerReference.GetComponent<GameManagerData>()._backupBool) { return; } // if platforms are instantiated (Realtime) Into the scene
         SetMaterial(); // CHANGE SO IT IS CALLED WHEN YOU STAND ON THE INITIAL READY/START BUTTON AS A PLAYER
+
+        if (GameManagerReference.GetComponent<GameManagerData>()._backupFloat > 0 && !GameManager.IsServer) // this is only done for client, as it is done for server in GameManger
+        {
+            ResetMaterialTimer(12);
+            Debug.Log("Client if statement");
+            Debug.Log("Client backupFlot " + GameManagerReference.GetComponent<GameManagerData>()._backupFloat);
+            GameManagerReference.GetComponent<GameManagerData>()._backupFloat = 0; // care that one of the clients sets this to 0, so that the other client doesnt reset material. // maybe wait // Not an issue now that only client does it
+        }
     }
 
     public void SetMaterial() // only called locally on each client // In future, SetMaterial, will be called once you stand on something!!!!!!!!
@@ -72,8 +80,23 @@ public class Platform : MonoBehaviour
 
     public void ResetMaterial() // only called locally on each client // In future, SetMaterial, will be called once you stand on something!!!!!!!!
     {
-        materialTimer += Time.deltaTime; // store time
-        if (materialTimer < 3) { return; } // check if time is passed to counter bug where material is set before platforms are RealtimeInstantiated
+        if (GameManager.IsServer && syncedPlatformVariables._isSolidPlayer2)
+        {
+            meshRenderer.material = Player2Material;
+        }
+        else if (!GameManager.IsServer && syncedPlatformVariables._isSolidPlayer1)
+        {
+            meshRenderer.material = Player1Material;
+        }
+        else
+        {
+            meshRenderer.material = defaultMaterial;
+        }
+    }
+
+    public IEnumerator ResetMaterialTimer(float time) // only called locally on each client // In future, SetMaterial, will be called once you stand on something!!!!!!!!
+    {
+        yield return new WaitForSeconds(time);
         if (GameManager.IsServer && syncedPlatformVariables._isSolidPlayer2)
         {
             meshRenderer.material = Player2Material;
