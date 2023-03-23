@@ -35,15 +35,11 @@ public class GameManager : MonoBehaviour
         syncedGameVariables = GetComponent<GameManagerData>();
         PlatformManagerScript = PlatformManagerObject.GetComponent<PlatformManager>();
         stopwatch = GetComponent<Stopwatch>();
-        stopwatch.StartStopwatch(); 
-
 
     }
     
     void Update()
     {
-
-        DebuggerVR.DebugMessage1 = stopwatch.time.ToString();
 
         if (!runOnce)
         {
