@@ -10,6 +10,8 @@ public class PlatformManager : MonoBehaviour
 
     public const int ColoumnLength = 5;
     public const int RowLength = 7;
+    public static int COLOUMNLENGTH; // static variables for platform class to grab
+    public static int ROWLENGTH;
     public float ColoumnMultiplier = 0.73f; // Inspector values overwrite! Set in Inspector of PlatformGrid!!!
     public float RowMultiplier = 0.73f; // Inspector values overwrite! Set in Inspector!!!
 
@@ -58,6 +60,8 @@ public class PlatformManager : MonoBehaviour
 
     void Start()
     {
+        COLOUMNLENGTH = ColoumnLength;
+        ROWLENGTH = RowLength;
         //platformArray = new GameObject[ColoumnLength, RowLength];
     }
 
@@ -75,7 +79,7 @@ public class PlatformManager : MonoBehaviour
                 //GameObject platform = platformArray[i, j];
                 platformArray[i,j] = Realtime.Instantiate("PlatformV2", new Vector3(transform.position.x + i * ColoumnMultiplier, 0, transform.position.z + j * RowMultiplier), Quaternion.identity, new Realtime.InstantiateOptions
                 {
-                    ownedByClient = true, // True? 
+                    ownedByClient = false, // True? 
                     preventOwnershipTakeover = false,
                     destroyWhenOwnerLeaves = false,
                     destroyWhenLastClientLeaves = true
