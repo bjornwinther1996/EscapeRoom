@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.35743085, g: 0.6972783, b: 0.72365904, a: 1}
+  m_IndirectSpecularColor: {r: 0.3575201, g: 0.6973908, b: 0.72364134, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1253,7 +1253,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6626e442ccabde646be8836b67e81851, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 1231007733}
   elevatorData: {fileID: 0}
+  stopwatch: {fileID: 0}
   waitTime: 10
   ElevatorAnims: {fileID: 0}
   button: {fileID: 306658668}
@@ -3633,6 +3635,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NetworkManager: {fileID: 120883205}
   PlatformManagerObject: {fileID: 291113915}
+  stopwatch: {fileID: 0}
   AmbientAudioEnabled: 1
 --- !u!114 &1231007734
 MonoBehaviour:
@@ -4666,7 +4669,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6626e442ccabde646be8836b67e81851, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 1231007733}
   elevatorData: {fileID: 0}
+  stopwatch: {fileID: 0}
   waitTime: 10
   ElevatorAnims: {fileID: 0}
   button: {fileID: 1207956368}

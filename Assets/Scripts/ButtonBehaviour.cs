@@ -6,7 +6,9 @@ using UnityEngine.Events;
 public class ButtonBehaviour : MonoBehaviour
 {
 
-    public ElevatorData elevatorData; 
+    public GameManager gameManager;
+    public ElevatorData elevatorData;
+    public Stopwatch stopwatch;
     
     public float waitTime = 2f;
     
@@ -18,11 +20,11 @@ public class ButtonBehaviour : MonoBehaviour
     GameObject presser;
     AudioSource sound;
     bool isPressed;
-
+    bool doOnce;
 
     void Start()
     {
-        
+        stopwatch = gameManager.GetComponent<Stopwatch>();
         sound = GetComponent<AudioSource>();
         isPressed = false;
         ElevatorAnims = GetComponentInParent<Animator>();
@@ -37,15 +39,35 @@ public class ButtonBehaviour : MonoBehaviour
 
         if (elevatorData._goUp)
         {
-            ElevatorAnims.SetBool("GoUp", true);
-            //WaitAndReset();
-            ElevatorAnims.SetBool("GoDown", false);
+            if (!doOnce)
+            {
+                stopwatch.StartStopwatch();
+                doOnce = true;
+            }
+            if (stopwatch.time >= 2)
+            {
+                ElevatorAnims.SetBool("GoUp", true);
+                //WaitAndReset();
+                ElevatorAnims.SetBool("GoDown", false);
+                doOnce = false;
+                elevatorData._goUp = false;
+            }
         }
         else if (elevatorData._goDown)
         {
-            ElevatorAnims.SetBool("GoDown", true);
-            //WaitAndReset();
-            ElevatorAnims.SetBool("GoUp", false);
+            if (!doOnce)
+            {
+                stopwatch.StartStopwatch();
+                doOnce = true;
+            }
+            if (stopwatch.time >= 2)
+            {
+                ElevatorAnims.SetBool("GoDown", true);
+                //WaitAndReset();
+                ElevatorAnims.SetBool("GoUp", false);
+                doOnce = false;
+                elevatorData._goDown = false;
+            }
         }
 
     }
@@ -55,7 +77,6 @@ public class ButtonBehaviour : MonoBehaviour
         if (!isPressed)
         {
             button.transform.localPosition = new Vector3(0, 0, 0);
-            presser = other.gameObject;
             onPress.Invoke();
             sound.Play();
             isPressed = true;
@@ -78,7 +99,6 @@ public class ButtonBehaviour : MonoBehaviour
         
         if (true)
         {
-            DebuggerVR.DebugMessage1 = "Starting coroutine UP";
             StartCoroutine(WaitAndReset());
         }
 
@@ -92,7 +112,6 @@ public class ButtonBehaviour : MonoBehaviour
         //ElevatorAnims.SetBool("GoDown", elevatorData._goDown);
         if (true)
         {
-            DebuggerVR.DebugMessage1 = "Starting coroutine DOWN";
             StartCoroutine(WaitAndReset());
         }
         //ElevatorAnims.SetBool("GoUp", false);
