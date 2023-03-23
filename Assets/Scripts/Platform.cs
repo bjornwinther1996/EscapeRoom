@@ -53,15 +53,11 @@ public class Platform : MonoBehaviour
         if (GameManagerReference.GetComponent<GameManagerData>()._backupFloat > 0 && !GameManager.IsServer) // this is only done for client, as it is done for server in GameManger
         {
             StartCoroutine(ResetMaterialTimer(12));
-            Debug.Log("Client if statement");
-            Debug.Log("Client backupFlot " + GameManagerReference.GetComponent<GameManagerData>()._backupFloat);
             NumberOfMaterialsChanged++;
             if (NumberOfMaterialsChanged >= PlatformManager.COLOUMNLENGTH * PlatformManager.RowLength)
             {
-                Debug.Log("Number of Materials changed: " + NumberOfMaterialsChanged);
                 NumberOfMaterialsChanged = 0;
                 GameManagerReference.GetComponent<GameManagerData>()._backupFloat = 0;
-                Debug.Log("GameMangerFloatReset " + GameManagerReference.GetComponent<GameManagerData>()._backupFloat);
             } 
         }
         
@@ -106,20 +102,16 @@ public class Platform : MonoBehaviour
     public IEnumerator ResetMaterialTimer(float time) // only called locally on each client // In future, SetMaterial, will be called once you stand on something!!!!!!!!
     {
         yield return new WaitForSeconds(time);
-        Debug.Log("RESET TIMER METHOD TRIGGERED");
         if (GameManager.IsServer && syncedPlatformVariables._isSolidPlayer2)
         {
-            Debug.Log("RESET TIMER METHOD - IS SERVER");
             meshRenderer.material = Player2Material;
         }
         else if (!GameManager.IsServer && syncedPlatformVariables._isSolidPlayer1)
         {
-            Debug.Log("RESET TIMER METHOD - IS NOT SERVER");
             meshRenderer.material = Player1Material;
         }
         else
         {
-            Debug.Log("RESET TIMER METHOD - ELSE STATEMENT");
             meshRenderer.material = defaultMaterial;
         }
     }
