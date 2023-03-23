@@ -207,7 +207,7 @@ public class PlatformManager : MonoBehaviour
             }
         }
         FloorHeaven.GetComponent<RealtimeTransform>().RequestOwnership();
-        FloorHeaven.transform.position += new Vector3(100, 0, 0);
+        //FloorHeaven.transform.position += new Vector3(100, 0, 0);
     }
 
     public IEnumerator EnableAllSurfaces(float time)

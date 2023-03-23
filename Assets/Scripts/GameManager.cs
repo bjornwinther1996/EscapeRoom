@@ -80,7 +80,7 @@ public class GameManager : MonoBehaviour
                 PlatformManagerScript.StartCoroutine(PlatformManagerScript.EnableAllSurfaces(7)); // enable all surfaces again after 5 sec
                 PlatformManagerScript.StartCoroutine(PlatformManagerScript.SetRandomSequenceAfterXTime(10));
                 PlatformManagerScript.StartCoroutine(PlatformManagerScript.ResetPositionOfDisabledPlatforms(10));
-                //Make another coroutine? to reset the sequence. Care that you might have to adjust setRandomSequence method. Add Else: isSolidplayer1+2 = false
+                PlatformManagerScript.StartCoroutine(PlatformManagerScript.ResetMaterial(12)); // Only for server
                 Platform.NumberOfPlatformsDestroyed = 0; // Reset so it doesnt run continously.
             }
         }
@@ -90,11 +90,11 @@ public class GameManager : MonoBehaviour
             AssignServer();
         }
 
-        //Do the following for both clients:
-        if (syncedGameVariables._backupFloat > 0)
+        //Do the following for only for the client (NOT THE SERVER):
+        if (syncedGameVariables._backupFloat > 0 && !IsServer)
         {
-            PlatformManagerScript.StartCoroutine(PlatformManagerScript.ResetMaterial(12)); // needs to be run for client as well.
-            syncedGameVariables._backupFloat = 0; // care that one of the clients sets this to 0, so that the other client doesnt reset material. // maybe wait
+            PlatformManagerScript.StartCoroutine(PlatformManagerScript.ResetMaterial(12));
+            syncedGameVariables._backupFloat = 0; // care that one of the clients sets this to 0, so that the other client doesnt reset material. // maybe wait // Not an issue now that only client does it
         }
 
     }
@@ -179,7 +179,7 @@ public class GameManager : MonoBehaviour
 
     bool CheckAllPlayersConnected()
     {
-        if(syncedGameVariables._backupInt == 1) // was Avatars.Count 
+        if(syncedGameVariables._backupInt == 2) // was Avatars.Count 
         {
             return true;
         }
