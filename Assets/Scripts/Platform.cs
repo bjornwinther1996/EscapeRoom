@@ -48,7 +48,7 @@ public class Platform : MonoBehaviour
     {
         if (!GameManagerReference.GetComponent<GameManagerData>()._backupBool) { return; } // if platforms are instantiated (Realtime) Into the scene
         SetMaterial(); // CHANGE SO IT IS CALLED WHEN YOU STAND ON THE INITIAL READY/START BUTTON AS A PLAYER
-
+        /*
         if (GameManagerReference.GetComponent<GameManagerData>()._backupFloat > 0 && !GameManager.IsServer) // this is only done for client, as it is done for server in GameManger
         {
             StartCoroutine(ResetMaterialTimer(12));
@@ -56,6 +56,7 @@ public class Platform : MonoBehaviour
             Debug.Log("Client backupFlot " + GameManagerReference.GetComponent<GameManagerData>()._backupFloat);
             GameManagerReference.GetComponent<GameManagerData>()._backupFloat = 0; // care that one of the clients sets this to 0, so that the other client doesnt reset material. // maybe wait // Not an issue now that only client does it
         }
+        */
     }
 
     public void SetMaterial() // only called locally on each client // In future, SetMaterial, will be called once you stand on something!!!!!!!!

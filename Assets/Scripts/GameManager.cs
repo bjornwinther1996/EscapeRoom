@@ -62,7 +62,12 @@ public class GameManager : MonoBehaviour
         if (CheckIfServerExist())
         {
             //Do the following for only for the client (NOT THE SERVER):
-            
+            if (syncedGameVariables._backupFloat > 0 && !IsServer) // this is only done for client, as it is done for server in GameManger
+            {
+                PlatformManagerScript.StartCoroutine(PlatformManagerScript.ResetMaterial(12)); // Only for server
+                Debug.Log("Client if statement"); 
+                syncedGameVariables._backupFloat = 0; // care that one of the clients sets this to 0, so that the other client doesnt reset material. // maybe wait // Not an issue now that only client does it
+            }
 
             // Only the server executes the following:
             if (!IsServer) { return; } // Only do the following if client is server:
