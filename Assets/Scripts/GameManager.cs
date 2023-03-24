@@ -82,10 +82,12 @@ public class GameManager : MonoBehaviour
                 PlatformManagerScript.StartCoroutine(PlatformManagerScript.SetRandomSequenceAfterXTime(5));
                 PlatformManagerScript.StartCoroutine(PlatformManagerScript.ResetPositionOfDisabledPlatforms(7));
                 PlatformManagerScript.StartCoroutine(PlatformManagerScript.ResetMaterial(8)); // Only for server // Also resets IsResetFinished
+                Debug.Log("GAME MANAGER FAIL CONDITION: " + PlatformManagerScript.RowIndex);
                 Platform.NumberOfPlatformsDestroyed = 0;
             }
             else if(PlatformManager.isResetFinished) // RUNNING ALL THE TIME IF PLAYERS HAVE NOT FAILED:
             {
+                Debug.Log("GAME MANAGER GAME CONDITION: " + PlatformManagerScript.RowIndex);
                 PlatformManagerScript.ActivateNextRow(PlatformManagerScript.RowIndex);
                 PlatformManagerScript.CheckCorrectPath(PlatformManagerScript.RowIndex);
             }

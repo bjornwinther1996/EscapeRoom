@@ -207,6 +207,7 @@ public class PlatformManager : MonoBehaviour
 
     public void DestroyAllSurfaces()
     {
+        Debug.Log("Destroy All Surfaces METHOD");
         for (int i = 0; i < ColoumnLength; i++)
         {
             for (int j = 0; j < RowLength; j++)
@@ -221,6 +222,7 @@ public class PlatformManager : MonoBehaviour
     public IEnumerator EnableAllSurfaces(float time)
     {
         yield return new WaitForSeconds(time);
+        Debug.Log("Enable All SUrfaces Method");
         for (int i = 0; i < ColoumnLength; i++)
         {
             for (int j = 0; j < RowLength; j++)
@@ -235,6 +237,7 @@ public class PlatformManager : MonoBehaviour
     public IEnumerator SetRandomSequenceAfterXTime(float time) // the players start from the top and go down:
     {
         yield return new WaitForSeconds(time);
+        Debug.Log("Reset Sequence of Platforms METHOD");
         int randomChance = Random.Range(0, 4);
         int[,] pathSequence;
 
@@ -287,6 +290,7 @@ public class PlatformManager : MonoBehaviour
     public IEnumerator ResetPositionOfDisabledPlatforms(float time)
     {
         yield return new WaitForSeconds(time);
+        Debug.Log("Reset Position Of Disabled Platforms METHOD");
         for (int i = 0; i < ColoumnLength; i++)
         {
             for (int j = 0; j < RowLength; j++)
@@ -303,7 +307,7 @@ public class PlatformManager : MonoBehaviour
     public IEnumerator ResetMaterial(float time)
     {
         yield return new WaitForSeconds(time);
-        //Debug.Log("Reset Material in PlatformManager Called");
+        Debug.Log("Reset Material METHOD");
         for (int i = 0; i < ColoumnLength; i++)
         {
             for (int j = 0; j < RowLength; j++)
@@ -316,6 +320,7 @@ public class PlatformManager : MonoBehaviour
 
     public void ResetActivatedPlatforms() // Resets all activated platforms
     {
+        Debug.Log("Reset Activated Platforms METHOD");
         for (int i = 0; i < ColoumnLength; i++)
         {
             for (int j = 0; j < RowLength; j++)
