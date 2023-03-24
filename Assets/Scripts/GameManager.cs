@@ -78,7 +78,8 @@ public class GameManager : MonoBehaviour
             {
                 syncedGameVariables._backupFloat = Platform.NumberOfPlatformsDestroyed; // To reset material
                 PlatformManagerScript.DestroyAllSurfaces();
-                PlatformManagerScript.StartCoroutine(PlatformManagerScript.EnableAllSurfaces(7)); // enable all surfaces again after 5 sec
+                PlatformManagerScript.StartCoroutine(PlatformManagerScript.EnableAllSurfaces(7)); // enable all surfaces again after X sec
+                PlatformManagerScript.StartCoroutine(PlatformManagerScript.ResetActivatedPlatforms(7)); // Also resets vars: rowIndex && NumOfPlatformsActivatedInRow
                 PlatformManagerScript.StartCoroutine(PlatformManagerScript.SetRandomSequenceAfterXTime(8));
                 PlatformManagerScript.StartCoroutine(PlatformManagerScript.ResetPositionOfDisabledPlatforms(10));
                 PlatformManagerScript.StartCoroutine(PlatformManagerScript.ResetMaterial(12)); // Only for server

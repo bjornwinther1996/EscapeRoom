@@ -53,7 +53,7 @@ public class PlatformManager : MonoBehaviour
     public int RowIndex = 1;
     public int PreviousRowIndex;
 
-    private int numOfPlatformsActivatedInRow;
+    public int NumOfPlatformsActivatedInRow;
 
     public GameObject FloorHeaven;
 
@@ -125,17 +125,19 @@ public class PlatformManager : MonoBehaviour
             {
                 if (platformArray[i, j].transform.GetChild(0).gameObject.GetComponent<Platform>().GetPlatformActivated())
                 {
-                    numOfPlatformsActivatedInRow++;
+                    NumOfPlatformsActivatedInRow++;
                     platformArray[i, j].transform.GetChild(0).gameObject.GetComponent<Platform>().SetPlatformActivated(false);
-                    if (numOfPlatformsActivatedInRow >= 2) // if 2 or more
+                    if (NumOfPlatformsActivatedInRow >= 2) // if 2 or more
                     {
                         RowIndex++;
-                        numOfPlatformsActivatedInRow = 0;
+                        NumOfPlatformsActivatedInRow = 0;
                     }
                 }
             }
         }
     }
+
+    
 
     public void DespawnPlatform(GameObject platform) // need to request ownership. Realtime.transform.requestOwnership()
     {
@@ -148,7 +150,7 @@ public class PlatformManager : MonoBehaviour
         platform.GetComponent<RealtimeTransform>().RequestOwnership();
         platform.transform.position += new Vector3(-100, 0, 0);
     }
-
+    
     public void SetRandomSequence() // the players start from the top and go down:
     {
 
@@ -307,6 +309,20 @@ public class PlatformManager : MonoBehaviour
                 platformArray[i, j].transform.GetChild(0).gameObject.GetComponent<Platform>().ResetMaterial();
             }
         }
+    }
+
+    public IEnumerator ResetActivatedPlatforms(float time) // Resets all activated platforms
+    {
+        yield return new WaitForSeconds(time);
+        for (int i = 0; i < ColoumnLength; i++)
+        {
+            for (int j = 0; j < RowLength; j++)
+            {
+                platformArray[i, j].transform.GetChild(0).gameObject.GetComponent<Platform>().SetPlatformActivated(false);
+            }
+        }
+        NumOfPlatformsActivatedInRow = 0;
+        RowIndex = 1;
     }
 }
 
