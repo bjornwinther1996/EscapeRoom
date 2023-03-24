@@ -219,7 +219,7 @@ public class PlatformManager : MonoBehaviour
         //FloorHeaven.transform.position += new Vector3(100, 0, 0);
     }
 
-    public IEnumerator EnableAllSurfaces(float time)
+    public IEnumerator EnableAllSurfaces(float time) // not used anymore
     {
         yield return new WaitForSeconds(time);
         Debug.Log("Enable All SUrfaces Method");
