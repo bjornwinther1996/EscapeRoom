@@ -71,20 +71,24 @@ public class GameManager : MonoBehaviour
                 isPlatformsInstantiated = true;
                 syncedGameVariables._backupBool = true; // Platforms Instantiated = true
             }
-            PlatformManagerScript.ActivateNextRow(PlatformManagerScript.RowIndex);
-            PlatformManagerScript.CheckCorrectPath(PlatformManagerScript.RowIndex);
 
-            if (Platform.NumberOfPlatformsDestroyed > 0) // if 1:
+            if (Platform.NumberOfPlatformsDestroyed > 0) // IF FAIL:
             {
                 syncedGameVariables._backupFloat = Platform.NumberOfPlatformsDestroyed; // To reset material
                 PlatformManagerScript.DestroyAllSurfaces();
                 PlatformManagerScript.ResetActivatedPlatforms(); // Also resets Vars: Rowindex and ActivatedPlatformsInRow.
-                PlatformManagerScript.StartCoroutine(PlatformManagerScript.EnableAllSurfaces(7)); // enable all surfaces again after X sec
-                PlatformManagerScript.StartCoroutine(PlatformManagerScript.SetRandomSequenceAfterXTime(8));
-                PlatformManagerScript.StartCoroutine(PlatformManagerScript.ResetPositionOfDisabledPlatforms(10));
-                PlatformManagerScript.StartCoroutine(PlatformManagerScript.ResetMaterial(12)); // Only for server
-                Platform.NumberOfPlatformsDestroyed = 0; // Reset so it doesnt run continously.
+                PlatformManagerScript.StartCoroutine(PlatformManagerScript.EnableAllSurfaces(3)); // enable all surfaces again after X sec
+                PlatformManagerScript.StartCoroutine(PlatformManagerScript.SetRandomSequenceAfterXTime(5));
+                PlatformManagerScript.StartCoroutine(PlatformManagerScript.ResetPositionOfDisabledPlatforms(7));
+                PlatformManagerScript.StartCoroutine(PlatformManagerScript.ResetMaterial(8)); // Only for server
+                ResetNumberOfPlatformsDestroyed(9);
             }
+            else // RUNNING ALL THE TIME IF PLAYERS HAVE NOT FAILED:
+            {
+                PlatformManagerScript.ActivateNextRow(PlatformManagerScript.RowIndex);
+                PlatformManagerScript.CheckCorrectPath(PlatformManagerScript.RowIndex);
+            }
+
         }
         else
         {
@@ -92,6 +96,12 @@ public class GameManager : MonoBehaviour
             AssignServer();
         }
 
+    }
+
+    public IEnumerator ResetNumberOfPlatformsDestroyed(float time)
+    {
+        yield return new WaitForSeconds(time);
+        Platform.NumberOfPlatformsDestroyed = 0;
     }
 
     void CheckAndSetAvatarArray() // needs to be run only by server, to set avatar count!
