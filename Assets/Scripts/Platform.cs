@@ -52,7 +52,7 @@ public class Platform : MonoBehaviour
         
         if (GameManagerReference.GetComponent<GameManagerData>()._backupFloat > 0 && !GameManager.IsServer) // this is only done for client, as it is done for server in GameManger
         {
-            StartCoroutine(ResetMaterialTimer(12));
+            StartCoroutine(ResetMaterialTimer(8));
             NumberOfMaterialsChanged++;
             if (NumberOfMaterialsChanged >= PlatformManager.COLOUMNLENGTH * PlatformManager.RowLength)
             {

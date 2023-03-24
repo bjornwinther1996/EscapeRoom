@@ -57,6 +57,8 @@ public class PlatformManager : MonoBehaviour
 
     public GameObject FloorHeaven;
 
+    public static bool isResetFinished = true;
+
 
     void Start()
     {
@@ -309,6 +311,7 @@ public class PlatformManager : MonoBehaviour
                 platformArray[i, j].transform.GetChild(0).gameObject.GetComponent<Platform>().ResetMaterial();
             }
         }
+        isResetFinished = true;
     }
 
     public void ResetActivatedPlatforms() // Resets all activated platforms

@@ -74,16 +74,17 @@ public class GameManager : MonoBehaviour
 
             if (Platform.NumberOfPlatformsDestroyed > 0) // IF FAIL:
             {
+                PlatformManager.isResetFinished = false;
                 syncedGameVariables._backupFloat = Platform.NumberOfPlatformsDestroyed; // To reset material
                 PlatformManagerScript.DestroyAllSurfaces();
                 PlatformManagerScript.ResetActivatedPlatforms(); // Also resets Vars: Rowindex and ActivatedPlatformsInRow.
                 PlatformManagerScript.StartCoroutine(PlatformManagerScript.EnableAllSurfaces(3)); // enable all surfaces again after X sec
                 PlatformManagerScript.StartCoroutine(PlatformManagerScript.SetRandomSequenceAfterXTime(5));
                 PlatformManagerScript.StartCoroutine(PlatformManagerScript.ResetPositionOfDisabledPlatforms(7));
-                PlatformManagerScript.StartCoroutine(PlatformManagerScript.ResetMaterial(8)); // Only for server
-                StartCoroutine(ResetNumberOfPlatformsDestroyed(9));
+                PlatformManagerScript.StartCoroutine(PlatformManagerScript.ResetMaterial(8)); // Only for server // Also resets IsResetFinished
+                Platform.NumberOfPlatformsDestroyed = 0;
             }
-            else // RUNNING ALL THE TIME IF PLAYERS HAVE NOT FAILED:
+            else if(PlatformManager.isResetFinished) // RUNNING ALL THE TIME IF PLAYERS HAVE NOT FAILED:
             {
                 PlatformManagerScript.ActivateNextRow(PlatformManagerScript.RowIndex);
                 PlatformManagerScript.CheckCorrectPath(PlatformManagerScript.RowIndex);
