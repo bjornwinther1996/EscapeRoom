@@ -81,7 +81,7 @@ public class GameManager : MonoBehaviour
                 PlatformManagerScript.StartCoroutine(PlatformManagerScript.SetRandomSequenceAfterXTime(5));
                 PlatformManagerScript.StartCoroutine(PlatformManagerScript.ResetPositionOfDisabledPlatforms(7));
                 PlatformManagerScript.StartCoroutine(PlatformManagerScript.ResetMaterial(8)); // Only for server
-                ResetNumberOfPlatformsDestroyed(9);
+                StartCoroutine(ResetNumberOfPlatformsDestroyed(9));
             }
             else // RUNNING ALL THE TIME IF PLAYERS HAVE NOT FAILED:
             {
