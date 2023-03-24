@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.3575201, g: 0.6973908, b: 0.72364134, a: 1}
+  m_IndirectSpecularColor: {r: 0.35743085, g: 0.6972783, b: 0.72365904, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -577,7 +577,10 @@ MonoBehaviour:
   PlatformSequence: 0
   RowIndex: 1
   PreviousRowIndex: 0
+  NumOfPlatformsActivatedInRow: 0
   FloorHeaven: {fileID: 38800321}
+  PlayArea: {fileID: 0}
+  SpawnArea: {fileID: 0}
 --- !u!4 &291113917
 Transform:
   m_ObjectHideFlags: 0

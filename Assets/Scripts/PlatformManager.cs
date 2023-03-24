@@ -87,20 +87,29 @@ public class PlatformManager : MonoBehaviour
                     destroyWhenLastClientLeaves = true
                 });
                 //platformArray[i,j].GetComponent<RealtimeTransform>().RequestOwnership();
-                MoveToStartPosition(platformArray[i, j]); // was temporary
+                MoveAndSetStartSpawnPosition(platformArray[i, j].transform.GetChild(0).gameObject); // Changed argument child obj instead of parent obj of Prefab.
                 //platformArray[i,j].transform.SetParent(gameObject.transform); // ONLY SETS PARENT FOR SERVER!! THIS LINE ONLY RUNS FOR SERVER?!
-                DespawnPlatform(platformArray[i, j].transform.GetChild(0).gameObject);
+                MoveAndSetDespawnPosition(platformArray[i, j].transform.GetChild(0).gameObject);
                 Debug.Log("All Platforms Instantiated and Despawned");
 
             }
         }
     }
 
-    public void MoveToStartPosition(GameObject platform) // Temporary. Find a way to setparent for the spawned objects for both clients. Problem = needs to wait to setparent or instantiate obj untill both clients have connected
+    public void MoveAndSetStartSpawnPosition(GameObject platform) // Temporary. Find a way to setparent for the spawned objects for both clients. Problem = needs to wait to setparent or instantiate obj untill both clients have connected
     {
         platform.GetComponent<RealtimeTransform>().RequestOwnership();
         //platform.transform.SetParent(gameObject.transform);
         platform.transform.position += new Vector3(-0.025f, 0, 0);
+        platform.GetComponent<Platform>().SpawnPosition = platform.transform.position;
+        //Debug.Log("InitialPos: " + platform.GetComponent<Platform>().SpawnPosition);
+    }
+
+    public void MoveAndSetDespawnPosition(GameObject platform) // need to request ownership. Realtime.transform.requestOwnership()
+    {
+        platform.GetComponent<RealtimeTransform>().RequestOwnership();
+        platform.transform.position += new Vector3(100, 0, 0);
+        platform.GetComponent<Platform>().DespawnPosition = platform.transform.position;
     }
 
     public void ActivateNextRow(int rowToActivate) // Make petter performance-wise so it doesnt continously activate components.
@@ -111,7 +120,9 @@ public class PlatformManager : MonoBehaviour
         {
             for (int j = 0; j < RowLength; j++)
             {
-                SpawnPlatform(platformArray[targetRow, j].transform.GetChild(0).gameObject);
+                //SpawnPlatform(platformArray[targetRow, j].transform.GetChild(0).gameObject);
+                //SetPosition(platformArray[targetRow, j].transform.GetChild(0).gameObject, platformArray[targetRow, j].transform.GetChild(0).gameObject.GetComponent<Platform>().SpawnPosition);
+                platformArray[targetRow, j].transform.GetChild(0).gameObject.GetComponent<Platform>().SpawnPlatform();
                 Debug.Log("SpawnPlatform -100x");
             }
         }
@@ -139,19 +150,18 @@ public class PlatformManager : MonoBehaviour
         }
     }
 
-    
-
-    public void DespawnPlatform(GameObject platform) // need to request ownership. Realtime.transform.requestOwnership()
-    {
-        platform.GetComponent<RealtimeTransform>().RequestOwnership();
-        platform.transform.position += new Vector3(100,0,0);
-    }
-
-    public void SpawnPlatform(GameObject platform)
+    /*public void SpawnPlatform(GameObject platform)
     {
         platform.GetComponent<RealtimeTransform>().RequestOwnership();
         platform.transform.position += new Vector3(-100, 0, 0);
-    }
+    }*/
+
+    /*
+    public void SetPosition(GameObject platform, Vector3 position)
+    {
+        platform.GetComponent<RealtimeTransform>().RequestOwnership();
+        platform.transform.position = position;
+    }*/
     
     public void SetRandomSequence() // the players start from the top and go down:
     {
@@ -212,7 +222,8 @@ public class PlatformManager : MonoBehaviour
         {
             for (int j = 0; j < RowLength; j++)
             {
-                platformArray[i, j].transform.GetChild(0).gameObject.GetComponent<Platform>().DisablePlatform();
+                platformArray[i, j].transform.GetChild(0).gameObject.GetComponent<Platform>().DespawnPlatform();
+                //SetPosition(platformArray[i, j].transform.GetChild(0).gameObject, platformArray[i, j].transform.GetChild(0).gameObject.GetComponent<Platform>().DespawnPosition);
             }
         }
         FloorHeaven.GetComponent<RealtimeTransform>().RequestOwnership();
@@ -227,7 +238,7 @@ public class PlatformManager : MonoBehaviour
         {
             for (int j = 0; j < RowLength; j++)
             {
-                platformArray[i, j].transform.GetChild(0).gameObject.GetComponent<Platform>().EnablePlatform();
+                platformArray[i, j].transform.GetChild(0).gameObject.GetComponent<Platform>().SpawnPlatform();
             }
         }
         FloorHeaven.GetComponent<RealtimeTransform>().RequestOwnership();
@@ -287,7 +298,7 @@ public class PlatformManager : MonoBehaviour
         }
     }
 
-    public IEnumerator ResetPositionOfDisabledPlatforms(float time)
+    public IEnumerator ResetPositionOfDisabledPlatforms(float time) // obsolete?
     {
         yield return new WaitForSeconds(time);
         Debug.Log("Reset Position Of Disabled Platforms METHOD");
@@ -297,7 +308,8 @@ public class PlatformManager : MonoBehaviour
             {
                 if (platformArray[i, j].transform.GetChild(0).gameObject.GetComponent<Platform>().GetPlatformDisabled())
                 {
-                    SpawnPlatform(platformArray[i, j].transform.GetChild(0).gameObject);
+                    //SpawnPlatform(platformArray[i, j].transform.GetChild(0).gameObject);
+                    //platformArray[i, j].transform.GetChild(0).gameObject.GetComponent<Platform>().SpawnPlatform(); 
                     platformArray[i, j].transform.GetChild(0).gameObject.GetComponent<Platform>().SetPlatformDisabled(false);
                 }
             }
@@ -330,6 +342,21 @@ public class PlatformManager : MonoBehaviour
         }
         NumOfPlatformsActivatedInRow = 0;
         RowIndex = 1;
+    }
+
+    public IEnumerator ActivateNextRow(int rowToActivate, float time) // Make petter performance-wise so it doesnt continously activate components.
+    {
+        yield return new WaitForSeconds(time);
+        for (int targetRow = rowToActivate - 1; targetRow < rowToActivate; targetRow++)
+        {
+            for (int j = 0; j < RowLength; j++)
+            {
+                //SpawnPlatform(platformArray[targetRow, j].transform.GetChild(0).gameObject);
+                //SetPosition(platformArray[targetRow, j].transform.GetChild(0).gameObject, platformArray[targetRow, j].transform.GetChild(0).gameObject.GetComponent<Platform>().SpawnPosition);
+                platformArray[targetRow, j].transform.GetChild(0).gameObject.GetComponent<Platform>().SpawnPlatform();
+                Debug.Log("Activate Next Row IEnumerator (AFTER FAIL)");
+            }
+        } 
     }
 
 }

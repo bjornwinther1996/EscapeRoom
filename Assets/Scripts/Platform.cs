@@ -26,6 +26,9 @@ public class Platform : MonoBehaviour
 
     public static int NumberOfPlatformsDestroyed;
     public static int NumberOfMaterialsChanged;
+
+    public Vector3 SpawnPosition; // Is set in PlatformManager when Instantiated
+    public Vector3 DespawnPosition; // Is set in PlatformManager when Instantiated
     //int randomChance; //Temporary - functionality should be in grid class
 
     //platform needs to have realtime components on them! - and this script needs to get the realtime component to delete realtime etc.
@@ -39,7 +42,7 @@ public class Platform : MonoBehaviour
         meshRenderer = GetComponent<MeshRenderer>();
         //GameManagerReference = GameObject.FindGameObjectWithTag("GameManager");
         GameManagerReference = GameObject.Find("GameManager");
-        Debug.Log("GameManagerReference: " + GameManagerReference);
+        //Debug.Log("GameManagerReference: " + GameManagerReference);
         defaultMaterial = meshRenderer.material;
         
     }
@@ -164,7 +167,7 @@ public class Platform : MonoBehaviour
                 break;
         }
         platformDisabled = true;
-        DisablePlatform();
+        DespawnPlatform();
     }
 
     public void Success()
@@ -241,11 +244,11 @@ public class Platform : MonoBehaviour
         this.platformActivated = platformActivated;
     }
 
-    public void DisablePlatform() // DOES THIS FUCK THE SOUND??
+    public void DespawnPlatform() // DOES THIS FUCK THE SOUND??
     {
         //gameObject.SetActive(false); // probably has to be changed to delete and furthermore realtime.delete?
         gameObject.GetComponent<RealtimeTransform>().RequestOwnership();
-        gameObject.transform.position += new Vector3(100, 0, 0);
+        gameObject.transform.position = DespawnPosition;
     }
 
     public bool GetPlatformDisabled()
@@ -258,11 +261,11 @@ public class Platform : MonoBehaviour
         this.platformDisabled = platformDisabled;
     }
 
-    public void EnablePlatform()
+    public void SpawnPlatform()
     {
         //gameObject.SetActive(true); // probably has to be changed to delete and furthermore realtime.delete?
         gameObject.GetComponent<RealtimeTransform>().RequestOwnership();
-        gameObject.transform.position += new Vector3(-100, 0, 0);
+        gameObject.transform.position = SpawnPosition;
     }
 
 }
