@@ -311,9 +311,8 @@ public class PlatformManager : MonoBehaviour
         }
     }
 
-    public IEnumerator ResetActivatedPlatforms(float time) // Resets all activated platforms
+    public void ResetActivatedPlatforms() // Resets all activated platforms
     {
-        yield return new WaitForSeconds(time);
         for (int i = 0; i < ColoumnLength; i++)
         {
             for (int j = 0; j < RowLength; j++)
@@ -324,6 +323,7 @@ public class PlatformManager : MonoBehaviour
         NumOfPlatformsActivatedInRow = 0;
         RowIndex = 1;
     }
+
 }
 
 
