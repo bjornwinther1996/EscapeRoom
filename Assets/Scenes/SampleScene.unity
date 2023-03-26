@@ -2897,7 +2897,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 913927066}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.7560658, y: 1.3080105, z: 1.5455743}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -11863,10 +11863,6 @@ PrefabInstance:
     - target: {fileID: 7084036354606493812, guid: 95f1ad617a5814eb9bdcf3ab36e7c153, type: 3}
       propertyPath: ShapeModule.m_Scale.x
       value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 7084036354606493812, guid: 95f1ad617a5814eb9bdcf3ab36e7c153, type: 3}
-      propertyPath: EmissionModule.enabled
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7084036354606493812, guid: 95f1ad617a5814eb9bdcf3ab36e7c153, type: 3}
       propertyPath: InitialModule.maxNumParticles
