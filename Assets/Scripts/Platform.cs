@@ -168,6 +168,7 @@ public class Platform : MonoBehaviour
         }
         platformDisabled = true;
         DespawnPlatform();
+        timer = 0;
     }
 
     public void Success()
