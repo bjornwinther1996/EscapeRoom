@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.3575201, g: 0.6973908, b: 0.72364134, a: 1}
+  m_IndirectSpecularColor: {r: 0.35743085, g: 0.6972783, b: 0.72365904, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -451,6 +451,14 @@ PrefabInstance:
     - target: {fileID: 7633953770711298854, guid: 89c7c01d5555c40c9975548891611185, type: 3}
       propertyPath: InitialModule.startColor.maxColor.r
       value: 0.13207549
+      objectReference: {fileID: 0}
+    - target: {fileID: 7633953770711298855, guid: 89c7c01d5555c40c9975548891611185, type: 3}
+      propertyPath: m_AllowRoll
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7633953770711298855, guid: 89c7c01d5555c40c9975548891611185, type: 3}
+      propertyPath: m_RenderAlignment
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7633953771527443708, guid: 89c7c01d5555c40c9975548891611185, type: 3}
       propertyPath: m_Name
@@ -11841,6 +11849,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 7084036354606493803, guid: 95f1ad617a5814eb9bdcf3ab36e7c153, type: 3}
+      propertyPath: m_AllowRoll
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7084036354606493803, guid: 95f1ad617a5814eb9bdcf3ab36e7c153, type: 3}
+      propertyPath: m_RenderAlignment
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7084036354606493803, guid: 95f1ad617a5814eb9bdcf3ab36e7c153, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: b04316e72e82e4350b7901bcbfa7122a, type: 2}
@@ -12180,6 +12196,14 @@ PrefabInstance:
     - target: {fileID: 7633953770711298854, guid: 89c7c01d5555c40c9975548891611185, type: 3}
       propertyPath: InitialModule.maxNumParticles
       value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 7633953770711298855, guid: 89c7c01d5555c40c9975548891611185, type: 3}
+      propertyPath: m_AllowRoll
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7633953770711298855, guid: 89c7c01d5555c40c9975548891611185, type: 3}
+      propertyPath: m_RenderAlignment
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7633953771527443708, guid: 89c7c01d5555c40c9975548891611185, type: 3}
       propertyPath: m_Name
