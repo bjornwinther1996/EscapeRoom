@@ -57,7 +57,7 @@ public class PlatformManager : MonoBehaviour
 
     public GameObject FloorHeaven;
 
-    public static bool isResetFinished = true;
+    public static bool isResetFinished = true;    
 
 
     void Start()
@@ -126,7 +126,18 @@ public class PlatformManager : MonoBehaviour
                 Debug.Log("SpawnPlatform -100x");
             }
         }
-        Debug.Log("PrevRow = Row");
+        //Debug.Log("PrevRow = Row");
+        if (RowIndex > 1) // Trigger Audio for each "New Row Call", except the first.
+        {
+            Realtime.Instantiate("RealtimeAudioObj", new Vector3(5, 0, 0), Quaternion.identity, new Realtime.InstantiateOptions
+            {
+                ownedByClient = false, // True? 
+                preventOwnershipTakeover = false,
+                destroyWhenOwnerLeaves = false,
+                destroyWhenLastClientLeaves = true
+            });
+        }
+
         PreviousRowIndex = RowIndex;
     }
 

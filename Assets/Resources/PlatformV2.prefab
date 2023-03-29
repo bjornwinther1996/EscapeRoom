@@ -210,6 +210,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: 175d7ebc893b54a98a5e2e01e23d40b6, type: 2}
     - target: {fileID: 7183534839951161702, guid: bc1caee2f892a408a9cd02b79a9c0b9a, type: 3}
+      propertyPath: SuccessAudio
+      value: 
+      objectReference: {fileID: 8300000, guid: b1317c26c752c44c8811ab16b86dba88, type: 3}
+    - target: {fileID: 7183534839951161702, guid: bc1caee2f892a408a9cd02b79a9c0b9a, type: 3}
       propertyPath: Player1Material
       value: 
       objectReference: {fileID: 2100000, guid: f580689a6c1ce4ce7899197183f7704b, type: 2}
