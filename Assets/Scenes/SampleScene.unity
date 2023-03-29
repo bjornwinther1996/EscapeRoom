@@ -338,96 +338,26 @@ MonoBehaviour:
   - componentID: 1
     component: {fileID: 38800326}
   _childViews: []
---- !u!1001 &120883202
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1551370189}
-    m_Modifications:
-    - target: {fileID: 1572161834460568, guid: fca9d4afb3743274e8f7da14019d7e0b, type: 3}
-      propertyPath: m_Name
-      value: Realtime + VR Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 4520454903943832, guid: fca9d4afb3743274e8f7da14019d7e0b, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4520454903943832, guid: fca9d4afb3743274e8f7da14019d7e0b, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4520454903943832, guid: fca9d4afb3743274e8f7da14019d7e0b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4520454903943832, guid: fca9d4afb3743274e8f7da14019d7e0b, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4520454903943832, guid: fca9d4afb3743274e8f7da14019d7e0b, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4520454903943832, guid: fca9d4afb3743274e8f7da14019d7e0b, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4520454903943832, guid: fca9d4afb3743274e8f7da14019d7e0b, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4520454903943832, guid: fca9d4afb3743274e8f7da14019d7e0b, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4520454903943832, guid: fca9d4afb3743274e8f7da14019d7e0b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4520454903943832, guid: fca9d4afb3743274e8f7da14019d7e0b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4520454903943832, guid: fca9d4afb3743274e8f7da14019d7e0b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114501696213753918, guid: fca9d4afb3743274e8f7da14019d7e0b, type: 3}
-      propertyPath: _normcoreAppSettings
-      value: 
-      objectReference: {fileID: 11400000, guid: dc3c7ef2209114090b69570afae8fca7, type: 2}
-    - target: {fileID: 114568985850100520, guid: fca9d4afb3743274e8f7da14019d7e0b, type: 3}
-      propertyPath: _localPlayer.head
-      value: 
-      objectReference: {fileID: 1416520287}
-    - target: {fileID: 114568985850100520, guid: fca9d4afb3743274e8f7da14019d7e0b, type: 3}
-      propertyPath: _localPlayer.root
-      value: 
-      objectReference: {fileID: 1581414914}
-    - target: {fileID: 114568985850100520, guid: fca9d4afb3743274e8f7da14019d7e0b, type: 3}
-      propertyPath: _localAvatarPrefab
-      value: 
-      objectReference: {fileID: 183480244253419929, guid: 0fd4508d714ec414880092b2ba44ecf4, type: 3}
-    - target: {fileID: 114568985850100520, guid: fca9d4afb3743274e8f7da14019d7e0b, type: 3}
-      propertyPath: _localPlayer.leftHand
-      value: 
-      objectReference: {fileID: 431065363}
-    - target: {fileID: 114568985850100520, guid: fca9d4afb3743274e8f7da14019d7e0b, type: 3}
-      propertyPath: _localPlayer.rightHand
-      value: 
-      objectReference: {fileID: 1968322023}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: fca9d4afb3743274e8f7da14019d7e0b, type: 3}
---- !u!4 &120883203 stripped
+--- !u!4 &120883203
 Transform:
-  m_CorrespondingSourceObject: {fileID: 4520454903943832, guid: fca9d4afb3743274e8f7da14019d7e0b, type: 3}
-  m_PrefabInstance: {fileID: 120883202}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &120883204 stripped
+  m_GameObject: {fileID: 120883205}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1551370189}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &120883204
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 114501696213753918, guid: fca9d4afb3743274e8f7da14019d7e0b, type: 3}
-  m_PrefabInstance: {fileID: 120883202}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 120883205}
   m_Enabled: 1
@@ -435,11 +365,46 @@ MonoBehaviour:
   m_Script: {fileID: -1424795628, guid: ebae63e7edba59945a994528ada1f7a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &120883205 stripped
+  _obsoleteAppKey: 
+  _normcoreAppSettings: {fileID: 11400000, guid: dc3c7ef2209114090b69570afae8fca7, type: 2}
+  _roomToJoinOnStart: Test Room
+  _joinRoomOnStart: 1
+--- !u!1 &120883205
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 1572161834460568, guid: fca9d4afb3743274e8f7da14019d7e0b, type: 3}
-  m_PrefabInstance: {fileID: 120883202}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 120883203}
+  - component: {fileID: 120883204}
+  - component: {fileID: 120883206}
+  m_Layer: 0
+  m_Name: Realtime + VR Player
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &120883206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 120883205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5b6ae53fe1e66d429cc41bbf5b29cb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _localAvatarPrefab: {fileID: 183480244253419929, guid: 0fd4508d714ec414880092b2ba44ecf4, type: 3}
+  _localPlayer:
+    root: {fileID: 1581414914}
+    head: {fileID: 1416520287}
+    leftHand: {fileID: 431065363}
+    rightHand: {fileID: 1968322023}
 --- !u!1001 &123227336
 PrefabInstance:
   m_ObjectHideFlags: 0
