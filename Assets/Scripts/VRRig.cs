@@ -5,48 +5,40 @@ using UnityEngine;
 [System.Serializable]
 public class VRMap
 {
-
-
-
     public Transform vrTarget;
     public Transform rigTarget;
-    public Vector3 trackingPositionOffset;
-    public Vector3 trackingRotationOffset;
+    public Vector3 trackingPosOffset;
+    public Vector3 trackingRotOffset;
 
     public void Map()
     {
-        rigTarget.position = vrTarget.TransformPoint(trackingPositionOffset);
-        rigTarget.rotation = vrTarget.rotation * Quaternion.Euler(trackingRotationOffset);
+        rigTarget.position = vrTarget.TransformPoint(trackingPosOffset);
+        rigTarget.rotation = vrTarget.rotation * Quaternion.Euler(trackingRotOffset);
     }
 }
 
 public class VRRig : MonoBehaviour
 {
     public VRMap head;
-    public VRMap leftHand;
     public VRMap rightHand;
+    public VRMap leftHand;
+
+    private float turnSmoothness = 1f;
 
     public Transform headConstraint;
     public Vector3 headBodyOffset;
-
+    // Start is called before the first frame update
     void Start()
     {
         headBodyOffset = transform.position - headConstraint.position;
-
-        head.vrTarget = GameObject.Find("Main Camera").transform;
-        leftHand.vrTarget = GameObject.Find("LeftHand Controller").transform;
-        rightHand.vrTarget = GameObject.Find("RightHand Controller").transform;
     }
 
     // Update is called once per frame
     void LateUpdate()
     {
         transform.position = headConstraint.position + headBodyOffset;
-        if (Vector3.ProjectOnPlane(headConstraint.up, Vector3.up).normalized != Vector3.zero)
-        {
-            transform.forward = Vector3.ProjectOnPlane(headConstraint.up, Vector3.up).normalized;
-        }
-
+        //transform.forward = Vector3.Lerp(transform.forward, Vector3.ProjectOnPlane(headConstraint.up, Vector3.up).normalized, Time.deltaTime * turnSmoothness);
+        transform.forward = Vector3.ProjectOnPlane(headConstraint.up, Vector3.up).normalized;
         head.Map();
         leftHand.Map();
         rightHand.Map();
