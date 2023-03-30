@@ -352,6 +352,8 @@ MonoBehaviour:
     component: {fileID: 114098979720017432}
   - componentID: 3
     component: {fileID: 114397248209533090}
+  - componentID: 4
+    component: {fileID: 0}
 --- !u!114 &114800176784454794
 MonoBehaviour:
   m_ObjectHideFlags: 0
