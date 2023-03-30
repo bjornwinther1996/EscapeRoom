@@ -399,7 +399,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5b6ae53fe1e66d429cc41bbf5b29cb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _localAvatarPrefab: {fileID: 2110209124485656560, guid: 82ba608bdd82e4193a434b1e9f174fdd, type: 3}
+  _localAvatarPrefab: {fileID: 7779014084404050648, guid: 35be39d8d2f2d43b28cc253587a5555d, type: 3}
   _localPlayer:
     root: {fileID: 1581414914}
     head: {fileID: 1416520287}
