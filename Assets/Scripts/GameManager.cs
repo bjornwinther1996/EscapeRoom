@@ -77,12 +77,12 @@ public class GameManager : MonoBehaviour
                 PlatformManager.isResetFinished = false;
                 syncedGameVariables._backupFloat = Platform.NumberOfPlatformsDestroyed; // To reset material
                 PlatformManagerScript.DestroyAllSurfaces();
-                PlatformManagerScript.ResetActivatedPlatforms(); // Also resets Vars: Rowindex and ActivatedPlatformsInRow.
+                PlatformManagerScript.ResetAllPlatforms(); // Resets: ((Vars:) Rowindex, ActivatedPlatformsInRow), PlatformActivated and 
                 //PlatformManagerScript.StartCoroutine(PlatformManagerScript.EnableAllSurfaces(3)); // enable all surfaces again after X sec
                 PlatformManagerScript.StartCoroutine(PlatformManagerScript.ActivateNextRow(PlatformManagerScript.RowIndex,3)); // enable all surfaces again after X sec
                 PlatformManagerScript.StartCoroutine(PlatformManagerScript.SetRandomSequenceAfterXTime(5));
                 PlatformManagerScript.StartCoroutine(PlatformManagerScript.ResetPositionOfDisabledPlatforms(7)); // Mby obsolote?
-                PlatformManagerScript.StartCoroutine(PlatformManagerScript.ResetMaterial(8)); // Only for server // Also Sets IsResetFinished = true
+                PlatformManagerScript.StartCoroutine(PlatformManagerScript.ResetMaterial(8)); // Only for server // Also Sets IsResetFinished = true // if this timer is adjusted - remember to adjust for client accordingly (in Platform)
                 Debug.Log("GAME MANAGER FAIL CONDITION: " + PlatformManagerScript.RowIndex);
                 Platform.NumberOfPlatformsDestroyed = 0;
             }

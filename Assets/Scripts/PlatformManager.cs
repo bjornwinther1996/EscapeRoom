@@ -219,8 +219,8 @@ public class PlatformManager : MonoBehaviour
                 }
                 else // so that i can call this method (SetrandomSequence) - to reset platforms according to new sequence.
                 {
-                    platformArray[i, j].gameObject.GetComponentInChildren<PlatformData>()._isSolidPlayer1 = false;
-                    platformArray[i, j].gameObject.GetComponentInChildren<PlatformData>()._isSolidPlayer2 = false;
+                    platformArray[i, j].gameObject.GetComponentInChildren<PlatformData>()._isSolidPlayer1 = false; // Obsolete now as it is done in ResetPlatforms
+                    platformArray[i, j].gameObject.GetComponentInChildren<PlatformData>()._isSolidPlayer2 = false; // Obsolete now as it is done in ResetPlatforms
                 }
             }
         }
@@ -300,10 +300,10 @@ public class PlatformManager : MonoBehaviour
                 {
                     platformArray[i, j].gameObject.GetComponentInChildren<PlatformData>()._isSolidPlayer2 = true;
                 }
-                else // so that i can call this method (SetrandomSequence) - to reset platforms according to new sequence.
+                else // so that i can call this method (SetrandomSequence) - to reset platforms according to new sequence. // wont work - Added code to account for this in ResetPlatforms
                 {
-                    platformArray[i, j].gameObject.GetComponentInChildren<PlatformData>()._isSolidPlayer1 = false;
-                    platformArray[i, j].gameObject.GetComponentInChildren<PlatformData>()._isSolidPlayer2 = false;
+                    platformArray[i, j].gameObject.GetComponentInChildren<PlatformData>()._isSolidPlayer1 = false; // Obsolete now as it is done in ResetPlatforms
+                    platformArray[i, j].gameObject.GetComponentInChildren<PlatformData>()._isSolidPlayer2 = false; // Obsolete now as it is done in ResetPlatforms
                 }
             }
         }
@@ -341,7 +341,7 @@ public class PlatformManager : MonoBehaviour
         isResetFinished = true;
     }
 
-    public void ResetActivatedPlatforms() // Resets all activated platforms
+    public void ResetAllPlatforms() // Resets all activated platforms
     {
         Debug.Log("Reset Activated Platforms METHOD");
         for (int i = 0; i < ColoumnLength; i++)
@@ -349,6 +349,8 @@ public class PlatformManager : MonoBehaviour
             for (int j = 0; j < RowLength; j++)
             {
                 platformArray[i, j].transform.GetChild(0).gameObject.GetComponent<Platform>().SetPlatformActivated(false);
+                platformArray[i, j].gameObject.GetComponentInChildren<PlatformData>()._isSolidPlayer1 = false;
+                platformArray[i, j].gameObject.GetComponentInChildren<PlatformData>()._isSolidPlayer2 = false;
             }
         }
         NumOfPlatformsActivatedInRow = 0;

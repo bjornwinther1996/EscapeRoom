@@ -43,7 +43,6 @@ public class Player : MonoBehaviour
 
         SetHandsColor();
         SetSkybox(); // MAKE IT SO IT ONLY CALLS ONCE!
-
     }
 
     private void SetSkybox() // MAKE LOGIC SO IT ONLY CALLS ONCE.
@@ -56,6 +55,7 @@ public class Player : MonoBehaviour
         else if(transform.position.y < -50 && RenderSettings.skybox != HellSkyMaterial)
         {
             RenderSettings.skybox = HellSkyMaterial;
+            
         }
         //DynamicGI.UpdateEnvironment();
     }
