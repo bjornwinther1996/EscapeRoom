@@ -143,6 +143,7 @@ public class PlatformManager : MonoBehaviour
 
     public void CheckCorrectPath(int rowToCheck) // Could limit to check only one row - Just as in ActivateNextRow
     {
+        Debug.Log("Check Correct Path Method - Row to check: " + rowToCheck);
         for (int i = 0; i < rowToCheck; i++)
         {
             for (int j = 0; j < RowLength; j++)
@@ -339,6 +340,7 @@ public class PlatformManager : MonoBehaviour
             }
         }
         isResetFinished = true;
+        RowIndex = 1;
     }
 
     public void ResetAllPlatforms() // Resets all activated platforms
@@ -354,7 +356,7 @@ public class PlatformManager : MonoBehaviour
             }
         }
         NumOfPlatformsActivatedInRow = 0;
-        RowIndex = 1;
+        RowIndex = 0;
     }
 
     public IEnumerator ActivateNextRow(int rowToActivate, float time) // Make petter performance-wise so it doesnt continously activate components.
