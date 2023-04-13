@@ -13,7 +13,7 @@ public class Platform : MonoBehaviour
     public AudioClip SuccessAudio;
     private AudioSource audioSource;
     private bool platformActivated;
-    private bool stopCalling;
+    public bool stopCalling;
     private MeshRenderer meshRenderer;
     private Material defaultMaterial;
     public Material Player1Material;
