@@ -114,6 +114,7 @@ public class PlatformManager : MonoBehaviour
 
     public void ActivateNextRow(int rowToActivate) // Make petter performance-wise so it doesnt continously activate components.
     {
+        Debug.Log("ActivateNextRow Method triggered - RowToActivate(RowIndex):"  + rowToActivate);
         if(PreviousRowIndex == RowIndex) { return; } // maybe obsolete once called from GameManager. // needs to be in GameManager?
         
         for (int targetRow = rowToActivate -1; targetRow < rowToActivate; targetRow++)
@@ -151,11 +152,13 @@ public class PlatformManager : MonoBehaviour
                 if (platformArray[i, j].transform.GetChild(0).gameObject.GetComponent<Platform>().GetPlatformActivated())
                 {
                     NumOfPlatformsActivatedInRow++;
+                    Debug.Log("NUmberOFPlatformsActivatedInRow INCREMENTED: " + NumOfPlatformsActivatedInRow);
                     platformArray[i, j].transform.GetChild(0).gameObject.GetComponent<Platform>().SetPlatformActivated(false);
                     if (NumOfPlatformsActivatedInRow >= 2) // if 2 or more
                     {
                         RowIndex++;
                         NumOfPlatformsActivatedInRow = 0;
+                        Debug.Log("CheckCorrectPath Method - Row Index increased! : " + RowIndex);
                     }
                 }
             }
@@ -359,7 +362,7 @@ public class PlatformManager : MonoBehaviour
         RowIndex = 1;
     }
 
-    public IEnumerator ActivateNextRow(int rowToActivate, float time) // Make petter performance-wise so it doesnt continously activate components.
+    public IEnumerator ActivateNextRowIE(int rowToActivate, float time) // Make petter performance-wise so it doesnt continously activate components.
     {
         yield return new WaitForSeconds(time);
         Debug.Log("Activate Next Row IEnumerator (AFTER FAIL)");

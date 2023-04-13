@@ -72,23 +72,23 @@ public class GameManager : MonoBehaviour
                 syncedGameVariables._backupBool = true; // Platforms Instantiated = true
             }
 
-            if (Platform.NumberOfPlatformsDestroyed > 0) // IF FAIL:
+            if (Platform.NumberOfPlatformsDestroyed > 1) // IF FAIL:
             {
                 PlatformManager.isResetFinished = false;
                 syncedGameVariables._backupFloat = Platform.NumberOfPlatformsDestroyed; // To reset material
                 PlatformManagerScript.DestroyAllSurfaces();
                 PlatformManagerScript.ResetAllPlatforms(); // Resets: ((Vars:) Rowindex, ActivatedPlatformsInRow), PlatformActivated and 
                 //PlatformManagerScript.StartCoroutine(PlatformManagerScript.EnableAllSurfaces(3)); // enable all surfaces again after X sec
-                PlatformManagerScript.StartCoroutine(PlatformManagerScript.ActivateNextRow(PlatformManagerScript.RowIndex,3)); // enable all surfaces again after X sec
+                PlatformManagerScript.StartCoroutine(PlatformManagerScript.ActivateNextRowIE(PlatformManagerScript.RowIndex,3)); // enable all surfaces again after X sec
                 PlatformManagerScript.StartCoroutine(PlatformManagerScript.SetRandomSequenceAfterXTime(5));
                 PlatformManagerScript.StartCoroutine(PlatformManagerScript.ResetLocalPlatformVariables(7));
-                PlatformManagerScript.StartCoroutine(PlatformManagerScript.ResetMaterial(8)); // Only for server // Also Sets IsResetFinished = true and rowIndex = 1 // if this timer is adjusted - remember to adjust for client accordingly (in Platform)
+                PlatformManagerScript.StartCoroutine(PlatformManagerScript.ResetMaterial(8)); // Only for server // Also Sets IsResetFinished = true // if this timer is adjusted - remember to adjust for client accordingly (in Platform)
                 //Debug.Log("GAME MANAGER FAIL CONDITION: " + PlatformManagerScript.RowIndex);
                 Platform.NumberOfPlatformsDestroyed = 0;
             }
             else if(PlatformManager.isResetFinished) // RUNNING ALL THE TIME IF PLAYERS HAVE NOT FAILED:
             {
-                //Debug.Log("GAME MANAGER GAME CONDITION: " + PlatformManagerScript.RowIndex);
+                Debug.Log("GAME MANAGER - Row Index: " + PlatformManagerScript.RowIndex);
                 PlatformManagerScript.ActivateNextRow(PlatformManagerScript.RowIndex);
                 PlatformManagerScript.CheckCorrectPath(PlatformManagerScript.RowIndex);
             }
