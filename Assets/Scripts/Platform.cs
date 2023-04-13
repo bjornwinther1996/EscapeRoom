@@ -250,6 +250,7 @@ public class Platform : MonoBehaviour
 
     public void DespawnPlatform() // DOES THIS FUCK THE SOUND??
     {
+        if (!GameManager.IsServer) { return; }
         //gameObject.SetActive(false); // probably has to be changed to delete and furthermore realtime.delete?
         gameObject.GetComponent<RealtimeTransform>().RequestOwnership();
         gameObject.transform.position = DespawnPosition;
@@ -267,6 +268,7 @@ public class Platform : MonoBehaviour
 
     public void SpawnPlatform()
     {
+        if (!GameManager.IsServer) { return; }
         //gameObject.SetActive(true); // probably has to be changed to delete and furthermore realtime.delete?
         gameObject.GetComponent<RealtimeTransform>().RequestOwnership();
         gameObject.transform.position = SpawnPosition;
