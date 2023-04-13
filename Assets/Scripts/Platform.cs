@@ -178,9 +178,9 @@ public class Platform : MonoBehaviour
         //Sound
         //light up perimiter of platform
         //material change?
-        audioSource.PlayOneShot(SuccessAudio);
         if (stopCalling) { return; } // so it doesnt activate all the next rows, as you continue to stand on activated/correct platform. Only triggers once, revealing next row
         Debug.Log("Guard Clause in Success Platform passed");
+        audioSource.PlayOneShot(SuccessAudio);
         platformActivated = true;
         stopCalling = true;
         timer = 0;
