@@ -325,7 +325,7 @@ public class PlatformManager : MonoBehaviour
                 {
                     //SpawnPlatform(platformArray[i, j].transform.GetChild(0).gameObject);
                     //platformArray[i, j].transform.GetChild(0).gameObject.GetComponent<Platform>().SpawnPlatform(); 
-                    platformArray[i, j].transform.GetChild(0).gameObject.GetComponent<Platform>().SetPlatformDisabled(false);
+                    platformArray[i, j].transform.GetChild(0).gameObject.GetComponent<Platform>().SetPlatformDisabled(false); // redundant i think - because we dont use disabledVariable anymore
                     platformArray[i, j].transform.GetChild(0).gameObject.GetComponent<Platform>().SetStopCalling(false);
                 }
             }
