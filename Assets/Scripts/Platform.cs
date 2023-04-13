@@ -13,7 +13,7 @@ public class Platform : MonoBehaviour
     public AudioClip SuccessAudio;
     private AudioSource audioSource;
     private bool platformActivated;
-    public bool stopCalling;
+    private bool stopCalling;
     private MeshRenderer meshRenderer;
     private Material defaultMaterial;
     public Material Player1Material;
@@ -174,11 +174,13 @@ public class Platform : MonoBehaviour
 
     public void Success()
     {
+        Debug.Log("Success Method called in Platform");
         //Sound
         //light up perimiter of platform
         //material change?
-        if(stopCalling) { return; } // so it doesnt activate all the next rows, as you continue to stand on activated/correct platform. Only triggers once, revealing next row
         audioSource.PlayOneShot(SuccessAudio);
+        if (stopCalling) { return; } // so it doesnt activate all the next rows, as you continue to stand on activated/correct platform. Only triggers once, revealing next row
+        Debug.Log("Guard Clause in Success Platform passed");
         platformActivated = true;
         stopCalling = true;
         timer = 0;
@@ -272,6 +274,16 @@ public class Platform : MonoBehaviour
         //gameObject.SetActive(true); // probably has to be changed to delete and furthermore realtime.delete?
         gameObject.GetComponent<RealtimeTransform>().RequestOwnership();
         gameObject.transform.position = SpawnPosition;
+    }
+
+    public bool GetStopCalling()
+    {
+        return stopCalling;
+    }
+
+    public void SetStopCalling(bool stopCalling)
+    {
+        this.stopCalling = stopCalling;
     }
 
 }

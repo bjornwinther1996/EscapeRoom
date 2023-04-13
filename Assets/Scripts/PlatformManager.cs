@@ -326,7 +326,7 @@ public class PlatformManager : MonoBehaviour
                     //SpawnPlatform(platformArray[i, j].transform.GetChild(0).gameObject);
                     //platformArray[i, j].transform.GetChild(0).gameObject.GetComponent<Platform>().SpawnPlatform(); 
                     platformArray[i, j].transform.GetChild(0).gameObject.GetComponent<Platform>().SetPlatformDisabled(false);
-                    platformArray[i, j].transform.GetChild(0).gameObject.GetComponent<Platform>().stopCalling = false;
+                    platformArray[i, j].transform.GetChild(0).gameObject.GetComponent<Platform>().SetStopCalling(false);
                 }
             }
         }
