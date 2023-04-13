@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour
                 PlatformManagerScript.DestroyAllSurfaces();
                 PlatformManagerScript.ResetAllPlatforms(); // Resets: ((Vars:) Rowindex, ActivatedPlatformsInRow), PlatformActivated and 
                 //PlatformManagerScript.StartCoroutine(PlatformManagerScript.EnableAllSurfaces(3)); // enable all surfaces again after X sec
-                //PlatformManagerScript.StartCoroutine(PlatformManagerScript.ActivateNextRow(PlatformManagerScript.RowIndex,3)); // enable all surfaces again after X sec
+                PlatformManagerScript.StartCoroutine(PlatformManagerScript.ActivateNextRow(PlatformManagerScript.RowIndex,3)); // enable all surfaces again after X sec
                 PlatformManagerScript.StartCoroutine(PlatformManagerScript.SetRandomSequenceAfterXTime(5));
                 PlatformManagerScript.StartCoroutine(PlatformManagerScript.ResetLocalPlatformVariables(7));
                 PlatformManagerScript.StartCoroutine(PlatformManagerScript.ResetMaterial(8)); // Only for server // Also Sets IsResetFinished = true and rowIndex = 1 // if this timer is adjusted - remember to adjust for client accordingly (in Platform)

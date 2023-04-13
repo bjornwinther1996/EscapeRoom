@@ -341,7 +341,6 @@ public class PlatformManager : MonoBehaviour
             }
         }
         isResetFinished = true;
-        RowIndex = 1;
     }
 
     public void ResetAllPlatforms() // Resets all activated platforms
@@ -357,12 +356,13 @@ public class PlatformManager : MonoBehaviour
             }
         }
         NumOfPlatformsActivatedInRow = 0;
-        RowIndex = 0;
+        RowIndex = 1;
     }
 
     public IEnumerator ActivateNextRow(int rowToActivate, float time) // Make petter performance-wise so it doesnt continously activate components.
     {
         yield return new WaitForSeconds(time);
+        Debug.Log("Activate Next Row IEnumerator (AFTER FAIL)");
         for (int targetRow = rowToActivate - 1; targetRow < rowToActivate; targetRow++)
         {
             for (int j = 0; j < RowLength; j++)
@@ -370,7 +370,6 @@ public class PlatformManager : MonoBehaviour
                 //SpawnPlatform(platformArray[targetRow, j].transform.GetChild(0).gameObject);
                 //SetPosition(platformArray[targetRow, j].transform.GetChild(0).gameObject, platformArray[targetRow, j].transform.GetChild(0).gameObject.GetComponent<Platform>().SpawnPosition);
                 platformArray[targetRow, j].transform.GetChild(0).gameObject.GetComponent<Platform>().SpawnPlatform();
-                Debug.Log("Activate Next Row IEnumerator (AFTER FAIL)");
             }
         } 
     }
