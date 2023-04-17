@@ -522,7 +522,7 @@ MonoBehaviour:
   head:
     vrTarget: {fileID: 1629921111290110574}
     rigTarget: {fileID: 6417371922105526970}
-    trackingPosOffset: {x: 0, y: -0.15, z: -0.05}
+    trackingPosOffset: {x: 0, y: -0.125, z: -0.05}
     trackingRotOffset: {x: 90, y: 90, z: 90}
   rightHand:
     vrTarget: {fileID: 6373624751904251248}
