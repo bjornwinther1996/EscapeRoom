@@ -377,7 +377,7 @@ Transform:
   m_GameObject: {fileID: 987892841336581149}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.075, y: 1.075, z: 1.075}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 566740670757599137}
@@ -522,7 +522,7 @@ MonoBehaviour:
   head:
     vrTarget: {fileID: 1629921111290110574}
     rigTarget: {fileID: 6417371922105526970}
-    trackingPosOffset: {x: 0, y: -0.125, z: -0.05}
+    trackingPosOffset: {x: 0, y: -0.16, z: -0.14}
     trackingRotOffset: {x: 90, y: 90, z: 90}
   rightHand:
     vrTarget: {fileID: 6373624751904251248}
@@ -934,7 +934,7 @@ Transform:
   m_GameObject: {fileID: 1077209293701824694}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.4, y: 1.05, z: 1.05}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1078773515531763868}

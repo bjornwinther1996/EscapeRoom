@@ -23,7 +23,7 @@ public class VRRig : MonoBehaviour
     public VRMap rightHand;
     public VRMap leftHand;
 
-    private float turnSmoothness = 1f;
+    private float turnSmoothness = 3.5f;
 
     public Transform headConstraint;
     public Vector3 headBodyOffset;
@@ -37,8 +37,8 @@ public class VRRig : MonoBehaviour
     void LateUpdate()
     {
         transform.position = headConstraint.position + headBodyOffset;
-        //transform.forward = Vector3.Lerp(transform.forward, Vector3.ProjectOnPlane(headConstraint.up, Vector3.up).normalized, Time.deltaTime * turnSmoothness);
-        transform.forward = Vector3.ProjectOnPlane(headConstraint.up, Vector3.up).normalized;
+        transform.forward = Vector3.Lerp(transform.forward, Vector3.ProjectOnPlane(headConstraint.up, Vector3.up).normalized, Time.deltaTime * turnSmoothness);
+        //transform.forward = Vector3.ProjectOnPlane(headConstraint.up, Vector3.up).normalized;
         head.Map();
         leftHand.Map();
         rightHand.Map();
