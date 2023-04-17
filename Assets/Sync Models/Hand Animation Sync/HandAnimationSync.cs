@@ -7,7 +7,6 @@ public class HandAnimationSync : RealtimeComponent<HandAnimationSyncModel>
 {
     //private MeshRenderer _meshRenderer;
     Animator _handAnimator;
-    
 
     private void Awake()
     {
