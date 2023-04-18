@@ -326,11 +326,24 @@ public class PlatformManager : MonoBehaviour
                     //SpawnPlatform(platformArray[i, j].transform.GetChild(0).gameObject);
                     //platformArray[i, j].transform.GetChild(0).gameObject.GetComponent<Platform>().SpawnPlatform(); 
                     platformArray[i, j].transform.GetChild(0).gameObject.GetComponent<Platform>().SetPlatformDisabled(false); // redundant i think - because we dont use disabledVariable anymore
-                    platformArray[i, j].transform.GetChild(0).gameObject.GetComponent<Platform>().SetStopCalling(false);
+                    platformArray[i, j].transform.GetChild(0).gameObject.GetComponent<Platform>().SetStopCalling(false); // Changed to sync var below:
                 }
             }
         }
     }
+
+    public IEnumerator ResetStopCallingVariableInPlatform(float time) // Only for client
+    {
+        yield return new WaitForSeconds(time);
+        for (int i = 0; i < ColoumnLength; i++)
+        {
+            for (int j = 0; j < RowLength; j++)
+            {
+                    platformArray[i, j].transform.GetChild(0).gameObject.GetComponent<Platform>().SetStopCalling(false);
+            }
+        }
+    }
+
 
     public IEnumerator ResetMaterial(float time)
     {

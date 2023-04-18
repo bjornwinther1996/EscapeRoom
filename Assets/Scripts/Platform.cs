@@ -126,7 +126,7 @@ public class Platform : MonoBehaviour
         timer += Time.deltaTime;
         if (timer <= TimerThreshold) { return; }//break instead?
         //CheckPlatformOld(); // Old method, doesnt consider which player step on what platform.
-        CheckPlatformForPlayers(); // doesnt work yet
+        CheckPlatformForPlayers2(other.GetComponent<Player>().PlayerNumber); // doesnt work yet
 
     }
 
@@ -227,6 +227,38 @@ public class Platform : MonoBehaviour
         }
     }
 
+    public void CheckPlatformForPlayers2(int playerNumber)
+    {
+        if(!GameManager.IsServer && syncedPlatformVariables._isSolidPlayer2) // Only called for client, and only to trigger sound
+        {
+            Success();
+        }
+
+        if (!GameManager.IsServer) { return; } // only server checks following.
+
+        if (playerNumber == 1 && syncedPlatformVariables._isSolidPlayer1)
+        {
+            Debug.Log("CHECKPLATFORM: If Statement triggered");
+            Success();
+        }
+        else if (playerNumber == 2 && syncedPlatformVariables._isSolidPlayer2)
+        {
+            Debug.Log("CHECKPLATFORM: ELSE IF Statement triggered");
+            Success();
+        }
+        else
+        {
+            Debug.Log("CHECKPLATFORM: ELSE STATEMENT TRIGGERED");
+            GlassCracking();
+            if (timer >= TimerThreshold + 1)
+            {
+                PlatformFall();
+                NumberOfPlatformsDestroyed++;
+            }
+        }
+    }
+
+
     public void CheckPlatformThrowable(float timeThreshold)
     {
         if (syncedPlatformVariables._isSolidPlayer1 || syncedPlatformVariables._isSolidPlayer2)
@@ -278,7 +310,6 @@ public class Platform : MonoBehaviour
         gameObject.GetComponent<RealtimeTransform>().RequestOwnership();
         gameObject.transform.position = SpawnPosition;
     }
-
     public bool GetStopCalling()
     {
         return stopCalling;
@@ -288,5 +319,4 @@ public class Platform : MonoBehaviour
     {
         this.stopCalling = stopCalling;
     }
-
 }
