@@ -125,8 +125,8 @@ public class Platform : MonoBehaviour
         if (!other.CompareTag("Player")) { return; }
         timer += Time.deltaTime;
         if (timer <= TimerThreshold) { return; }//break instead?
-        CheckPlatformOld();
-        //CheckPlatformForPlayers(); // doesnt work yet
+        //CheckPlatformOld(); // Old method, doesnt consider which player step on what platform.
+        CheckPlatformForPlayers(); // doesnt work yet
 
     }
 
@@ -150,7 +150,6 @@ public class Platform : MonoBehaviour
 
     public void PlatformFall()
     {
-        //make platform fall (translate pos), and possibly delete?
         int randomAudio = Random.Range(0, 3);
         switch (randomAudio)
         {
@@ -214,7 +213,7 @@ public class Platform : MonoBehaviour
         {
             Success();
         }
-        else if(!syncedPlatformVariables._isSolidPlayer1 || !syncedPlatformVariables._isSolidPlayer2)
+        else
         {
             GlassCracking();
             if (timer >= TimerThreshold + 1)
