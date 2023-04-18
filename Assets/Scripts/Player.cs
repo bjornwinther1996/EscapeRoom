@@ -14,7 +14,6 @@ public class Player : MonoBehaviour
     public Material MaterialPlayer1;
     public Material MaterialPlayer2;
     private bool isHandsColorSet;
-    public int PlayerNumber;
 
     private float avatarYOffset = 2f;
 
@@ -36,12 +35,10 @@ public class Player : MonoBehaviour
         if (syncedPlayerData._isServer)
         {
             GameManager.IsServer = true;
-            PlayerNumber = 1;
         }
         else
         {
             GameManager.IsServer = false;
-            PlayerNumber = 2;
         }
 
         SetHandsColor();

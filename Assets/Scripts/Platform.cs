@@ -126,7 +126,7 @@ public class Platform : MonoBehaviour
         timer += Time.deltaTime;
         if (timer <= TimerThreshold) { return; }//break instead?
         //CheckPlatformOld(); // Old method, doesnt consider which player step on what platform.
-        CheckPlatformForPlayers2(other.GetComponent<Player>().PlayerNumber); // doesnt work yet
+        CheckPlatformForPlayers2(other.GetComponent<PlayerData>()._isServer); // doesnt work yet
 
     }
 
@@ -227,7 +227,7 @@ public class Platform : MonoBehaviour
         }
     }
 
-    public void CheckPlatformForPlayers2(int playerNumber)
+    public void CheckPlatformForPlayers2(bool isPlayerServer)
     {
         if(!GameManager.IsServer && syncedPlatformVariables._isSolidPlayer2) // Only called for client, and only to trigger sound
         {
