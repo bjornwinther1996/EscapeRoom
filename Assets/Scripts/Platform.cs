@@ -219,6 +219,7 @@ public class Platform : MonoBehaviour
             if (timer >= TimerThreshold + 1)
             {
                 PlatformFall();
+                NumberOfPlatformsDestroyed++;
             }
         }
     }
