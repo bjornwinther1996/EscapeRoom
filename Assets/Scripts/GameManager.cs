@@ -88,7 +88,7 @@ public class GameManager : MonoBehaviour
             }
             else if(PlatformManager.isResetFinished) // RUNNING ALL THE TIME IF PLAYERS HAVE NOT FAILED:
             {
-                Debug.Log("GAME MANAGER - Row Index: " + PlatformManagerScript.RowIndex);
+                //Debug.Log("GAME MANAGER - Row Index: " + PlatformManagerScript.RowIndex);
                 PlatformManagerScript.ActivateNextRow(PlatformManagerScript.RowIndex);
                 PlatformManagerScript.CheckCorrectPath(PlatformManagerScript.RowIndex);
             }

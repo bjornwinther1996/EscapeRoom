@@ -114,7 +114,7 @@ public class PlatformManager : MonoBehaviour
 
     public void ActivateNextRow(int rowToActivate) // Make petter performance-wise so it doesnt continously activate components.
     {
-        Debug.Log("ActivateNextRow Method triggered - RowToActivate(RowIndex):"  + rowToActivate);
+        //Debug.Log("ActivateNextRow Method triggered - RowToActivate(RowIndex):"  + rowToActivate);
         if(PreviousRowIndex == RowIndex) { return; } // maybe obsolete once called from GameManager. // needs to be in GameManager?
         
         for (int targetRow = rowToActivate -1; targetRow < rowToActivate; targetRow++)
@@ -144,7 +144,7 @@ public class PlatformManager : MonoBehaviour
 
     public void CheckCorrectPath(int rowToCheck) // Could limit to check only one row - Just as in ActivateNextRow
     {
-        Debug.Log("Check Correct Path Method - Row to check: " + rowToCheck);
+        //Debug.Log("Check Correct Path Method - Row to check: " + rowToCheck);
         for (int i = 0; i < rowToCheck; i++)
         {
             for (int j = 0; j < RowLength; j++)
