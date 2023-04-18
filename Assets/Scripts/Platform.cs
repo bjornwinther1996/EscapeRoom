@@ -217,6 +217,7 @@ public class Platform : MonoBehaviour
         }
         else
         {
+            Debug.Log("CHECKPLATFORM: ELSE STATEMENT TRIGGERED");
             GlassCracking();
             if (timer >= TimerThreshold + 1)
             {
