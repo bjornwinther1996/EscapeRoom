@@ -236,12 +236,12 @@ public class Platform : MonoBehaviour
 
         if (!GameManager.IsServer) { return; } // only server checks following.
 
-        if (playerNumber == 1 && syncedPlatformVariables._isSolidPlayer1)
+        if (isPlayerServer && syncedPlatformVariables._isSolidPlayer1)
         {
             Debug.Log("CHECKPLATFORM: If Statement triggered");
             Success();
         }
-        else if (playerNumber == 2 && syncedPlatformVariables._isSolidPlayer2)
+        else if (!isPlayerServer && syncedPlatformVariables._isSolidPlayer2)
         {
             Debug.Log("CHECKPLATFORM: ELSE IF Statement triggered");
             Success();
