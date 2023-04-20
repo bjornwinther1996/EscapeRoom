@@ -126,15 +126,23 @@ public class Platform : MonoBehaviour
         timer += Time.deltaTime;
         if (timer <= TimerThreshold) { return; }//break instead?
         //CheckPlatformOld(); // Old method, doesnt consider which player step on what platform.
-        CheckPlatformForPlayers2(other.GetComponent<PlayerData>()._isServer); // doesnt work yet
+        CheckPlatformForPlayers(other.GetComponent<PlayerData>()._isServer); // doesnt work yet
 
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.CompareTag("Throwable")) { return; }
-        timer += Time.deltaTime;
-        CheckPlatformThrowable(0f);
+        if (other.CompareTag("Throwable"))
+        {
+            timer += Time.deltaTime;
+            CheckPlatformThrowable(0f);
+        }
+
+        if (other.CompareTag("Player"))
+        {
+            audioSource.PlayOneShot(SuccessAudio);
+        }
+
     }
 
     public void SetSolid(bool isSolid)
@@ -179,7 +187,7 @@ public class Platform : MonoBehaviour
         //material change?
         if (stopCalling) { return; } // so it doesnt activate all the next rows, as you continue to stand on activated/correct platform. Only triggers once, revealing next row
         Debug.Log("Guard Clause in Success Platform passed");
-        audioSource.PlayOneShot(SuccessAudio);
+        //audioSource.PlayOneShot(SuccessAudio); // Moved to OnTriggerEnter for both client and server
         platformActivated = true;
         stopCalling = true;
         timer = 0;
@@ -202,34 +210,9 @@ public class Platform : MonoBehaviour
         }
     }
 
-    public void CheckPlatformForPlayers()
+    public void CheckPlatformForPlayers(bool isPlayerServer)
     {
-
-        if (GameManager.IsServer && syncedPlatformVariables._isSolidPlayer1)
-        {
-            Debug.Log("CHECKPLATFORM: If Statement triggered");
-            Success();
-        }
-        else if (!GameManager.IsServer && syncedPlatformVariables._isSolidPlayer2)
-        {
-            Debug.Log("CHECKPLATFORM: ELSE IF Statement triggered");
-            Success();
-        }
-        else
-        {
-            Debug.Log("CHECKPLATFORM: ELSE STATEMENT TRIGGERED");
-            GlassCracking();
-            if (timer >= TimerThreshold + 1)
-            {
-                PlatformFall();
-                NumberOfPlatformsDestroyed++;
-            }
-        }
-    }
-
-    public void CheckPlatformForPlayers2(bool isPlayerServer)
-    {
-        if(!GameManager.IsServer && syncedPlatformVariables._isSolidPlayer2) // Only called for client, and only to trigger sound
+        if(!GameManager.IsServer && syncedPlatformVariables._isSolidPlayer2) // Only called for client, and only to trigger sound // Redundant now.
         {
             Success();
         }

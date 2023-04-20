@@ -28,7 +28,6 @@ public class GameManager : MonoBehaviour
 
     public static bool AmbientAudio;
     public bool AmbientAudioEnabled;
-    private int previousFails = 15; //Random start int, that differs from syncedGameVariables._fails. Just cant be 0.
 
 
     void Start()
@@ -64,12 +63,7 @@ public class GameManager : MonoBehaviour
         {
             if (!IsServer) // Only do this for client
             {
-                if (previousFails != syncedGameVariables._fails)
-                {
-                    Debug.Log("Client Resets Local Variable 'stopCalling' in all platforms - purely for sound");
-                    PlatformManagerScript.StartCoroutine(PlatformManagerScript.ResetStopCallingVariableInPlatform(7));
-                    previousFails = syncedGameVariables._fails;
-                }
+                
             }
 
             // Only the server executes the following:
@@ -96,7 +90,6 @@ public class GameManager : MonoBehaviour
                 PlatformManagerScript.StartCoroutine(PlatformManagerScript.ResetMaterial(8)); // Only for server // Also Sets IsResetFinished = true // if this timer is adjusted - remember to adjust for client accordingly (in Platform)
                 //Debug.Log("GAME MANAGER FAIL CONDITION: " + PlatformManagerScript.RowIndex);
                 Platform.NumberOfPlatformsDestroyed = 0;
-                syncedGameVariables._fails++; // used to reset local variable stopCalling for client && keep track of fails?
             }
             else if(PlatformManager.isResetFinished) // RUNNING ALL THE TIME IF PLAYERS HAVE NOT FAILED:
             {

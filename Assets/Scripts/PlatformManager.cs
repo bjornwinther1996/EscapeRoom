@@ -332,19 +332,6 @@ public class PlatformManager : MonoBehaviour
         }
     }
 
-    public IEnumerator ResetStopCallingVariableInPlatform(float time) // Only for client
-    {
-        yield return new WaitForSeconds(time);
-        for (int i = 0; i < ColoumnLength; i++)
-        {
-            for (int j = 0; j < RowLength; j++)
-            {
-                    platformArray[i, j].transform.GetChild(0).gameObject.GetComponent<Platform>().SetStopCalling(false);
-            }
-        }
-    }
-
-
     public IEnumerator ResetMaterial(float time)
     {
         yield return new WaitForSeconds(time);
