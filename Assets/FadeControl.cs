@@ -25,10 +25,10 @@ public class FadeControl : MonoBehaviour
 
     }
 
-    
+
     private void OnTriggerStay(Collider other)
     {
-        
+
         if (!GetComponent<RealtimeTransform>().isOwnedLocallySelf) return;
 
         if (other.gameObject.tag == "Wall")
@@ -37,36 +37,23 @@ public class FadeControl : MonoBehaviour
             timer += Time.deltaTime;
             if (imageColor.a < 1f)
             {
-                imageColor.a += timer / 10;
+                imageColor.a += (timer / 0.5f) *Time.deltaTime;
                 imageComponent.color = imageColor;
-                //imageColor.a = timer / 10; // set alpha value of local color variable
-                //imageComponent.color = imageColor; // set local color variable to the one used in Image. -- can't set imageComponent.color.a directly.
             }
         }
-        else
+
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (!GetComponent<RealtimeTransform>().isOwnedLocallySelf) return;
+
+        if (other.gameObject.tag == "Wall")
         {
-            Debug.Log("ELSE WALL");
-            if (timer <= 0)
-            {
-                timer = 0;
-
-                if (!callOnce)
-                {
-                    imageColor.a = 0;
-                    imageComponent.color = imageColor;
-                }
-                callOnce = true;
-                return;
-            }
-            else
-            {
-                timer -= Time.deltaTime;
-                imageColor.a -= timer / 10; // set alpha value of local color variable
-                imageComponent.color = imageColor;
-                callOnce = false;
-            }
-
+            Debug.Log("OnTriggerExit Wall");
+            imageColor.a = 0;
+            imageComponent.color = imageColor;
+            timer = 0;
         }
-
     }
 }
