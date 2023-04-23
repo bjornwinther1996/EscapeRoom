@@ -14,7 +14,6 @@ public class FadeControl : MonoBehaviour
     public GameObject ImageFadeCanvas;
     private Image imageComponent;
     private Color imageColor;
-    private bool callOnce;
 
     float timer;
     // Start is called before the first frame update
@@ -38,12 +37,7 @@ public class FadeControl : MonoBehaviour
         if (other.gameObject.tag == "Wall")
         {
             //Debug.Log("HITTING WALL");
-            timer += Time.deltaTime;
-            if (imageColor.a < 1f)
-            {
-                imageColor.a += (timer / 0.5f) *Time.deltaTime;
-                imageComponent.color = imageColor;
-            }
+            FadeScreen();
             textComponent.SetText("Oops! Move out from the wall, fucking pig cheater!");
         }
 
@@ -56,10 +50,25 @@ public class FadeControl : MonoBehaviour
         if (other.gameObject.tag == "Wall")
         {
             //Debug.Log("OnTriggerExit Wall");
-            imageColor.a = 0;
-            imageComponent.color = imageColor;
-            timer = 0;
+            ClearFade();
             textComponent.SetText("");
         }
+    }
+
+    public void FadeScreen() // Fade screen by changing alpha value of black image
+    {
+        timer += Time.deltaTime;
+        if (imageColor.a < 1f)
+        {
+            imageColor.a += (timer / 0.5f) * Time.deltaTime;
+            imageComponent.color = imageColor;
+        }
+    }
+
+    public void ClearFade() // set alpha to 0, to make black image transparent.
+    {
+        imageColor.a = 0;
+        imageComponent.color = imageColor;
+        timer = 0;
     }
 }
