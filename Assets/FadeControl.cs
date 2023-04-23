@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using Normal.Realtime;
 using UnityEngine.UI;
+using TMPro;
 
 public class FadeControl : MonoBehaviour
 {
 
-    public GameObject UICanvas;
+    public GameObject UIText;
+    private TextMeshProUGUI textComponent;
 
     public GameObject ImageFadeCanvas;
     private Image imageComponent;
@@ -23,6 +25,8 @@ public class FadeControl : MonoBehaviour
         imageColor.a = 0f;
         imageComponent.color = imageColor;
 
+        textComponent = UIText.GetComponent<TextMeshProUGUI>();
+
     }
 
 
@@ -33,13 +37,14 @@ public class FadeControl : MonoBehaviour
 
         if (other.gameObject.tag == "Wall")
         {
-            Debug.Log("HITTING WALL");
+            //Debug.Log("HITTING WALL");
             timer += Time.deltaTime;
             if (imageColor.a < 1f)
             {
                 imageColor.a += (timer / 0.5f) *Time.deltaTime;
                 imageComponent.color = imageColor;
             }
+            textComponent.SetText("Oops! Move out from the wall, fucking pig cheater!");
         }
 
     }
@@ -50,10 +55,11 @@ public class FadeControl : MonoBehaviour
 
         if (other.gameObject.tag == "Wall")
         {
-            Debug.Log("OnTriggerExit Wall");
+            //Debug.Log("OnTriggerExit Wall");
             imageColor.a = 0;
             imageComponent.color = imageColor;
             timer = 0;
+            textComponent.SetText("");
         }
     }
 }
