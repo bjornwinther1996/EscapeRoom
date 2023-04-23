@@ -60,7 +60,7 @@ public class FadeControl : MonoBehaviour
         timer += Time.deltaTime;
         if (imageColor.a < 1f)
         {
-            imageColor.a += (timer / 0.5f) * Time.deltaTime;
+            imageColor.a += (timer / 0.3f) * Time.deltaTime;
             imageComponent.color = imageColor;
         }
     }

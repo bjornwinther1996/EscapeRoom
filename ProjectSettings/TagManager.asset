@@ -8,6 +8,7 @@ TagManager:
   - Elevator
   - GameManager
   - Wall
+  - HellHitbox
   layers:
   - Default
   - TransparentFX

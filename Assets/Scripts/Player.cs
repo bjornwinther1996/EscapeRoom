@@ -29,6 +29,8 @@ public class Player : MonoBehaviour
 
     float fadeTimer;
 
+    float previousYPos;
+
     void Start()
     {
         syncedPlayerData = GetComponent<PlayerData>();
@@ -75,8 +77,12 @@ public class Player : MonoBehaviour
     }
 
     public void ActivateFadeWhenFalling()
-    { // if change in Y position condition?
-        if (transform.position.y > -85 && transform.position.y < -10)
+    {
+        if (!GetComponent<RealtimeTransform>().isOwnedLocallySelf) return;
+        if (!ChangeInYPos()) { return; } // Return if no change in Y pos.
+        Debug.Log("Change in Y pos");
+
+        if (transform.position.y > -89 && transform.position.y < -3)
         {
             if (imageColor.a < 1f)
             {
@@ -84,12 +90,6 @@ public class Player : MonoBehaviour
                 imageColor.a += (fadeTimer / 0.5f) * Time.deltaTime;
                 imageComponent.color = imageColor;
             }
-        }
-        else if (transform.position.y < -85)
-        {
-            imageColor.a = 0;
-            imageComponent.color = imageColor;
-            fadeTimer = 0;
         }
         
     }
@@ -122,6 +122,12 @@ public class Player : MonoBehaviour
                 other.GetComponent<RealtimeTransform>().RequestOwnership();
             }
         }
+        if (other.CompareTag("HellHitbox"))
+        {
+            imageColor.a = 0;
+            imageComponent.color = imageColor;
+            fadeTimer = 0;
+        }
 
     }
 
@@ -134,8 +140,17 @@ public class Player : MonoBehaviour
 
             VRRig.transform.position = newPos;
         }
+    }
 
-
+    public bool ChangeInYPos()
+    {
+        if (transform.position.y != previousYPos)
+        {
+            return true;
+        }
+        
+        previousYPos = transform.position.y;
+        return false;
     }
 
 }
