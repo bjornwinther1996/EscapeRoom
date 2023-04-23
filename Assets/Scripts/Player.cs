@@ -26,21 +26,18 @@ public class Player : MonoBehaviour
     public GameObject ImageFadeCanvas;
     private Image imageComponent;
     private Color imageColor;
-    private bool callOnce;
 
-    float timer;
+    float fadeTimer;
 
     void Start()
     {
         syncedPlayerData = GetComponent<PlayerData>();
         VRRig = GameObject.Find("VR Player");
         GameManagerReference = GameObject.Find("GameManager");
-        /*
+
         imageComponent = ImageFadeCanvas.GetComponent<Image>();
         imageColor = Color.black;
         imageColor.a = 0f;
-        imageComponent.color = imageColor;*/
-        
     }
 
     // Update is called once per frame
@@ -59,9 +56,7 @@ public class Player : MonoBehaviour
 
         SetHandsColor();
         SetSkybox();
-        //imageColor.a -= 0.0001f;
-        //imageComponent.color = imageColor;
-        //imageComponent.CrossFadeAlpha(0.1f, 50.0f, false);//CrossFadeAlpha(Alpha, Time, Ignore time scale)
+        ActivateFadeWhenFalling();
     }
 
     private void SetSkybox()
@@ -77,6 +72,26 @@ public class Player : MonoBehaviour
             
         }
         //DynamicGI.UpdateEnvironment();
+    }
+
+    public void ActivateFadeWhenFalling()
+    { // if change in Y position condition?
+        if (transform.position.y > -85 && transform.position.y < -10)
+        {
+            if (imageColor.a < 1f)
+            {
+                fadeTimer += Time.deltaTime;
+                imageColor.a += (fadeTimer / 0.5f) * Time.deltaTime;
+                imageComponent.color = imageColor;
+            }
+        }
+        else if (transform.position.y < -85)
+        {
+            imageColor.a = 0;
+            imageComponent.color = imageColor;
+            fadeTimer = 0;
+        }
+        
     }
 
     private void SetHandsColor() // needs color sync?
@@ -119,45 +134,6 @@ public class Player : MonoBehaviour
 
             VRRig.transform.position = newPos;
         }
-
-        /*
-
-        if (other.gameObject.tag == "Wall")
-        {
-            Debug.Log("HITTING WALL");
-            timer += Time.deltaTime;
-            if (imageColor.a < 1f)
-            {
-                imageColor.a += timer / 10;
-                imageComponent.color = imageColor;
-                //imageColor.a = timer / 10; // set alpha value of local color variable
-                //imageComponent.color = imageColor; // set local color variable to the one used in Image. -- can't set imageComponent.color.a directly.
-            }
-        }
-        else
-        {
-            Debug.Log("ELSE WALL");
-            if (timer <= 0)
-            {
-                timer = 0;
-                
-                if (!callOnce)
-                {
-                    //imageColor.a = 0;
-                    //imageComponent.color = imageColor;
-                }
-                callOnce = true;
-                return;
-            }
-            else
-            {
-                timer -= Time.deltaTime;
-                //imageColor.a -= timer/10; // set alpha value of local color variable
-                //imageComponent.color = imageColor;
-                callOnce = false;
-            }
-            
-        }*/
 
 
     }
