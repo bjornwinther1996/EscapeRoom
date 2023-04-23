@@ -144,13 +144,15 @@ public class Player : MonoBehaviour
 
     public bool ChangeInYPos()
     {
-        if (transform.position.y != previousYPos)
+        if (previousYPos !=transform.position.y)
         {
+            previousYPos = transform.position.y;
             return true;
         }
-        
-        previousYPos = transform.position.y;
-        return false;
+        else
+        {
+            return false;
+        }
     }
 
 }
