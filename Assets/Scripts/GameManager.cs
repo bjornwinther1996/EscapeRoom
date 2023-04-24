@@ -77,7 +77,7 @@ public class GameManager : MonoBehaviour
                 syncedGameVariables._backupBool = true; // Platforms Instantiated = true
             }
 
-            if (Platform.NumberOfPlatformsDestroyed > 1) // IF FAIL:
+            if (Platform.NumberOfPlatformsDestroyed > 0) // IF FAIL:
             {
                 PlatformManager.isResetFinished = false;
                 syncedGameVariables._backupFloat = Platform.NumberOfPlatformsDestroyed; // To reset material

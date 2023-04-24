@@ -56,6 +56,8 @@ public class PlatformManager : MonoBehaviour
     public int NumOfPlatformsActivatedInRow;
 
     public GameObject FloorHeaven;
+    private Vector3 floorHeavenStartPosition;
+    private Vector3 floorHeavenOffsetPosition;
 
     public static bool isResetFinished = true;    
 
@@ -65,6 +67,8 @@ public class PlatformManager : MonoBehaviour
         COLOUMNLENGTH = ColoumnLength;
         ROWLENGTH = RowLength;
         //platformArray = new GameObject[ColoumnLength, RowLength];
+        floorHeavenStartPosition = FloorHeaven.transform.position;
+        floorHeavenOffsetPosition = new Vector3(100, FloorHeaven.transform.position.y, FloorHeaven.transform.position.z);
     }
 
     // need to get relatime component possibly? - and put realtime components on prefab (already on!).
@@ -242,7 +246,7 @@ public class PlatformManager : MonoBehaviour
             }
         }
         FloorHeaven.GetComponent<RealtimeTransform>().RequestOwnership();
-        //FloorHeaven.transform.position += new Vector3(100, 0, 0);
+        FloorHeaven.transform.position = floorHeavenOffsetPosition;
     }
 
     public IEnumerator EnableAllSurfaces(float time) // not used anymore
@@ -257,7 +261,7 @@ public class PlatformManager : MonoBehaviour
             }
         }
         FloorHeaven.GetComponent<RealtimeTransform>().RequestOwnership();
-        //FloorHeaven.transform.position += new Vector3(-100, 0, 0);
+        FloorHeaven,.transform.position = floorHeavenStartPosition;
     }
 
     public IEnumerator SetRandomSequenceAfterXTime(float time) // the players start from the top and go down:
