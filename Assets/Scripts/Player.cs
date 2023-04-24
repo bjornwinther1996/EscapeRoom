@@ -80,7 +80,7 @@ public class Player : MonoBehaviour
     {
         if (!GetComponent<RealtimeTransform>().isOwnedLocallySelf) return;
         if (!ChangeInYPos()) { return; } // Return if no change in Y pos.
-        Debug.Log("Change in Y pos");
+        //Debug.Log("Change in Y pos");
 
         if (transform.position.y > -89 && transform.position.y < -3)
         {
