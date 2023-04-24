@@ -9,6 +9,7 @@ TagManager:
   - GameManager
   - Wall
   - HellHitbox
+  - inverseMount
   layers:
   - Default
   - TransparentFX

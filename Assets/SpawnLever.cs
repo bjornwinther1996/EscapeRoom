@@ -7,6 +7,8 @@ public class SpawnLever : MonoBehaviour
 {
     private bool runOnce = false;
     private float timer;
+
+    private GameObject lever;
     private HingeJoint hj;
 
     void Start()
@@ -22,18 +24,46 @@ public class SpawnLever : MonoBehaviour
         if (!GameManager.IsServer) { return; }
         if (!runOnce && timer > 3)
         {
-            
-            GameObject lever = Realtime.Instantiate("Lever", transform.position, transform.rotation, new Realtime.InstantiateOptions
+            if (gameObject.tag == "inverseMount")
             {
-                ownedByClient = false,
-                preventOwnershipTakeover = false,
-                destroyWhenOwnerLeaves = false,
-                destroyWhenLastClientLeaves = true
-            });
+                lever = Realtime.Instantiate("Lever_inv", transform.position, transform.rotation, new Realtime.InstantiateOptions
+                {
+                    ownedByClient = false,
+                    preventOwnershipTakeover = false,
+                    destroyWhenOwnerLeaves = false,
+                    destroyWhenLastClientLeaves = true
+                });
+            }
+            else
+            {
+                lever = Realtime.Instantiate("Lever", transform.position, transform.rotation, new Realtime.InstantiateOptions
+                {
+                    ownedByClient = false,
+                    preventOwnershipTakeover = false,
+                    destroyWhenOwnerLeaves = false,
+                    destroyWhenLastClientLeaves = true
+                });
+            }
 
             hj = lever.GetComponent<HingeJoint>();
-            hj.connectedAnchor = new Vector3(transform.position.x - 0.02f, transform.position.y + 0.01f, transform.position.z + 0.02f);
-            lever.transform.Rotate(120f, 0, 0, Space.Self);            
+            if (gameObject.tag == "inverseMount")
+            {
+                hj.connectedAnchor = new Vector3(transform.position.x - 0.02f, transform.position.y + 0.01f, transform.position.z - 0.02f);
+            }
+            else
+            {
+                hj.connectedAnchor = new Vector3(transform.position.x - 0.02f, transform.position.y + 0.01f, transform.position.z + 0.02f);
+            }
+            lever.transform.Rotate(120f, 0, 0, Space.Self);
+
+            /*if (gameObject.tag == "inverseMount") 
+            {
+                gameObject.GetComponent<RealtimeTransform>().RequestOwnership();
+                lever.GetComponent<RealtimeTransform>().RequestOwnership();
+                Debug.Log("WAS TRIGGERED DAWG");
+                lever.transform.Rotate(0, -180f, 0);
+            }
+            */
 
             runOnce = true;
         }
