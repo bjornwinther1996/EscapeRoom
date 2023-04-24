@@ -8,12 +8,12 @@ public class PlatformManager : MonoBehaviour
 
     public GameObject PlatformPrefab; // put realtimecomponents on platform. - Does this change the instantiate method?
 
-    public const int ColoumnLength = 5;
+    public const int ColoumnLength = 10;
     public const int RowLength = 7;
     public static int COLOUMNLENGTH; // static variables for platform class to grab
     public static int ROWLENGTH;
-    public float ColoumnMultiplier = 0.73f; // Inspector values overwrite! Set in Inspector of PlatformGrid!!!
-    public float RowMultiplier = 0.73f; // Inspector values overwrite! Set in Inspector!!!
+    private float coloumnMultiplier = 0.65f; // Inspector values overwrite! Set in Inspector of PlatformGrid!!! // <-- Changed to private now, so its only set via script
+    private float rowMultiplier = 0.65f; // Inspector values overwrite! Set in Inspector!!! // <-- Changed to private now, so its only set via script
 
     public GameObject[,] platformArray;
 
@@ -24,12 +24,22 @@ public class PlatformManager : MonoBehaviour
                                                                                 {0, 1, 0, 0, 2, 0, 0},
                                                                                 {0, 1, 0, 0, 2, 0, 0},
                                                                                 {0, 1, 0, 0, 2, 0, 0},
+                                                                                {0, 1, 0, 0, 2, 0, 0},
+                                                                                {0, 1, 0, 0, 2, 0, 0},
+                                                                                {0, 1, 0, 0, 2, 0, 0},
+                                                                                {0, 1, 0, 0, 2, 0, 0},
+                                                                                {0, 1, 0, 0, 2, 0, 0}
 
     };
     private int[,] pathSequence2 = new int[ColoumnLength, RowLength] {          {0, 0, 1, 0, 0, 2, 0},
                                                                                 {0, 0, 1, 2, 0, 0, 0},
                                                                                 {0, 0, 2, 1, 0, 0, 0},
                                                                                 {0, 2, 0, 0, 1, 0, 0},
+                                                                                {2, 0, 0, 0, 0, 1, 0},
+                                                                                {2, 0, 0, 0, 0, 1, 0},
+                                                                                {2, 0, 0, 0, 0, 1, 0},
+                                                                                {2, 0, 0, 0, 0, 1, 0},
+                                                                                {2, 0, 0, 0, 0, 1, 0},
                                                                                 {2, 0, 0, 0, 0, 1, 0},
 
     };
@@ -38,10 +48,20 @@ public class PlatformManager : MonoBehaviour
                                                                                 {0, 1, 0, 0, 0, 2, 0},
                                                                                 {0, 1, 0, 0, 0, 0, 2},
                                                                                 {0, 0, 1, 0, 0, 0, 2},
+                                                                                {0, 0, 1, 0, 0, 0, 2},
+                                                                                {0, 0, 1, 0, 0, 0, 2},
+                                                                                {0, 0, 1, 0, 0, 0, 2},
+                                                                                {0, 0, 1, 0, 0, 0, 2},
+                                                                                {0, 0, 1, 0, 0, 0, 2},
 
     };
     private int[,] pathSequence4 = new int[ColoumnLength, RowLength] {          {0, 0, 0, 1, 0, 0, 2},
                                                                                 {0, 0, 1, 0, 0, 0, 2},
+                                                                                {0, 1, 0, 0, 0, 0, 2},
+                                                                                {0, 1, 0, 0, 0, 0, 2},
+                                                                                {0, 1, 0, 0, 0, 0, 2},
+                                                                                {0, 1, 0, 0, 0, 0, 2},
+                                                                                {0, 1, 0, 0, 0, 0, 2},
                                                                                 {0, 1, 0, 0, 0, 0, 2},
                                                                                 {0, 1, 0, 0, 0, 0, 2},
                                                                                 {0, 1, 0, 0, 0, 0, 2},
@@ -59,7 +79,8 @@ public class PlatformManager : MonoBehaviour
     private Vector3 floorHeavenStartPosition;
     private Vector3 floorHeavenOffsetPosition;
 
-    public static bool isResetFinished = true;    
+    public static bool isResetFinished = true;
+    private float coloumnOffset = 2.03f;
 
 
     void Start()
@@ -83,7 +104,7 @@ public class PlatformManager : MonoBehaviour
             for (int j = 0; j < RowLength; j++)
             {
                 //GameObject platform = platformArray[i, j];
-                platformArray[i,j] = Realtime.Instantiate("PlatformV2", new Vector3(transform.position.x + i * ColoumnMultiplier, 0, transform.position.z + j * RowMultiplier), Quaternion.identity, new Realtime.InstantiateOptions
+                platformArray[i,j] = Realtime.Instantiate("PlatformV2", new Vector3(transform.position.x + i * coloumnMultiplier -coloumnOffset, 0, transform.position.z + j * rowMultiplier), Quaternion.identity, new Realtime.InstantiateOptions
                 {
                     ownedByClient = false, // True? 
                     preventOwnershipTakeover = false,
@@ -104,7 +125,8 @@ public class PlatformManager : MonoBehaviour
     {
         platform.GetComponent<RealtimeTransform>().RequestOwnership();
         //platform.transform.SetParent(gameObject.transform);
-        platform.transform.position += new Vector3(-0.025f, 0, 0);
+        //platform.transform.position += new Vector3(-2.02f, 0, 0); // created offset for coloumns when instantiated instead.
+        platform.transform.position += new Vector3(-0.025f, 0, 0); //Redundant. Is set in coloumnOffset now when entire obj is instantiated.
         platform.GetComponent<Platform>().SpawnPosition = platform.transform.position;
         //Debug.Log("InitialPos: " + platform.GetComponent<Platform>().SpawnPosition);
     }
