@@ -5,9 +5,9 @@ using Normal.Realtime;
 
 public class SpawnLever : MonoBehaviour
 {
-
     private bool runOnce = false;
     private float timer;
+    private HingeJoint hj;
 
     void Start()
     {
@@ -23,13 +23,17 @@ public class SpawnLever : MonoBehaviour
         if (!runOnce && timer > 3)
         {
             
-            GameObject lever = Realtime.Instantiate("Lever", transform.position * 10, transform.rotation, new Realtime.InstantiateOptions
+            GameObject lever = Realtime.Instantiate("Lever", transform.position, transform.rotation, new Realtime.InstantiateOptions
             {
                 ownedByClient = false,
                 preventOwnershipTakeover = false,
                 destroyWhenOwnerLeaves = false,
                 destroyWhenLastClientLeaves = true
             });
+
+            hj = lever.GetComponent<HingeJoint>();
+            hj.connectedAnchor = new Vector3(transform.position.x - 0.02f, transform.position.y + 0.01f, transform.position.z + 0.02f);
+            lever.transform.Rotate(120f, 0, 0, Space.Self);            
 
             runOnce = true;
         }
