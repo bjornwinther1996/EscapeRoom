@@ -181,12 +181,12 @@ public class Platform : MonoBehaviour
 
     public void Success()
     {
-        Debug.Log("Success Method called in Platform");
+        //Debug.Log("Success Method called in Platform");
         //Sound
         //light up perimiter of platform
         //material change?
         if (stopCalling) { return; } // so it doesnt activate all the next rows, as you continue to stand on activated/correct platform. Only triggers once, revealing next row
-        Debug.Log("Guard Clause in Success Platform passed");
+        //Debug.Log("Guard Clause in Success Platform passed");
         //audioSource.PlayOneShot(SuccessAudio); // Moved to OnTriggerEnter for both client and server
         platformActivated = true;
         stopCalling = true;
@@ -221,17 +221,17 @@ public class Platform : MonoBehaviour
 
         if (isPlayerServer && syncedPlatformVariables._isSolidPlayer1)
         {
-            Debug.Log("CHECKPLATFORM: If Statement triggered");
+            //Debug.Log("CHECKPLATFORM: If Statement triggered");
             Success();
         }
         else if (!isPlayerServer && syncedPlatformVariables._isSolidPlayer2)
         {
-            Debug.Log("CHECKPLATFORM: ELSE IF Statement triggered");
+            //Debug.Log("CHECKPLATFORM: ELSE IF Statement triggered");
             Success();
         }
         else
         {
-            Debug.Log("CHECKPLATFORM: ELSE STATEMENT TRIGGERED");
+            //Debug.Log("CHECKPLATFORM: ELSE STATEMENT TRIGGERED");
             GlassCracking();
             if (timer >= TimerThreshold + 1)
             {
