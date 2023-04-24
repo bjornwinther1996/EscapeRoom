@@ -113,7 +113,7 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-
+        if (!GetComponent<RealtimeTransform>().isOwnedLocallySelf) return;
         if (other.gameObject.tag == "Elevator")
         {
             //Debug.Log("ELLIE HIT");
@@ -122,6 +122,7 @@ public class Player : MonoBehaviour
                 other.GetComponent<RealtimeTransform>().RequestOwnership();
             }
         }
+
         if (other.CompareTag("HellHitbox"))
         {
             imageColor.a = 0;
