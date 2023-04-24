@@ -378,7 +378,9 @@ public class PlatformManager : MonoBehaviour
                 //SetPosition(platformArray[targetRow, j].transform.GetChild(0).gameObject, platformArray[targetRow, j].transform.GetChild(0).gameObject.GetComponent<Platform>().SpawnPosition);
                 platformArray[targetRow, j].transform.GetChild(0).gameObject.GetComponent<Platform>().SpawnPlatform();
             }
-        } 
+        }
+        FloorHeaven.GetComponent<RealtimeTransform>().RequestOwnership();
+        FloorHeaven.transform.position = floorHeavenStartPosition;
     }
 
 }
