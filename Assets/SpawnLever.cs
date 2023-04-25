@@ -28,7 +28,29 @@ public class SpawnLever : MonoBehaviour
         {
             if (gameObject.tag == "inverseMount")
             {
-                lever = Realtime.Instantiate("Lever_inv", transform.position, transform.rotation, new Realtime.InstantiateOptions
+                lever = Realtime.Instantiate("Lever_back", transform.position, transform.rotation, new Realtime.InstantiateOptions
+                {
+                    ownedByClient = false,
+                    preventOwnershipTakeover = false,
+                    destroyWhenOwnerLeaves = false,
+                    destroyWhenLastClientLeaves = true
+                });
+                lever.transform.rotation = Quaternion.Euler(0.5f, 0, 0);
+            }
+            else if (gameObject.tag == "leftMount")
+            {
+                lever = Realtime.Instantiate("Lever_left", transform.position, transform.rotation, new Realtime.InstantiateOptions
+                {
+                    ownedByClient = false,
+                    preventOwnershipTakeover = false,
+                    destroyWhenOwnerLeaves = false,
+                    destroyWhenLastClientLeaves = true
+                });
+                lever.transform.rotation = Quaternion.Euler(0.5f, 0, 0);
+            }
+            else if (gameObject.tag == "rightMount")
+            {
+                lever = Realtime.Instantiate("Lever_right", transform.position, transform.rotation, new Realtime.InstantiateOptions
                 {
                     ownedByClient = false,
                     preventOwnershipTakeover = false,
@@ -39,7 +61,7 @@ public class SpawnLever : MonoBehaviour
             }
             else
             {
-                lever = Realtime.Instantiate("Lever", transform.position, transform.rotation, new Realtime.InstantiateOptions
+                lever = Realtime.Instantiate("Lever_front", transform.position, transform.rotation, new Realtime.InstantiateOptions
                 {
                     ownedByClient = false,
                     preventOwnershipTakeover = false,
@@ -54,11 +76,15 @@ public class SpawnLever : MonoBehaviour
             {
                 hj.connectedAnchor = new Vector3(transform.position.x + 0.02f, transform.position.y + 0.01f, transform.position.z - 0.02f);
             }
+            else if (gameObject.tag == "leftMount")
+            {
+                hj.connectedAnchor = new Vector3(transform.position.x + 0.02f, transform.position.y + 0.01f, transform.position.z - 0.02f);
+            }
             else
             {
                 hj.connectedAnchor = new Vector3(transform.position.x - 0.02f, transform.position.y + 0.01f, transform.position.z + 0.02f);
             }
-
+            
             //lever.transform.Rotate(90f, 0, 0, Space.Self);d
 
             /*if (gameObject.tag == "inverseMount") 

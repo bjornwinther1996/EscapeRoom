@@ -7,6 +7,7 @@ public class ElevatorData : MonoBehaviour
 {
 
     public ElevatorSync _elevatorSync;
+    private LeverData syncedLeverData;
 
     public bool _goUp = default;
     public bool _previousGoUp = default;
@@ -18,11 +19,19 @@ public class ElevatorData : MonoBehaviour
     private void Awake()
     {
         _elevatorSync = GetComponent<ElevatorSync>();
+        syncedLeverData = GetComponent<LeverData>();
     }
 
     // Update is called once per frame
     private void Update()
     {
+
+        if (syncedLeverData._leversPulled == 6)
+        {
+            _goDown = true;
+            syncedLeverData._leversPulled = 0;
+        }
+
         if (_goUp != _previousGoUp)
         {
             _elevatorSync.SetGoUp(_goUp);

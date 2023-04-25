@@ -99,12 +99,12 @@ GameObject:
   - component: {fileID: 2003736173069353769}
   - component: {fileID: 3948734026803138819}
   - component: {fileID: 8836842216640786011}
-  - component: {fileID: -5044048739576801877}
-  - component: {fileID: 6378110940822032503}
-  - component: {fileID: 1991020474784699514}
-  - component: {fileID: 4570852533722954494}
+  - component: {fileID: 2436656385365153736}
+  - component: {fileID: 4874467969991746901}
+  - component: {fileID: 2836402090680758250}
+  - component: {fileID: 1112963053699576462}
   m_Layer: 0
-  m_Name: Lever_inv
+  m_Name: Lever_front
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -117,7 +117,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8088625955322899064}
-  m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
+  m_LocalRotation: {x: 0, y: 0.92387956, z: -0.38268343, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.75, y: 9.333335, z: 1.1666669}
   m_ConstrainProportionsScale: 0
@@ -125,7 +125,7 @@ Transform:
   - {fileID: 5367894124258039334}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 45, y: 180, z: 0}
 --- !u!33 &7614242345155758901
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -387,7 +387,7 @@ MonoBehaviour:
   - componentID: 1
     component: {fileID: 8836842216640786011}
   - componentID: 2
-    component: {fileID: 1991020474784699514}
+    component: {fileID: 2836402090680758250}
   _childViews:
   - componentID: 1
     component: {fileID: 7280673358517601388}
@@ -409,7 +409,7 @@ MonoBehaviour:
   _syncScale: 1
   _syncVelocity: 1
   _maintainOwnershipWhileSleeping: 0
---- !u!114 &-5044048739576801877
+--- !u!114 &2436656385365153736
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -421,7 +421,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1b42eb056eff48d1acc6167167c9e2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6378110940822032503
+--- !u!114 &4874467969991746901
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -436,7 +436,7 @@ MonoBehaviour:
   _leverSync: {fileID: 0}
   _leversPulled: 0
   _previousLeversPulled: 0
---- !u!114 &1991020474784699514
+--- !u!114 &2836402090680758250
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -448,7 +448,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b71e64892b42ac04fba4e6ffe44ad776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4570852533722954494
+--- !u!114 &1112963053699576462
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
