@@ -29,6 +29,9 @@ public class GameManager : MonoBehaviour
     public static bool AmbientAudio;
     public bool AmbientAudioEnabled;
 
+    public static bool IsTaskSharedStatic;
+    public bool IsTaskShared;
+
 
     void Start()
     {
@@ -53,6 +56,11 @@ public class GameManager : MonoBehaviour
                 AmbientAudio = false;
                 runOnce = true;
             }
+        }
+
+        if (IsTaskShared && !IsTaskSharedStatic)
+        {
+            IsTaskSharedStatic = true;
         }
 
         //if (!BoolFirstConnectedDevice()) { return; } // If the device is not the first connected device to the server - return
@@ -193,7 +201,7 @@ public class GameManager : MonoBehaviour
 
     bool CheckAllPlayersConnected()
     {
-        if(syncedGameVariables._backupInt == 2) // was Avatars.Count 
+        if(syncedGameVariables._backupInt == 1) // was Avatars.Count 
         {
             return true;
         }

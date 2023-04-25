@@ -18,53 +18,79 @@ public class PlatformManager : MonoBehaviour
     public GameObject[,] platformArray;
 
     // hardcorded path sequences. has to be manually adjusted according to ColoumnLength and RowLength
-    
-    private int[,] pathSequence1 = new int[ColoumnLength, RowLength] {          {0, 1, 0, 0, 2, 0, 0},
-                                                                                {0, 1, 0, 0, 2, 0, 0},
-                                                                                {0, 1, 0, 0, 2, 0, 0},
-                                                                                {0, 1, 0, 0, 2, 0, 0},
-                                                                                {0, 1, 0, 0, 2, 0, 0},
-                                                                                {0, 1, 0, 0, 2, 0, 0},
-                                                                                {0, 1, 0, 0, 2, 0, 0},
-                                                                                {0, 1, 0, 0, 2, 0, 0},
-                                                                                {0, 1, 0, 0, 2, 0, 0},
-                                                                                {0, 1, 0, 0, 2, 0, 0}
 
-    };
-    private int[,] pathSequence2 = new int[ColoumnLength, RowLength] {          {0, 0, 1, 0, 0, 2, 0},
+    //Shared space (Task):
+    private int[,] pathSequence1 = new int[ColoumnLength, RowLength] {          {0, 0, 1, 0, 2, 0, 0},
                                                                                 {0, 0, 1, 2, 0, 0, 0},
                                                                                 {0, 0, 2, 1, 0, 0, 0},
-                                                                                {0, 2, 0, 0, 1, 0, 0},
-                                                                                {2, 0, 0, 0, 0, 1, 0},
-                                                                                {2, 0, 0, 0, 0, 1, 0},
-                                                                                {2, 0, 0, 0, 0, 1, 0},
-                                                                                {2, 0, 0, 0, 0, 1, 0},
-                                                                                {2, 0, 0, 0, 0, 1, 0},
-                                                                                {2, 0, 0, 0, 0, 1, 0},
+                                                                                {0, 0, 2, 1, 0, 0, 0},
+                                                                                {0, 2, 1, 0, 0, 0, 0},
+                                                                                {0, 1, 2, 0, 0, 0, 0},
+                                                                                {0, 1, 2, 0, 0, 0, 0},
+                                                                                {0, 2, 1, 0, 0, 0, 0},
+                                                                                {0, 2, 0, 1, 0, 0, 0},
+                                                                                {0, 0, 2, 1, 0, 0, 0}
 
     };
-    private int[,] pathSequence3 = new int[ColoumnLength, RowLength] {          {1, 0, 0, 2, 0, 0, 0},
+    private int[,] pathSequence2 = new int[ColoumnLength, RowLength] {          {0, 0, 0, 1, 2, 0, 0},
+                                                                                {0, 0, 0, 2, 1, 0, 0},
+                                                                                {0, 0, 0, 2, 1, 0, 0},
+                                                                                {0, 0, 0, 2, 1, 0, 0},
+                                                                                {0, 0, 0, 0, 2, 1, 0},
+                                                                                {0, 0, 0, 0, 1, 2, 0},
+                                                                                {0, 0, 0, 1, 0, 2, 0},
+                                                                                {0, 0, 1, 0, 2, 0, 0},
+                                                                                {0, 0, 0, 1, 0, 2, 0},
+                                                                                {0, 0, 0, 1, 2, 0, 0},
+
+    };
+    private int[,] pathSequence3 = new int[ColoumnLength, RowLength] {          {0, 0, 1, 2, 0, 0, 0},
+                                                                                {0, 1, 0, 0, 2, 0, 0},
+                                                                                {0, 0, 1, 2, 0, 0, 0},
+                                                                                {0, 0, 2, 1, 0, 0, 0},
+                                                                                {0, 0, 2, 1, 0, 0, 0},
+                                                                                {0, 0, 1, 2, 0, 0, 0},
+                                                                                {0, 0, 1, 0, 2, 0, 0},
+                                                                                {0, 0, 0, 1, 2, 0, 0},
+                                                                                {0, 0, 0, 2, 1, 0, 0},
+                                                                                {0, 0, 2, 0, 1, 0, 0},
+
+    };
+    //Distributed space (Task)
+    private int[,] pathSequence4 = new int[ColoumnLength, RowLength] {          {0, 0, 1, 0, 0, 2, 0},
+                                                                                {0, 0, 1, 0, 0, 0, 2},
+                                                                                {0, 1, 0, 0, 0, 2, 0},
+                                                                                {1, 0, 0, 0, 2, 0, 0},
                                                                                 {1, 0, 0, 0, 2, 0, 0},
                                                                                 {0, 1, 0, 0, 0, 2, 0},
+                                                                                {0, 0, 1, 0, 0, 0, 2},
                                                                                 {0, 1, 0, 0, 0, 0, 2},
-                                                                                {0, 0, 1, 0, 0, 0, 2},
-                                                                                {0, 0, 1, 0, 0, 0, 2},
-                                                                                {0, 0, 1, 0, 0, 0, 2},
-                                                                                {0, 0, 1, 0, 0, 0, 2},
-                                                                                {0, 0, 1, 0, 0, 0, 2},
-                                                                                {0, 0, 1, 0, 0, 0, 2},
+                                                                                {0, 1, 0, 0, 0, 2, 0},
+                                                                                {1, 0, 0, 0, 2, 0, 0},
 
     };
-    private int[,] pathSequence4 = new int[ColoumnLength, RowLength] {          {0, 0, 0, 1, 0, 0, 2},
-                                                                                {0, 0, 1, 0, 0, 0, 2},
+    private int[,] pathSequence5 = new int[ColoumnLength, RowLength] {          {1, 0, 0, 0, 0, 0, 2},
+                                                                                {0, 1, 0, 0, 0, 2, 0},
+                                                                                {0, 0, 1, 0, 0, 2, 0},
+                                                                                {0, 1, 0, 0, 2, 0, 0},
+                                                                                {0, 0, 1, 0, 2, 0, 0},
+                                                                                {0, 0, 0, 1, 0, 2, 0},
+                                                                                {0, 0, 1, 0, 2, 0, 0},
+                                                                                {0, 1, 0, 0, 0, 2, 0},
                                                                                 {0, 1, 0, 0, 0, 0, 2},
                                                                                 {0, 1, 0, 0, 0, 0, 2},
-                                                                                {0, 1, 0, 0, 0, 0, 2},
-                                                                                {0, 1, 0, 0, 0, 0, 2},
-                                                                                {0, 1, 0, 0, 0, 0, 2},
-                                                                                {0, 1, 0, 0, 0, 0, 2},
-                                                                                {0, 1, 0, 0, 0, 0, 2},
-                                                                                {0, 1, 0, 0, 0, 0, 2},
+
+    };
+    private int[,] pathSequence6 = new int[ColoumnLength, RowLength] {          {0, 1, 0, 0, 2, 0, 0},
+                                                                                {0, 0, 1, 0, 0, 2, 0},
+                                                                                {0, 0, 0, 1, 0, 2, 0},
+                                                                                {0, 0, 0, 0, 1, 0, 2},
+                                                                                {0, 0, 0, 1, 0, 2, 0},
+                                                                                {0, 0, 0, 1, 2, 0, 0},
+                                                                                {0, 0, 1, 0, 2, 0, 0},
+                                                                                {0, 1, 0, 0, 0, 2, 0},
+                                                                                {0, 1, 0, 0, 2, 0, 0},
+                                                                                {1, 0, 0, 2, 0, 0, 0},
 
     };
 
@@ -206,33 +232,58 @@ public class PlatformManager : MonoBehaviour
     
     public void SetRandomSequence() // the players start from the top and go down:
     {
-
-        int randomChance = Random.Range(0, 4);
         int[,] pathSequence;
-
-        switch (randomChance)
+        if (GameManager.IsTaskSharedStatic)
         {
-            case 0:
-                pathSequence = pathSequence1;
-                PlatformSequence = 1;
-                break;
-            case 1:
-                pathSequence = pathSequence2;
-                PlatformSequence = 2;
-                break;
-            case 2:
-                pathSequence = pathSequence3;
-                PlatformSequence = 3;
-                break;
-            case 3:
-                pathSequence = pathSequence4;
-                PlatformSequence = 4;
-                break;
-            default:
-                pathSequence = pathSequence1;
-                PlatformSequence = 1;
-                break;
+            int randomChance = Random.Range(0, 3);
+            Debug.Log("Shared Task - Path: " + randomChance);
+            switch (randomChance)
+            {
+                case 0:
+                    pathSequence = pathSequence1;
+                    PlatformSequence = 1;
+                    break;
+                case 1:
+                    pathSequence = pathSequence2;
+                    PlatformSequence = 2;
+                    break;
+                case 2:
+                    pathSequence = pathSequence3;
+                    PlatformSequence = 3;
+                    break;
+                case 3:
+                default:
+                    pathSequence = pathSequence1;
+                    PlatformSequence = 1;
+                    break;
+
+            }
         }
+        else
+        {
+            int randomChance = Random.Range(3, 6);
+            Debug.Log("Distributed Task - Path: " + randomChance);
+            switch (randomChance)
+            {
+                case 3:
+                    pathSequence = pathSequence4;
+                    PlatformSequence = 4;
+                    break;
+                case 4:
+                    pathSequence = pathSequence5;
+                    PlatformSequence = 5;
+                    break;
+                case 5:
+                    pathSequence = pathSequence6;
+                    PlatformSequence = 6;
+                    break;
+                default:
+                    pathSequence = pathSequence5;
+                    PlatformSequence = 5;
+                    break;
+            }
+        }
+
 
         for (int i = 0; i < ColoumnLength; i++)
         {
@@ -290,31 +341,58 @@ public class PlatformManager : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
         Debug.Log("Reset Sequence of Platforms METHOD");
-        int randomChance = Random.Range(0, 4);
+        //int randomChance = Random.Range(0, 6);
         int[,] pathSequence;
 
-        switch (randomChance)
+        if (GameManager.IsTaskSharedStatic)
         {
-            case 0:
-                pathSequence = pathSequence1;
-                PlatformSequence = 1;
-                break;
-            case 1:
-                pathSequence = pathSequence2;
-                PlatformSequence = 2;
-                break;
-            case 2:
-                pathSequence = pathSequence3;
-                PlatformSequence = 3;
-                break;
-            case 3:
-                pathSequence = pathSequence4;
-                PlatformSequence = 4;
-                break;
-            default:
-                pathSequence = pathSequence1;
-                PlatformSequence = 1;
-                break;
+            int randomChance = Random.Range(0, 3);
+            Debug.Log("Shared Task (Reset) - Path: " + randomChance);
+            switch (randomChance)
+            {
+                case 0:
+                    pathSequence = pathSequence1;
+                    PlatformSequence = 1;
+                    break;
+                case 1:
+                    pathSequence = pathSequence2;
+                    PlatformSequence = 2;
+                    break;
+                case 2:
+                    pathSequence = pathSequence3;
+                    PlatformSequence = 3;
+                    break;
+                case 3:
+                default:
+                    pathSequence = pathSequence1;
+                    PlatformSequence = 1;
+                    break;
+
+            }
+        }
+        else
+        {
+            int randomChance = Random.Range(3, 6);
+            Debug.Log("Distributed Task (Reset) - Path: " + randomChance);
+            switch (randomChance)
+            {
+                case 3:
+                    pathSequence = pathSequence4;
+                    PlatformSequence = 4;
+                    break;
+                case 4:
+                    pathSequence = pathSequence5;
+                    PlatformSequence = 5;
+                    break;
+                case 5:
+                    pathSequence = pathSequence6;
+                    PlatformSequence = 6;
+                    break;
+                default:
+                    pathSequence = pathSequence5;
+                    PlatformSequence = 5;
+                    break;
+            }
         }
 
         for (int i = 0; i < ColoumnLength; i++)
