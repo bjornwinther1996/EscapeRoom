@@ -18,7 +18,6 @@ public class LeverBehaviour : MonoBehaviour
     void Update()
     {
 
-        Debug.Log("x rotation value is " + this.transform.rotation.x);
         if (!wasPulled && this.transform.rotation.x > 0.9f)
         {
             syncedLeverData._leversPulled += 1;
