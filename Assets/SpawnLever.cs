@@ -58,7 +58,6 @@ public class SpawnLever : MonoBehaviour
             {
                 hj.connectedAnchor = new Vector3(transform.position.x - 0.02f, transform.position.y + 0.01f, transform.position.z + 0.02f);
             }
-            Debug.Log("Rotation set for Lever");
 
             //lever.transform.Rotate(90f, 0, 0, Space.Self);d
 
