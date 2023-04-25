@@ -9,6 +9,7 @@ public class SpawnLever : MonoBehaviour
     private float timer;
 
     private GameObject lever;
+    private GameObject leverInv;
     private HingeJoint hj;
 
     void Start()
@@ -19,6 +20,7 @@ public class SpawnLever : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         timer += Time.deltaTime;
 
         if (!GameManager.IsServer) { return; }
@@ -33,7 +35,7 @@ public class SpawnLever : MonoBehaviour
                     destroyWhenOwnerLeaves = false,
                     destroyWhenLastClientLeaves = true
                 });
-                lever.transform.rotation = Quaternion.Euler(45, 0, 0);
+                lever.transform.rotation = Quaternion.Euler(0.5f, 0, 0);
             }
             else
             {
@@ -44,13 +46,13 @@ public class SpawnLever : MonoBehaviour
                     destroyWhenOwnerLeaves = false,
                     destroyWhenLastClientLeaves = true
                 });
-                lever.transform.rotation = Quaternion.Euler(-45, 0, 0);
+                lever.transform.rotation = Quaternion.Euler(-25f, 0, 0);
             }
 
             hj = lever.GetComponent<HingeJoint>();
             if (gameObject.tag == "inverseMount")
             {
-                hj.connectedAnchor = new Vector3(transform.position.x - 0.02f, transform.position.y + 0.01f, transform.position.z - 0.02f);
+                hj.connectedAnchor = new Vector3(transform.position.x + 0.02f, transform.position.y + 0.01f, transform.position.z - 0.02f);
             }
             else
             {
@@ -58,7 +60,7 @@ public class SpawnLever : MonoBehaviour
             }
             Debug.Log("Rotation set for Lever");
 
-            //lever.transform.Rotate(90f, 0, 0, Space.Self);
+            //lever.transform.Rotate(90f, 0, 0, Space.Self);d
 
             /*if (gameObject.tag == "inverseMount") 
             {
@@ -71,5 +73,8 @@ public class SpawnLever : MonoBehaviour
 
             runOnce = true;
         }
+
+        //leverInv.transform.rotation = Quaternion.Euler(-45, 0, 0);
+
     }
 }

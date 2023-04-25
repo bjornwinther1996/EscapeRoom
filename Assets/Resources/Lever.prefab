@@ -100,6 +100,9 @@ GameObject:
   - component: {fileID: 3948734026803138819}
   - component: {fileID: 8836842216640786011}
   - component: {fileID: 2436656385365153736}
+  - component: {fileID: 4874467969991746901}
+  - component: {fileID: 2836402090680758250}
+  - component: {fileID: 1112963053699576462}
   m_Layer: 0
   m_Name: Lever
   m_TagString: Untagged
@@ -383,6 +386,8 @@ MonoBehaviour:
   _components:
   - componentID: 1
     component: {fileID: 8836842216640786011}
+  - componentID: 2
+    component: {fileID: 2836402090680758250}
   _childViews:
   - componentID: 1
     component: {fileID: 7280673358517601388}
@@ -414,6 +419,45 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e1b42eb056eff48d1acc6167167c9e2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4874467969991746901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8088625955322899064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0beb71e78700b844906cabe9ac0cb59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _leverSync: {fileID: 0}
+  _leversPulled: 0
+  _previousLeversPulled: 0
+--- !u!114 &2836402090680758250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8088625955322899064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b71e64892b42ac04fba4e6ffe44ad776, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1112963053699576462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8088625955322899064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c85e5282131a534eaeaa2130db7a92d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8671243784603411719
@@ -459,7 +503,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8671243784603411719}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 2, y: 2.2832563, z: 2.6709294}
