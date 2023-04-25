@@ -30,6 +30,7 @@ public class Player : MonoBehaviour
     float fadeTimer;
 
     float previousYPos;
+    public int PlayerNumber;
 
     void Start()
     {
@@ -45,6 +46,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        SetPlayerNumber(); // needs to be run before guard clause - so it can set PlayerNumber for ALL clients.
         if (!GetComponent<RealtimeTransform>().isOwnedLocallySelf) return;
 
         if (syncedPlayerData._isServer)
@@ -55,6 +57,12 @@ public class Player : MonoBehaviour
         {
             GameManager.IsServer = false;
         }
+
+        /*
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            PlayerNumber = 3;
+        }*/
 
         SetHandsColor();
         SetSkybox();
@@ -153,6 +161,18 @@ public class Player : MonoBehaviour
         else
         {
             return false;
+        }
+    }
+
+    public void SetPlayerNumber()
+    {
+        if (syncedPlayerData._isServer)
+        {
+            PlayerNumber = 1;
+        }
+        else
+        { 
+            PlayerNumber = 2;
         }
     }
 

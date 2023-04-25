@@ -31,6 +31,7 @@ public class Platform : MonoBehaviour
     public Vector3 SpawnPosition; // Is set in PlatformManager when Instantiated
     public Vector3 DespawnPosition; // Is set in PlatformManager when Instantiated
     //int randomChance; //Temporary - functionality should be in grid class
+    private bool playAudio; // To only trigger successAudio once. Is reset in IEResetMaterialTimer
 
     //platform needs to have realtime components on them! - and this script needs to get the realtime component to delete realtime etc.
 
@@ -56,7 +57,7 @@ public class Platform : MonoBehaviour
         
         if (GameManagerReference.GetComponent<GameManagerData>()._backupFloat > 0 && !GameManager.IsServer) // this is only done for client, as it is done for server in GameManger
         {
-            StartCoroutine(ResetMaterialTimer(8)); // if this timer is adjusted - remember to adjust for server accordingly
+            StartCoroutine(ResetMaterialTimer(8)); // if this timer is adjusted - remember to adjust for server accordingly // Also resets playAudio
             NumberOfMaterialsChanged++;
             if (NumberOfMaterialsChanged >= PlatformManager.COLOUMNLENGTH * PlatformManager.RowLength)
             {
@@ -118,6 +119,7 @@ public class Platform : MonoBehaviour
         {
             meshRenderer.material = defaultMaterial;
         }
+        playAudio = false;
     }
 
     private void OnTriggerStay(Collider other) // can use courutine instead? - to wait x-time to execute. // Rigidbody on Avatar
@@ -138,9 +140,18 @@ public class Platform : MonoBehaviour
             CheckPlatformThrowable(0f);
         }
 
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && !playAudio)
         {
-            audioSource.PlayOneShot(SuccessAudio);
+            if(other.GetComponent<Player>().PlayerNumber == 1 && syncedPlatformVariables._isSolidPlayer1)
+            {
+                audioSource.PlayOneShot(SuccessAudio);
+                playAudio = true;
+            }
+            else if (other.GetComponent<Player>().PlayerNumber == 2 && syncedPlatformVariables._isSolidPlayer1)
+            {
+                audioSource.PlayOneShot(SuccessAudio);
+                playAudio = true;
+            }
         }
 
     }

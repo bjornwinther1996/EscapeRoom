@@ -34,6 +34,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject VRRig;
 
+    bool computerRigPositioned;
+
 
     void Start()
     {
@@ -46,10 +48,13 @@ public class GameManager : MonoBehaviour
     void Update()
     {
 
-        if (Application.platform != RuntimePlatform.Android)
+        if (Application.platform != RuntimePlatform.Android && !computerRigPositioned)
         {
             VRRig.transform.position = new Vector3(-0.9f, -200, 0);
             //return;
+            computerRigPositioned = true;
+            Debug.Log("computerRigPOsitioned");
+
         }
 
         if (!runOnce)
@@ -209,7 +214,7 @@ public class GameManager : MonoBehaviour
 
     bool CheckAllPlayersConnected()
     {
-        if(syncedGameVariables._backupInt == 1) // was Avatars.Count // make < 2 when final test, to make sure computer is connected to log telemetry data.
+        if(syncedGameVariables._backupInt > 1) // was Avatars.Count // make < 2 when final test, to make sure computer is connected to log telemetry data. // was: syncedGameVariables._backupInt == 2
         {
             return true;
         }
