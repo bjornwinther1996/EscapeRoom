@@ -32,6 +32,8 @@ public class GameManager : MonoBehaviour
     public static bool IsTaskSharedStatic;
     public bool IsTaskShared;
 
+    public GameObject VRRig;
+
 
     void Start()
     {
@@ -43,6 +45,12 @@ public class GameManager : MonoBehaviour
     
     void Update()
     {
+
+        if (Application.platform != RuntimePlatform.Android)
+        {
+            VRRig.transform.position = new Vector3(-0.9f, -200, 0);
+            //return;
+        }
 
         if (!runOnce)
         {
@@ -201,7 +209,7 @@ public class GameManager : MonoBehaviour
 
     bool CheckAllPlayersConnected()
     {
-        if(syncedGameVariables._backupInt == 1) // was Avatars.Count 
+        if(syncedGameVariables._backupInt == 1) // was Avatars.Count // make < 2 when final test, to make sure computer is connected to log telemetry data.
         {
             return true;
         }
