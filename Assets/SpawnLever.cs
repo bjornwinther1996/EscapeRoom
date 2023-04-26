@@ -78,7 +78,11 @@ public class SpawnLever : MonoBehaviour
             }
             else if (gameObject.tag == "leftMount")
             {
-                hj.connectedAnchor = new Vector3(transform.position.x + 0.02f, transform.position.y + 0.01f, transform.position.z - 0.02f);
+                hj.connectedAnchor = new Vector3(transform.position.x - 0.02f, transform.position.y + 0.01f, transform.position.z - 0.02f);
+            }
+            else if (gameObject.tag == "rightMount")
+            {
+                hj.connectedAnchor = new Vector3(transform.position.x + 0.02f, transform.position.y + 0.01f, transform.position.z + 0.02f);
             }
             else
             {

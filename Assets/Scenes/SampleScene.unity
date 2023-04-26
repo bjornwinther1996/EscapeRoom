@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.3575201, g: 0.6973908, b: 0.72364134, a: 1}
+  m_IndirectSpecularColor: {r: 0.35752022, g: 0.69739085, b: 0.72364134, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2100,7 +2100,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &546856605
 Transform:
   m_ObjectHideFlags: 0
@@ -3581,6 +3581,10 @@ PrefabInstance:
       value: Wall_mount (3)
       objectReference: {fileID: 0}
     - target: {fileID: 6739882397970417222, guid: 9f035a8a1866a0f40b0e0394bdba087a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6739882397970417222, guid: 9f035a8a1866a0f40b0e0394bdba087a, type: 3}
       propertyPath: m_TagString
       value: leftMount
       objectReference: {fileID: 0}
@@ -3611,7 +3615,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &758093004
 Transform:
   m_ObjectHideFlags: 0
@@ -4051,7 +4055,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &784818043
 Transform:
   m_ObjectHideFlags: 0
@@ -4729,7 +4733,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &992177900
 Transform:
   m_ObjectHideFlags: 0
@@ -6051,7 +6055,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1231007732}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0020fb21a55ad4ebda94dd19c72999e7, type: 3}
   m_Name: 
@@ -7554,6 +7558,10 @@ PrefabInstance:
       value: Wall_mount (5)
       objectReference: {fileID: 0}
     - target: {fileID: 6739882397970417222, guid: 9f035a8a1866a0f40b0e0394bdba087a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6739882397970417222, guid: 9f035a8a1866a0f40b0e0394bdba087a, type: 3}
       propertyPath: m_TagString
       value: rightMount
       objectReference: {fileID: 0}
@@ -8175,6 +8183,10 @@ PrefabInstance:
       value: Wall_mount
       objectReference: {fileID: 0}
     - target: {fileID: 6739882397970417222, guid: 9f035a8a1866a0f40b0e0394bdba087a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6739882397970417222, guid: 9f035a8a1866a0f40b0e0394bdba087a, type: 3}
       propertyPath: m_TagString
       value: rightMount
       objectReference: {fileID: 0}
@@ -8249,7 +8261,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1668424226
 Transform:
   m_ObjectHideFlags: 0
@@ -8350,6 +8362,10 @@ PrefabInstance:
     - target: {fileID: 6739882397970417222, guid: 9f035a8a1866a0f40b0e0394bdba087a, type: 3}
       propertyPath: m_Name
       value: Wall_mount (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6739882397970417222, guid: 9f035a8a1866a0f40b0e0394bdba087a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6739882397970417222, guid: 9f035a8a1866a0f40b0e0394bdba087a, type: 3}
       propertyPath: m_TagString
@@ -8719,6 +8735,10 @@ PrefabInstance:
     - target: {fileID: 6739882397970417222, guid: 9f035a8a1866a0f40b0e0394bdba087a, type: 3}
       propertyPath: m_Name
       value: Wall_mount (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6739882397970417222, guid: 9f035a8a1866a0f40b0e0394bdba087a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6739882397970417222, guid: 9f035a8a1866a0f40b0e0394bdba087a, type: 3}
       propertyPath: m_TagString
@@ -9984,6 +10004,10 @@ PrefabInstance:
     - target: {fileID: 6739882397970417222, guid: 9f035a8a1866a0f40b0e0394bdba087a, type: 3}
       propertyPath: m_Name
       value: Wall_mount (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6739882397970417222, guid: 9f035a8a1866a0f40b0e0394bdba087a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6739882397970417222, guid: 9f035a8a1866a0f40b0e0394bdba087a, type: 3}
       propertyPath: m_TagString
@@ -15556,7 +15580,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6739882397970417222, guid: 9f035a8a1866a0f40b0e0394bdba087a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f035a8a1866a0f40b0e0394bdba087a, type: 3}

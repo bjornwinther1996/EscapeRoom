@@ -16,14 +16,16 @@ public class LeverBehaviour : MonoBehaviour
     {
         syncedLeverData = GetComponent<LeverData>();
         leversPulledGlobal = 0;
+
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(this.transform.rotation.x);
 
-        if (!wasPulled && this.gameObject.name == "Lever_back(Clone)" && this.transform.rotation.x > 0.9f)
+        /*
+        if (!wasPulled && this.gameObject.name == "Lever_back(Clone)" && this.transform.rotation.eulerAngles.x > 110)
         {
             leversPulledGlobal += 1;
             syncedLeverData._leversPulled = leversPulledGlobal;
@@ -31,7 +33,7 @@ public class LeverBehaviour : MonoBehaviour
             wasPulled = true;
             // Play Audio
         }
-        else if (!wasPulled && this.gameObject.name == "Lever_front(Clone)" && this.transform.rotation.x > 0.9f)
+        else if (!wasPulled && this.gameObject.name == "Lever_front(Clone)" && this.transform.rotation.y < 0.45f)
         {
             leversPulledGlobal += 1;
             syncedLeverData._leversPulled = leversPulledGlobal;
@@ -39,6 +41,25 @@ public class LeverBehaviour : MonoBehaviour
             wasPulled = true;
             // Play Audio
         }
-    
+        else if (!wasPulled && this.gameObject.name == "Lever_left(Clone)" && this.transform.localRotation.y < 0.45f)
+        {
+            leversPulledGlobal += 1;
+            syncedLeverData._leversPulled = leversPulledGlobal;
+            Debug.Log("Amount of levers pulled = " + syncedLeverData._leversPulled);
+            wasPulled = true;
+            // Play Audio
+        }
+        */
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!wasPulled && other.name == "ActivateTrigger")
+        {
+            leversPulledGlobal += 1;
+            syncedLeverData._leversPulled = leversPulledGlobal;
+            Debug.Log("Amount of levers pulled = " + syncedLeverData._leversPulled);
+            wasPulled = true;
+        }
     }
 }
