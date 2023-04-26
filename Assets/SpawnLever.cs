@@ -9,7 +9,6 @@ public class SpawnLever : MonoBehaviour
     private float timer;
 
     private GameObject lever;
-    private GameObject leverInv;
     private HingeJoint hj;
 
     void Start()

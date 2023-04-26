@@ -11,6 +11,9 @@ public class LeverBehaviour : MonoBehaviour
     private bool wasPulled = false;
     private LeverData syncedLeverData;
     private ElevatorData syncedElevatorData;
+    
+    private AudioSource audioSource;
+    public AudioClip pulled;
 
     [SerializeField]
     private Material mat;
@@ -22,9 +25,8 @@ public class LeverBehaviour : MonoBehaviour
     void Start()
     {
         syncedLeverData = GetComponent<LeverData>();
+        audioSource = GetComponent<AudioSource>();
         leversPulledGlobal = 0;
-
-        
     }
 
     // Update is called once per frame
@@ -69,6 +71,7 @@ public class LeverBehaviour : MonoBehaviour
             wasPulled = true;
             mat = meshRenderer.material;
             mat.SetColor("_EmissionColor", Color.green);
+            audioSource.PlayOneShot(pulled, 0.7f);
         }
     }
 }
