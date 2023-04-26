@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 
 public class LeverBehaviour : MonoBehaviour
@@ -10,6 +11,12 @@ public class LeverBehaviour : MonoBehaviour
     private bool wasPulled = false;
     private LeverData syncedLeverData;
     private ElevatorData syncedElevatorData;
+
+    [SerializeField]
+    private Material mat;
+
+    [SerializeField]
+    private MeshRenderer meshRenderer;
 
     // Start is called before the first frame update
     void Start()
@@ -60,6 +67,8 @@ public class LeverBehaviour : MonoBehaviour
             syncedLeverData._leversPulled = leversPulledGlobal;
             Debug.Log("Amount of levers pulled = " + syncedLeverData._leversPulled);
             wasPulled = true;
+            mat = meshRenderer.material;
+            mat.SetColor("_EmissionColor", Color.green);
         }
     }
 }
