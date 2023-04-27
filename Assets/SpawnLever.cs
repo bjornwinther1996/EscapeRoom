@@ -106,14 +106,14 @@ public class SpawnLever : MonoBehaviour
         }
         else
         {
-            /*
             Debug.Log("Else triggered");
             if (!runOnce && timer > 4)
             {
                 Debug.Log("Else triggered - Timer");
                 if (gameObject.tag == "inverseMount")
                 {
-                    foreach (GameObject backLever in GameObject.FindGameObjectsWithTag("LeverBack"))
+                    GameObject[] leverBackArray = GameObject.FindGameObjectsWithTag("LeverBack");
+                    foreach (GameObject backLever in leverBackArray)
                     {
                         if (!backLever.GetComponent<LeverBehaviour>().IsReferenced)
                         {
@@ -151,7 +151,8 @@ public class SpawnLever : MonoBehaviour
                 {
                     foreach (GameObject frontLever in GameObject.FindGameObjectsWithTag("LeverFront"))
                     {
-                        Debug.Log("Front Levers array: " + GameObject.FindGameObjectsWithTag("LeverFront") + "Lever: " + frontLever);
+                        GameObject[] leverFrontArray = GameObject.FindGameObjectsWithTag("LeverFront");
+                        Debug.Log("Front Levers array length: " + leverFrontArray.Length + "   -- Front Levers array:" + leverFrontArray + "Lever: " + frontLever);
                         if (!frontLever.GetComponent<LeverBehaviour>().IsReferenced)
                         {
                             hj = frontLever.GetComponent<HingeJoint>();
@@ -163,7 +164,7 @@ public class SpawnLever : MonoBehaviour
                     //hj.connectedAnchor = new Vector3(transform.position.x - 0.02f, transform.position.y + 0.01f, transform.position.z + 0.02f);
                 }
                 runOnce = true;
-            }*/
+            }
         }
 
         //leverInv.transform.rotation = Quaternion.Euler(-45, 0, 0);
