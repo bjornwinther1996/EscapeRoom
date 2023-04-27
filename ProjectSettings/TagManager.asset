@@ -12,6 +12,10 @@ TagManager:
   - inverseMount
   - leftMount
   - rightMount
+  - LeverFront
+  - LeverBack
+  - LeverLeft
+  - LeverRight
   layers:
   - Default
   - TransparentFX

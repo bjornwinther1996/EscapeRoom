@@ -14,6 +14,7 @@ public class LeverBehaviour : MonoBehaviour
     
     private AudioSource audioSource;
     public AudioClip pulled;
+    public bool IsReferenced;
 
     [SerializeField]
     private Material mat;

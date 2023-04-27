@@ -253,7 +253,7 @@ GameObject:
   - component: {fileID: -1508371359458230799}
   m_Layer: 0
   m_Name: Lever_right
-  m_TagString: Untagged
+  m_TagString: LeverRight
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -610,6 +610,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pulled: {fileID: 8300000, guid: b1317c26c752c44c8811ab16b86dba88, type: 3}
+  IsReferenced: 0
   mat: {fileID: 0}
   meshRenderer: {fileID: 127033479728043885}
 --- !u!82 &-1508371359458230799
