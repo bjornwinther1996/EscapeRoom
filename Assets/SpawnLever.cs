@@ -32,14 +32,12 @@ public class SpawnLever : MonoBehaviour
                 {
                     lever = Realtime.Instantiate("Lever_back", transform.position, transform.rotation, new Realtime.InstantiateOptions
                     {
-                        ownedByClient = true,
+                        ownedByClient = false,
                         preventOwnershipTakeover = false,
                         destroyWhenOwnerLeaves = false,
                         destroyWhenLastClientLeaves = true
                     });
-                    lever.GetComponent<RealtimeTransform>().RequestOwnership();
                     lever.transform.rotation = Quaternion.Euler(0.5f, 0, 0);
-                    lever.transform.position = gameObject.transform.position;
                 }
                 else if (gameObject.tag == "leftMount")
                 {
@@ -67,14 +65,12 @@ public class SpawnLever : MonoBehaviour
                 {
                     lever = Realtime.Instantiate("Lever_front", transform.position, transform.rotation, new Realtime.InstantiateOptions
                     {
-                        ownedByClient = true,
+                        ownedByClient = false,
                         preventOwnershipTakeover = false,
                         destroyWhenOwnerLeaves = false,
                         destroyWhenLastClientLeaves = true
                     });
-                    lever.GetComponent<RealtimeTransform>().RequestOwnership();
                     lever.transform.rotation = Quaternion.Euler(-25f, 0, 0);
-                    lever.transform.position = gameObject.transform.position;
                 }
                 
                 hj = lever.GetComponent<HingeJoint>();
@@ -114,6 +110,7 @@ public class SpawnLever : MonoBehaviour
             Debug.Log("Else triggered");
             if (!runOnce && timer > 8)
             {
+                if (hasLever) { return; }
                 Debug.Log("Else triggered - Timer");
                 if (gameObject.tag == "inverseMount")
                 {
@@ -124,12 +121,11 @@ public class SpawnLever : MonoBehaviour
                         {
                             hj = backLever.GetComponent<HingeJoint>();
                             hj.connectedAnchor = new Vector3(transform.position.x - 0.02f, transform.position.y + 0.01f, transform.position.z + 0.02f);
+                            backLever.transform.rotation = Quaternion.Euler(-25f, 0, 0);
+                            backLever.transform.position = gameObject.transform.position;
                             backLever.GetComponent<LeverBehaviour>().IsReferenced = true;
-                            /*if (!hasLever)
-                            {
-                                backLever.transform.rotation = Quaternion.Euler(-25f, 0, 0);
-                                backLever.transform.position = transform.position;
-                            }*/
+                            hasLever = true;
+                            return;
                         }
                     }
                 }
@@ -168,8 +164,10 @@ public class SpawnLever : MonoBehaviour
                             hj = frontLever.GetComponent<HingeJoint>();
                             hj.connectedAnchor = new Vector3(transform.position.x - 0.02f, transform.position.y + 0.01f, transform.position.z + 0.02f);
                             frontLever.GetComponent<LeverBehaviour>().IsReferenced = true;
-                            //frontLever.transform.rotation = Quaternion.Euler(-25f, 0, 0);
-                            //frontLever.transform.position = transform.position;
+                            frontLever.transform.rotation = Quaternion.Euler(-25f, 0, 0);
+                            frontLever.transform.position = transform.position;
+                            hasLever = true;
+                            return;
                         }
                     }
                     //hj = lever.GetComponent<HingeJoint>();
