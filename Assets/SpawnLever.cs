@@ -106,6 +106,7 @@ public class SpawnLever : MonoBehaviour
         }
         else
         {
+            /*
             Debug.Log("Else triggered");
             if (!runOnce && timer > 4)
             {
@@ -162,7 +163,7 @@ public class SpawnLever : MonoBehaviour
                     //hj.connectedAnchor = new Vector3(transform.position.x - 0.02f, transform.position.y + 0.01f, transform.position.z + 0.02f);
                 }
                 runOnce = true;
-            }
+            }*/
         }
 
         //leverInv.transform.rotation = Quaternion.Euler(-45, 0, 0);
