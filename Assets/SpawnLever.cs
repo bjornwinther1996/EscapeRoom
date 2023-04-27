@@ -32,7 +32,7 @@ public class SpawnLever : MonoBehaviour
                 {
                     lever = Realtime.Instantiate("Lever_back", transform.position, transform.rotation, new Realtime.InstantiateOptions
                     {
-                        ownedByClient = false,
+                        ownedByClient = true,
                         preventOwnershipTakeover = false,
                         destroyWhenOwnerLeaves = false,
                         destroyWhenLastClientLeaves = true
@@ -67,7 +67,7 @@ public class SpawnLever : MonoBehaviour
                 {
                     lever = Realtime.Instantiate("Lever_front", transform.position, transform.rotation, new Realtime.InstantiateOptions
                     {
-                        ownedByClient = false,
+                        ownedByClient = true,
                         preventOwnershipTakeover = false,
                         destroyWhenOwnerLeaves = false,
                         destroyWhenLastClientLeaves = true
