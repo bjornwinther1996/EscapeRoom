@@ -90,63 +90,6 @@ public class SpawnLever : MonoBehaviour
                     hj.connectedAnchor = new Vector3(transform.position.x - 0.02f, transform.position.y + 0.01f, transform.position.z + 0.02f);
                 }
             }
-            else
-            {
-                if (!runOnce && timer > 4)
-                {
-
-                    if (gameObject.tag == "inverseMount")
-                    {
-                        foreach (GameObject backLever in GameObject.FindGameObjectsWithTag("LeverBack"))
-                        {
-                            if (!backLever.GetComponent<LeverBehaviour>().IsReferenced)
-                            {
-                                hj = backLever.GetComponent<HingeJoint>();
-                                hj.connectedAnchor = new Vector3(transform.position.x - 0.02f, transform.position.y + 0.01f, transform.position.z + 0.02f);
-                                backLever.GetComponent<LeverBehaviour>().IsReferenced = true;
-                            }
-                        }
-                    }
-                    else if (gameObject.tag == "leftMount")
-                    {
-                        foreach (GameObject leftLever in GameObject.FindGameObjectsWithTag("LeverLeft"))
-                        {
-                            if (!leftLever.GetComponent<LeverBehaviour>().IsReferenced)
-                            {
-                                hj = leftLever.GetComponent<HingeJoint>();
-                                hj.connectedAnchor = new Vector3(transform.position.x - 0.02f, transform.position.y + 0.01f, transform.position.z + 0.02f);
-                                leftLever.GetComponent<LeverBehaviour>().IsReferenced = true;
-                            }
-                        }
-                    }
-                    else if (gameObject.tag == "rightMount")
-                    {
-                        foreach (GameObject rightLever in GameObject.FindGameObjectsWithTag("LeverRight"))
-                        {
-                            if (!rightLever.GetComponent<LeverBehaviour>().IsReferenced)
-                            {
-                                hj = rightLever.GetComponent<HingeJoint>();
-                                hj.connectedAnchor = new Vector3(transform.position.x - 0.02f, transform.position.y + 0.01f, transform.position.z + 0.02f);
-                                rightLever.GetComponent<LeverBehaviour>().IsReferenced = true;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        foreach (GameObject frontLever in GameObject.FindGameObjectsWithTag("LeverFront"))
-                        {
-                            if (!frontLever.GetComponent<LeverBehaviour>().IsReferenced)
-                            {
-                                hj = frontLever.GetComponent<HingeJoint>();
-                                hj.connectedAnchor = new Vector3(transform.position.x - 0.02f, transform.position.y + 0.01f, transform.position.z + 0.02f);
-                                frontLever.GetComponent<LeverBehaviour>().IsReferenced = true;
-                            }
-                        }
-                        //hj = lever.GetComponent<HingeJoint>();
-                        //hj.connectedAnchor = new Vector3(transform.position.x - 0.02f, transform.position.y + 0.01f, transform.position.z + 0.02f);
-                    }
-                }
-            }
             
             //lever.transform.Rotate(90f, 0, 0, Space.Self);d
 
@@ -159,6 +102,66 @@ public class SpawnLever : MonoBehaviour
             }
             */
 
+            runOnce = true;
+        }
+        else
+        {
+            Debug.Log("Else triggered");
+            if (!runOnce && timer > 4)
+            {
+                Debug.Log("Else triggered - Timer");
+                if (gameObject.tag == "inverseMount")
+                {
+                    foreach (GameObject backLever in GameObject.FindGameObjectsWithTag("LeverBack"))
+                    {
+                        if (!backLever.GetComponent<LeverBehaviour>().IsReferenced)
+                        {
+                            hj = backLever.GetComponent<HingeJoint>();
+                            hj.connectedAnchor = new Vector3(transform.position.x - 0.02f, transform.position.y + 0.01f, transform.position.z + 0.02f);
+                            backLever.GetComponent<LeverBehaviour>().IsReferenced = true;
+                        }
+                    }
+                }
+                else if (gameObject.tag == "leftMount")
+                {
+                    foreach (GameObject leftLever in GameObject.FindGameObjectsWithTag("LeverLeft"))
+                    {
+                        if (!leftLever.GetComponent<LeverBehaviour>().IsReferenced)
+                        {
+                            hj = leftLever.GetComponent<HingeJoint>();
+                            hj.connectedAnchor = new Vector3(transform.position.x - 0.02f, transform.position.y + 0.01f, transform.position.z + 0.02f);
+                            leftLever.GetComponent<LeverBehaviour>().IsReferenced = true;
+                        }
+                    }
+                }
+                else if (gameObject.tag == "rightMount")
+                {
+                    foreach (GameObject rightLever in GameObject.FindGameObjectsWithTag("LeverRight"))
+                    {
+                        if (!rightLever.GetComponent<LeverBehaviour>().IsReferenced)
+                        {
+                            hj = rightLever.GetComponent<HingeJoint>();
+                            hj.connectedAnchor = new Vector3(transform.position.x - 0.02f, transform.position.y + 0.01f, transform.position.z + 0.02f);
+                            rightLever.GetComponent<LeverBehaviour>().IsReferenced = true;
+                        }
+                    }
+                }
+                else
+                {
+                    foreach (GameObject frontLever in GameObject.FindGameObjectsWithTag("LeverFront"))
+                    {
+                        Debug.Log("Front Levers array: " + GameObject.FindGameObjectsWithTag("LeverFront") + "Lever: " + frontLever);
+                        if (!frontLever.GetComponent<LeverBehaviour>().IsReferenced)
+                        {
+                            hj = frontLever.GetComponent<HingeJoint>();
+                            hj.connectedAnchor = new Vector3(transform.position.x - 0.02f, transform.position.y + 0.01f, transform.position.z + 0.02f);
+                            frontLever.GetComponent<LeverBehaviour>().IsReferenced = true;
+                        }
+                    }
+                    //hj = lever.GetComponent<HingeJoint>();
+                    //hj.connectedAnchor = new Vector3(transform.position.x - 0.02f, transform.position.y + 0.01f, transform.position.z + 0.02f);
+                }
+            }
             runOnce = true;
         }
 
