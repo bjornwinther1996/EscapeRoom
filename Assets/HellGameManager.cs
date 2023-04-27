@@ -29,6 +29,8 @@ public class HellGameManager : MonoBehaviour
         lever.GetComponent<RealtimeTransform>().RequestOwnership();
         lever.transform.rotation = Quaternion.Euler(0.5f, 0, 0);
         lever.transform.position = LeverMount.transform.position;
+        HingeJoint hj = lever.GetComponent<HingeJoint>();
+        hj.connectedAnchor = new Vector3(LeverMount.transform.position.x + 0.02f, LeverMount.transform.position.y + 0.01f, LeverMount.transform.position.z - 0.02f);
         instantiated = true;
     }
 }
