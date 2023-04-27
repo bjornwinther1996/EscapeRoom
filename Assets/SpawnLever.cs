@@ -36,7 +36,9 @@ public class SpawnLever : MonoBehaviour
                         destroyWhenOwnerLeaves = false,
                         destroyWhenLastClientLeaves = true
                     });
+                    lever.GetComponent<RealtimeTransform>().RequestOwnership();
                     lever.transform.rotation = Quaternion.Euler(0.5f, 0, 0);
+                    lever.transform.position = transform.position;
                 }
                 else if (gameObject.tag == "leftMount")
                 {
@@ -69,7 +71,9 @@ public class SpawnLever : MonoBehaviour
                         destroyWhenOwnerLeaves = false,
                         destroyWhenLastClientLeaves = true
                     });
+                    lever.GetComponent<RealtimeTransform>().RequestOwnership();
                     lever.transform.rotation = Quaternion.Euler(-25f, 0, 0);
+                    lever.transform.position = transform.position;
                 }
                 
                 hj = lever.GetComponent<HingeJoint>();
