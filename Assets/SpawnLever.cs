@@ -112,7 +112,7 @@ public class SpawnLever : MonoBehaviour
         else
         {
             Debug.Log("Else triggered");
-            if (!runOnce && timer > 4)
+            if (!runOnce && timer > 8)
             {
                 Debug.Log("Else triggered - Timer");
                 if (gameObject.tag == "inverseMount")
