@@ -161,8 +161,8 @@ public class SpawnLever : MonoBehaviour
                     //hj = lever.GetComponent<HingeJoint>();
                     //hj.connectedAnchor = new Vector3(transform.position.x - 0.02f, transform.position.y + 0.01f, transform.position.z + 0.02f);
                 }
+                runOnce = true;
             }
-            runOnce = true;
         }
 
         //leverInv.transform.rotation = Quaternion.Euler(-45, 0, 0);
