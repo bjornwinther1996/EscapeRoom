@@ -3107,6 +3107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fd5a59e3a90b44f58131ccb08ac20f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LeverMount: {fileID: 706411995}
 --- !u!1 &687496411
 GameObject:
   m_ObjectHideFlags: 0
