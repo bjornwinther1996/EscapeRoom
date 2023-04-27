@@ -120,7 +120,7 @@ public class SpawnLever : MonoBehaviour
                         if (!backLever.GetComponent<LeverBehaviour>().IsReferenced)
                         {
                             hj = backLever.GetComponent<HingeJoint>();
-                            hj.connectedAnchor = new Vector3(transform.position.x - 0.02f, transform.position.y + 0.01f, transform.position.z + 0.02f);
+                            hj.connectedAnchor = new Vector3(transform.position.x + 0.02f, transform.position.y + 0.01f, transform.position.z - 0.02f);
                             backLever.transform.rotation = Quaternion.Euler(-25f, 0, 0);
                             backLever.transform.position = gameObject.transform.position;
                             backLever.GetComponent<LeverBehaviour>().IsReferenced = true;
@@ -163,9 +163,9 @@ public class SpawnLever : MonoBehaviour
                         {
                             hj = frontLever.GetComponent<HingeJoint>();
                             hj.connectedAnchor = new Vector3(transform.position.x - 0.02f, transform.position.y + 0.01f, transform.position.z + 0.02f);
-                            frontLever.GetComponent<LeverBehaviour>().IsReferenced = true;
                             frontLever.transform.rotation = Quaternion.Euler(-25f, 0, 0);
                             frontLever.transform.position = transform.position;
+                            frontLever.GetComponent<LeverBehaviour>().IsReferenced = true;
                             hasLever = true;
                             return;
                         }
