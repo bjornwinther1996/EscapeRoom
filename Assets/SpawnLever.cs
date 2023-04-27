@@ -22,70 +22,75 @@ public class SpawnLever : MonoBehaviour
 
         timer += Time.deltaTime;
 
-        if (!GameManager.IsServer) { return; }
-        if (!runOnce && timer > 3)
+        if (GameManager.IsServer)
         {
-            if (gameObject.tag == "inverseMount")
+            if (!runOnce && timer > 3)
             {
-                lever = Realtime.Instantiate("Lever_back", transform.position, transform.rotation, new Realtime.InstantiateOptions
+                if (gameObject.tag == "inverseMount")
                 {
-                    ownedByClient = false,
-                    preventOwnershipTakeover = false,
-                    destroyWhenOwnerLeaves = false,
-                    destroyWhenLastClientLeaves = true
-                });
-                lever.transform.rotation = Quaternion.Euler(0.5f, 0, 0);
-            }
-            else if (gameObject.tag == "leftMount")
-            {
-                lever = Realtime.Instantiate("Lever_left", transform.position, transform.rotation, new Realtime.InstantiateOptions
+                    lever = Realtime.Instantiate("Lever_back", transform.position, transform.rotation, new Realtime.InstantiateOptions
+                    {
+                        ownedByClient = false,
+                        preventOwnershipTakeover = false,
+                        destroyWhenOwnerLeaves = false,
+                        destroyWhenLastClientLeaves = true
+                    });
+                    lever.transform.rotation = Quaternion.Euler(0.5f, 0, 0);
+                }
+                else if (gameObject.tag == "leftMount")
                 {
-                    ownedByClient = false,
-                    preventOwnershipTakeover = false,
-                    destroyWhenOwnerLeaves = false,
-                    destroyWhenLastClientLeaves = true
-                });
-                lever.transform.rotation = Quaternion.Euler(0.5f, 0, 0);
-            }
-            else if (gameObject.tag == "rightMount")
-            {
-                lever = Realtime.Instantiate("Lever_right", transform.position, transform.rotation, new Realtime.InstantiateOptions
+                    lever = Realtime.Instantiate("Lever_left", transform.position, transform.rotation, new Realtime.InstantiateOptions
+                    {
+                        ownedByClient = false,
+                        preventOwnershipTakeover = false,
+                        destroyWhenOwnerLeaves = false,
+                        destroyWhenLastClientLeaves = true
+                    });
+                    lever.transform.rotation = Quaternion.Euler(0.5f, 0, 0);
+                }
+                else if (gameObject.tag == "rightMount")
                 {
-                    ownedByClient = false,
-                    preventOwnershipTakeover = false,
-                    destroyWhenOwnerLeaves = false,
-                    destroyWhenLastClientLeaves = true
-                });
-                lever.transform.rotation = Quaternion.Euler(0.5f, 0, 0);
-            }
-            else
-            {
-                lever = Realtime.Instantiate("Lever_front", transform.position, transform.rotation, new Realtime.InstantiateOptions
+                    lever = Realtime.Instantiate("Lever_right", transform.position, transform.rotation, new Realtime.InstantiateOptions
+                    {
+                        ownedByClient = false,
+                        preventOwnershipTakeover = false,
+                        destroyWhenOwnerLeaves = false,
+                        destroyWhenLastClientLeaves = true
+                    });
+                    lever.transform.rotation = Quaternion.Euler(0.5f, 0, 0);
+                }
+                else
                 {
-                    ownedByClient = false,
-                    preventOwnershipTakeover = false,
-                    destroyWhenOwnerLeaves = false,
-                    destroyWhenLastClientLeaves = true
-                });
-                lever.transform.rotation = Quaternion.Euler(-25f, 0, 0);
+                    lever = Realtime.Instantiate("Lever_front", transform.position, transform.rotation, new Realtime.InstantiateOptions
+                    {
+                        ownedByClient = false,
+                        preventOwnershipTakeover = false,
+                        destroyWhenOwnerLeaves = false,
+                        destroyWhenLastClientLeaves = true
+                    });
+                    lever.transform.rotation = Quaternion.Euler(-25f, 0, 0);
+                }
             }
 
-            hj = lever.GetComponent<HingeJoint>();
-            if (gameObject.tag == "inverseMount")
+            if (!runOnce && timer > 3)
             {
-                hj.connectedAnchor = new Vector3(transform.position.x + 0.02f, transform.position.y + 0.01f, transform.position.z - 0.02f);
-            }
-            else if (gameObject.tag == "leftMount")
-            {
-                hj.connectedAnchor = new Vector3(transform.position.x - 0.02f, transform.position.y + 0.01f, transform.position.z - 0.02f);
-            }
-            else if (gameObject.tag == "rightMount")
-            {
-                hj.connectedAnchor = new Vector3(transform.position.x + 0.02f, transform.position.y + 0.01f, transform.position.z + 0.02f);
-            }
-            else
-            {
-                hj.connectedAnchor = new Vector3(transform.position.x - 0.02f, transform.position.y + 0.01f, transform.position.z + 0.02f);
+                hj = lever.GetComponent<HingeJoint>();
+                if (gameObject.tag == "inverseMount")
+                {
+                    hj.connectedAnchor = new Vector3(transform.position.x + 0.02f, transform.position.y + 0.01f, transform.position.z - 0.02f);
+                }
+                else if (gameObject.tag == "leftMount")
+                {
+                    hj.connectedAnchor = new Vector3(transform.position.x - 0.02f, transform.position.y + 0.01f, transform.position.z - 0.02f);
+                }
+                else if (gameObject.tag == "rightMount")
+                {
+                    hj.connectedAnchor = new Vector3(transform.position.x + 0.02f, transform.position.y + 0.01f, transform.position.z + 0.02f);
+                }
+                else
+                {
+                    hj.connectedAnchor = new Vector3(transform.position.x - 0.02f, transform.position.y + 0.01f, transform.position.z + 0.02f);
+                }
             }
             
             //lever.transform.Rotate(90f, 0, 0, Space.Self);d
