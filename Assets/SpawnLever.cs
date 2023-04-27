@@ -11,6 +11,7 @@ public class SpawnLever : MonoBehaviour
     private GameObject lever;
     private HingeJoint hj;
     public static int leverID;
+    bool hasLever;
 
     void Start()
     {
@@ -109,6 +110,7 @@ public class SpawnLever : MonoBehaviour
             Debug.Log("Else triggered");
             if (!runOnce && timer > 4)
             {
+                if (hasLever) { return; }
                 Debug.Log("Else triggered - Timer");
                 if (gameObject.tag == "inverseMount")
                 {
@@ -160,7 +162,6 @@ public class SpawnLever : MonoBehaviour
                             hj = frontLever.GetComponent<HingeJoint>();
                             hj.connectedAnchor = new Vector3(transform.position.x - 0.02f, transform.position.y + 0.01f, transform.position.z + 0.02f);
                             frontLever.GetComponent<LeverBehaviour>().IsReferenced = true;
-                            frontLever.GetComponent<RealtimeTransform>().RequestOwnership();
                             frontLever.transform.rotation = Quaternion.Euler(-25f, 0, 0);
                             frontLever.transform.position = transform.position;
                         }
@@ -168,6 +169,7 @@ public class SpawnLever : MonoBehaviour
                     //hj = lever.GetComponent<HingeJoint>();
                     //hj.connectedAnchor = new Vector3(transform.position.x - 0.02f, transform.position.y + 0.01f, transform.position.z + 0.02f);
                 }
+                hasLever = true;
                 runOnce = true;
             }
         }
