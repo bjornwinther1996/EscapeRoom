@@ -8,7 +8,7 @@ public class SpawnLever : MonoBehaviour
     private bool runOnce = false;
     private float timer;
 
-    private GameObject lever;
+    public GameObject lever;
     private HingeJoint hj;
     public static int leverID;
     public bool hasLever;
@@ -37,6 +37,8 @@ public class SpawnLever : MonoBehaviour
                         destroyWhenOwnerLeaves = false,
                         destroyWhenLastClientLeaves = true
                     });
+                    lever.GetComponent<RealtimeTransform>().RequestOwnership();
+                    lever.transform.position = transform.position;
                     lever.transform.rotation = Quaternion.Euler(0.5f, 0, 0);
                 }
                 else if (gameObject.tag == "leftMount")
@@ -121,8 +123,8 @@ public class SpawnLever : MonoBehaviour
                         {
                             hj = backLever.GetComponent<HingeJoint>();
                             hj.connectedAnchor = new Vector3(transform.position.x + 0.02f, transform.position.y + 0.01f, transform.position.z - 0.02f);
-                            backLever.transform.rotation = Quaternion.Euler(-25f, 0, 0);
-                            backLever.transform.position = gameObject.transform.position;
+                            //backLever.transform.rotation = Quaternion.Euler(-25f, 0, 0);
+                            //backLever.transform.position = gameObject.transform.position;
                             backLever.GetComponent<LeverBehaviour>().IsReferenced = true;
                             hasLever = true;
                             return;
