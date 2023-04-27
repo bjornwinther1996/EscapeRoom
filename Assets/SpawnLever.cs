@@ -113,7 +113,7 @@ public class SpawnLever : MonoBehaviour
                 if (hasLever) { return; }
                 Debug.Log("Else triggered - Timer");
                 if (gameObject.tag == "inverseMount")
-                {/*
+                {
                     GameObject[] leverBackArray = GameObject.FindGameObjectsWithTag("LeverBack");
                     foreach (GameObject backLever in leverBackArray)
                     {
@@ -127,7 +127,7 @@ public class SpawnLever : MonoBehaviour
                             hasLever = true;
                             return;
                         }
-                    }*/
+                    }
                 }
                 else if (gameObject.tag == "leftMount")
                 {
