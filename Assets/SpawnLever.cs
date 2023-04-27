@@ -120,6 +120,8 @@ public class SpawnLever : MonoBehaviour
                             hj = backLever.GetComponent<HingeJoint>();
                             hj.connectedAnchor = new Vector3(transform.position.x - 0.02f, transform.position.y + 0.01f, transform.position.z + 0.02f);
                             backLever.GetComponent<LeverBehaviour>().IsReferenced = true;
+                            backLever.transform.rotation = Quaternion.Euler(-25f, 0, 0);
+                            backLever.transform.position = transform.position;
                         }
                     }
                 }
