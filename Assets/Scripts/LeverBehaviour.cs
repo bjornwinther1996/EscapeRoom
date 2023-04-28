@@ -11,7 +11,11 @@ public class LeverBehaviour : MonoBehaviour
     private bool wasPulled = false;
     public bool IsReferenced;
 
+    private GameObject elevator;
+
+    [SerializeField]
     private LeverData syncedLeverData;
+
     private ElevatorData syncedElevatorData;
     
     private AudioSource audioSource;
@@ -26,16 +30,18 @@ public class LeverBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        syncedLeverData = GetComponent<LeverData>();
+        elevator = GameObject.Find("elevator_v2");
+        syncedLeverData = elevator.GetComponent<LeverData>();
         audioSource = GetComponent<AudioSource>();
-        leversPulledGlobal = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
+        // MIGHT WORK DISABLED FOR TESTING
+        //syncedLeverData._leversPulled = leversPulledGlobal;
 
-        syncedLeverData._leversPulled = leversPulledGlobal;
+
         /*
         if (!wasPulled && this.gameObject.name == "Lever_back(Clone)" && this.transform.rotation.eulerAngles.x > 110)
         {
@@ -68,13 +74,15 @@ public class LeverBehaviour : MonoBehaviour
     {
         if (!wasPulled && other.name == "ActivateTrigger")
         {
-            leversPulledGlobal += 1;
-            syncedLeverData._leversPulled = leversPulledGlobal;
+            //leversPulledGlobal += 1;
+            //syncedLeverData._leversPulled = leversPulledGlobal;
+            syncedLeverData._leversPulled++;
             Debug.Log("Amount of levers pulled = " + syncedLeverData._leversPulled);
             mat = meshRenderer.material;
             mat.SetColor("_EmissionColor", Color.green);
             audioSource.PlayOneShot(pulled, 0.7f);
             wasPulled = true;
+
         }
     }
 }
