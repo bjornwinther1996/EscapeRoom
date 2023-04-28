@@ -107,6 +107,7 @@ public class PlatformManager : MonoBehaviour
 
     public static bool isResetFinished = true;
     private float coloumnOffset = 2.03f;
+    bool forcedIntoHell;
 
 
     void Start()
@@ -211,6 +212,11 @@ public class PlatformManager : MonoBehaviour
                         RowIndex++;
                         NumOfPlatformsActivatedInRow = 0;
                         Debug.Log("CheckCorrectPath Method - Row Index increased! : " + RowIndex);
+                    }
+                    if (RowIndex > 4 && !forcedIntoHell)
+                    {
+                        StartCoroutine(ForcedIntoHellVoice(5));
+                        forcedIntoHell = true;
                     }
                 }
             }
@@ -481,6 +487,14 @@ public class PlatformManager : MonoBehaviour
         }
         FloorHeaven.GetComponent<RealtimeTransform>().RequestOwnership();
         FloorHeaven.transform.position = floorHeavenStartPosition;
+    }
+
+    public IEnumerator ForcedIntoHellVoice(float time)
+    {
+        //Voice
+        yield return new WaitForSeconds(time);
+        
+        Platform.NumberOfPlatformsDestroyed = 1; // will trigger the reset for platforms in GameManager
     }
 
 }

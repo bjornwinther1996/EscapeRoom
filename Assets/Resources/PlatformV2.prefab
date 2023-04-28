@@ -216,11 +216,11 @@ PrefabInstance:
     - target: {fileID: 7183534839951161702, guid: bc1caee2f892a408a9cd02b79a9c0b9a, type: 3}
       propertyPath: Player1Material
       value: 
-      objectReference: {fileID: 2100000, guid: f580689a6c1ce4ce7899197183f7704b, type: 2}
+      objectReference: {fileID: 2100000, guid: 93f1576ac16bf4da49b57d3717efadcf, type: 2}
     - target: {fileID: 7183534839951161702, guid: bc1caee2f892a408a9cd02b79a9c0b9a, type: 3}
       propertyPath: Player2Material
       value: 
-      objectReference: {fileID: 2100000, guid: 30aa1fa4839ca41d98f0671ad4df23bf, type: 2}
+      objectReference: {fileID: 2100000, guid: cfb247f0782494e67936fb7b7a10704e, type: 2}
     - target: {fileID: 7183534839951161703, guid: bc1caee2f892a408a9cd02b79a9c0b9a, type: 3}
       propertyPath: m_RootOrder
       value: 0

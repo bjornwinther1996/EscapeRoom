@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: PlatformDefaultMat
+  m_Name: Player2Emission
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_ValidKeywords:
   - _EMISSION
@@ -107,12 +107,12 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.4772606, g: 0.5150854, b: 0.5188679, a: 1}
-    - _Color: {r: 0.47726053, g: 0.5150854, b: 0.51886785, a: 1}
-    - _EmissionColor: {r: 0.94509387, g: 0.95698184, b: 0.92131793, a: 1}
+    - _BaseColor: {r: 1, g: 0.8188845, b: 0, a: 1}
+    - _Color: {r: 1, g: 0.8188845, b: 0, a: 1}
+    - _EmissionColor: {r: 0.70710677, g: 0.59618807, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &6231213966949535461
+--- !u!114 &8942018083569555993
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
