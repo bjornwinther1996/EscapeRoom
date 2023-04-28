@@ -16,6 +16,7 @@ public class PlatformManager : MonoBehaviour
     private float rowMultiplier = 0.65f; // Inspector values overwrite! Set in Inspector!!! // <-- Changed to private now, so its only set via script
 
     public GameObject[,] platformArray;
+    public GameObject AudioObj;
 
     // hardcorded path sequences. has to be manually adjusted according to ColoumnLength and RowLength
 
@@ -215,7 +216,8 @@ public class PlatformManager : MonoBehaviour
                     }
                     if (RowIndex > 4 && !forcedIntoHell)
                     {
-                        StartCoroutine(ForcedIntoHellVoice(5));
+                        AudioObj.GetComponent<AudioSource>().Play();
+                        StartCoroutine(ForcedIntoHell(5));
                         forcedIntoHell = true;
                     }
                 }
@@ -326,6 +328,7 @@ public class PlatformManager : MonoBehaviour
         }
         FloorHeaven.GetComponent<RealtimeTransform>().RequestOwnership();
         FloorHeaven.transform.position = floorHeavenOffsetPosition;
+        forcedIntoHell = true;
     }
 
     public IEnumerator EnableAllSurfaces(float time) // not used anymore
@@ -489,11 +492,9 @@ public class PlatformManager : MonoBehaviour
         FloorHeaven.transform.position = floorHeavenStartPosition;
     }
 
-    public IEnumerator ForcedIntoHellVoice(float time)
+    public IEnumerator ForcedIntoHell(float time)
     {
-        //Voice
         yield return new WaitForSeconds(time);
-        
         Platform.NumberOfPlatformsDestroyed = 1; // will trigger the reset for platforms in GameManager
     }
 

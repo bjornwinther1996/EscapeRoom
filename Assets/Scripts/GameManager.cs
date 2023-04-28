@@ -102,7 +102,7 @@ public class GameManager : MonoBehaviour
             {
                 PlatformManager.isResetFinished = false;
                 syncedGameVariables._backupFloat = Platform.NumberOfPlatformsDestroyed; // To reset material
-                PlatformManagerScript.DestroyAllSurfaces();
+                PlatformManagerScript.DestroyAllSurfaces(); // Also sets forcedIntoHell = true
                 PlatformManagerScript.ResetAllPlatforms(); // Resets: ((Vars:) Rowindex, ActivatedPlatformsInRow), PlatformActivated and 
                 //PlatformManagerScript.StartCoroutine(PlatformManagerScript.EnableAllSurfaces(3)); // enable all surfaces again after X sec
                 PlatformManagerScript.StartCoroutine(PlatformManagerScript.ActivateNextRowIE(PlatformManagerScript.RowIndex,3)); // enable all surfaces again after X sec
