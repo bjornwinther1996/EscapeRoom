@@ -32,6 +32,11 @@ public class Player : MonoBehaviour
     float previousYPos;
     public int PlayerNumber;
 
+    public Material Player1AvatarMat;
+    public Material Player2AvatarMat;
+    public GameObject AvatarMeshObj;
+    bool isAvatarMaterialSet;
+
     void Start()
     {
         syncedPlayerData = GetComponent<PlayerData>();
@@ -67,6 +72,7 @@ public class Player : MonoBehaviour
         SetHandsColor();
         SetSkybox();
         ActivateFadeWhenFalling();
+        SetAvatarColor();
     }
 
     private void SetSkybox()
@@ -108,15 +114,33 @@ public class Player : MonoBehaviour
         if (isHandsColorSet) { return; }
         if (GameManager.IsServer)
         {
-            LeftHand.GetComponent<MeshRenderer>().material = MaterialPlayer1;
-            RightHand.GetComponent<MeshRenderer>().material = MaterialPlayer1;
+            LeftHand.GetComponent<SkinnedMeshRenderer>().material = Player1AvatarMat;
+            RightHand.GetComponent<SkinnedMeshRenderer>().material = Player1AvatarMat;
         }
         else if(!GameManager.IsServer)
         {
-            LeftHand.GetComponent<MeshRenderer>().material = MaterialPlayer2;
-            RightHand.GetComponent<MeshRenderer>().material = MaterialPlayer2;
+            LeftHand.GetComponent<SkinnedMeshRenderer>().material = Player2AvatarMat;
+            RightHand.GetComponent<SkinnedMeshRenderer>().material = Player2AvatarMat;
         }
         isHandsColorSet = true;
+    }
+
+    private void SetAvatarColor()
+    {
+        if (!GameManagerReference.GetComponent<GameManagerData>()._backupBool) { return; }
+        if (!GetComponent<RealtimeTransform>().isOwnedLocallySelf) return;
+        if (isAvatarMaterialSet) { return; }
+        
+        if (syncedPlayerData._isServer && AvatarMeshObj.GetComponent<SkinnedMeshRenderer>().material != Player1AvatarMat)
+        {
+            AvatarMeshObj.GetComponent<SkinnedMeshRenderer>().material = Player1AvatarMat;
+        }
+        else if (!syncedPlayerData._isServer && AvatarMeshObj.GetComponent<SkinnedMeshRenderer>().material != Player2AvatarMat)
+        {
+            AvatarMeshObj.GetComponent<SkinnedMeshRenderer>().material = Player2AvatarMat;
+        }
+        isAvatarMaterialSet = true;
+
     }
 
     private void OnTriggerEnter(Collider other)
