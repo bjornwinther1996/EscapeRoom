@@ -112,12 +112,12 @@ public class Player : MonoBehaviour
     {
         if (!GameManagerReference.GetComponent<GameManagerData>()._backupBool) { return; }
         if (isHandsColorSet) { return; }
-        if (GameManager.IsServer)
+        if (syncedPlayerData._isServer && LeftHand.GetComponent<SkinnedMeshRenderer>().material != Player1AvatarMat)
         {
             LeftHand.GetComponent<SkinnedMeshRenderer>().material = Player1AvatarMat;
             RightHand.GetComponent<SkinnedMeshRenderer>().material = Player1AvatarMat;
         }
-        else if(!GameManager.IsServer)
+        else if(!syncedPlayerData._isServer && LeftHand.GetComponent<SkinnedMeshRenderer>().material != Player2AvatarMat)
         {
             LeftHand.GetComponent<SkinnedMeshRenderer>().material = Player2AvatarMat;
             RightHand.GetComponent<SkinnedMeshRenderer>().material = Player2AvatarMat;
