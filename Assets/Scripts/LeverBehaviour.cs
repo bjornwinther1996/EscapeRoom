@@ -9,12 +9,13 @@ public class LeverBehaviour : MonoBehaviour
     private static int leversPulledGlobal;
     
     private bool wasPulled = false;
+    public bool IsReferenced;
+
     private LeverData syncedLeverData;
     private ElevatorData syncedElevatorData;
     
     private AudioSource audioSource;
     public AudioClip pulled;
-    public bool IsReferenced;
 
     [SerializeField]
     private Material mat;
@@ -34,6 +35,7 @@ public class LeverBehaviour : MonoBehaviour
     void Update()
     {
 
+        syncedLeverData._leversPulled = leversPulledGlobal;
         /*
         if (!wasPulled && this.gameObject.name == "Lever_back(Clone)" && this.transform.rotation.eulerAngles.x > 110)
         {
@@ -69,10 +71,10 @@ public class LeverBehaviour : MonoBehaviour
             leversPulledGlobal += 1;
             syncedLeverData._leversPulled = leversPulledGlobal;
             Debug.Log("Amount of levers pulled = " + syncedLeverData._leversPulled);
-            wasPulled = true;
             mat = meshRenderer.material;
             mat.SetColor("_EmissionColor", Color.green);
             audioSource.PlayOneShot(pulled, 0.7f);
+            wasPulled = true;
         }
     }
 }

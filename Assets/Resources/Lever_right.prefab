@@ -108,9 +108,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5446872577138619795}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: -1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.120000005}
-  m_LocalScale: {x: 0.009525714, y: 0.0015974997, z: 0.07618284}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0.7071068, w: 0}
+  m_LocalPosition: {x: 0, y: -0.015, z: 0}
+  m_LocalScale: {x: 0.02857141, y: 0.038331408, z: 0.0035710705}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5385906381683829487}
@@ -127,8 +127,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4, y: 4, z: 1}
-  m_Center: {x: -7.63, y: 0, z: -1.39}
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0.4, y: -2, z: -8}
 --- !u!114 &8723094701209157950
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -242,7 +242,6 @@ GameObject:
   - component: {fileID: 8322273300448662016}
   - component: {fileID: 4201992218122586911}
   - component: {fileID: 8136770561721401912}
-  - component: {fileID: 3416409245505993050}
   - component: {fileID: 79706922188315164}
   - component: {fileID: 3177613644071667766}
   - component: {fileID: 6951124907002853230}
@@ -339,44 +338,8 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 110
   m_CollisionDetection: 0
---- !u!59 &3416409245505993050
-HingeJoint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7680058038518838093}
-  m_ConnectedBody: {fileID: 0}
-  m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0, y: 0, z: 0}
-  m_Axis: {x: 0, y: 0, z: 0}
-  m_AutoConfigureConnectedAnchor: 0
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
-  m_UseSpring: 1
-  m_Spring:
-    spring: 0
-    damper: 2
-    targetPosition: 0
-  m_UseMotor: 0
-  m_Motor:
-    targetVelocity: 0
-    force: 0
-    freeSpin: 0
-  m_UseLimits: 1
-  m_Limits:
-    min: 0
-    max: 90
-    bounciness: 0
-    bounceMinVelocity: 0.2
-    contactDistance: 0
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_EnableCollision: 0
-  m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
 --- !u!114 &79706922188315164
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -609,8 +572,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c85e5282131a534eaeaa2130db7a92d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pulled: {fileID: 8300000, guid: b1317c26c752c44c8811ab16b86dba88, type: 3}
   IsReferenced: 0
+  pulled: {fileID: 8300000, guid: b1317c26c752c44c8811ab16b86dba88, type: 3}
   mat: {fileID: 0}
   meshRenderer: {fileID: 127033479728043885}
 --- !u!82 &-1508371359458230799

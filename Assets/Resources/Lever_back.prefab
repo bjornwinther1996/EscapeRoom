@@ -128,7 +128,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: -0.010000002, y: 1.33, z: 4.43}
+  m_Center: {x: 0, y: 1, z: 4}
 --- !u!114 &7940917935192214388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,7 +153,6 @@ GameObject:
   - component: {fileID: 7614242345155758901}
   - component: {fileID: 2343534009485480490}
   - component: {fileID: 7655560660977736461}
-  - component: {fileID: 3871996651127464047}
   - component: {fileID: 2003736173069353769}
   - component: {fileID: 3948734026803138819}
   - component: {fileID: 8836842216640786011}
@@ -251,44 +250,8 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 110
   m_CollisionDetection: 0
---- !u!59 &3871996651127464047
-HingeJoint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8088625955322899064}
-  m_ConnectedBody: {fileID: 0}
-  m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0, y: 0, z: 0}
-  m_Axis: {x: 0, y: 0, z: 0}
-  m_AutoConfigureConnectedAnchor: 0
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
-  m_UseSpring: 1
-  m_Spring:
-    spring: 0
-    damper: 2
-    targetPosition: 0
-  m_UseMotor: 0
-  m_Motor:
-    targetVelocity: 0
-    force: 0
-    freeSpin: 0
-  m_UseLimits: 1
-  m_Limits:
-    min: 0
-    max: 90
-    bounciness: 0
-    bounceMinVelocity: 0.2
-    contactDistance: 0
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_EnableCollision: 0
-  m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
 --- !u!114 &2003736173069353769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -521,8 +484,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c85e5282131a534eaeaa2130db7a92d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pulled: {fileID: 8300000, guid: b1317c26c752c44c8811ab16b86dba88, type: 3}
   IsReferenced: 0
+  pulled: {fileID: 8300000, guid: b1317c26c752c44c8811ab16b86dba88, type: 3}
   mat: {fileID: 0}
   meshRenderer: {fileID: 1951974184495042136}
 --- !u!136 &8028208295991802485
