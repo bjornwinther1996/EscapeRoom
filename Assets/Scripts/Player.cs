@@ -52,6 +52,8 @@ public class Player : MonoBehaviour
     void Update()
     {
         SetPlayerNumber(); // needs to be run before guard clause - so it can set PlayerNumber for ALL clients.
+        SetHandsColor();
+        SetAvatarColor();
         if (!GetComponent<RealtimeTransform>().isOwnedLocallySelf) return;
 
         if (syncedPlayerData._isServer)
@@ -69,10 +71,8 @@ public class Player : MonoBehaviour
             PlayerNumber = 3;
         }*/
 
-        SetHandsColor();
         SetSkybox();
         ActivateFadeWhenFalling();
-        SetAvatarColor();
     }
 
     private void SetSkybox()
@@ -128,7 +128,6 @@ public class Player : MonoBehaviour
     private void SetAvatarColor()
     {
         if (!GameManagerReference.GetComponent<GameManagerData>()._backupBool) { return; }
-        if (!GetComponent<RealtimeTransform>().isOwnedLocallySelf) return;
         if (isAvatarMaterialSet) { return; }
         
         if (syncedPlayerData._isServer && AvatarMeshObj.GetComponent<SkinnedMeshRenderer>().material != Player1AvatarMat)
