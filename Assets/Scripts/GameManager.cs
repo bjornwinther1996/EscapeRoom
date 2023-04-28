@@ -36,6 +36,10 @@ public class GameManager : MonoBehaviour
 
     bool computerRigPositioned;
 
+    public AudioSource AudioObj;
+    public AudioClip[] VoiceNarration;
+    bool stopPlayingAudio;
+
 
     void Start()
     {
@@ -76,8 +80,21 @@ public class GameManager : MonoBehaviour
             IsTaskSharedStatic = true;
         }
 
+        if (syncedGameVariables._backupBool) // If both players connected and platforms instantiated // If started basically:
+        {
+            if (!stopPlayingAudio)
+            {
+                StartCoroutine(VoiceNarrationCoroutine(5, VoiceNarration[0]));
+                StartCoroutine(VoiceNarrationCoroutine(7.5f, VoiceNarration[1]));
+                StartCoroutine(VoiceNarrationCoroutine(11, VoiceNarration[2]));
+                StartCoroutine(VoiceNarrationCoroutine(15, VoiceNarration[3]));
+                StartCoroutine(VoiceNarrationCoroutine(19, VoiceNarration[4]));
+                stopPlayingAudio = true;
+            }
+        }
+
         //if (!BoolFirstConnectedDevice()) { return; } // If the device is not the first connected device to the server - return
-        
+
         CheckAndSetAvatarArray();
         AssignPlayerNumbers(); // also sets IsServer!
         if (CheckIfServerExist())
@@ -223,6 +240,12 @@ public class GameManager : MonoBehaviour
             return false;
         }
 
+    }
+    
+    public IEnumerator VoiceNarrationCoroutine(float time, AudioClip narrationPart)
+    {
+        yield return new WaitForSeconds(time);
+        AudioObj.GetComponent<AudioSource>().PlayOneShot(narrationPart);
     }
 
 }
