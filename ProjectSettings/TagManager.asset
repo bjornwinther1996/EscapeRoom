@@ -16,6 +16,7 @@ TagManager:
   - LeverBack
   - LeverLeft
   - LeverRight
+  - Hands
   layers:
   - Default
   - TransparentFX
