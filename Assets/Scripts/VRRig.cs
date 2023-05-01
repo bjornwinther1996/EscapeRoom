@@ -37,8 +37,23 @@ public class VRRig : MonoBehaviour
     void LateUpdate()
     {
         transform.position = headConstraint.position + headBodyOffset;
-        transform.forward = Vector3.Lerp(transform.forward, Vector3.ProjectOnPlane(headConstraint.up, Vector3.up).normalized, Time.deltaTime * turnSmoothness);
+        //transform.forward = Vector3.Lerp(transform.forward, Vector3.ProjectOnPlane(headConstraint.up, Vector3.up).normalized, Time.deltaTime * turnSmoothness);
+        /*
+        if(transform.eulerAngles.y > -20 && transform.eulerAngles.y < 20)
+        {
+            transform.forward = Vector3.ProjectOnPlane(headConstraint.up, Vector3.up).normalized;
+        }*/
+        Vector3 fixedHeadConstraint = headConstraint.up;
+        if (fixedHeadConstraint.y < 0.95)
+        {
+            transform.forward = Vector3.Lerp(transform.forward, Vector3.ProjectOnPlane(headConstraint.up, Vector3.up).normalized, Time.deltaTime * turnSmoothness);
+            //transform.forward = Vector3.ProjectOnPlane(fixedHeadConstraint, Vector3.up).normalized;
+            Debug.Log("IF FixedHeadConstraint:" + fixedHeadConstraint);
+        }
         //transform.forward = Vector3.ProjectOnPlane(headConstraint.up, Vector3.up).normalized;
+        //Debug.Log("HeadUP:" + headConstraint.up);
+
+        //Debug.Log("Y ROTATION:" + transform.rotation.y + "Y euler" + transform.eulerAngles.y);
         head.Map();
         leftHand.Map();
         rightHand.Map();
