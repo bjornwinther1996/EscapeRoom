@@ -48,7 +48,7 @@ public class VRRig : MonoBehaviour
         {
             transform.forward = Vector3.Lerp(transform.forward, Vector3.ProjectOnPlane(headConstraint.up, Vector3.up).normalized, Time.deltaTime * turnSmoothness);
             //transform.forward = Vector3.ProjectOnPlane(fixedHeadConstraint, Vector3.up).normalized;
-            Debug.Log("IF FixedHeadConstraint:" + fixedHeadConstraint);
+            //Debug.Log("IF FixedHeadConstraint:" + fixedHeadConstraint);
         }
         //transform.forward = Vector3.ProjectOnPlane(headConstraint.up, Vector3.up).normalized;
         //Debug.Log("HeadUP:" + headConstraint.up);
