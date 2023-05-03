@@ -45,7 +45,7 @@ public class LeverBehaviour : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (!wasPulled && other.tag == "Hands" && isLeftGrabPressed || isRightGrabPressed)
+        if (!wasPulled && other.tag == "Hands" && (isLeftGrabPressed || isRightGrabPressed))
         {
             if (this.gameObject.name == "Lever_front(Clone)")
             {
