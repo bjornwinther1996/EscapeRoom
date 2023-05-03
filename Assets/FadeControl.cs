@@ -38,7 +38,7 @@ public class FadeControl : MonoBehaviour
         {
             //Debug.Log("HITTING WALL");
             FadeScreen();
-            textComponent.SetText("Oops! Move out from the wall, fucking pig cheater!");
+            textComponent.SetText("Move your head out of the wall!");
         }
 
     }

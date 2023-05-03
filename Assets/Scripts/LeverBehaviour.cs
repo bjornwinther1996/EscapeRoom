@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
+using Normal.Realtime;
 
 public class LeverBehaviour : MonoBehaviour
 {
@@ -27,6 +28,11 @@ public class LeverBehaviour : MonoBehaviour
 
     [SerializeField]
     private MeshRenderer meshRenderer;
+    public GameObject GameManagerReference;
+
+    bool colorSet;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +40,7 @@ public class LeverBehaviour : MonoBehaviour
         elevator = GameObject.Find("elevator_v2");
         syncedLeverData = elevator.GetComponent<LeverData>();
         audioSource = GetComponent<AudioSource>();
+        GameManagerReference = GameObject.Find("GameManager");
     }
 
     // Update is called once per frame
@@ -41,12 +48,22 @@ public class LeverBehaviour : MonoBehaviour
     {
         CheckForVRInput();
         CheckForResetLever();
+
+        if (syncedLeverData._leversPulled == 1 && !colorSet)
+        {
+            mat = meshRenderer.material;
+            mat.SetColor("_EmissionColor", Color.green);
+            audioSource.PlayOneShot(pulled, 0.7f);
+            colorSet = true;
+        }
     }
 
     private void OnTriggerStay(Collider other)
     {
+        if (!GetComponent<RealtimeTransform>().isOwnedLocallySelf) return;
         if (!wasPulled && other.tag == "Hands" && (isLeftGrabPressed || isRightGrabPressed))
         {
+            gameObject.GetComponent<RealtimeTransform>().RequestOwnership();
             if (this.gameObject.name == "Lever_front(Clone)")
             {
                 this.transform.rotation = Quaternion.Euler(135, 180, 0);
@@ -64,16 +81,15 @@ public class LeverBehaviour : MonoBehaviour
                 this.transform.rotation = Quaternion.Euler(135, 270, 0); 
             }
 
-            syncedLeverData._leversPulled++;
-            mat = meshRenderer.material;
-            mat.SetColor("_EmissionColor", Color.green);
-            audioSource.PlayOneShot(pulled, 0.7f);
+            syncedLeverData._leversPulled = 1; // Now means that its pulled and should set color.
+            GameManagerReference.GetComponent<GameManagerData>()._level++; // A variable to keep track of how many levers has been pulled.
             wasPulled = true;
         }
     }
 
     private void CheckForVRInput()
     {
+        if (!GetComponent<RealtimeTransform>().isOwnedLocallySelf) return;
         var leftHandDevices = new List<UnityEngine.XR.InputDevice>();
         UnityEngine.XR.InputDevices.GetDevicesAtXRNode(UnityEngine.XR.XRNode.LeftHand, leftHandDevices);
 
@@ -111,7 +127,7 @@ public class LeverBehaviour : MonoBehaviour
         }
     }
 
-    private void CheckForResetLever()
+    private void CheckForResetLever() // still needs adjustment
     {
 
         if (resetCondition)

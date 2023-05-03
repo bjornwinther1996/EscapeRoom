@@ -6590,8 +6590,6 @@ GameObject:
   - component: {fileID: 1408518600}
   - component: {fileID: 1408518605}
   - component: {fileID: 1408518604}
-  - component: {fileID: 1408518603}
-  - component: {fileID: 1408518602}
   - component: {fileID: 1408518606}
   m_Layer: 0
   m_Name: LeverPulledText
@@ -6754,33 +6752,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &1408518602
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1408518598}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0beb71e78700b844906cabe9ac0cb59, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _leverSync: {fileID: 0}
-  _leversPulled: 0
-  _previousLeversPulled: 0
---- !u!114 &1408518603
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1408518598}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b71e64892b42ac04fba4e6ffe44ad776, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1408518604
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6822,7 +6793,7 @@ MonoBehaviour:
   - componentID: 1
     component: {fileID: 1408518604}
   - componentID: 2
-    component: {fileID: 1408518603}
+    component: {fileID: 0}
   _childViews: []
 --- !u!114 &1408518606
 MonoBehaviour:
@@ -6836,6 +6807,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e640b90bffda46adb260bc35df14e6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GameManagerObj: {fileID: 1231007732}
 --- !u!1 &1416520286
 GameObject:
   m_ObjectHideFlags: 0

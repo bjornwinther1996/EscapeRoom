@@ -5,21 +5,26 @@ using TMPro;
 
 public class SetText : MonoBehaviour
 {
-    private LeverData syncedLeverData;
     private TextMeshPro textObj;
+
+    public GameObject GameManagerObj;
+    GameManagerData syncedGameManagerVars;
+    int previousAmountOfLeversPulled = -1;
+    
     // Start is called before the first frame update
     void Start()
     {
-        syncedLeverData = GetComponent<LeverData>();
         textObj = GetComponent<TextMeshPro>();
+        syncedGameManagerVars = GameManagerObj.GetComponent<GameManagerData>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.IsServer)
+        if (syncedGameManagerVars._level != previousAmountOfLeversPulled)
         {
-            textObj.SetText("Levers Pulled: " +syncedLeverData._leversPulled);
+            textObj.SetText("Levers Pulled: " +syncedGameManagerVars._level);
+            previousAmountOfLeversPulled = syncedGameManagerVars._level;
         }
     }
 }
