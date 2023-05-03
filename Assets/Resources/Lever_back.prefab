@@ -44,7 +44,7 @@ BoxCollider:
   m_GameObject: {fileID: 3903251616132073990}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 2, y: 2.2832563, z: 2.6709294}
   m_Center: {x: 0, y: 0.14162873, z: -0.3354646}
@@ -189,6 +189,7 @@ GameObject:
   - component: {fileID: 3903251616522645425}
   - component: {fileID: 3903251616522645427}
   - component: {fileID: 3903251616522645437}
+  - component: {fileID: -1960842814233033456}
   m_Layer: 0
   m_Name: Lever_back
   m_TagString: LeverBack
@@ -420,3 +421,16 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!65 &-1960842814233033456
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3903251616522645436}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.05, y: 0.03, z: 0.05}
+  m_Center: {x: -0.010000002, y: 0.01, z: 0.00992269}

@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2876785263266469857}
   - component: {fileID: 2876785263266469856}
   - component: {fileID: 2876785263266469859}
+  - component: {fileID: -8673870140618217330}
   m_Layer: 0
   m_Name: Lever_left
   m_TagString: LeverLeft
@@ -246,6 +247,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!65 &-8673870140618217330
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2876785263266469858}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.05, y: 0.03, z: 0.05}
+  m_Center: {x: -0.01000001, y: 0.01, z: 0.009922693}
 --- !u!1 &2876785263569307830
 GameObject:
   m_ObjectHideFlags: 0
@@ -290,7 +304,7 @@ BoxCollider:
   m_GameObject: {fileID: 2876785263569307830}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 2, y: 2.2832563, z: 2.6709294}
   m_Center: {x: 0, y: 0.14162873, z: -0.3354646}

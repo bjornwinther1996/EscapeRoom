@@ -868,7 +868,7 @@ GameObject:
   - component: {fileID: 4415093042979029041}
   m_Layer: 6
   m_Name: Right Hand
-  m_TagString: Untagged
+  m_TagString: Hands
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1144,7 +1144,6 @@ MonoBehaviour:
   HellSkyMaterial: {fileID: 2100000, guid: a093f82ba07e44104b3d07206de518ef, type: 2}
   UICanvas: {fileID: 6504901963813193554}
   ImageFadeCanvas: {fileID: 2487007196674547733}
-  PlayerNumber: 0
   Player1AvatarMat: {fileID: 2100000, guid: af2bbe34eed5f4079bdc903d8419e0a3, type: 2}
   Player2AvatarMat: {fileID: 2100000, guid: f68448cd6a0234b7fb603c3b71fe4662, type: 2}
   AvatarMeshObj: {fileID: 2412255794881369728}
@@ -1330,7 +1329,7 @@ GameObject:
   - component: {fileID: 5611533417967050278}
   m_Layer: 6
   m_Name: Left Hand
-  m_TagString: Untagged
+  m_TagString: Hands
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
