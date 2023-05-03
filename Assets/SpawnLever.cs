@@ -6,7 +6,6 @@ using Normal.Realtime;
 public class SpawnLever : MonoBehaviour
 {
     private bool runOnce = false;
-    private float timer;
 
     public GameObject lever;
 
@@ -19,11 +18,9 @@ public class SpawnLever : MonoBehaviour
     void Update()
     {
 
-        timer += Time.deltaTime;
-
         if (GameManager.IsServer)
         {
-            if (!runOnce && timer > 4)
+            if (!runOnce && GameManager.GameStarted)
             {
                 if (gameObject.tag == "inverseMount")
                 {
