@@ -146,6 +146,7 @@ public class Player : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (!GetComponent<RealtimeTransform>().isOwnedLocallySelf) return;
+        /*
         if (other.gameObject.tag == "Elevator")
         {
             //Debug.Log("ELLIE HIT");
@@ -153,7 +154,7 @@ public class Player : MonoBehaviour
             {
                 other.GetComponent<RealtimeTransform>().RequestOwnership();
             }
-        }
+        }*/
 
         if (other.CompareTag("HellHitbox"))
         {
@@ -166,13 +167,15 @@ public class Player : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+        /*
         if (other.gameObject.tag == "Elevator")
         {
             Vector3 newPos = new Vector3(VRRig.transform.position.x, other.transform.position.y - avatarYOffset, VRRig.transform.position.z);
             //Debug.Log("STILL IN ELLIE");
 
             VRRig.transform.position = newPos;
-        }
+        }*/
+
     }
 
     public bool ChangeInYPos()
