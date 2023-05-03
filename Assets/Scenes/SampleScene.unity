@@ -6808,6 +6808,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameManagerObj: {fileID: 1231007732}
+  ElevatorObj: {fileID: 7639749042653488890}
 --- !u!1 &1416520286
 GameObject:
   m_ObjectHideFlags: 0
@@ -16842,7 +16843,7 @@ MonoBehaviour:
   - componentID: 3
     component: {fileID: 7639749042653488895}
   - componentID: 4
-    component: {fileID: 7639749042653488897}
+    component: {fileID: 0}
   _childViews:
   - componentID: 1
     component: {fileID: 0}
@@ -16885,33 +16886,7 @@ MonoBehaviour:
   _previousGoUp: 0
   _goDown: 0
   _previousGoDown: 0
---- !u!114 &7639749042653488897
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7639749042653488890}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b71e64892b42ac04fba4e6ffe44ad776, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &7639749042653488898
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7639749042653488890}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0beb71e78700b844906cabe9ac0cb59, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _leverSync: {fileID: 0}
-  _leversPulled: 0
-  _previousLeversPulled: 0
+  GameManagerObj: {fileID: 1231007732}
 --- !u!23 &7649066787113629775
 MeshRenderer:
   m_ObjectHideFlags: 0

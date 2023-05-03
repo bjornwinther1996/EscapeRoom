@@ -15,21 +15,25 @@ public class ElevatorData : MonoBehaviour
     public bool _goDown = default;
     public bool _previousGoDown = default;
 
+    public GameObject GameManagerObj;
+    private GameManagerData syncedGameVars;
+
 
     private void Awake()
     {
         _elevatorSync = GetComponent<ElevatorSync>();
         syncedLeverData = GetComponent<LeverData>();
+        syncedGameVars = GameManagerObj.GetComponent<GameManagerData>();
     }
 
     // Update is called once per frame
     private void Update()
     {
 
-        if (syncedLeverData._leversPulled == 6)
+        if (syncedGameVars._level == 6)
         {
             _goDown = true;
-            syncedLeverData._leversPulled = 0;
+            syncedGameVars._level = 0;
         }
 
         if (_goUp != _previousGoUp)

@@ -34,7 +34,7 @@ public class GameManagerData : MonoBehaviour
     public int _previousFails = default;
 
     [SerializeField]
-    public int _level = default;
+    public int _level = default; // is now used to keep track of amount of levers pulled
     public int _previousLevel = default;
 
     [SerializeField]

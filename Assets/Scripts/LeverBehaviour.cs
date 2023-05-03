@@ -12,13 +12,13 @@ public class LeverBehaviour : MonoBehaviour
     private bool isLeftGrabPressed = false;
     private bool isRightGrabPressed = false;
 
-    private static int leversPulledGlobal;
+    //private static int leversPulledGlobal;
     private LeverData syncedLeverData;
     
     private bool wasPulled = false;
     public bool IsReferenced;
 
-    private GameObject elevator;
+    //private GameObject elevator;
 
     private AudioSource audioSource;
     public AudioClip pulled;
@@ -37,8 +37,8 @@ public class LeverBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        elevator = GameObject.Find("elevator_v2");
-        syncedLeverData = elevator.GetComponent<LeverData>();
+        //elevator = GameObject.Find("elevator_v2");
+        syncedLeverData = GetComponent<LeverData>();
         audioSource = GetComponent<AudioSource>();
         GameManagerReference = GameObject.Find("GameManager");
     }

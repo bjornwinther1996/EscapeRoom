@@ -190,6 +190,8 @@ GameObject:
   - component: {fileID: 3903251616522645427}
   - component: {fileID: 3903251616522645437}
   - component: {fileID: -1960842814233033456}
+  - component: {fileID: 8884398074799914741}
+  - component: {fileID: -8082704944083749983}
   m_Layer: 0
   m_Name: Lever_back
   m_TagString: LeverBack
@@ -287,6 +289,8 @@ MonoBehaviour:
     component: {fileID: 3903251616522645425}
   - componentID: 2
     component: {fileID: 0}
+  - componentID: 3
+    component: {fileID: 8884398074799914741}
   _childViews:
   - componentID: 1
     component: {fileID: 3903251616132073989}
@@ -325,6 +329,7 @@ MonoBehaviour:
   pulled: {fileID: 8300000, guid: b1317c26c752c44c8811ab16b86dba88, type: 3}
   mat: {fileID: 0}
   meshRenderer: {fileID: 3903251616394769761}
+  GameManagerReference: {fileID: 0}
 --- !u!82 &3903251616522645437
 AudioSource:
   m_ObjectHideFlags: 0
@@ -434,3 +439,30 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.05, y: 0.03, z: 0.05}
   m_Center: {x: -0.010000002, y: 0.01, z: 0.00992269}
+--- !u!114 &8884398074799914741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3903251616522645436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b71e64892b42ac04fba4e6ffe44ad776, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-8082704944083749983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3903251616522645436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0beb71e78700b844906cabe9ac0cb59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _leverSync: {fileID: 0}
+  _leversPulled: 0
+  _previousLeversPulled: 0
