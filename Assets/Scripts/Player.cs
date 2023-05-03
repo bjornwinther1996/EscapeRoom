@@ -37,6 +37,9 @@ public class Player : MonoBehaviour
     public GameObject AvatarMeshObj;
     bool isAvatarMaterialSet;
 
+    //public bool isLeftGrabPressed = false; // Replaced by syncedPlayerData._BackupBool
+    //public bool isRightGrabPressed = false; // Replaced by syncedPlayerData._IsReady
+
     void Start()
     {
         syncedPlayerData = GetComponent<PlayerData>();
@@ -74,6 +77,7 @@ public class Player : MonoBehaviour
 
         SetSkybox();
         ActivateFadeWhenFalling();
+        CheckForVRInput();
     }
 
     private void SetSkybox()
@@ -168,6 +172,7 @@ public class Player : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         /*
+        if (!GetComponent<RealtimeTransform>().isOwnedLocallySelf) return;
         if (other.gameObject.tag == "Elevator")
         {
             Vector3 newPos = new Vector3(VRRig.transform.position.x, other.transform.position.y - avatarYOffset, VRRig.transform.position.z);
@@ -208,6 +213,51 @@ public class Player : MonoBehaviour
         { 
             //PlayerNumber = 2;
             syncedPlayerData._backupInt = 2;
+        }
+    }
+
+    private void CheckForVRInput()
+    {
+        if (!GetComponent<RealtimeTransform>().isOwnedLocallySelf) return;
+        //Debug.Log("CheckForVrInput");
+        var leftHandDevices = new List<UnityEngine.XR.InputDevice>();
+        UnityEngine.XR.InputDevices.GetDevicesAtXRNode(UnityEngine.XR.XRNode.LeftHand, leftHandDevices);
+
+        var rightHandDevices = new List<UnityEngine.XR.InputDevice>();
+        UnityEngine.XR.InputDevices.GetDevicesAtXRNode(UnityEngine.XR.XRNode.RightHand, rightHandDevices);
+
+        if (leftHandDevices.Count == 1)
+        {
+            UnityEngine.XR.InputDevice device = leftHandDevices[0];
+
+            bool triggerValue;
+            if (device.TryGetFeatureValue(UnityEngine.XR.CommonUsages.gripButton, out triggerValue) && triggerValue)
+            {
+                //isLeftGrabPressed = true;
+                syncedPlayerData._backupBool = true; // Replaces isLeftGrabPressed
+            }
+            else
+            {
+                //isLeftGrabPressed = false;
+                syncedPlayerData._backupBool = false; // Replaces isLeftGrabPressed
+            }
+        }
+
+        if (rightHandDevices.Count == 1)
+        {
+            UnityEngine.XR.InputDevice device = rightHandDevices[0];
+
+            bool triggerValue;
+            if (device.TryGetFeatureValue(UnityEngine.XR.CommonUsages.gripButton, out triggerValue) && triggerValue)
+            {
+                //isRightGrabPressed = true;
+                syncedPlayerData._isReady = true; // Replaces isRightGrabPressed
+            }
+            else
+            {
+                //isRightGrabPressed = false;
+                syncedPlayerData._isReady = false; // Replaces isRightGrabPressed
+            }
         }
     }
 

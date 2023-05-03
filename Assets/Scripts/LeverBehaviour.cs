@@ -9,8 +9,8 @@ public class LeverBehaviour : MonoBehaviour
     public bool resetCondition = false;
 
     // Change to be true when input by grabPressed is present
-    private bool isLeftGrabPressed = false;
-    private bool isRightGrabPressed = false;
+    //private bool isLeftGrabPressed = false;
+    //private bool isRightGrabPressed = false;
 
     //private static int leversPulledGlobal;
     private LeverData syncedLeverData;
@@ -46,7 +46,7 @@ public class LeverBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CheckForVRInput();
+        //CheckForVRInput();
         CheckForResetLever();
 
         if (syncedLeverData._leversPulled == 1 && !colorSet)
@@ -60,9 +60,10 @@ public class LeverBehaviour : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (!GetComponent<RealtimeTransform>().isOwnedLocallySelf) return;
-        if (!wasPulled && other.tag == "Hands" && (isLeftGrabPressed || isRightGrabPressed))
+        if (other.GetComponentInParent<RealtimeTransform>().isOwnedLocallySelf) return;
+        if (!wasPulled && other.tag == "Hands" && (other.GetComponentInParent<PlayerData>()._backupBool || other.GetComponentInParent<PlayerData>()._isReady))
         {
+            Debug.Log("OnTrigger - If Passed");
             gameObject.GetComponent<RealtimeTransform>().RequestOwnership();
             if (this.gameObject.name == "Lever_front(Clone)")
             {
@@ -84,46 +85,6 @@ public class LeverBehaviour : MonoBehaviour
             syncedLeverData._leversPulled = 1; // Now means that its pulled and should set color.
             GameManagerReference.GetComponent<GameManagerData>()._level++; // A variable to keep track of how many levers has been pulled.
             wasPulled = true;
-        }
-    }
-
-    private void CheckForVRInput()
-    {
-        if (!GetComponent<RealtimeTransform>().isOwnedLocallySelf) return;
-        var leftHandDevices = new List<UnityEngine.XR.InputDevice>();
-        UnityEngine.XR.InputDevices.GetDevicesAtXRNode(UnityEngine.XR.XRNode.LeftHand, leftHandDevices);
-
-        var rightHandDevices = new List<UnityEngine.XR.InputDevice>();
-        UnityEngine.XR.InputDevices.GetDevicesAtXRNode(UnityEngine.XR.XRNode.RightHand, rightHandDevices);
-
-        if (leftHandDevices.Count == 1)
-        {
-            UnityEngine.XR.InputDevice device = leftHandDevices[0];
-
-            bool triggerValue;
-            if (device.TryGetFeatureValue(UnityEngine.XR.CommonUsages.gripButton, out triggerValue) && triggerValue)
-            {
-                isLeftGrabPressed = true;
-            }
-            else
-            {
-                isLeftGrabPressed = false;
-            }
-        }
-
-        if (rightHandDevices.Count == 1)
-        {
-            UnityEngine.XR.InputDevice device = rightHandDevices[0];
-
-            bool triggerValue;
-            if (device.TryGetFeatureValue(UnityEngine.XR.CommonUsages.gripButton, out triggerValue) && triggerValue)
-            {
-                isRightGrabPressed = true;
-            }
-            else
-            {
-                isRightGrabPressed = false;
-            }
         }
     }
 

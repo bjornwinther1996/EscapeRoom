@@ -12,7 +12,7 @@ public class PlayerData : MonoBehaviour
     public bool _previousIsServer = default;
 
     [SerializeField]
-    public bool _isReady = default;
+    public bool _isReady = default; // Replaces isRightGrabPressed
     public bool _previousIsReady = default;
 
     [SerializeField]
@@ -20,7 +20,7 @@ public class PlayerData : MonoBehaviour
     public int _previousPathSequence = default;
 
     [SerializeField]
-    public bool _backupBool = default;
+    public bool _backupBool = default; // Replaces isLeftGrabPressed
     public bool _previousBackupBool = default;
 
     [SerializeField]
