@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
     public AudioSource AudioObj;
     public AudioClip[] VoiceNarration;
     bool stopPlayingAudio;
+    public static bool GameStarted; // set by syncedGameVariables._backupBool // set when both players are connected and platforms are instantiated
 
 
     void Start()
@@ -60,6 +61,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("computerRigPOsitioned");
 
         }
+        //if( Application.platform != RuntimePlatform.Android) { return; } // if computer - return // REMOVED - WILL CAUSE TOO MANY UNREPORTED ERRORS FOR THE GAME.
 
         if (!runOnce)
         {
@@ -82,13 +84,14 @@ public class GameManager : MonoBehaviour
 
         if (syncedGameVariables._backupBool) // If both players connected and platforms instantiated // If started basically:
         {
+            GameStarted = true;
             if (!stopPlayingAudio)
             {
-                StartCoroutine(VoiceNarrationCoroutine(5, VoiceNarration[0]));
-                StartCoroutine(VoiceNarrationCoroutine(7.5f, VoiceNarration[1]));
-                StartCoroutine(VoiceNarrationCoroutine(11, VoiceNarration[2]));
-                StartCoroutine(VoiceNarrationCoroutine(15, VoiceNarration[3]));
-                StartCoroutine(VoiceNarrationCoroutine(19, VoiceNarration[4]));
+                StartCoroutine(VoiceNarrationCoroutine(10, VoiceNarration[0]));
+                StartCoroutine(VoiceNarrationCoroutine(12.5f, VoiceNarration[1]));
+                StartCoroutine(VoiceNarrationCoroutine(16, VoiceNarration[2]));
+                StartCoroutine(VoiceNarrationCoroutine(20, VoiceNarration[3]));
+                StartCoroutine(VoiceNarrationCoroutine(24, VoiceNarration[4]));
                 stopPlayingAudio = true;
             }
         }
@@ -231,7 +234,7 @@ public class GameManager : MonoBehaviour
 
     bool CheckAllPlayersConnected()
     {
-        if(syncedGameVariables._backupInt > 1) // was Avatars.Count // make < 2 when final test, to make sure computer is connected to log telemetry data. // was: syncedGameVariables._backupInt == 2
+        if(syncedGameVariables._backupInt > 0) // was Avatars.Count // make < 2 when final test, to make sure computer is connected to log telemetry data. // was: syncedGameVariables._backupInt == 2
         {
             return true;
         }

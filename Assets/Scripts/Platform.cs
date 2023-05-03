@@ -142,12 +142,12 @@ public class Platform : MonoBehaviour
 
         if (other.CompareTag("Player") && !playAudio)
         {
-            if(other.GetComponent<Player>().PlayerNumber == 1 && syncedPlatformVariables._isSolidPlayer1)
+            if(other.GetComponent<PlayerData>()._backupInt == 1 && syncedPlatformVariables._isSolidPlayer1)
             {
                 audioSource.PlayOneShot(SuccessAudio);
                 playAudio = true;
             }
-            else if (other.GetComponent<Player>().PlayerNumber == 2 && syncedPlatformVariables._isSolidPlayer1)
+            else if (other.GetComponent<PlayerData>()._backupInt == 2 && syncedPlatformVariables._isSolidPlayer1)
             {
                 audioSource.PlayOneShot(SuccessAudio);
                 playAudio = true;

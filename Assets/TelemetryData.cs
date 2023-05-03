@@ -24,14 +24,15 @@ public class TelemetryData : MonoBehaviour
     void Update()
     {
         if (Application.platform == RuntimePlatform.Android) { return; } // only computer does following:
+        if (!GameManager.GameStarted) { return; }
         avatars = GetComponent<GameManager>().Avatars;
 
         for (int i = 0; i < avatars.Count; i++) // maybe for each loop instead
         {
             RealtimeAvatar player = avatars[i];
             if (player.isOwnedLocallySelf) { return; }
-            int playerNumber = player.gameObject.GetComponent<Player>().PlayerNumber;
-            Debug.Log("PlayerNumber: " + playerNumber);
+            int playerNumber = player.gameObject.GetComponent<PlayerData>()._backupInt;
+            //Debug.Log("PlayerNumber: " + playerNumber);
 
             Vector3 headPos = player.gameObject.transform.Find("Head").transform.position;
             //Vector3 leftHand = player.gameObject.transform.Find("Left Hand").transform.position;
@@ -39,14 +40,19 @@ public class TelemetryData : MonoBehaviour
 
 
             //PlayerStat playerStat = player.gameObject.GetComponent<PlayerStat>();
-
+            if (playerNumber == 3) // if computer
+            {
+                //Debug.Log("P3");
+            }
 
             if (playerNumber == 1)
             {
+                //Debug.Log("P1");
                 File.AppendAllText(headPosPath1, Time.time.ToString() + " : " + headPos.x + " : " + headPos.y + " : " + headPos.z + "\n");
             }
             if (playerNumber == 2)
             {
+                //Debug.Log("P2");
                 File.AppendAllText(headPosPath2, Time.time.ToString() + " : " + headPos.x + " : " + headPos.y + " : " + headPos.z + "\n");
             }
 

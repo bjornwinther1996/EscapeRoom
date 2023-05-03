@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
     float fadeTimer;
 
     float previousYPos;
-    public int PlayerNumber;
+    //public int PlayerNumber; // Is now syncedPlayerData._BackupInt instead
 
     public Material Player1AvatarMat;
     public Material Player2AvatarMat;
@@ -51,10 +51,11 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        SetPlayerNumber(); // needs to be run before guard clause - so it can set PlayerNumber for ALL clients.
+        //if (Application.platform != RuntimePlatform.Android) { return; } // if computer - return
         SetHandsColor();
         SetAvatarColor();
         if (!GetComponent<RealtimeTransform>().isOwnedLocallySelf) return;
+        SetPlayerNumber(); // PlayerNumber is now set with sync variable and can therefore be set ownedlocally by client self.
 
         if (syncedPlayerData._isServer)
         {
@@ -189,13 +190,21 @@ public class Player : MonoBehaviour
 
     public void SetPlayerNumber()
     {
-        if (syncedPlayerData._isServer)
+        if (!GetComponent<RealtimeTransform>().isOwnedLocallySelf) return;
+        if (Application.platform != RuntimePlatform.Android) // if coomputer:
         {
-            PlayerNumber = 1;
+            //PlayerNumber = 3;
+            syncedPlayerData._backupInt = 3;
+        }
+        else if (syncedPlayerData._isServer)
+        {
+            //PlayerNumber = 1;
+            syncedPlayerData._backupInt = 1;
         }
         else
         { 
-            PlayerNumber = 2;
+            //PlayerNumber = 2;
+            syncedPlayerData._backupInt = 2;
         }
     }
 
