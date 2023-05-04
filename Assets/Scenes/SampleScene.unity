@@ -4185,7 +4185,7 @@ GameObject:
   - component: {fileID: 803289099}
   - component: {fileID: 803289098}
   m_Layer: 0
-  m_Name: PLayer2AreaHitbox
+  m_Name: Player2AreaHitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4438,7 +4438,7 @@ GameObject:
   - component: {fileID: 904457221}
   - component: {fileID: 904457220}
   m_Layer: 0
-  m_Name: PLayer1AreaHitbox
+  m_Name: Player1AreaHitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
