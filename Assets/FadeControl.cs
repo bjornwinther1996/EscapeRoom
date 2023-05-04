@@ -14,6 +14,8 @@ public class FadeControl : MonoBehaviour
     public GameObject ImageFadeCanvas;
     private Image imageComponent;
     private Color imageColor;
+    public GameObject PlayerObject;
+    private PlayerData syncedPlayerData;
 
     float timer;
     // Start is called before the first frame update
@@ -23,6 +25,7 @@ public class FadeControl : MonoBehaviour
         imageColor = Color.black;
         imageColor.a = 0f;
         imageComponent.color = imageColor;
+        syncedPlayerData = PlayerObject.GetComponent<PlayerData>();
 
         textComponent = UIText.GetComponent<TextMeshProUGUI>();
 
@@ -40,6 +43,28 @@ public class FadeControl : MonoBehaviour
             FadeScreen();
             textComponent.SetText("Move your head out of the wall!");
         }
+        if (other.gameObject.name == "Player1AreaHitbox")
+        {
+            if (syncedPlayerData._isServer) // If Player 1
+            {
+                ClearText();
+            }
+            else
+            {
+                textComponent.SetText("Move to the Yellow mist");
+            }
+        }
+        if (other.gameObject.name == "Player2AreaHitbox")
+        {
+            if (!syncedPlayerData._isServer) // If Player 2
+            {
+                ClearText();
+            }
+            else
+            {
+                textComponent.SetText("Move to the Blue mist");
+            }
+        }
 
     }
 
@@ -51,7 +76,15 @@ public class FadeControl : MonoBehaviour
         {
             //Debug.Log("OnTriggerExit Wall");
             ClearFade();
-            textComponent.SetText("");
+            ClearText();
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.name == "HeavenHitbox")
+        {
+            ClearFade();
         }
     }
 
@@ -70,5 +103,10 @@ public class FadeControl : MonoBehaviour
         imageColor.a = 0;
         imageComponent.color = imageColor;
         timer = 0;
+    }
+
+    private void ClearText()
+    {
+        textComponent.SetText("");
     }
 }

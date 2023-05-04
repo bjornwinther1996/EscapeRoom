@@ -738,6 +738,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UIText: {fileID: 1137281401938892997}
   ImageFadeCanvas: {fileID: 2487007196674547733}
+  PlayerObject: {fileID: 1077209293701824694}
 --- !u!1 &1077080539542466354
 GameObject:
   m_ObjectHideFlags: 0
