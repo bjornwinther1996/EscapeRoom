@@ -31,7 +31,7 @@ public class LeverBehaviour : MonoBehaviour
     public GameObject GameManagerReference;
 
     bool colorSet;
-
+    public GameObject ElevatorObj;
 
 
     // Start is called before the first frame update
@@ -41,13 +41,14 @@ public class LeverBehaviour : MonoBehaviour
         syncedLeverData = GetComponent<LeverData>();
         audioSource = GetComponent<AudioSource>();
         GameManagerReference = GameObject.Find("GameManager");
+        ElevatorObj = GameObject.Find("elevator_v2");
     }
 
     // Update is called once per frame
     void Update()
     {
-        //CheckForVRInput();
-        CheckForResetLever();
+        CheckElevatorPosition(); // Sets resetCondition for lever to true.
+        CheckForResetLever(); // Resets levers
 
         if (syncedLeverData._leversPulled == 1 && !colorSet)
         {
@@ -55,6 +56,11 @@ public class LeverBehaviour : MonoBehaviour
             mat.SetColor("_EmissionColor", Color.green);
             audioSource.PlayOneShot(pulled, 0.7f);
             colorSet = true;
+        }
+        else if (syncedLeverData._leversPulled == 0)
+        {
+            mat = meshRenderer.material;
+            mat.SetColor("_EmissionColor", Color.red);
         }
     }
 
@@ -89,32 +95,40 @@ public class LeverBehaviour : MonoBehaviour
 
     private void CheckForResetLever() // still needs adjustment
     {
-
         if (resetCondition)
         {
+            if (GameManager.IsServer) // only server does this
+            {
+                gameObject.GetComponent<RealtimeTransform>().RequestOwnership();
 
-            if (this.gameObject.name == "Lever_front(Clone)")
-            {
-                this.transform.rotation = Quaternion.Euler(45, 0, 0);
+                if (this.gameObject.name == "Lever_front(Clone)")
+                {
+                    this.transform.rotation = Quaternion.Euler(45, 0, 0);
+                }
+                else if (this.gameObject.name == "Lever_back(Clone)")
+                {
+                    this.transform.rotation = Quaternion.Euler(45, 0, 0);
+                }
+                else if (this.gameObject.name == "Lever_left(Clone)")
+                {
+                    this.transform.rotation = Quaternion.Euler(45, 0, 0);
+                }
+                else
+                {
+                    this.transform.rotation = Quaternion.Euler(45, 0, 0);
+                }
+                syncedLeverData._leversPulled = 0;
             }
-            else if (this.gameObject.name == "Lever_back(Clone)")
-            {
-                this.transform.rotation = Quaternion.Euler(45, 0, 0);
-            }
-            else if (this.gameObject.name == "Lever_left(Clone)")
-            {
-                this.transform.rotation = Quaternion.Euler(45, 0, 0);
-            }
-            else
-            {
-                this.transform.rotation = Quaternion.Euler(45, 0, 0);
-            }
+            wasPulled = false; // needs to be reset for both client and server
+            resetCondition = false; // needs to be reset for both client and server
+        }
+    }
 
-            syncedLeverData._leversPulled--;
-            mat = meshRenderer.material;
-            mat.SetColor("_EmissionColor", Color.red);
-            wasPulled = false;
-            resetCondition = false;
+    public void CheckElevatorPosition()
+    {
+        if (ElevatorObj.transform.position.y < -90)
+        {
+            resetCondition = true;
         }
     }
 }

@@ -147,7 +147,7 @@ public class Platform : MonoBehaviour
                 audioSource.PlayOneShot(SuccessAudio);
                 playAudio = true;
             }
-            else if (other.GetComponent<PlayerData>()._backupInt == 2 && syncedPlatformVariables._isSolidPlayer1)
+            else if (other.GetComponent<PlayerData>()._backupInt == 2 && syncedPlatformVariables._isSolidPlayer2)
             {
                 audioSource.PlayOneShot(SuccessAudio);
                 playAudio = true;
