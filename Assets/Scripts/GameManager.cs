@@ -40,6 +40,9 @@ public class GameManager : MonoBehaviour
     public AudioClip[] VoiceNarration;
     bool stopPlayingAudio;
     public static bool GameStarted; // set by syncedGameVariables._backupBool // set when both players are connected and platforms are instantiated
+    public GameObject HellDistributedScene;
+    public GameObject HellSharedScene;
+
 
 
     void Start()
@@ -77,9 +80,16 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        //Set static variable according to Distributed/Shared condition -- Also enable/disable correct hellscenes accordingly
         if (IsTaskShared && !IsTaskSharedStatic)
         {
             IsTaskSharedStatic = true;
+            HellSharedScene.SetActive(true);
+            HellDistributedScene.SetActive(false);
+        }else if (!IsTaskShared)
+        {
+            HellSharedScene.SetActive(false);
+            HellDistributedScene.SetActive(true);
         }
 
         if (syncedGameVariables._backupBool) // If both players connected and platforms instantiated // If started basically:
