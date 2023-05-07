@@ -41,36 +41,39 @@ public class ElevatorBehaviour : MonoBehaviour
 
     void Update()
     {
-        if (elevatorData._goUp)
+        if (GameManager.IsServer)
         {
-            eleAnim.SetBool("Open", false);
-            gameObject.GetComponent<RealtimeTransform>().RequestOwnership();
-            transform.position = Vector3.MoveTowards(transform.position, startPos, 0.1f);
-
-            if (transform.position == startPos)
+            if (elevatorData._goUp)
             {
+                eleAnim.SetBool("Open", false);
                 gameObject.GetComponent<RealtimeTransform>().RequestOwnership();
-                transform.position = startPos;
-                elevatorData._goUp = false;
-                eleAnim.SetBool("Open", true);
+                transform.position = Vector3.MoveTowards(transform.position, startPos, 0.1f);
+
+                if (transform.position == startPos)
+                {
+                    gameObject.GetComponent<RealtimeTransform>().RequestOwnership();
+                    transform.position = startPos;
+                    elevatorData._goUp = false;
+                    eleAnim.SetBool("Open", true);
+                }
+            }
+
+            if (elevatorData._goDown)
+            {
+                eleAnim.SetBool("Open", false);
+                gameObject.GetComponent<RealtimeTransform>().RequestOwnership();
+                transform.position = Vector3.MoveTowards(transform.position, endPos, 0.1f);
+
+                if (transform.position == endPos)
+                {
+                    gameObject.GetComponent<RealtimeTransform>().RequestOwnership();
+                    transform.position = endPos;
+                    elevatorData._goDown = false;
+                    eleAnim.SetBool("Open", true);
+                }
             }
         }
-
-        if (elevatorData._goDown)
-        {
-            eleAnim.SetBool("Open", false);
-            gameObject.GetComponent<RealtimeTransform>().RequestOwnership();
-            transform.position = Vector3.MoveTowards(transform.position, endPos, 0.1f);
-
-            if (transform.position == endPos)
-            {
-                gameObject.GetComponent<RealtimeTransform>().RequestOwnership();
-                transform.position = endPos;
-                elevatorData._goDown = false;
-                eleAnim.SetBool("Open", true);
-            }
-        }
-
+        
     }
 }
 
