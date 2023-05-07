@@ -6,10 +6,21 @@ using Normal.Realtime;
 public class ElevatorBehaviour : MonoBehaviour
 {
 
+    public bool openDoors = false;
+    public bool closeDoors = false;
+
+    public GameObject doorLeft;
+    public GameObject doorRight;
+
     public ElevatorData elevatorData;
 
     Vector3 startPos;
     Vector3 endPos;
+
+    Vector3 doorLeftStartPos;
+    Vector3 doorRightStartPos;
+    Vector3 doorLeftEndPos;
+    Vector3 doorRightEndPos;
 
     float timer = 0;
 
@@ -24,6 +35,12 @@ public class ElevatorBehaviour : MonoBehaviour
         startPos = new Vector3(this.transform.position.x, 2.086f, this.transform.position.z);
         endPos = new Vector3(this.transform.position.x, -100.1f, this.transform.position.z);
 
+        doorLeftEndPos = new Vector3(doorLeft.transform.position.x, doorLeft.transform.position.y, doorLeft.transform.position.z - 0.75f);
+        doorRightEndPos = new Vector3(doorRight.transform.position.x, doorRight.transform.position.y, doorRight.transform.position.z + 0.75f);
+
+        doorRightStartPos = doorRight.transform.position;
+        doorLeftStartPos = doorLeft.transform.position;
+
         elevatorData = GetComponent<ElevatorData>();
         gameObject.GetComponent<RealtimeTransform>().RequestOwnership();
     }
@@ -37,6 +54,8 @@ public class ElevatorBehaviour : MonoBehaviour
 
         MoveUp();
         MoveDown();
+        OpenDoors();
+        CloseDoors();
 
         //transform.position = Vector3.Lerp(startPos, endPos, timer / 25);
         //timer += Time.deltaTime;
@@ -52,9 +71,10 @@ public class ElevatorBehaviour : MonoBehaviour
                 transform.position = Vector3.Lerp(endPos, startPos, timer / 25);
                 timer += Time.deltaTime;
             }
-            else
+            else if (transform.position == startPos) { }
             {
                 elevatorData._goUp = false;
+                timer = 0;
             }
             
             
@@ -70,17 +90,62 @@ public class ElevatorBehaviour : MonoBehaviour
                 transform.position = Vector3.Lerp(startPos, endPos, timer / 25);
                 timer += Time.deltaTime;
             }
-            else
+            /*else if (transform.position == endPos)
             {
                 elevatorData._goDown = false;
             }
+            */
             
         }
     }
 
+    private void OpenDoors()
+    {
+        //Vector3 doorLeftEndPos = new Vector3(doorLeft.transform.position.x, doorLeft.transform.position.y, doorLeft.transform.position.z);
+        //doorLeftEndPos.z += 2;
+
+        if (openDoors && !closeDoors)
+        {
+            if (doorLeft.transform.position != doorLeftEndPos && doorRight.transform.position != doorRightEndPos)
+            {
+                doorLeft.transform.position = Vector3.Lerp(doorLeft.transform.position, doorLeftEndPos, timer / 50);
+                doorRight.transform.position = Vector3.Lerp(doorRight.transform.position, doorRightEndPos, timer / 50);
+                timer += Time.deltaTime;
+            }
+            else
+            {
+                openDoors = false;
+                timer = 0;
+            }
+            
+        }
+       
+    }
+
+    private void CloseDoors()
+    {
+        //Vector3 doorLeftEndPos = new Vector3(doorLeft.transform.position.x, doorLeft.transform.position.y, doorLeft.transform.position.z);
+        //doorLeftEndPos.z += 2;
+
+        if (closeDoors && !openDoors)
+        {
+            if (doorLeft.transform.position != doorLeftStartPos && doorRight.transform.position != doorRightStartPos)
+            {
+                doorLeft.transform.position = Vector3.Lerp(doorLeft.transform.position, doorLeftStartPos, timer / 50);
+                doorRight.transform.position = Vector3.Lerp(doorRight.transform.position, doorRightStartPos, timer / 50);
+                timer += Time.deltaTime;
+            }
+            else
+            {
+                closeDoors = false;
+                timer = 0;
+            }
+
+        }
+
+    }
+
 }
-
-
 
 
     /*
