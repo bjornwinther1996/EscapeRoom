@@ -9,6 +9,9 @@ public class ButtonBehaviour : MonoBehaviour
     public GameManager gameManager;
     public ElevatorData elevatorData;
     public Stopwatch stopwatch;
+
+    public const float startPosY = 2.086f;
+    public const float endPosY = -100.1f;
     
     public float waitTime = 2f;
     
@@ -29,7 +32,6 @@ public class ButtonBehaviour : MonoBehaviour
         isPressed = false;
         ElevatorAnims = GetComponentInParent<Animator>();
         elevatorData = GetComponentInParent<ElevatorData>();
-
     }
 
     void FixedUpdate()
@@ -109,6 +111,11 @@ public class ButtonBehaviour : MonoBehaviour
     private IEnumerator WaitAndReset()
     {
         yield return new WaitForSeconds(2f);
+    }
+
+    private void LerpElevatorUp()
+    {
+        
     }
 
 }
