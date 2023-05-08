@@ -98,7 +98,7 @@ public class Player : MonoBehaviour
     public void ActivateFadeWhenFalling()
     {
         if (!GetComponent<RealtimeTransform>().isOwnedLocallySelf) return;
-        if (!ChangeInYPos()) { return; } // Return if no change in Y pos.
+        if (!fallinDownwards()) { return; } // Return if no change in Y pos. -- Changed to check if falling only. Not positive y change-
         //Debug.Log("Change in Y pos");
 
         if (transform.position.y > -89 && transform.position.y < -3)
@@ -162,11 +162,25 @@ public class Player : MonoBehaviour
 
         if (other.CompareTag("HellHitbox"))
         {
-            imageColor.a = 0;
-            imageComponent.color = imageColor;
-            fadeTimer = 0;
+            ClearFade();
         }
 
+        if (other.gameObject.name == "HeavenHitbox")
+        {
+            ClearFade();
+            if (previousYPos != transform.position.y)
+            {
+                previousYPos = transform.position.y;
+            }
+        }
+
+    }
+
+    public void ClearFade()
+    {
+        imageColor.a = 0;
+        imageComponent.color = imageColor;
+        fadeTimer = 0;
     }
 
     private void OnTriggerStay(Collider other)
@@ -186,6 +200,19 @@ public class Player : MonoBehaviour
     public bool ChangeInYPos()
     {
         if (previousYPos !=transform.position.y)
+        {
+            previousYPos = transform.position.y;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public bool fallinDownwards()
+    {
+        if (previousYPos > transform.position.y)
         {
             previousYPos = transform.position.y;
             return true;

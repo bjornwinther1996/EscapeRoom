@@ -22,7 +22,7 @@ public class SetText : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (ElevatorObj.GetComponent<ElevatorData>()._goDown)
+        if (syncedGameManagerVars._level == 6)
         {
             textObj.SetText("Elevator is coming!");
         }
