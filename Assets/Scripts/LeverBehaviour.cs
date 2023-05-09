@@ -33,6 +33,7 @@ public class LeverBehaviour : MonoBehaviour
     bool colorSet;
     public GameObject ElevatorObj;
     public int PlayerLever;
+    Quaternion startRotation;
 
 
     // Start is called before the first frame update
@@ -43,6 +44,7 @@ public class LeverBehaviour : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         GameManagerReference = GameObject.Find("GameManager");
         ElevatorObj = GameObject.Find("elevator_v2");
+        startRotation = transform.rotation;
     }
 
     // Update is called once per frame
@@ -111,22 +113,7 @@ public class LeverBehaviour : MonoBehaviour
             if (!wasPulled && other.tag == "Hands" && (other.GetComponentInParent<PlayerData>()._backupBool || other.GetComponentInParent<PlayerData>()._isReady))
             {
                 gameObject.GetComponent<RealtimeTransform>().RequestOwnership();
-                if (this.gameObject.name == "Lever_front(Clone)")
-                {
-                    this.transform.rotation = Quaternion.Euler(135, 180, 0);
-                }
-                else if (this.gameObject.name == "Lever_back(Clone)")
-                {
-                    this.transform.rotation = Quaternion.Euler(135, 0, 0);
-                }
-                else if (this.gameObject.name == "Lever_left(Clone)")
-                {
-                    this.transform.rotation = Quaternion.Euler(135, 90, 0);
-                }
-                else
-                {
-                    this.transform.rotation = Quaternion.Euler(135, 270, 0);
-                }
+                transform.rotation = startRotation;
                 if (!other.GetComponent<RealtimeTransform>().isOwnedRemotelySelf) { return; }
                 syncedLeverData._leversPulled = 1; // Now means that its pulled and should set color.
                 GameManagerReference.GetComponent<GameManagerData>()._level++; // A variable to keep track of how many levers has been pulled.
@@ -190,6 +177,7 @@ public class LeverBehaviour : MonoBehaviour
             }
             wasPulled = false; // needs to be reset for both client and server
             resetCondition = false; // needs to be reset for both client and server
+            colorSet = false;
         }
     }
 

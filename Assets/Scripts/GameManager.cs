@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
             
         if (Application.platform != RuntimePlatform.Android && !computerRigPositioned)
         {
-            //VRRig.transform.position = new Vector3(-0.9f, -200, 0);
+            VRRig.transform.position = new Vector3(-0.9f, -200, 0);
             //return;
             computerRigPositioned = true;
             Debug.Log("computerRigPOsitioned");

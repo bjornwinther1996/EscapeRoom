@@ -26,16 +26,19 @@ public class HandCollision : MonoBehaviour
         {
             if (other.CompareTag("LeverBack") || other.CompareTag("LeverFront") || other.CompareTag("LeverLeft") || other.CompareTag("LeverRight"))
             {
-                if (gameObject.GetComponentInParent<PlayerData>()._isServer && other.GetComponent<LeverBehaviour>().PlayerLever == 2)
+                if (gameObject.GetComponentInParent<PlayerData>()._isServer && other.gameObject.GetComponent<LeverBehaviour>().PlayerLever == 2)
                 {
+                    Debug.Log("1");
                     fadeControl.SetText("Only your partner can activate this lever");
                 }
-                if (!gameObject.GetComponentInParent<PlayerData>()._isServer && other.GetComponent<LeverBehaviour>().PlayerLever == 1)
+                if (!gameObject.GetComponentInParent<PlayerData>()._isServer && other.gameObject.GetComponent<LeverBehaviour>().PlayerLever == 1)
                 {
+                    Debug.Log("2");
                     fadeControl.SetText("Only your partner can activate this lever");
                 }
                 else
                 {
+                    Debug.Log("3");
                     fadeControl.SetText("Else trigger");
                 }
             }
