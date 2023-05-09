@@ -127,7 +127,7 @@ public class LeverBehaviour : MonoBehaviour
                 {
                     this.transform.rotation = Quaternion.Euler(135, 270, 0);
                 }
-                if (!other.GetComponent<RealtimeTransform>().isOwnedLocallySelf) { return; }
+                if (!other.GetComponent<RealtimeTransform>().isOwnedRemotelySelf) { return; }
                 syncedLeverData._leversPulled = 1; // Now means that its pulled and should set color.
                 GameManagerReference.GetComponent<GameManagerData>()._level++; // A variable to keep track of how many levers has been pulled.
                 wasPulled = true;

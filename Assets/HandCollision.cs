@@ -21,27 +21,54 @@ public class HandCollision : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!GetComponent<RealtimeTransform>().isOwnedLocallySelf) return;
-        if (other.CompareTag("LeverBack") || other.CompareTag("LeverFront") || other.CompareTag("LeverLeft") || other.CompareTag("LeverRight"))
+        if (GetComponent<RealtimeTransform>().isOwnedLocallySelf)
         {
-            if (gameObject.GetComponentInParent<PlayerData>()._isServer && other.GetComponent<LeverBehaviour>().PlayerLever == 2)
+            if (other.CompareTag("LeverBack") || other.CompareTag("LeverFront") || other.CompareTag("LeverLeft") || other.CompareTag("LeverRight"))
             {
-                fadeControl.SetText("Only your partner can activate this lever");
+                if (gameObject.GetComponentInParent<PlayerData>()._isServer && other.GetComponent<LeverBehaviour>().PlayerLever == 2)
+                {
+                    fadeControl.SetText("Only your partner can activate this lever");
+                }
+                else if (!gameObject.GetComponentInParent<PlayerData>()._isServer && other.GetComponent<LeverBehaviour>().PlayerLever == 1)
+                {
+                    fadeControl.SetText("Only your partner can activate this lever");
+                }
             }
-            else if (!gameObject.GetComponentInParent<PlayerData>()._isServer && other.GetComponent<LeverBehaviour>().PlayerLever == 1)
+        }
+        else if (GetComponent<RealtimeTransform>().isOwnedRemotelySelf)
+        {
+            if (other.CompareTag("LeverBack") || other.CompareTag("LeverFront") || other.CompareTag("LeverLeft") || other.CompareTag("LeverRight"))
             {
-                fadeControl.SetText("Only your partner can activate this lever");
+                if (gameObject.GetComponentInParent<PlayerData>()._isServer && other.GetComponent<LeverBehaviour>().PlayerLever == 2)
+                {
+                    fadeControl.SetText("Only your partner can activate this lever");
+                }
+                else if (!gameObject.GetComponentInParent<PlayerData>()._isServer && other.GetComponent<LeverBehaviour>().PlayerLever == 1)
+                {
+                    fadeControl.SetText("Only your partner can activate this lever");
+                }
             }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (!GetComponent<RealtimeTransform>().isOwnedLocallySelf) return;
-        if (other.CompareTag("LeverBack") || other.CompareTag("LeverFront") || other.CompareTag("LeverLeft") || other.CompareTag("LeverRight"))
+        if (GetComponent<RealtimeTransform>().isOwnedLocallySelf)
         {
-            Debug.Log("Stopped touching lever");
-            fadeControl.ClearText();
+            if (other.CompareTag("LeverBack") || other.CompareTag("LeverFront") || other.CompareTag("LeverLeft") || other.CompareTag("LeverRight"))
+            {
+                Debug.Log("Stopped touching lever");
+                fadeControl.ClearText();
+            }
         }
+        else if (GetComponent<RealtimeTransform>().isOwnedRemotelySelf)
+        {
+            if (other.CompareTag("LeverBack") || other.CompareTag("LeverFront") || other.CompareTag("LeverLeft") || other.CompareTag("LeverRight"))
+            {
+                Debug.Log("Stopped touching lever");
+                fadeControl.ClearText();
+            }
+        }
+
     }
 }
