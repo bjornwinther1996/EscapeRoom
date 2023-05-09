@@ -67,8 +67,7 @@ public class LeverBehaviour : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if(!other.CompareTag("Hands")) { return;  }
-        Debug.Log("HandsTouching");
+        /*
         if(other.GetComponentInParent<PlayerData>()._isServer && PlayerLever == 2)
         {
             Debug.Log("First return");
@@ -78,10 +77,66 @@ public class LeverBehaviour : MonoBehaviour
         {
             Debug.Log("Secondf return");
             return;
+        }*/
+
+        if (other.GetComponentInParent<PlayerData>()._isServer && PlayerLever == 1)
+        {
+            if (!wasPulled && other.tag == "Hands" && (other.GetComponentInParent<PlayerData>()._backupBool || other.GetComponentInParent<PlayerData>()._isReady))
+            {
+                gameObject.GetComponent<RealtimeTransform>().RequestOwnership();
+                if (this.gameObject.name == "Lever_front(Clone)")
+                {
+                    this.transform.rotation = Quaternion.Euler(135, 180, 0);
+                }
+                else if (this.gameObject.name == "Lever_back(Clone)")
+                {
+                    this.transform.rotation = Quaternion.Euler(135, 0, 0);
+                }
+                else if (this.gameObject.name == "Lever_left(Clone)")
+                {
+                    this.transform.rotation = Quaternion.Euler(135, 90, 0);
+                }
+                else
+                {
+                    this.transform.rotation = Quaternion.Euler(135, 270, 0);
+                }
+                if (!other.GetComponentInParent<RealtimeTransform>().isOwnedLocallySelf) return;
+                syncedLeverData._leversPulled = 1; // Now means that its pulled and should set color.
+                GameManagerReference.GetComponent<GameManagerData>()._level++; // A variable to keep track of how many levers has been pulled.
+                wasPulled = true;
+            }
         }
+        if (!other.GetComponentInParent<PlayerData>()._isServer && PlayerLever == 2)
+        {
+            if (!wasPulled && other.tag == "Hands" && (other.GetComponentInParent<PlayerData>()._backupBool || other.GetComponentInParent<PlayerData>()._isReady))
+            {
+                gameObject.GetComponent<RealtimeTransform>().RequestOwnership();
+                if (this.gameObject.name == "Lever_front(Clone)")
+                {
+                    this.transform.rotation = Quaternion.Euler(135, 180, 0);
+                }
+                else if (this.gameObject.name == "Lever_back(Clone)")
+                {
+                    this.transform.rotation = Quaternion.Euler(135, 0, 0);
+                }
+                else if (this.gameObject.name == "Lever_left(Clone)")
+                {
+                    this.transform.rotation = Quaternion.Euler(135, 90, 0);
+                }
+                else
+                {
+                    this.transform.rotation = Quaternion.Euler(135, 270, 0);
+                }
+                if (!other.GetComponentInParent<RealtimeTransform>().isOwnedLocallySelf) return;
+                syncedLeverData._leversPulled = 1; // Now means that its pulled and should set color.
+                GameManagerReference.GetComponent<GameManagerData>()._level++; // A variable to keep track of how many levers has been pulled.
+                wasPulled = true;
+            }
+        }
+
+        /*
         if (!wasPulled && other.tag == "Hands" && (other.GetComponentInParent<PlayerData>()._backupBool || other.GetComponentInParent<PlayerData>()._isReady))
         {
-            //Debug.Log("OnTrigger - If Passed");
             gameObject.GetComponent<RealtimeTransform>().RequestOwnership();
             if (this.gameObject.name == "Lever_front(Clone)")
             {
@@ -103,7 +158,7 @@ public class LeverBehaviour : MonoBehaviour
             syncedLeverData._leversPulled = 1; // Now means that its pulled and should set color.
             GameManagerReference.GetComponent<GameManagerData>()._level++; // A variable to keep track of how many levers has been pulled.
             wasPulled = true;
-        }
+        }*/
     }
 
     private void CheckForResetLever() // still needs adjustment

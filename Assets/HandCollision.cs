@@ -28,7 +28,7 @@ public class HandCollision : MonoBehaviour
             {
                 fadeControl.SetText("Only your partner can activate this lever");
             }
-            else if (!gameObject.GetComponentInParent<PlayerData>() && other.GetComponent<LeverBehaviour>().PlayerLever == 1)
+            else if (!gameObject.GetComponentInParent<PlayerData>()._isServer && other.GetComponent<LeverBehaviour>().PlayerLever == 1)
             {
                 fadeControl.SetText("Only your partner can activate this lever");
             }
