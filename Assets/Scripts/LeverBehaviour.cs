@@ -81,7 +81,7 @@ public class LeverBehaviour : MonoBehaviour
             return;
         }*/
 
-        if (other.GetComponentInParent<PlayerData>()._isServer && PlayerLever == 1)
+        if (other.GetComponentInParent<PlayerData>()._isServer && gameObject.GetComponent<LeverIdData>()._leverId == 1)
         {
             if (!wasPulled && other.tag == "Hands" && (other.GetComponentInParent<PlayerData>()._backupBool || other.GetComponentInParent<PlayerData>()._isReady))
             {
@@ -108,7 +108,7 @@ public class LeverBehaviour : MonoBehaviour
                 wasPulled = true;
             }
         }
-        if (!other.GetComponentInParent<PlayerData>()._isServer && PlayerLever == 2)
+        if (!other.GetComponentInParent<PlayerData>()._isServer && gameObject.GetComponent<LeverIdData>()._leverId == 1)
         {
             if (!wasPulled && other.tag == "Hands" && (other.GetComponentInParent<PlayerData>()._backupBool || other.GetComponentInParent<PlayerData>()._isReady))
             {
@@ -129,7 +129,7 @@ public class LeverBehaviour : MonoBehaviour
                 {
                     this.transform.rotation = Quaternion.Euler(135, 270, 0);
                 }
-                if (!other.GetComponent<RealtimeTransform>().isOwnedRemotelySelf) { return; }
+                if (!other.GetComponent<RealtimeTransform>().isOwnedLocallySelf) { return; }
                 syncedLeverData._leversPulled = 1; // Now means that its pulled and should set color.
                 GameManagerReference.GetComponent<GameManagerData>()._level++; // A variable to keep track of how many levers has been pulled.
                 wasPulled = true;
