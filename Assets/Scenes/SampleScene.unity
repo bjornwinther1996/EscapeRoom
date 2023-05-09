@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.35743085, g: 0.6972783, b: 0.72365904, a: 1}
+  m_IndirectSpecularColor: {r: 0.3575201, g: 0.6973908, b: 0.72364134, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6196,6 +6196,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 911c30b63045f4aa183f98cf105b9f78, type: 3}
   HellDistributedScene: {fileID: 784818042}
   HellSharedScene: {fileID: 1668424225}
+  gate: {fileID: 919132149059226130}
+  anim: {fileID: 0}
 --- !u!114 &1231007734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11810,6 +11812,8 @@ GameObject:
   m_Component:
   - component: {fileID: 543450652729233576}
   - component: {fileID: 919132149059226131}
+  - component: {fileID: 919132149059226134}
+  - component: {fileID: 919132149059226133}
   - component: {fileID: 919132149059226132}
   m_Layer: 0
   m_Name: fence_gate
@@ -11847,11 +11851,54 @@ MonoBehaviour:
   m_GameObject: {fileID: 919132149059226130}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4bd4ea5d19b6de4099178fcc63dbb16, type: 3}
+  m_Script: {fileID: -1029778088, guid: c424820a8880b8845bda10ec0b41507e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gate: {fileID: 0}
-  access: 0
+  _interpolate: 1
+  _syncPosition: 1
+  _syncRotation: 1
+  _syncScale: 1
+  _syncVelocity: 1
+  _maintainOwnershipWhileSleeping: 0
+--- !u!114 &919132149059226133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132149059226130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -363599832, guid: c424820a8880b8845bda10ec0b41507e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _realtime: {fileID: 120883204}
+  _sceneViewUUID: 
+  _viewUUID: be537226-6267-4eb6-ab3c-fc5de3686755
+  _sceneViewPreventOwnershipTakeover: 0
+  _sceneViewDestroyWhenOwnerOrLastClientLeaves: 1
+  _sceneViewDestroyWhenOwnerOrLastClientLeavesMigrated: 1
+  _sceneViewDestroyWhenLastClientLeaves: 1
+  _components:
+  - componentID: 1
+    component: {fileID: 919132149059226132}
+  _childViews: []
+--- !u!54 &919132149059226134
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132149059226130}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!4 &1059076381800461571
 Transform:
   m_ObjectHideFlags: 0
@@ -12855,7 +12902,6 @@ GameObject:
   - component: {fileID: 7403526565660010994}
   - component: {fileID: 2615340721094717431}
   - component: {fileID: 4182108827909625955}
-  - component: {fileID: 7403526565660010995}
   m_Layer: 0
   m_Name: column
   m_TagString: Untagged
@@ -14029,7 +14075,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3837416906381996205}
-  - component: {fileID: 4060447581940497069}
   m_Layer: 0
   m_Name: fence_gate
   m_TagString: Untagged
@@ -14037,22 +14082,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!54 &4060447581940497069
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4060447581940497068}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &4076672184151709487
 GameObject:
   m_ObjectHideFlags: 0
@@ -14082,7 +14111,6 @@ GameObject:
   - component: {fileID: 8853851800047556001}
   - component: {fileID: 522746345164817360}
   - component: {fileID: 3423649894871173981}
-  - component: {fileID: 8853851800047556002}
   m_Layer: 0
   m_Name: column2
   m_TagString: Untagged
@@ -15293,7 +15321,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4370644161677647342}
-  - component: {fileID: 5402310234672881640}
   m_Layer: 0
   m_Name: fence_gate1
   m_TagString: Untagged
@@ -15301,22 +15328,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!54 &5402310234672881640
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5402310234672881639}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!23 &5411890803644054031
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -16930,22 +16941,6 @@ Transform:
   m_Father: {fileID: 543450652729233576}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &7403526565660010995
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2856176046497899547}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!4 &7424600827070731948
 Transform:
   m_ObjectHideFlags: 0
@@ -18173,22 +18168,6 @@ Transform:
   m_Father: {fileID: 543450652729233576}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &8853851800047556002
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4107697447186891208}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!23 &8887534507887105061
 MeshRenderer:
   m_ObjectHideFlags: 0
