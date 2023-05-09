@@ -190,6 +190,8 @@ GameObject:
   - component: {fileID: 8585496390382190663}
   - component: {fileID: -8872705575890542639}
   - component: {fileID: 6357762712810839069}
+  - component: {fileID: 3403508027005868271}
+  - component: {fileID: -5353194354011461043}
   m_Layer: 0
   m_Name: Lever_right
   m_TagString: LeverRight
@@ -289,6 +291,8 @@ MonoBehaviour:
     component: {fileID: 0}
   - componentID: 3
     component: {fileID: -8872705575890542639}
+  - componentID: 4
+    component: {fileID: 3403508027005868271}
   _childViews:
   - componentID: 1
     component: {fileID: 5423783325558103954}
@@ -328,6 +332,8 @@ MonoBehaviour:
   mat: {fileID: 0}
   meshRenderer: {fileID: 5423783325131337736}
   GameManagerReference: {fileID: 0}
+  ElevatorObj: {fileID: 0}
+  PlayerLever: 0
 --- !u!82 &5423783326633592435
 AudioSource:
   m_ObjectHideFlags: 0
@@ -464,3 +470,30 @@ MonoBehaviour:
   _leverSync: {fileID: 0}
   _leversPulled: 0
   _previousLeversPulled: 0
+--- !u!114 &3403508027005868271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5423783326633592432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2172f569220550147a0bf79f9f091383, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-5353194354011461043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5423783326633592432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7aa1fc38b22d804a9a47af8442ae805, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _leverIdSync: {fileID: 0}
+  _leverId: 0
+  _previousLeverId: 0

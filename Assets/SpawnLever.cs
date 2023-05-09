@@ -72,6 +72,7 @@ public class SpawnLever : MonoBehaviour
                     //lever.transform.rotation = Quaternion.Euler(0.5f, 0, 0);
                 }
                 runOnce = true;
+                lever.GetComponent<LeverIdData>()._leverId = Player;
                 lever.GetComponent<LeverBehaviour>().PlayerLever = Player;
             }
             
