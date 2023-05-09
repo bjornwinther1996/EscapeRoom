@@ -108,7 +108,7 @@ public class LeverBehaviour : MonoBehaviour
                 wasPulled = true;
             }
         }
-        if (!other.GetComponentInParent<PlayerData>()._isServer && gameObject.GetComponent<LeverIdData>()._leverId == 1)
+        if (!other.GetComponentInParent<PlayerData>()._isServer && gameObject.GetComponent<LeverIdData>()._leverId == 2)
         {
             if (!wasPulled && other.tag == "Hands" && (other.GetComponentInParent<PlayerData>()._backupBool || other.GetComponentInParent<PlayerData>()._isReady))
             {
