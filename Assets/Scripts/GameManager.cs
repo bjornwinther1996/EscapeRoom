@@ -43,6 +43,12 @@ public class GameManager : MonoBehaviour
     public GameObject HellDistributedScene;
     public GameObject HellSharedScene;
 
+    public GameObject gate;
+    public Animator anim;
+
+    bool runOnceOpen = false;
+    bool runOnceClose = false;
+
 
 
     void Start()
@@ -50,12 +56,15 @@ public class GameManager : MonoBehaviour
         syncedGameVariables = GetComponent<GameManagerData>();
         PlatformManagerScript = PlatformManagerObject.GetComponent<PlatformManager>();
         stopwatch = GetComponent<Stopwatch>();
+        anim = gate.GetComponent<Animator>();
+
+        PlayOpenGateAnimation();
 
     }
     
     void Update()
     {
-
+            
         if (Application.platform != RuntimePlatform.Android && !computerRigPositioned)
         {
             VRRig.transform.position = new Vector3(-0.9f, -200, 0);
@@ -140,6 +149,8 @@ public class GameManager : MonoBehaviour
                 PlatformManagerScript.StartCoroutine(PlatformManagerScript.ResetLocalPlatformVariables(7));
                 PlatformManagerScript.StartCoroutine(PlatformManagerScript.ResetMaterial(8)); // Only for server // Also Sets IsResetFinished = true // if this timer is adjusted - remember to adjust for client accordingly (in Platform)
                 //Debug.Log("GAME MANAGER FAIL CONDITION: " + PlatformManagerScript.RowIndex);
+                runOnceOpen = false;
+                runOnceClose = false;
                 Platform.NumberOfPlatformsDestroyed = 0;
             }
             else if(PlatformManager.isResetFinished) // RUNNING ALL THE TIME IF PLAYERS HAVE NOT FAILED:
@@ -259,6 +270,38 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
         AudioObj.GetComponent<AudioSource>().PlayOneShot(narrationPart);
+    }
+
+    public void PlayOpenGateAnimation()
+    {
+        anim.SetBool("accessToHeaven", true);
+    }
+
+    public void PlayCloseGateAnimation()
+    {
+        anim.SetBool("accessToHeaven", false);
+    }
+
+    public void checkForWin()
+    {
+
+        if (PlatformManagerScript.RowIndex >= 10)
+        {
+            if (!runOnceOpen)
+            {
+                PlayOpenGateAnimation();
+                runOnceOpen = true;
+            }
+        }
+        else
+        {   
+            if (!runOnceClose)
+            {
+                PlayCloseGateAnimation();
+                runOnceClose = true;
+            }
+
+        }
     }
 
 }
