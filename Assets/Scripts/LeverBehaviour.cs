@@ -32,6 +32,7 @@ public class LeverBehaviour : MonoBehaviour
 
     bool colorSet;
     public GameObject ElevatorObj;
+    public int PlayerLever;
 
 
     // Start is called before the first frame update
@@ -66,6 +67,14 @@ public class LeverBehaviour : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+        if(other.GetComponent<PlayerData>()._isServer && PlayerLever == 2)
+        {
+            return;
+        }
+        else if (!other.GetComponent<PlayerData>()._isServer && PlayerLever == 1)
+        {
+            return;
+        }
         if (!wasPulled && other.tag == "Hands" && (other.GetComponentInParent<PlayerData>()._backupBool || other.GetComponentInParent<PlayerData>()._isReady))
         {
             //Debug.Log("OnTrigger - If Passed");

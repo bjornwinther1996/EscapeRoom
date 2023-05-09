@@ -8,6 +8,7 @@ public class SpawnLever : MonoBehaviour
     private bool runOnce = false;
 
     public GameObject lever;
+    public int Player; // set in inspector
 
     void Start()
     {
@@ -71,6 +72,7 @@ public class SpawnLever : MonoBehaviour
                     //lever.transform.rotation = Quaternion.Euler(0.5f, 0, 0);
                 }
                 runOnce = true;
+                lever.GetComponent<LeverBehaviour>().PlayerLever = Player;
             }
             
         }

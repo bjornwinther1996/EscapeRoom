@@ -866,6 +866,7 @@ GameObject:
   - component: {fileID: 1108015254197881718}
   - component: {fileID: 1107900595598031306}
   - component: {fileID: 4415093042979029041}
+  - component: {fileID: 5942982762254833458}
   m_Layer: 6
   m_Name: Right Hand
   m_TagString: Hands
@@ -947,6 +948,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.106872335, y: 0.115559496, z: 0.20005181}
   m_Center: {x: 0.023547366, y: -0.030981768, z: -0.025984883}
+--- !u!114 &5942982762254833458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1077117898294817978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ab882d506d984eecb5baeac638dadeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HeadTextObj: {fileID: 1076632941831322506}
 --- !u!1 &1077209293701824694
 GameObject:
   m_ObjectHideFlags: 0
@@ -1327,6 +1341,7 @@ GameObject:
   - component: {fileID: 1108802341539169740}
   - component: {fileID: 1108312114319478134}
   - component: {fileID: 5611533417967050278}
+  - component: {fileID: 652398230037258228}
   m_Layer: 6
   m_Name: Left Hand
   m_TagString: Hands
@@ -1408,6 +1423,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.106872335, y: 0.115559496, z: 0.20005181}
   m_Center: {x: -0.03, y: -0.030981768, z: -0.025984883}
+--- !u!114 &652398230037258228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1077460277414569332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ab882d506d984eecb5baeac638dadeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HeadTextObj: {fileID: 1076632941831322506}
 --- !u!1 &1077971901860461722
 GameObject:
   m_ObjectHideFlags: 0

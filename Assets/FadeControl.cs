@@ -105,8 +105,13 @@ public class FadeControl : MonoBehaviour
         timer = 0;
     }
 
-    private void ClearText()
+    public void ClearText()
     {
         textComponent.SetText("");
+    }
+
+    public void SetText(string text)
+    {
+        textComponent.SetText(text);
     }
 }
