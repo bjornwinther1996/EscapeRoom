@@ -67,12 +67,16 @@ public class LeverBehaviour : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if(other.GetComponent<PlayerData>()._isServer && PlayerLever == 2)
+        if(!other.CompareTag("Hands")) { return;  }
+        Debug.Log("HandsTouching");
+        if(other.GetComponentInParent<PlayerData>()._isServer && PlayerLever == 2)
         {
+            Debug.Log("First return");
             return;
         }
-        else if (!other.GetComponent<PlayerData>()._isServer && PlayerLever == 1)
+        else if (!other.GetComponentInParent<PlayerData>()._isServer && PlayerLever == 1)
         {
+            Debug.Log("Secondf return");
             return;
         }
         if (!wasPulled && other.tag == "Hands" && (other.GetComponentInParent<PlayerData>()._backupBool || other.GetComponentInParent<PlayerData>()._isReady))
