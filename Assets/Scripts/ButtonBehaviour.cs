@@ -38,7 +38,7 @@ public class ButtonBehaviour : MonoBehaviour
     {
         //ElevatorAnims.SetBool("GoUp", elevatorData._goUp);
         //ElevatorAnims.SetBool("GoDown", true);
-
+        /*
         if (elevatorData._goUp)
         {
             if (!doOnce)
@@ -71,7 +71,7 @@ public class ButtonBehaviour : MonoBehaviour
                 elevatorData._goDown = false;
             }
         }
-
+        */
     }
 
     private void OnTriggerEnter(Collider other)

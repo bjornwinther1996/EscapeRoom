@@ -124,12 +124,11 @@ public class Platform : MonoBehaviour
 
     private void OnTriggerStay(Collider other) // can use courutine instead? - to wait x-time to execute. // Rigidbody on Avatar
     {
-        if (!other.CompareTag("Player")) { return; }
+        if (!other.gameObject.CompareTag("Player")) { return; }
         timer += Time.deltaTime;
         if (timer <= TimerThreshold) { return; }//break instead?
         //CheckPlatformOld(); // Old method, doesnt consider which player step on what platform.
-        CheckPlatformForPlayers(other.GetComponent<PlayerData>()._isServer); // doesnt work yet
-
+        CheckPlatformForPlayers(other.GetComponentInParent<PlayerData>()._isServer); // doesnt work yet
     }
 
     private void OnTriggerEnter(Collider other)
@@ -139,15 +138,15 @@ public class Platform : MonoBehaviour
             timer += Time.deltaTime;
             CheckPlatformThrowable(0f);
         }
-
-        if (other.CompareTag("Player") && !playAudio)
+        
+        if (other.gameObject.CompareTag("Player") && !playAudio)
         {
-            if(other.GetComponent<PlayerData>()._backupInt == 1 && syncedPlatformVariables._isSolidPlayer1)
+            if(other.gameObject.GetComponentInParent<PlayerData>()._backupInt == 1 && syncedPlatformVariables._isSolidPlayer1)
             {
                 audioSource.PlayOneShot(SuccessAudio);
                 playAudio = true;
             }
-            else if (other.GetComponent<PlayerData>()._backupInt == 2 && syncedPlatformVariables._isSolidPlayer2)
+            else if (other.gameObject.GetComponentInParent<PlayerData>()._backupInt == 2 && syncedPlatformVariables._isSolidPlayer2)
             {
                 audioSource.PlayOneShot(SuccessAudio);
                 playAudio = true;

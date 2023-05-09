@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
             
         if (Application.platform != RuntimePlatform.Android && !computerRigPositioned)
         {
-            VRRig.transform.position = new Vector3(-0.9f, -200, 0);
+            //VRRig.transform.position = new Vector3(-0.9f, -200, 0);
             //return;
             computerRigPositioned = true;
             Debug.Log("computerRigPOsitioned");
@@ -254,7 +254,7 @@ public class GameManager : MonoBehaviour
 
     bool CheckAllPlayersConnected()
     {
-        if(syncedGameVariables._backupInt > 2) // was Avatars.Count // make < 2 when final test, to make sure computer is connected to log telemetry data. // was: syncedGameVariables._backupInt == 2
+        if(syncedGameVariables._backupInt > 0) // was Avatars.Count // make < 2 when final test, to make sure computer is connected to log telemetry data. // was: syncedGameVariables._backupInt == 2
         {
             return true;
         }
