@@ -10,6 +10,7 @@ public class HandCollision : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (!GetComponent<RealtimeTransform>().isOwnedLocallySelf) { return; }
         fadeControl = HeadTextObj.GetComponent<FadeControl>();
     }
 
@@ -29,24 +30,26 @@ public class HandCollision : MonoBehaviour
                 {
                     fadeControl.SetText("Only your partner can activate this lever");
                 }
-                else if (!gameObject.GetComponentInParent<PlayerData>()._isServer && other.GetComponent<LeverBehaviour>().PlayerLever == 1)
+                if (!gameObject.GetComponentInParent<PlayerData>()._isServer && other.GetComponent<LeverBehaviour>().PlayerLever == 1)
                 {
                     fadeControl.SetText("Only your partner can activate this lever");
                 }
             }
         }
-        else if (GetComponent<RealtimeTransform>().isOwnedRemotelySelf)
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (!GetComponent<RealtimeTransform>().isOwnedLocallySelf) { return; }
+        if (other.CompareTag("LeverBack") || other.CompareTag("LeverFront") || other.CompareTag("LeverLeft") || other.CompareTag("LeverRight"))
         {
-            if (other.CompareTag("LeverBack") || other.CompareTag("LeverFront") || other.CompareTag("LeverLeft") || other.CompareTag("LeverRight"))
+            if (gameObject.GetComponentInParent<PlayerData>()._isServer && other.GetComponent<LeverBehaviour>().PlayerLever == 2)
             {
-                if (gameObject.GetComponentInParent<PlayerData>()._isServer && other.GetComponent<LeverBehaviour>().PlayerLever == 2)
-                {
-                    fadeControl.SetText("Only your partner can activate this lever");
-                }
-                else if (!gameObject.GetComponentInParent<PlayerData>()._isServer && other.GetComponent<LeverBehaviour>().PlayerLever == 1)
-                {
-                    fadeControl.SetText("Only your partner can activate this lever");
-                }
+                fadeControl.SetText("Only your partner can activate this lever");
+            }
+            else if (!gameObject.GetComponentInParent<PlayerData>()._isServer && other.GetComponent<LeverBehaviour>().PlayerLever == 1)
+            {
+                fadeControl.SetText("Only your partner can activate this lever");
             }
         }
     }

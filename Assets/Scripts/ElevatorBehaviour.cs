@@ -54,7 +54,7 @@ public class ElevatorBehaviour : MonoBehaviour
                     gameObject.GetComponent<RealtimeTransform>().RequestOwnership();
                     transform.position = startPos;
                     elevatorData._goUp = false;
-                    eleAnim.SetBool("Open", true);
+                    //eleAnim.SetBool("Open", true);
                 }
             }
 
@@ -69,11 +69,19 @@ public class ElevatorBehaviour : MonoBehaviour
                     gameObject.GetComponent<RealtimeTransform>().RequestOwnership();
                     transform.position = endPos;
                     elevatorData._goDown = false;
-                    eleAnim.SetBool("Open", true);
+                    //eleAnim.SetBool("Open", true);
                 }
             }
         }
-        
+        if (transform.position == startPos)
+        {
+            eleAnim.SetBool("Open", true);
+        }
+        else if (transform.position == endPos)
+        {
+            eleAnim.SetBool("Open", true);
+        }
+
     }
 }
 
