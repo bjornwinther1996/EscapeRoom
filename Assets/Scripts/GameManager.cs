@@ -58,8 +58,6 @@ public class GameManager : MonoBehaviour
         stopwatch = GetComponent<Stopwatch>();
         anim = gate.GetComponent<Animator>();
 
-        PlayOpenGateAnimation();
-
     }
     
     void Update()
