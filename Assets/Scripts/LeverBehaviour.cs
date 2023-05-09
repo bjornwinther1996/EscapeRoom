@@ -171,21 +171,22 @@ public class LeverBehaviour : MonoBehaviour
 
                 if (this.gameObject.name == "Lever_front(Clone)")
                 {
-                    this.transform.rotation = Quaternion.Euler(45, 0, 0);
+                    this.transform.rotation = Quaternion.Euler(135, 180, 0);
                 }
                 else if (this.gameObject.name == "Lever_back(Clone)")
                 {
-                    this.transform.rotation = Quaternion.Euler(45, 0, 0);
+                    this.transform.rotation = Quaternion.Euler(135, 0, 0);
                 }
                 else if (this.gameObject.name == "Lever_left(Clone)")
                 {
-                    this.transform.rotation = Quaternion.Euler(45, 0, 0);
+                    this.transform.rotation = Quaternion.Euler(135, 90, 0);
                 }
                 else
                 {
-                    this.transform.rotation = Quaternion.Euler(45, 0, 0);
+                    this.transform.rotation = Quaternion.Euler(135, 270, 0);
                 }
                 syncedLeverData._leversPulled = 0;
+                GameManagerReference.GetComponent<GameManagerData>()._level = 0;
             }
             wasPulled = false; // needs to be reset for both client and server
             resetCondition = false; // needs to be reset for both client and server

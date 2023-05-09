@@ -33,6 +33,7 @@ public class ElevatorData : MonoBehaviour
         if (syncedGameVars._level == 6)
         {
             _goDown = true;
+            if(_goDown == true) { return; }
             syncedGameVars._level = 0;
         }
 
