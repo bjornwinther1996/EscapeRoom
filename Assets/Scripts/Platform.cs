@@ -7,7 +7,9 @@ public class Platform : MonoBehaviour
 {
     public bool IsSolid;
     private float timer;
-    public float TimerThreshold = 1;
+    private float successTimer;
+    public float TimerThreshold = 2;
+    private float successTimerThreshold = 1;
     Collider collider;
     public AudioClip[] VanishSounds;
     public AudioClip SuccessAudio;
@@ -20,7 +22,6 @@ public class Platform : MonoBehaviour
     public Material Player2Material;
     public GameObject GameManagerReference;
     private float materialTimer;
-    private bool platformDisabled;
 
     private PlatformData syncedPlatformVariables;
     private bool isMaterialSet;
@@ -125,34 +126,41 @@ public class Platform : MonoBehaviour
     private void OnTriggerStay(Collider other) // can use courutine instead? - to wait x-time to execute. // Rigidbody on Avatar
     {
         if (!other.gameObject.CompareTag("Player")) { return; }
-        timer += Time.deltaTime;
-        if (timer <= TimerThreshold) { return; }//break instead?
+        //timer += Time.deltaTime; // Needs to only increase timer when standing on WRONG platform - NOT ANY! - therefore its moved to under "CheckPlatformForPlayers"
+        //if (timer <= TimerThreshold) { return; } // This does not make sense anymore as the above line is moved
         //CheckPlatformOld(); // Old method, doesnt consider which player step on what platform.
-        CheckPlatformForPlayers(other.GetComponentInParent<PlayerData>()._isServer); // doesnt work yet
+        CheckPlatformForPlayers(other.GetComponentInParent<PlayerData>()._isServer);
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        /*
         if (other.CompareTag("Throwable"))
         {
             timer += Time.deltaTime;
             CheckPlatformThrowable(0f);
         }
-        
+        */
         if (other.gameObject.CompareTag("Player") && !playAudio)
         {
-            if(other.gameObject.GetComponentInParent<PlayerData>()._backupInt == 1 && syncedPlatformVariables._isSolidPlayer1)
+            if(other.gameObject.GetComponentInParent<PlayerData>()._isServer && syncedPlatformVariables._isSolidPlayer1)
             {
-                audioSource.PlayOneShot(SuccessAudio);
+                StartCoroutine(PlayAudioAfterXSec(successTimerThreshold)); // This was changed 10th of may around 2am - Check Github
                 playAudio = true;
             }
-            else if (other.gameObject.GetComponentInParent<PlayerData>()._backupInt == 2 && syncedPlatformVariables._isSolidPlayer2)
+            else if (!other.gameObject.GetComponentInParent<PlayerData>()._isServer && syncedPlatformVariables._isSolidPlayer2)
             {
-                audioSource.PlayOneShot(SuccessAudio);
+                StartCoroutine(PlayAudioAfterXSec(successTimerThreshold));
                 playAudio = true;
             }
         }
 
+    }
+
+    public IEnumerator PlayAudioAfterXSec(float time) // This was changed 10th of may around 2am - Check Github
+    {
+        yield return new WaitForSeconds(time);
+        audioSource.PlayOneShot(SuccessAudio);
     }
 
     public void SetSolid(bool isSolid)
@@ -184,23 +192,22 @@ public class Platform : MonoBehaviour
                 audioSource.PlayOneShot(VanishSounds[1]);
                 break;
         }
-        platformDisabled = true;
         DespawnPlatform();
         timer = 0;
+        successTimer = 0;
     }
 
     public void Success()
     {
-        //Debug.Log("Success Method called in Platform");
         //Sound
         //light up perimiter of platform
         //material change?
         if (stopCalling) { return; } // so it doesnt activate all the next rows, as you continue to stand on activated/correct platform. Only triggers once, revealing next row
-        //Debug.Log("Guard Clause in Success Platform passed");
-        //audioSource.PlayOneShot(SuccessAudio); // Moved to OnTriggerEnter for both client and server
+        Debug.Log("Success after stopCalling triggered");
         platformActivated = true;
         stopCalling = true;
         timer = 0;
+        successTimer = 0;
     }
 
     public void CheckPlatformOld() // old - not used anymore.
@@ -222,28 +229,34 @@ public class Platform : MonoBehaviour
 
     public void CheckPlatformForPlayers(bool isPlayerServer)
     {
+        /*
         if(!GameManager.IsServer && syncedPlatformVariables._isSolidPlayer2) // Only called for client, and only to trigger sound // Redundant now.
         {
             Success();
-        }
+        }*/
 
         if (!GameManager.IsServer) { return; } // only server checks following.
-
         if (isPlayerServer && syncedPlatformVariables._isSolidPlayer1)
         {
-            //Debug.Log("CHECKPLATFORM: If Statement triggered");
-            Success();
+            successTimer += Time.deltaTime;
+            if (successTimer >= TimerThreshold -1)
+            {
+                Success();
+            }
         }
         else if (!isPlayerServer && syncedPlatformVariables._isSolidPlayer2)
         {
-            //Debug.Log("CHECKPLATFORM: ELSE IF Statement triggered");
-            Success();
+            successTimer += Time.deltaTime;
+            if (successTimer >= TimerThreshold - 1)
+            {
+                Success();
+            }
         }
         else
         {
-            //Debug.Log("CHECKPLATFORM: ELSE STATEMENT TRIGGERED");
+            timer += Time.deltaTime;
             GlassCracking();
-            if (timer >= TimerThreshold + 1)
+            if (timer >= TimerThreshold)
             {
                 PlatformFall();
                 NumberOfPlatformsDestroyed++;
@@ -284,16 +297,6 @@ public class Platform : MonoBehaviour
         //gameObject.SetActive(false); // probably has to be changed to delete and furthermore realtime.delete?
         gameObject.GetComponent<RealtimeTransform>().RequestOwnership();
         gameObject.transform.position = DespawnPosition;
-    }
-
-    public bool GetPlatformDisabled()
-    {
-        return platformDisabled;
-    }
-
-    public void SetPlatformDisabled(bool platformDisabled)
-    {
-        this.platformDisabled = platformDisabled;
     }
 
     public void SpawnPlatform()

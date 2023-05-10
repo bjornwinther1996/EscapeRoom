@@ -429,18 +429,12 @@ public class PlatformManager : MonoBehaviour
     public IEnumerator ResetLocalPlatformVariables(float time) // obsolete?
     {
         yield return new WaitForSeconds(time);
-        Debug.Log("Reset Position Of Disabled Platforms METHOD");
+        Debug.Log("Reset local variables on all platforms");
         for (int i = 0; i < ColoumnLength; i++)
         {
             for (int j = 0; j < RowLength; j++)
             {
-                if (platformArray[i, j].transform.GetChild(0).gameObject.GetComponent<Platform>().GetPlatformDisabled())
-                {
-                    //SpawnPlatform(platformArray[i, j].transform.GetChild(0).gameObject);
-                    //platformArray[i, j].transform.GetChild(0).gameObject.GetComponent<Platform>().SpawnPlatform(); 
-                    platformArray[i, j].transform.GetChild(0).gameObject.GetComponent<Platform>().SetPlatformDisabled(false); // redundant i think - because we dont use disabledVariable anymore
-                    platformArray[i, j].transform.GetChild(0).gameObject.GetComponent<Platform>().SetStopCalling(false); // Changed to sync var below:
-                }
+                    platformArray[i, j].transform.GetChild(0).gameObject.GetComponent<Platform>().SetStopCalling(false); // stopCalling-var is used in Success-method in Platform   
             }
         }
     }
