@@ -47,7 +47,8 @@ public class ElevatorBehaviour : MonoBehaviour
             {
                 eleAnim.SetBool("Open", false);
                 gameObject.GetComponent<RealtimeTransform>().RequestOwnership();
-                transform.position = Vector3.MoveTowards(transform.position, startPos, 0.1f);
+                transform.position = Vector3.MoveTowards(transform.position, startPos, 8f * Time.deltaTime);
+                Debug.Log(Time.deltaTime);
 
                 if (transform.position == startPos)
                 {
@@ -62,7 +63,7 @@ public class ElevatorBehaviour : MonoBehaviour
             {
                 eleAnim.SetBool("Open", false);
                 gameObject.GetComponent<RealtimeTransform>().RequestOwnership();
-                transform.position = Vector3.MoveTowards(transform.position, endPos, 0.1f);
+                transform.position = Vector3.MoveTowards(transform.position, endPos, 8f * Time.deltaTime);
 
                 if (transform.position == endPos)
                 {
