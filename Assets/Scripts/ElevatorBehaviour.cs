@@ -15,6 +15,11 @@ public class ElevatorBehaviour : MonoBehaviour
     public GameObject doorRight;
 
     public ElevatorData elevatorData;
+    public GameObject ChildObj;
+    private AudioSource audioSource;
+    public AudioClip ElevatorMusic;
+    private float previousYPos = 2.086f;
+    private bool isMusicPlaying;
 
     Vector3 startPos;
     [SerializeField]
@@ -34,7 +39,9 @@ public class ElevatorBehaviour : MonoBehaviour
         endPos = new Vector3(this.transform.position.x, -100.1f, this.transform.position.z);
 
         elevatorData = GetComponent<ElevatorData>();
-        gameObject.GetComponent<RealtimeTransform>().RequestOwnership();
+        //gameObject.GetComponent<RealtimeTransform>().RequestOwnership();
+        audioSource = ChildObj.GetComponent<AudioSource>();
+        //previousYPos = 2.086f;
     }
 
     // Update is called once per frame
@@ -48,7 +55,7 @@ public class ElevatorBehaviour : MonoBehaviour
                 eleAnim.SetBool("Open", false);
                 gameObject.GetComponent<RealtimeTransform>().RequestOwnership();
                 transform.position = Vector3.MoveTowards(transform.position, startPos, 8f * Time.deltaTime);
-                Debug.Log(Time.deltaTime);
+                //Debug.Log(Time.deltaTime);
 
                 if (transform.position == startPos)
                 {
@@ -83,7 +90,38 @@ public class ElevatorBehaviour : MonoBehaviour
             eleAnim.SetBool("Open", true);
         }
 
+        //The following is ran outside of servercheck, because it needs to run on both client and server:
+        if (MovingUpwards() && !isMusicPlaying)
+        {
+            audioSource.PlayOneShot(ElevatorMusic);
+            Debug.Log("MUSIC PLAYING");
+            isMusicPlaying = true;
+        }
+        else if (transform.position.y == startPos.y && isMusicPlaying)
+        {
+            //audioSource.Stop();
+            Debug.Log("Music Stopped!");
+            audioSource.Stop();
+            isMusicPlaying = false;
+        }
+
     }
+
+    public bool MovingUpwards()
+    {
+        if (previousYPos < transform.position.y)
+        {
+            //Debug.Log("True: Prev: " + previousYPos + "CurrentPos: " + transform.position.y);
+            previousYPos = transform.position.y;
+            return true;
+        }
+        else
+        {
+            previousYPos = transform.position.y;
+            return false;
+        }
+    }
+
 }
 
 
