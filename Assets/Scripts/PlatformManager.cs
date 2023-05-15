@@ -196,6 +196,12 @@ public class PlatformManager : MonoBehaviour
         PreviousRowIndex = RowIndex;
     }
 
+    public IEnumerator ActivateNextRow2SyncTime(float time)
+    {
+        yield return new WaitForSeconds(time);
+        ActivateNextRow(RowIndex);
+    }
+
     public void CheckCorrectPath(int rowToCheck) // Could limit to check only one row - Just as in ActivateNextRow
     {
         //Debug.Log("Check Correct Path Method - Row to check: " + rowToCheck);
@@ -216,7 +222,6 @@ public class PlatformManager : MonoBehaviour
                     }
                     if (RowIndex > 4 && !forcedIntoHell) // Forced into hell:
                     {
-                        //Forced into hell:
                         //AudioObj.GetComponent<AudioSource>().Play(); // Only played for serer
                         Realtime.Instantiate("RealTAudio_ForcedHell", new Vector3(5, 0, 0), Quaternion.identity, new Realtime.InstantiateOptions
                         {
@@ -225,7 +230,7 @@ public class PlatformManager : MonoBehaviour
                             destroyWhenOwnerLeaves = false,
                             destroyWhenLastClientLeaves = true
                         });
-                        StartCoroutine(ForcedIntoHell(12));
+                        StartCoroutine(ForcedIntoHell(13));
                         forcedIntoHell = true;
                     }
                 }

@@ -154,7 +154,8 @@ public class GameManager : MonoBehaviour
             else if(PlatformManager.isResetFinished) // RUNNING ALL THE TIME IF PLAYERS HAVE NOT FAILED:
             {
                 //Debug.Log("GAME MANAGER - Row Index: " + PlatformManagerScript.RowIndex);
-                PlatformManagerScript.ActivateNextRow(PlatformManagerScript.RowIndex);
+                //PlatformManagerScript.ActivateNextRow(PlatformManagerScript.RowIndex);
+                StartCoroutine(PlatformManagerScript.ActivateNextRow2SyncTime(2));
                 PlatformManagerScript.CheckCorrectPath(PlatformManagerScript.RowIndex);
                 CheckForWin(); // CheckForWin is ONLY tied to the heavens gate animation, nothing else.
             }
