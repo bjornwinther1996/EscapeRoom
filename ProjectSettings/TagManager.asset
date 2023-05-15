@@ -17,6 +17,7 @@ TagManager:
   - LeverLeft
   - LeverRight
   - Hands
+  - WinCollider
   layers:
   - Default
   - TransparentFX

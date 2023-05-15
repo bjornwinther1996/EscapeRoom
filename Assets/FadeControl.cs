@@ -78,6 +78,10 @@ public class FadeControl : MonoBehaviour
             ClearFade();
             ClearText();
         }
+        if (other.gameObject.CompareTag("WinCollider"))
+        {
+            ClearText();
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -85,6 +89,11 @@ public class FadeControl : MonoBehaviour
         if (other.gameObject.name == "HeavenHitbox")
         {
             ClearFade();
+        }
+
+        if (other.gameObject.CompareTag("WinCollider"))
+        {
+            SetText("Congratulations - you WON! Take off your headset");
         }
     }
 
