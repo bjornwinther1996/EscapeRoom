@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Normal.Realtime;
+using TMPro;
 
 public class Platform : MonoBehaviour
 {
@@ -35,6 +36,8 @@ public class Platform : MonoBehaviour
     private bool playAudio; // To only trigger successAudio once. Is reset in IEResetMaterialTimer
     private bool setActivatedMaterial;
     public Material ActivatedMaterial;
+    public TextMeshPro textObj;
+    public float CountDown;
 
     //platform needs to have realtime components on them! - and this script needs to get the realtime component to delete realtime etc.
 
@@ -49,6 +52,7 @@ public class Platform : MonoBehaviour
         GameManagerReference = GameObject.Find("GameManager");
         //Debug.Log("GameManagerReference: " + GameManagerReference);
         defaultMaterial = meshRenderer.material;
+        textObj = GetComponentInChildren<TextMeshPro>();
         
     }
 
@@ -61,12 +65,14 @@ public class Platform : MonoBehaviour
         if (GameManagerReference.GetComponent<GameManagerData>()._backupFloat > 0 && !GameManager.IsServer) // this is only done for client, as it is done for server in GameManger
         {
             StartCoroutine(ResetMaterialTimer(8)); // if this timer is adjusted - remember to adjust for server accordingly // Also resets playAudio
+            textObj.SetText("");
+            CountDown = 0;
             NumberOfMaterialsChanged++;
             if (NumberOfMaterialsChanged >= PlatformManager.COLOUMNLENGTH * PlatformManager.RowLength)
             {
                 NumberOfMaterialsChanged = 0;
                 GameManagerReference.GetComponent<GameManagerData>()._backupFloat = 0;
-            } 
+            }
         }
         SetActivatedMaterial();
         
@@ -148,10 +154,30 @@ public class Platform : MonoBehaviour
     private void OnTriggerStay(Collider other) // can use courutine instead? - to wait x-time to execute. // Rigidbody on Avatar
     {
         if (!other.gameObject.CompareTag("Player")) { return; }
+        SetTextCountdown();
         //timer += Time.deltaTime; // Needs to only increase timer when standing on WRONG platform - NOT ANY! - therefore its moved to under "CheckPlatformForPlayers"
         //if (timer <= TimerThreshold) { return; } // This does not make sense anymore as the above line is moved
         //CheckPlatformOld(); // Old method, doesnt consider which player step on what platform.
         CheckPlatformForPlayers(other.GetComponentInParent<PlayerData>()._isServer);
+    }
+
+    private void SetTextCountdown()
+    {
+        if (CountDown < 0)
+        {
+            textObj.SetText("");
+            return;
+        }
+        if (syncedPlatformVariables._isSolidPlayer1 || syncedPlatformVariables._isSolidPlayer2)
+        {
+            CountDown = TimerThreshold - successTimer;
+            textObj.SetText(CountDown.ToString("F1"));
+        }
+        else
+        {
+            CountDown = TimerThreshold - timer;
+            textObj.SetText(CountDown.ToString("F1"));
+        }
     }
 
     private void OnTriggerEnter(Collider other)
