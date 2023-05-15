@@ -19,6 +19,8 @@ public class ElevatorBehaviour : MonoBehaviour
     private AudioSource audioSource;
     public AudioClip ElevatorMusic;
     private float previousYPos = 2.086f;
+    [SerializeField]
+    private float speed = 5f;
     private bool isMusicPlaying;
 
     Vector3 startPos;
@@ -54,7 +56,7 @@ public class ElevatorBehaviour : MonoBehaviour
             if (elevatorData._goUp)
             {
                 gameObject.GetComponent<RealtimeTransform>().RequestOwnership();
-                transform.position = Vector3.MoveTowards(transform.position, startPos, 8f * Time.deltaTime);
+                transform.position = Vector3.MoveTowards(transform.position, startPos, speed * Time.deltaTime);
                 //Debug.Log(Time.deltaTime);
 
                 if (transform.position == startPos)
@@ -69,7 +71,7 @@ public class ElevatorBehaviour : MonoBehaviour
             if (elevatorData._goDown)
             {
                 gameObject.GetComponent<RealtimeTransform>().RequestOwnership();
-                transform.position = Vector3.MoveTowards(transform.position, endPos, 8f * Time.deltaTime);
+                transform.position = Vector3.MoveTowards(transform.position, endPos, speed * Time.deltaTime);
 
                 if (transform.position == endPos)
                 {
