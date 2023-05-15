@@ -48,11 +48,11 @@ public class ElevatorBehaviour : MonoBehaviour
 
     void Update()
     {
+
         if (GameManager.IsServer)
         {
             if (elevatorData._goUp)
             {
-                eleAnim.SetBool("Open", false);
                 gameObject.GetComponent<RealtimeTransform>().RequestOwnership();
                 transform.position = Vector3.MoveTowards(transform.position, startPos, 8f * Time.deltaTime);
                 //Debug.Log(Time.deltaTime);
@@ -68,7 +68,6 @@ public class ElevatorBehaviour : MonoBehaviour
 
             if (elevatorData._goDown)
             {
-                eleAnim.SetBool("Open", false);
                 gameObject.GetComponent<RealtimeTransform>().RequestOwnership();
                 transform.position = Vector3.MoveTowards(transform.position, endPos, 8f * Time.deltaTime);
 
@@ -81,11 +80,23 @@ public class ElevatorBehaviour : MonoBehaviour
                 }
             }
         }
+
+        if (elevatorData._goUp)
+        {
+            eleAnim.SetBool("Open", false);
+        }
+
+        if (elevatorData._goDown)
+        {
+            eleAnim.SetBool("Open", false);
+        }
+
         if (transform.position == startPos)
         {
             eleAnim.SetBool("Open", true);
         }
-        else if (transform.position == endPos)
+        
+        if (transform.position == endPos)
         {
             eleAnim.SetBool("Open", true);
         }
