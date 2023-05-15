@@ -196,10 +196,38 @@ public class PlatformManager : MonoBehaviour
         PreviousRowIndex = RowIndex;
     }
 
-    public IEnumerator ActivateNextRow2SyncTime(float time)
+    public void ActivateNextRowV2(int rowToActivate) // Make petter performance-wise so it doesnt continously activate components.
+    {
+        //Debug.Log("ActivateNextRow Method triggered - RowToActivate(RowIndex):"  + rowToActivate);
+        if (PreviousRowIndex == RowIndex) { return; } // maybe obsolete once called from GameManager. // needs to be in GameManager?
+        StartCoroutine(NextRowFunctionalityAfterXSec(2));
+        PreviousRowIndex = RowIndex;
+    }
+
+    public IEnumerator NextRowFunctionalityAfterXSec(float time)
     {
         yield return new WaitForSeconds(time);
-        ActivateNextRow(RowIndex);
+        for (int targetRow = RowIndex - 1; targetRow < RowIndex; targetRow++)
+        {
+            for (int j = 0; j < RowLength; j++)
+            {
+                //SpawnPlatform(platformArray[targetRow, j].transform.GetChild(0).gameObject);
+                //SetPosition(platformArray[targetRow, j].transform.GetChild(0).gameObject, platformArray[targetRow, j].transform.GetChild(0).gameObject.GetComponent<Platform>().SpawnPosition);
+                platformArray[targetRow, j].transform.GetChild(0).gameObject.GetComponent<Platform>().SpawnPlatform();
+                Debug.Log("SpawnPlatform -100x");
+            }
+        }
+        //Debug.Log("PrevRow = Row");
+        if (RowIndex > 1) // Trigger Audio for each "New Row Call", except the first.
+        {
+            Realtime.Instantiate("RealtimeAudioObj", new Vector3(5, 0, 0), Quaternion.identity, new Realtime.InstantiateOptions
+            {
+                ownedByClient = false, // True? 
+                preventOwnershipTakeover = false,
+                destroyWhenOwnerLeaves = false,
+                destroyWhenLastClientLeaves = true
+            });
+        }
     }
 
     public void CheckCorrectPath(int rowToCheck) // Could limit to check only one row - Just as in ActivateNextRow

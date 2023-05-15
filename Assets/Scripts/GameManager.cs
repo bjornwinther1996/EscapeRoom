@@ -155,7 +155,7 @@ public class GameManager : MonoBehaviour
             {
                 //Debug.Log("GAME MANAGER - Row Index: " + PlatformManagerScript.RowIndex);
                 //PlatformManagerScript.ActivateNextRow(PlatformManagerScript.RowIndex);
-                StartCoroutine(PlatformManagerScript.ActivateNextRow2SyncTime(2));
+                PlatformManagerScript.ActivateNextRowV2(PlatformManagerScript.RowIndex);
                 PlatformManagerScript.CheckCorrectPath(PlatformManagerScript.RowIndex);
                 CheckForWin(); // CheckForWin is ONLY tied to the heavens gate animation, nothing else.
             }
