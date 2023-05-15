@@ -33,6 +33,8 @@ public class Platform : MonoBehaviour
     public Vector3 DespawnPosition; // Is set in PlatformManager when Instantiated
     //int randomChance; //Temporary - functionality should be in grid class
     private bool playAudio; // To only trigger successAudio once. Is reset in IEResetMaterialTimer
+    private bool setActivatedMaterial;
+    public Material ActivatedMaterial;
 
     //platform needs to have realtime components on them! - and this script needs to get the realtime component to delete realtime etc.
 
@@ -66,7 +68,27 @@ public class Platform : MonoBehaviour
                 GameManagerReference.GetComponent<GameManagerData>()._backupFloat = 0;
             } 
         }
+        SetActivatedMaterial();
         
+    }
+
+    public void SetActivatedMaterial()
+    {
+        if (syncedPlatformVariables._isSolidPlayer1 && GameManager.IsServer && setActivatedMaterial)
+        {
+            StartCoroutine(ChangeMaterialAfterXSec(successTimerThreshold, ActivatedMaterial));
+            setActivatedMaterial = false;
+        }else if (syncedPlatformVariables._isSolidPlayer2 && !GameManager.IsServer && setActivatedMaterial)
+        {
+            StartCoroutine(ChangeMaterialAfterXSec(successTimerThreshold, ActivatedMaterial));
+            setActivatedMaterial = false;
+        }
+    }
+
+    public IEnumerator ChangeMaterialAfterXSec(float time, Material material)
+    {
+        yield return new WaitForSeconds(time);
+        meshRenderer.material = material;
     }
 
     public void SetMaterial() // only called locally on each client // In future, SetMaterial, will be called once you stand on something!!!!!!!!
@@ -229,11 +251,12 @@ public class Platform : MonoBehaviour
 
     public void CheckPlatformForPlayers(bool isPlayerServer)
     {
-        /*
+        
         if(!GameManager.IsServer && syncedPlatformVariables._isSolidPlayer2) // Only called for client, and only to trigger sound // Redundant now.
         {
-            Success();
-        }*/
+            //Success();
+            setActivatedMaterial = true;
+        }
 
         if (!GameManager.IsServer) { return; } // only server checks following.
         if (isPlayerServer && syncedPlatformVariables._isSolidPlayer1)
@@ -242,6 +265,7 @@ public class Platform : MonoBehaviour
             if (successTimer >= TimerThreshold -1)
             {
                 Success();
+                setActivatedMaterial = true;
             }
         }
         else if (!isPlayerServer && syncedPlatformVariables._isSolidPlayer2)

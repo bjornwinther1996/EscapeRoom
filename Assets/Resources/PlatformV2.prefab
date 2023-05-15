@@ -221,6 +221,10 @@ PrefabInstance:
       propertyPath: Player2Material
       value: 
       objectReference: {fileID: 2100000, guid: cfb247f0782494e67936fb7b7a10704e, type: 2}
+    - target: {fileID: 7183534839951161702, guid: bc1caee2f892a408a9cd02b79a9c0b9a, type: 3}
+      propertyPath: ActivatedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 9faf7a7a7c8b84b1daa29a67f436c9fb, type: 2}
     - target: {fileID: 7183534839951161703, guid: bc1caee2f892a408a9cd02b79a9c0b9a, type: 3}
       propertyPath: m_RootOrder
       value: 0

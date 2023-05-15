@@ -17320,8 +17320,24 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 7633953770711298854, guid: 89c7c01d5555c40c9975548891611185, type: 3}
+      propertyPath: lengthInSec
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7633953770711298854, guid: 89c7c01d5555c40c9975548891611185, type: 3}
+      propertyPath: autoRandomSeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7633953770711298854, guid: 89c7c01d5555c40c9975548891611185, type: 3}
+      propertyPath: EmissionModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7633953770711298854, guid: 89c7c01d5555c40c9975548891611185, type: 3}
       propertyPath: InitialModule.maxNumParticles
-      value: 90
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 7633953770711298854, guid: 89c7c01d5555c40c9975548891611185, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 7633953770711298855, guid: 89c7c01d5555c40c9975548891611185, type: 3}
       propertyPath: m_AllowRoll
