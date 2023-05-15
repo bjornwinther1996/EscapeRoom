@@ -94,7 +94,7 @@ public class FadeControl : MonoBehaviour
 
         if (other.gameObject.CompareTag("WinCollider"))
         {
-            SetText("Congratulations - you WON! Take off your headset");
+            SetText("Congratulations! Take off your headset");
         }
     }
 
