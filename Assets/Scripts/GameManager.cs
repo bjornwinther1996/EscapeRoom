@@ -281,10 +281,10 @@ public class GameManager : MonoBehaviour
 
     public void PlayOpenGateAnimation()
     {
-        anim.SetBool("accessToHeaven", true);
+        anim.SetBool("Open", true);
     }
 
-    public void PlayCloseGateAnimation()
+    public void PlayCloseGateAnimation() // isnt used
     {
         anim.SetBool("accessToHeaven", false);
     }
@@ -304,7 +304,7 @@ public class GameManager : MonoBehaviour
         {   
             if (!runOnceClose)
             {
-                PlayCloseGateAnimation();
+                //PlayCloseGateAnimation();
                 runOnceClose = true;
             }
 
