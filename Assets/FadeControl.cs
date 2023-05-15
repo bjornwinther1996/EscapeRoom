@@ -86,6 +86,7 @@ public class FadeControl : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (!GetComponent<RealtimeTransform>().isOwnedLocallySelf) return;
         if (other.gameObject.name == "HeavenHitbox")
         {
             ClearFade();

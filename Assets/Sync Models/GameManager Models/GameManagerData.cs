@@ -22,7 +22,7 @@ public class GameManagerData : MonoBehaviour
     public bool _previousIsAllPlayersReady = default;
 
     [SerializeField]
-    public int _sequenceIndex = default;
+    public int _sequenceIndex = default; // if rowIndex > 9 ergo Win
     public int _previousSequenceIndex = default;
 
     [SerializeField]

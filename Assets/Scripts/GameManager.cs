@@ -113,6 +113,10 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        CheckForWin(); // CheckForWin is ONLY tied to the heavens gate animation, nothing else.
+
+        //Up untill now, things are done for both server AND client.
+
         //if (!BoolFirstConnectedDevice()) { return; } // If the device is not the first connected device to the server - return
 
         CheckAndSetAvatarArray();
@@ -157,7 +161,10 @@ public class GameManager : MonoBehaviour
                 //PlatformManagerScript.ActivateNextRow(PlatformManagerScript.RowIndex);
                 PlatformManagerScript.ActivateNextRowV2(PlatformManagerScript.RowIndex);
                 PlatformManagerScript.CheckCorrectPath(PlatformManagerScript.RowIndex);
-                CheckForWin(); // CheckForWin is ONLY tied to the heavens gate animation, nothing else.
+                if (PlatformManagerScript.RowIndex > 9) // if win
+                {
+                    syncedGameVariables._sequenceIndex = PlatformManagerScript.RowIndex; // if 10
+                }
             }
 
         }
@@ -284,8 +291,8 @@ public class GameManager : MonoBehaviour
 
     public void CheckForWin()
     {
-
-        if (PlatformManagerScript.RowIndex >= 10)
+        Debug.Log("WIN");
+        if (syncedGameVariables._sequenceIndex > 9)
         {
             if (!runOnceOpen)
             {
