@@ -166,7 +166,7 @@ public class PlatformManager : MonoBehaviour
         platform.GetComponent<Platform>().DespawnPosition = platform.transform.position;
     }
 
-    public void ActivateNextRow(int rowToActivate) // Make petter performance-wise so it doesnt continously activate components.
+    public void ActivateNextRow(int rowToActivate) // Make petter performance-wise so it doesnt continously activate components. / V2 below is used to do after time.
     {
         //Debug.Log("ActivateNextRow Method triggered - RowToActivate(RowIndex):"  + rowToActivate);
         if(PreviousRowIndex == RowIndex) { return; } // maybe obsolete once called from GameManager. // needs to be in GameManager?
