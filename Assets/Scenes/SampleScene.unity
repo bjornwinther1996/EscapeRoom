@@ -17572,7 +17572,7 @@ MonoBehaviour:
   elevatorData: {fileID: 0}
   ChildObj: {fileID: 8554318285731220442}
   ElevatorMusic: {fileID: 8300000, guid: a043ae7228c214fb7b1507b5bbcc1044, type: 3}
-  speed: 5
+  speed: 8
   endPos: {x: 0, y: 0, z: 0}
 --- !u!23 &7649066787113629775
 MeshRenderer:
