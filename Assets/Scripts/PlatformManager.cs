@@ -214,8 +214,9 @@ public class PlatformManager : MonoBehaviour
                         NumOfPlatformsActivatedInRow = 0;
                         Debug.Log("CheckCorrectPath Method - Row Index increased! : " + RowIndex);
                     }
-                    if (RowIndex > 4 && !forcedIntoHell)
+                    if (RowIndex > 4 && !forcedIntoHell) // Forced into hell:
                     {
+                        //Forced into hell:
                         AudioObj.GetComponent<AudioSource>().Play();
                         StartCoroutine(ForcedIntoHell(5));
                         forcedIntoHell = true;
