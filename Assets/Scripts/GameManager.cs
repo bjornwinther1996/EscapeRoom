@@ -281,7 +281,7 @@ public class GameManager : MonoBehaviour
 
     public void PlayOpenGateAnimation()
     {
-        anim.SetBool("Open", true);
+        anim.SetBool("accessToHeaven", true);
     }
 
     public void PlayCloseGateAnimation() // isnt used
