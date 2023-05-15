@@ -174,6 +174,11 @@ public class LeverBehaviour : MonoBehaviour
                 syncedLeverData._leversPulled = 0;
                 GameManagerReference.GetComponent<GameManagerData>()._level = 0;
             }
+            if(transform.rotation != startRotation)
+            {
+                gameObject.GetComponent<RealtimeTransform>().RequestOwnership();
+                transform.rotation = startRotation;
+            }
             wasPulled = false; // needs to be reset for both client and server
             resetCondition = false; // needs to be reset for both client and server
             colorSet = false;
