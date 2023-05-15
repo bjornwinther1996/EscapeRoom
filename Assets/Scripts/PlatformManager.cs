@@ -217,8 +217,15 @@ public class PlatformManager : MonoBehaviour
                     if (RowIndex > 4 && !forcedIntoHell) // Forced into hell:
                     {
                         //Forced into hell:
-                        AudioObj.GetComponent<AudioSource>().Play();
-                        StartCoroutine(ForcedIntoHell(5));
+                        //AudioObj.GetComponent<AudioSource>().Play(); // Only played for serer
+                        Realtime.Instantiate("RealTAudio_ForcedHell", new Vector3(5, 0, 0), Quaternion.identity, new Realtime.InstantiateOptions
+                        {
+                            ownedByClient = false, // True? 
+                            preventOwnershipTakeover = false,
+                            destroyWhenOwnerLeaves = false,
+                            destroyWhenLastClientLeaves = true
+                        });
+                        StartCoroutine(ForcedIntoHell(12));
                         forcedIntoHell = true;
                     }
                 }
