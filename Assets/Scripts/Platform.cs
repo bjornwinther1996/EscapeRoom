@@ -38,6 +38,7 @@ public class Platform : MonoBehaviour
     public Material ActivatedMaterial;
     public TextMeshPro textObj;
     public float CountDown;
+    public float CountDownSuccessTimer;
 
     //platform needs to have realtime components on them! - and this script needs to get the realtime component to delete realtime etc.
 
@@ -67,6 +68,8 @@ public class Platform : MonoBehaviour
             StartCoroutine(ResetMaterialTimer(8)); // if this timer is adjusted - remember to adjust for server accordingly // Also resets playAudio
             textObj.SetText("");
             CountDown = 0;
+            timer = 0;
+            successTimer = 0;
             NumberOfMaterialsChanged++;
             if (NumberOfMaterialsChanged >= PlatformManager.COLOUMNLENGTH * PlatformManager.RowLength)
             {
@@ -163,20 +166,41 @@ public class Platform : MonoBehaviour
 
     private void SetTextCountdown()
     {
-        if (CountDown < 0)
+        if (!GameManager.IsServer)
         {
-            textObj.SetText("");
-            return;
+            if (CountDown < 0)
+            {
+                textObj.SetText("");
+                return;
+            }
+            if (syncedPlatformVariables._isSolidPlayer1 || syncedPlatformVariables._isSolidPlayer2)
+            {
+                CountDown = successTimerThreshold - successTimer;
+                textObj.SetText(CountDown.ToString("F1"));
+            }
+            else
+            {
+                CountDown = TimerThreshold - timer;
+                textObj.SetText(CountDown.ToString("F1"));
+            }
         }
-        if (syncedPlatformVariables._isSolidPlayer1 || syncedPlatformVariables._isSolidPlayer2)
+        else if (GameManager.IsServer)
         {
-            CountDown = TimerThreshold - successTimer;
-            textObj.SetText(CountDown.ToString("F1"));
-        }
-        else
-        {
-            CountDown = TimerThreshold - timer;
-            textObj.SetText(CountDown.ToString("F1"));
+            if (CountDown < 0)
+            {
+                textObj.SetText("");
+                return;
+            }
+            if (syncedPlatformVariables._isSolidPlayer1 || syncedPlatformVariables._isSolidPlayer2)
+            {
+                CountDown = successTimerThreshold - CountDownSuccessTimer;
+                textObj.SetText(CountDown.ToString("F1"));
+            }
+            else
+            {
+                CountDown = TimerThreshold - timer;
+                textObj.SetText(CountDown.ToString("F1"));
+            }
         }
     }
 
@@ -243,6 +267,7 @@ public class Platform : MonoBehaviour
         DespawnPlatform();
         timer = 0;
         successTimer = 0;
+        CountDownSuccessTimer = 0;
     }
 
     public void Success()
@@ -256,6 +281,7 @@ public class Platform : MonoBehaviour
         stopCalling = true;
         timer = 0;
         successTimer = 0;
+        CountDownSuccessTimer = 0;
     }
 
     public void CheckPlatformOld() // old - not used anymore.
@@ -277,11 +303,58 @@ public class Platform : MonoBehaviour
 
     public void CheckPlatformForPlayers(bool isPlayerServer)
     {
-        
-        if(!GameManager.IsServer && syncedPlatformVariables._isSolidPlayer2) // Only called for client, and only to trigger sound // Redundant now.
+        if (!GameManager.IsServer) // Tracking time for client to set Countdown
         {
-            //Success();
-            setActivatedMaterial = true;
+            if (!isPlayerServer && syncedPlatformVariables._isSolidPlayer2) // Only called for client, and only to trigger sound // Redundant now.
+            {
+                //Debug.Log("CLIENT TOUCHING PLATFORM2");
+                successTimer += Time.deltaTime;
+                setActivatedMaterial = true;
+            }
+            if(!isPlayerServer && syncedPlatformVariables._isSolidPlayer1)
+            {
+                //Debug.Log("CLIENT TOUCHING PLATFORM1");
+                successTimer += Time.deltaTime;
+            }
+            if (isPlayerServer && syncedPlatformVariables._isSolidPlayer1)
+            {
+                //Debug.Log("SERVER TOUCHING PLATFORM1");
+                successTimer += Time.deltaTime;
+            }
+            if (isPlayerServer && syncedPlatformVariables._isSolidPlayer2)
+            {
+                //Debug.Log("SERVER TOUCHING PLATFORM2");
+                successTimer += Time.deltaTime;
+            }
+            if (!syncedPlatformVariables._isSolidPlayer2 || !syncedPlatformVariables._isSolidPlayer1)
+            {
+                timer += Time.deltaTime;
+            }
+        }
+
+        if (GameManager.IsServer) // Tracking time for Server to set Countdown - really messy:
+        {
+            if (isPlayerServer && syncedPlatformVariables._isSolidPlayer1) 
+            {
+                //Debug.Log("SERVER TOUCHING PLATFORM1 ----");
+                CountDownSuccessTimer += Time.deltaTime;
+            }
+            if (isPlayerServer && syncedPlatformVariables._isSolidPlayer2)
+            {
+                //Debug.Log("SERVER TOUCHING PLATFORM2 ----");
+                CountDownSuccessTimer += Time.deltaTime;
+            }
+            if (!isPlayerServer && syncedPlatformVariables._isSolidPlayer2)
+            {
+                //Debug.Log("Client TOUCHING PLATFORM2 ----");
+                CountDownSuccessTimer += Time.deltaTime;
+            }
+            if (!isPlayerServer && syncedPlatformVariables._isSolidPlayer1)
+            {
+                //Debug.Log("Client TOUCHING PLATFORM1 ----");
+                CountDownSuccessTimer += Time.deltaTime;
+            }
+
         }
 
         if (!GameManager.IsServer) { return; } // only server checks following.
@@ -305,7 +378,7 @@ public class Platform : MonoBehaviour
         else
         {
             timer += Time.deltaTime;
-            GlassCracking();
+            GlassCracking(); // Obsolete - doesnt have functionality
             if (timer >= TimerThreshold)
             {
                 PlatformFall();

@@ -11,6 +11,7 @@ public class SetText : MonoBehaviour
     GameManagerData syncedGameManagerVars;
     int previousAmountOfLeversPulled = -1;
     public GameObject ElevatorObj;
+    public GameObject AudioObj;
     
     // Start is called before the first frame update
     void Start()
@@ -25,6 +26,10 @@ public class SetText : MonoBehaviour
         if (syncedGameManagerVars._level == 6)
         {
             textObj.SetText("Elevator is coming!");
+            if (AudioObj != null)
+            {
+                AudioObj.GetComponent<AudioSource>().Play();
+            }
         }
         else if (syncedGameManagerVars._level != previousAmountOfLeversPulled)
         {

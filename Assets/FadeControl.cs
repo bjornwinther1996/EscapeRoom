@@ -65,6 +65,23 @@ public class FadeControl : MonoBehaviour
                 textComponent.SetText("Move to the Blue mist");
             }
         }
+        if (other.gameObject.CompareTag("Elevator"))
+        {
+            if (other.GetComponentInParent<ElevatorData>()._goUp)
+            {
+                textComponent.SetText("Please stand still while elevator is moving");
+            }
+            else
+            {
+                ClearText();
+            }
+        }
+
+        if (other.gameObject.CompareTag("WinCollider"))
+        {
+            FadeWhite();
+            SetTextWithColor("Congratulations! Take off your headset", Color.black);
+        }
 
     }
 
@@ -81,6 +98,7 @@ public class FadeControl : MonoBehaviour
         if (other.gameObject.CompareTag("WinCollider"))
         {
             ClearText();
+            other.gameObject.GetComponentInChildren<AudioSource>().Stop();
         }
     }
 
@@ -90,11 +108,12 @@ public class FadeControl : MonoBehaviour
         if (other.gameObject.name == "HeavenHitbox")
         {
             ClearFade();
+            ClearText();
         }
 
         if (other.gameObject.CompareTag("WinCollider"))
         {
-            SetText("Congratulations! Take off your headset");
+            other.gameObject.GetComponentInChildren<AudioSource>().Play();
         }
     }
 
@@ -104,6 +123,22 @@ public class FadeControl : MonoBehaviour
         if (imageColor.a < 1f)
         {
             imageColor.a += (timer / 0.3f) * Time.deltaTime;
+            imageComponent.color = imageColor;
+        }
+    }
+
+    public void FadeWhite()
+    {
+        if(imageColor.r != Color.white.r && imageColor.g != Color.white.g && imageColor.b != Color.white.b)
+        {
+            imageColor.r = Color.white.r;
+            imageColor.g = Color.white.g;
+            imageColor.b = Color.white.b;
+        }
+        timer += Time.deltaTime;
+        if (imageColor.a < 1f)
+        {
+            imageColor.a += (timer / 4f) * Time.deltaTime;
             imageComponent.color = imageColor;
         }
     }
@@ -122,6 +157,11 @@ public class FadeControl : MonoBehaviour
 
     public void SetText(string text)
     {
+        textComponent.SetText(text);
+    }
+    public void SetTextWithColor(string text, Color color)
+    {
+        textComponent.color = color;
         textComponent.SetText(text);
     }
 }

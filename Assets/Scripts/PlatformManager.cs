@@ -478,6 +478,7 @@ public class PlatformManager : MonoBehaviour
                 platformArray[i, j].transform.GetChild(0).gameObject.GetComponent<Platform>().SetStopCalling(false); // stopCalling-var is used in Success-method in Platform
                 platformArray[i, j].transform.GetChild(0).gameObject.GetComponent<Platform>().textObj.SetText("");
                 platformArray[i, j].transform.GetChild(0).gameObject.GetComponent<Platform>().CountDown = 0;
+                platformArray[i, j].transform.GetChild(0).gameObject.GetComponent<Platform>().CountDownSuccessTimer = 0;
             }
         }
     }
