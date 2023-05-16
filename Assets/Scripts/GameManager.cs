@@ -292,7 +292,7 @@ public class GameManager : MonoBehaviour
     public void CheckForWin()
     {
         //Debug.Log("WIN");
-        if (syncedGameVariables._sequenceIndex > 9)
+        if (syncedGameVariables._sequenceIndex > 10)
         {
             if (!runOnceOpen)
             {
