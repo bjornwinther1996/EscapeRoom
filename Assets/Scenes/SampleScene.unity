@@ -6731,7 +6731,7 @@ MonoBehaviour:
   NetworkManager: {fileID: 120883205}
   PlatformManagerObject: {fileID: 291113915}
   AmbientAudioEnabled: 1
-  IsTaskShared: 0
+  IsTaskShared: 1
   VRRig: {fileID: 1551370188}
   AudioObj: {fileID: 1882741738}
   VoiceNarration:
